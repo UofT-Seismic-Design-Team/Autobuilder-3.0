@@ -66,7 +66,7 @@ class Tower:
     def generatePanelsByFace(self):
         ''' Generate panel objects by faces '''
         for face in self.faces:
-            # Step 1: sort the keys out (by elevation)
+            # Step 1: sort the keys out (elevation)
             elevations = list(face.members.keys())
             elevations.sort()
             # Step 2: use members to form panels
@@ -82,7 +82,7 @@ class Tower:
     def generateColumnsByFace(self):
         ''' Add column objects by face '''
         for face in self.faces:
-            # Step 1: sort the keys out (by elevation)
+            # Step 1: sort the keys out (elevation)
             elevations = list(face.members.keys())
             elevations.sort()
             # Step 2: use members to generate columns
@@ -185,7 +185,7 @@ class Panel:
         self.lowerRight = Node()
 
     def definePanel(self, topMember, bottomMember):
-        ''' Define panel with top and bottom members with same orientation '''
+        ''' Define panel with top and bottom members in the same orientation '''
         self.lowerLeft = bottomMember.start_node
         self.lowerRight = bottomMember.end_node
         self.upperRight = bottomMember.start_node

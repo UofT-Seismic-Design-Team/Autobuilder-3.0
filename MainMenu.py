@@ -4,6 +4,7 @@ from PyQt5.QtGui import *       # extends QtCore with GUI functionality
 from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
+from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
 
 import sys  # We need sys so that we can pass argv to QApplication
@@ -15,7 +16,16 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_mainwindow_v2.ui', self)
+        uic.loadUi('autobuilder_mainwindow_v2.ui', self)
+
+        # Tower object
+        self.tower = Tower()
+
+        # Project Settings data object
+        self.projectSettingsData = ProjectSettingsData()
+
+        # Set project settings data for all views
+        self.setProjectSettingsDataForViews()
 
         # Set menu bar
         self.setMenu()
@@ -39,11 +49,15 @@ class MainWindow(QMainWindow):
         timer.timeout.connect(self.view_2D_painter.update)
         timer.start()
 
-    def setTowerfor3D(self, tower):
-        self.view_3D_opengl.setTower(tower)
+    def setTower(self, tower):
+        self.tower = tower
 
-    def setTowerfor2D(self, tower):
+        self.view_3D_opengl.setTower(tower)
         self.view_2D_painter.setTower(tower)
+
+    def setProjectSettingsDataForViews(self):
+        self.view_3D_opengl.setProjectSettingsData(self.projectSettingsData)
+        self.view_2D_painter.setProjectSettingsData(self.projectSettingsData)
     
     def setIconsForSectionView(self):
         # Set icon for up button
@@ -124,14 +138,14 @@ class MainWindow(QMainWindow):
         # Add button for going up the tower
         self.up_button = QAction(QIcon(r"Icons\24x24\arrow-090.png"),"Up", self)
         self.up_button.setStatusTip("Up")
-        self.up_button.triggered.connect(self.translate_z_up_3DView)
+        self.up_button.triggered.connect(lambda x: self.view_3D_opengl.moveUp())
 
         self.views_toolbar.addAction(self.up_button)
 
         # Add button for going down the tower
         self.down_button = QAction(QIcon(r"Icons\24x24\arrow-270.png"),"Down", self)
         self.down_button.setStatusTip("Down")
-        self.down_button.triggered.connect(self.translate_z_down_3DView)
+        self.down_button.triggered.connect(lambda x: self.view_3D_opengl.moveDown())
 
         self.views_toolbar.addAction(self.down_button)
 
@@ -142,15 +156,11 @@ class MainWindow(QMainWindow):
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings(self)
+
+        projectSettings.setProjectSettingsData(self.projectSettingsData)
+        projectSettings.displayProjectSettingsData()
+
         projectSettings.exec_()
-
-    # For 3D view -----------------------------------------------------
-    # Testing for now
-    def translate_z_up_3DView(self, signal):
-        self.view_3D_opengl.translation_z -= 3
-
-    def translate_z_down_3DView(self, signal):
-        self.view_3D_opengl.translation_z += 3
 
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):

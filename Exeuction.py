@@ -9,10 +9,10 @@ def main():
 
     floorPlan = FloorPlan()
 
-    member1 = Member(Node(0,0), Node(4,0))
-    member2 = Member(Node(4,0), Node(12,8))
-    member3 = Member(Node(12,8), Node(12,12))
-    member4 = Member(Node(12,12), Node(0,12))
+    member1 = Member(Node(0,0), Node(2,0))
+    member2 = Member(Node(2,0), Node(6,8))
+    member3 = Member(Node(6,8), Node(6,12))
+    member4 = Member(Node(6,12), Node(0,12))
     member5 = Member(Node(0,12), Node(0,0))
 
     floorPlan.addMember(member1)
@@ -23,11 +23,11 @@ def main():
 
     floorPlan2 = FloorPlan()
 
-    member21 = Member(Node(0,0), Node(4,0))
-    member22 = Member(Node(4,0), Node(4,8))
-    member23 = Member(Node(4,8), Node(12,8))
-    member24 = Member(Node(12,8), Node(12,12))
-    member25 = Member(Node(12,12), Node(0,12))
+    member21 = Member(Node(0,0), Node(2,0))
+    member22 = Member(Node(2,0), Node(2,8))
+    member23 = Member(Node(2,8), Node(6,8))
+    member24 = Member(Node(6,8), Node(6,12))
+    member25 = Member(Node(6,12), Node(0,12))
     member26 = Member(Node(0,12), Node(0,0))
 
     floorPlan2.addMember(member21)
@@ -60,10 +60,10 @@ def main():
     app = QApplication(sys.argv)
 
     main = MainWindow()
-    main.setTowerfor3D(tower)
-    main.setTowerfor2D(tower)
+    main.setTower(tower)
 
     main.show()
+    
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
