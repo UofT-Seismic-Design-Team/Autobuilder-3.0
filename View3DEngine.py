@@ -32,9 +32,7 @@ class View3DGLWidget(QGLWidget):
         self.scalingFactor_y = 1/4
         self.scalingFactor_z = 1/4
 
-        self.translation_x = 0
-        self.translation_y = 0
-        self.translation_z = -self.projectSettingsData.renderZ/2
+        self.translation_z = 0
         # ----------------------------------------------------------------------
 
         # Save the previous location of the cursor
@@ -63,7 +61,7 @@ class View3DGLWidget(QGLWidget):
         glPushMatrix()    # push the current matrix to the current stack
 
         # Note: tranlate the object before rotating it
-        glTranslate(0, 0, -self.projectSettingsData.renderZ/2)    # third, translate cube to specified depth
+        glTranslate(0, 0, -30)    # third, translate cube to specified depth
 
         glRotate(self.rotMultiplier_x, 1, 0, 0)
         glRotate(self.rotMultiplier_y, 0, 1, 0)
@@ -88,6 +86,7 @@ class View3DGLWidget(QGLWidget):
 
         centerX = self.projectSettingsData.renderX/2
         centerY = self.projectSettingsData.renderY/2
+        centerZ = self.projectSettingsData.renderZ/2
 
         # Render the floor plan
         for elev in self.tower.floors:
@@ -98,13 +97,13 @@ class View3DGLWidget(QGLWidget):
                 for member in floorPlan.members:
                     start_node = member.start_node
                     end_node = member.end_node
-                    
-                    vertex1 = (start_node.x-centerX, start_node.y-centerY, elev + self.translation_z)
+
                     glColor3fv((1,1,1))
+                    
+                    vertex1 = (start_node.x-centerX, start_node.y-centerY, elev-centerZ+self.translation_z)
                     glVertex3fv(vertex1)
 
-                    vertex2 = (end_node.x-centerX, end_node.y-centerY, elev + self.translation_z)
-                    glColor3fv((1,1,1))
+                    vertex2 = (end_node.x-centerX, end_node.y-centerY, elev-centerZ+self.translation_z)
                     glVertex3fv(vertex2)
 
         # Render the columns
@@ -112,13 +111,13 @@ class View3DGLWidget(QGLWidget):
             column = self.tower.columns[column_id]
             start_node = column.start_node
             end_node = column.end_node
-            
-            vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z + self.translation_z)
+
             glColor3fv((1,0,0))
+            
+            vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex1)
 
-            vertex2 = (end_node.x-centerX, end_node.y-centerY, end_node.z + self.translation_z)
-            glColor3fv((1,0,0))
+            vertex2 = (end_node.x-centerX, end_node.y-centerY, end_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex2)
 
         glEnd()
@@ -158,11 +157,11 @@ class View3DGLWidget(QGLWidget):
     
     def wheelEvent(self, e):
         scrollDirection = e.angleDelta().y()/120
-        # if u scroll up upward, magnify
+        # if you scroll up, zoom in
         if scrollDirection > 0:
             factor = 1.1
         else:
-        # otherwise, minimize 
+        # otherwise, zoom out 
             factor = 1/1.1
 
         self.scalingFactor_x *= factor

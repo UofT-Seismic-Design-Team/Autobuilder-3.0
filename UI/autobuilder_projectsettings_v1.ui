@@ -281,7 +281,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="fileloc_label">
+            <widget class="QLabel" name="sapModelLoc_label">
              <property name="text">
               <string>file location...</string>
              </property>

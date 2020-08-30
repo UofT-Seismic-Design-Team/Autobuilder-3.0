@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('autobuilder_mainwindow_v2.ui', self)
+        uic.loadUi(r'UI\autobuilder_mainwindow_v2.ui', self)
 
         # Tower object
         self.tower = Tower()

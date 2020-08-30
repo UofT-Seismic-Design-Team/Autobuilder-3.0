@@ -19,7 +19,7 @@ class ProjectSettings(QDialog):
         self.projectSettingsData = ProjectSettingsData()
 
         # Load the UI Page
-        uic.loadUi('autobuilder_projectsettings_v1.ui', self)
+        uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()
