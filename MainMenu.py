@@ -5,6 +5,7 @@ from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
 from ProjectSettings import *   # open project settings dialog
+from BracingDesign import *    # open design variable dialog
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -100,6 +101,8 @@ class MainWindow(QMainWindow):
         self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variable", self)
         self.editDesignVariable_button.setStatusTip("Edit Design Variable")
 
+        self.editDesignVariable_button.triggered.connect(self.openBracingDesign)
+
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
         # Add button for Assign Design variable
@@ -138,6 +141,7 @@ class MainWindow(QMainWindow):
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
+        self.action_DesignVariable.triggered.connect(self.openBracingDesign)
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
@@ -169,6 +173,11 @@ class MainWindow(QMainWindow):
 
     def change_panel_orientation(self, signal):
         self.view_2D_painter.changePanelDirection()
+
+    # For Bracing Design --------------------------------------------
+    def openBracingDesign(self, signal):
+        bracingDesign = BracingDesign(self)
+        bracingDesign.exec_()
 
     
 
