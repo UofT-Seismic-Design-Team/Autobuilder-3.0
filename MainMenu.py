@@ -6,6 +6,7 @@ from PyQt5 import uic
 
 from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
+from FloorPlan import * #open floor plan ui
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -95,6 +96,8 @@ class MainWindow(QMainWindow):
         self.panel_button = QAction(QIcon(r"Icons\24x24\Panel - 24x24.png"),"Edit Panel", self)
         self.panel_button.setStatusTip("Edit Panel")
 
+        self.panel_button.triggered.connect(self.openFloorDesign)
+
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Design variable
@@ -173,6 +176,11 @@ class MainWindow(QMainWindow):
 
     def change_panel_orientation(self, signal):
         self.view_2D_painter.changePanelDirection()
+
+    # For Bracing Design --------------------------------------------
+    def openFloorDesign(self, signal):
+        floorPlan = FloorPlan(self)
+        floorPlan.exec_()
 
     # For Bracing Design --------------------------------------------
     def openBracingDesign(self, signal):

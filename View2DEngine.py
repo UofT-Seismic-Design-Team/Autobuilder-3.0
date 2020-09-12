@@ -176,6 +176,3 @@ class ViewSectionWidget(QWidget):
             painter.drawText(idLocation.x*view_factor+center_x, -idLocation.y*view_factor+center_y, str(panel.name))
 
             index += 1
-            
-
-        
