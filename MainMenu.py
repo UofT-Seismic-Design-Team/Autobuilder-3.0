@@ -145,6 +145,7 @@ class MainWindow(QMainWindow):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
         self.action_DesignVariable.triggered.connect(self.openBracingDesign)
+        self.action_FloorPlan.triggered.connect(self.openFloorDesign)
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
