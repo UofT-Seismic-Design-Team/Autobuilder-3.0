@@ -25,16 +25,10 @@ class BracingDesign(QDialog):
         # Add Empty Row to List of Bracing Schemes
         self.deleteBracingDesignButton.clicked.connect(self.deleteBracingDesign)
         # Open Bracings To Try Table
-        self.bracingDesignTable.itemDoubleClicked.connect(self.openBracingsToTry)        
+        self.bracingDesignTable.itemDoubleClicked.connect(self.openBracingsToTry)  
 
-
-        #item = QTableWidgetItem('12/1/12')
-        #self.bracingDesignTable.setItem(0, 0, item)
-        #self.bracingDesignTable.setCurrentItem(item)
-        # create an cell widget
-        # btn = QPushButton(self.bracingDesignTable)
-        # btn.setText('Edit')
-        # self.bracingDesignTable.setCellWidget(0, 0, btn)
+        self.bracingDesignData = BracingDesignData()
+        self.bracingsToTryData = BracingsToTryData()
 
     def setIconsForButtons(self):
         self.addBracingDesignButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
@@ -49,11 +43,14 @@ class BracingDesign(QDialog):
             self.bracingDesignTable.removeRow(index.row())
     
     def openBracingsToTry(self, signal):
+        #self.bracingVersions = {}
         bracingDesign = BracingsToTry(self)
         bracingDesign.exec_()
+        item = self.bracingDesignTable.currentItem()
+        self.bracingDesignData.bracingVersions[item.text()] = self.bracingsToTryData.bracings
+        print(self.bracingDesignData.bracingVersions)
 
     def saveBracingDesign(self):
-        rowdata = []
         for row in range(self.bracingDesignTable.rowCount()):
             for column in range(self.bracingDesignTable.columnCount()):
                 item = self.bracingDesignTable.item(row, column)
@@ -69,4 +66,7 @@ class BracingDesign(QDialog):
         self.CancelButton = self.bracingDesign_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
 
+class BracingDesignData:
+    def __init__(self):
+        self.bracingVersions = {}
     

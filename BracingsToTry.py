@@ -23,6 +23,8 @@ class BracingsToTry(QDialog):
         # Delete Selected Row from List of Bracing Schemes
         self.deleteBracingsToTryButton.clicked.connect(self.deleteBracingsToTry)
 
+        self.bracingsToTryData = BracingsToTryData()
+
     def setIconsForButtons(self):
         self.addBracingsToTryButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
         self.deleteBracingsToTryButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
@@ -36,13 +38,12 @@ class BracingsToTry(QDialog):
             self.bracingsToTryTable.removeRow(index.row())
 
     def saveBracingsToTry(self):
-        rowdata = []
         for row in range(self.bracingsToTryTable.rowCount()):
             for column in range(self.bracingsToTryTable.columnCount()):
                 item = self.bracingsToTryTable.item(row, column)
                 if item is not None:
-                    rowdata.append(item.text())
-        print(rowdata)
+                    self.bracingsToTryData.bracings.append(item.text())
+        print(self.bracingsToTryData.bracings)
 
     def setOkandCancelButtons(self):
         self.OkButton = self.bracingsToTry_buttonBox.button(QDialogButtonBox.Ok)
@@ -52,10 +53,6 @@ class BracingsToTry(QDialog):
         self.CancelButton = self.bracingsToTry_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
 
-
-    # def setOkandCancelButtons(self):
-    #     self.OkButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Ok)
-    #     self.OkButton.clicked.connect(lambda x: self.close())
-
-    #     self.CancelButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Cancel)
-    #     self.CancelButton.clicked.connect(lambda x: self.close())
+class BracingsToTryData:
+    def __init__(self):
+        self.bracings = []
