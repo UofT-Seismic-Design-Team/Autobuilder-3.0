@@ -4,16 +4,16 @@ from Model import *
 # TESTING only
 def main():
 
-    elevations = [0, 6, 9, 12, 15, 18, 21, 27, 33, 39, 45, 51, 57, 60]
+    elevations = [0, 6, 9, 12, 15, 18, 21, 27, 33, 39, 45, 51, 57, 60, 66, 100]
     tower = Tower(elevations)
 
     floorPlan = FloorPlan()
 
     member1 = Member(Node(0,0), Node(4,0))
-    member2 = Member(Node(4,0), Node(12,8))
-    member3 = Member(Node(12,8), Node(12,12))
-    member4 = Member(Node(12,12), Node(0,12))
-    member5 = Member(Node(0,12), Node(0,0))
+    member2 = Member(Node(4,0), Node(12,6))
+    member3 = Member(Node(12,6), Node(12,9))
+    member4 = Member(Node(12,9), Node(0,9))
+    member5 = Member(Node(0,9), Node(0,0))
 
     floorPlan.addMember(member1)
     floorPlan.addMember(member2)
@@ -24,11 +24,11 @@ def main():
     floorPlan2 = FloorPlan()
 
     member21 = Member(Node(0,0), Node(4,0))
-    member22 = Member(Node(4,0), Node(4,8))
-    member23 = Member(Node(4,8), Node(12,8))
-    member24 = Member(Node(12,8), Node(12,12))
-    member25 = Member(Node(12,12), Node(0,12))
-    member26 = Member(Node(0,12), Node(0,0))
+    member22 = Member(Node(4,0), Node(4,6))
+    member23 = Member(Node(4,6), Node(12,6))
+    member24 = Member(Node(12,6), Node(12,9))
+    member25 = Member(Node(12,9), Node(0,9))
+    member26 = Member(Node(0,9), Node(0,0))
 
     floorPlan2.addMember(member21)
     floorPlan2.addMember(member22)
@@ -60,10 +60,10 @@ def main():
     app = QApplication(sys.argv)
 
     main = MainWindow()
-    main.setTowerfor3D(tower)
-    main.setTowerfor2D(tower)
+    main.setTower(tower)
 
     main.show()
+    
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
