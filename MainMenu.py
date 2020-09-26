@@ -25,6 +25,9 @@ class MainWindow(QMainWindow):
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
 
+        # Bracing Design data object
+        self.bracingDesignData = BracingDesignData()
+
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)

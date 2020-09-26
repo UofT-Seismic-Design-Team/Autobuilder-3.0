@@ -21,10 +21,13 @@ class BracingDesign(QDialog):
         # Set UI Elements
         self.setIconsForButtons()
         self.setOkandCancelButtons()
+
         # Add Empty Row to List of Bracing Design
         self.addBracingDesignButton.clicked.connect(self.addBracingDesign)
+
         # Delete Row from List of Bracing Design
         self.deleteBracingDesignButton.clicked.connect(self.deleteBracingDesign)
+
         # Open Bracings To Try Table
         self.bracingDesignTable.itemDoubleClicked.connect(self.openBracingsToTry)  
 
@@ -35,15 +38,17 @@ class BracingDesign(QDialog):
         self.addBracingDesignButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
         self.deleteBracingDesignButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
 
+    # Insert new row in bracing design table
     def addBracingDesign(self,signal):
         self.bracingDesignTable.insertRow( self.bracingDesignTable.rowCount() )
 
+    # Delete selected row in bracing design table
     def deleteBracingDesign(self,signal):
         indices = self.bracingDesignTable.selectionModel().selectedRows()
         for index in sorted(indices):
             self.bracingDesignTable.removeRow(index.row())
     
-    
+    # Open bracings to try dialog after clicking on item in bracing design table
     def openBracingsToTry(self, signal):
         
         item = self.bracingDesignTable.currentItem()
@@ -55,12 +60,18 @@ class BracingDesign(QDialog):
 
         bracingsToTry.exec_()
 
+    # Save list of bracings corresponding to each design in BracingDesignData
     def saveBracingDesign(self):
         
         bracingsToTry = BracingsToTry(self)
         bracingsToTry.setBracingsToTryData(self.bracingsToTryData)
-        self.bracingDesignData.bracingVersions = bracingsToTry.bracingsToTryData.bracings
-        #delete from dict if deleted in table after assignment
+        #add to bracing versions, not equal
+        for key in bracingsToTry.bracingsToTryData.bracings:
+            if key not in self.bracingDesignData.bracingVersions:
+                self.bracingDesignData.bracingVersions[key] = bracingsToTry.bracingsToTryData.bracings.get(key)
+            bracingsToTry.bracingsToTryData.bracings
+
+        #delete design from BracingDesignData if deleted in table
         curr_list = []
         curr_row_count = self.bracingDesignTable.rowCount()
         i = 0
@@ -72,10 +83,10 @@ class BracingDesign(QDialog):
             if ver not in curr_list:
                 del self.bracingDesignData.bracingVersions[ver]
 
+    # Display list of bracing designs
     def displayBracingDesignData(self):
         
         data = self.bracingDesignData.bracingVersions
-        print("displayBracingDesignData", data)
         i = 0
         rowNum = len(data)
         for ver in data.keys():
@@ -99,6 +110,7 @@ class BracingDesign(QDialog):
         self.CancelButton = self.bracingDesign_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
 
+# Store list of bracings and corresponding bracing design
 class BracingDesignData:
     def __init__(self):
         self.bracingVersions = {}
