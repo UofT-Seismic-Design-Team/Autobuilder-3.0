@@ -10,6 +10,8 @@ from OpenGL.arrays import vbo
 from Model import * # tower and other design components
 from ProjectSettings import *   # project settings data
 
+from Definition import Algebra# constants
+
 import numpy as np
 import math as m
 
@@ -47,7 +49,7 @@ class View3DGLWidget(QGLWidget):
         glViewport(0, 0, width, height)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        aspect = width / float(height)
+        aspect = width / (float(height) + Algebra.EPSILON)
 
         # Sample: gluPerspective(field_of_view, aspect_ratio, z_near, z_far)
         gluPerspective(45.0, aspect, 0.1, 50.0)
@@ -123,7 +125,7 @@ class View3DGLWidget(QGLWidget):
         glEnd()
 
     def rotate(self, delta_x, delta_y):
-        sumOfChange = abs(delta_x) + abs(delta_y)
+        sumOfChange = abs(delta_x) + abs(delta_y) + Algebra.EPSILON
 
         self.rotMultiplier_z += delta_x / sumOfChange * 5
         self.rotMultiplier_x += delta_y / sumOfChange * 5

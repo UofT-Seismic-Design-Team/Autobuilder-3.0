@@ -2,33 +2,79 @@
 # - Stores classes that define the geometry of the tower and its components
 
 # -------------------------------------------------------------------------
+# Wrapper class for all the data
 class Tower:
 
     def __init__(self, elevations = []):
         self.elevations = elevations
         self.floors = {}
-        self.nodes = {}
         self.columns = {}
+        self.floorPlans = {}
         self.panels = {}
         self.faces = []
 
+    def setElevations(self, elevs):
+        self.elevations = elevs
+
+    def reset(self):
+        ''' clear all data '''
+        self.elevations.clear()
+        self.floors.clear()
+        self.columns.clear()
+        self.floorPlans.clear()
+        self.panels.clear()
+        self.faces.clear()
+
+    def build(self):
+        ''' build tower (assume all tower components are saved in tower)'''
         self.defineFloors()
+
+        self.addFloorPlansToFloors()
+        self.addPanelsToFloors()
+
+        for name in self.floorPlans:
+            self.generateFacesByFloorPlan(self.floorPlans[name])
+        self.generateColumnsByFace()     
 
     def defineFloors(self):
         ''' Add Floor objects to the member variables based on the elevations '''
         for elev in self.elevations:
-            self.floors[elev] = Floor(elev)
+            # Create new floor if needed
+            if not (elev in self.floors):
+                self.floors[elev] = Floor(elev)
 
-    def addNodesToFloors(self):
-        ''' Add nodes to the floors they are on based on the elevation '''
-        for node in self.nodes.values():
-            if node.z in self.elevations:
-                floor_at_z = self.floors[node.z]
-                floor_at_z.addNode(node)
+        # Delete redundant floors
+        for elev in self.floors:
+            if not (elev in self.elevations):
+                del self.floors[elev]
 
     def addFace(self, face):
         ''' Add face object to faces '''
         self.faces.append(face)
+
+    def addFloorPlan(self, floorPlan):
+        ''' Add floor plan object to floorPlans '''
+        self.floorPlans[floorPlan.name] = floorPlan
+
+    def addPanel(self, panel):
+        ''' Add panel object to panels '''
+        self.panels[panel.name] = panel
+
+    def addFloorPlansToFloors(self):
+        ''' Add floor plans to floors based on the elevation '''
+        for floorPlan in self.floorPlans.values():
+            for elev in floorPlan.elevations:
+                self.floors[elev].addFloorPlan(floorPlan)
+
+    def addPanelsToFloors(self):
+        ''' Add panels to floors based on the elevation '''
+        for panel_id in self.panels:
+            panel = self.panels[panel_id]
+            elevation = panel.lowerLeft.z
+            
+            floor  = self.floors[elevation]
+
+            floor.addPanel(panel)
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -53,16 +99,6 @@ class Tower:
 
             self.faces.append(face)
 
-    def addPanelsToFloors(self):
-        ''' Add panels to floors based on the elevation '''
-        for panel_id in self.panels:
-            panel = self.panels[panel_id]
-            elevation = panel.lowerLeft.z
-            
-            floor  = self.floors[elevation]
-
-            floor.addPanel(panel)
-
     def generatePanelsByFace(self):
         ''' Generate panel objects by faces '''
         for face in self.faces:
@@ -75,7 +111,7 @@ class Tower:
                 topMember = face.members[elevations[i+1]]
                 # Step 3: form panel
                 panel = Panel()
-                panel.definePanel(topMember, bottomMember)
+                panel.definePanelWithMembers(topMember, bottomMember)
                 # Step 4: add panel to panels
                 self.panels[panel.name] = panel
 
@@ -126,16 +162,28 @@ class FloorPlan:
     id = 1
 
     def __init__(self, name=None):
-        self.name = name
+        self.name = name    # name is in string form
         if not name:
-            self.name = FloorPlan.id
+            self.name = str(FloorPlan.id)
             FloorPlan.id += 1
 
+        self.nodes = []
         self.members = []
         self.elevations = []
 
+    def addNode(self, node):
+        self.nodes.append(node)
+
     def addMember(self, member):
         self.members.append(member)
+
+    def generateMemebersfromNodes(self):
+        numNodes = len(self.nodes)
+        for i in range(numNodes-1):
+            member = Member(self.nodes[i], self.nodes[i+1])
+            self.addMember(member)
+        member = Member(self.nodes[numNodes-1], self.nodes[0])
+        self.addMember(member)
 
     def addElevation(self, elevation):
         self.elevations.append(elevation)
@@ -154,7 +202,7 @@ class Face:
         # Use id as name if name is not provided
         self.name = name
         if not name:
-            self.name = Face.id
+            self.name = str(Face.id)
             Face.id += 1
 
         # contains horizontal members/beams on the face
@@ -175,7 +223,7 @@ class Panel:
         # Use id as name if name is not provided
         self.name = name
         if not name:
-            self.name = Panel.id
+            self.name = str(Panel.id)
             Panel.id += 1
 
         # Nodes that define a panel object
@@ -184,12 +232,19 @@ class Panel:
         self.upperRight = Node()
         self.lowerRight = Node()
 
-    def definePanel(self, topMember, bottomMember):
+    def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
+        ''' Define panel with nodes '''
+        self.lowerLeft = lowerLeft
+        self.upperLeft = upperLeft
+        self.upperRight = upperRight
+        self.lowerRight = lowerRight
+
+    def definePanelWithMembers(self, topMember, bottomMember):
         ''' Define panel with top and bottom members in the same orientation '''
         self.lowerLeft = bottomMember.start_node
         self.lowerRight = bottomMember.end_node
-        self.upperRight = bottomMember.start_node
-        self.upperLeft = bottomMember.end_node
+        self.upperLeft = topMember.start_node
+        self.upperRight = topMember.end_node
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -205,29 +260,17 @@ class Node:
         # Use id if name is not provided
         self.name = name
         if not name:
-            self.name = Node.id
+            self.name = str(Node.id)
             Node.id +=  1
 
         self.x = x
         self.y = y
         self.z = z
-        self.xy_members = [] # stores the members connected on the x-y plane
-        self.z_members = [] # stores the members on the z axis
-        self.other_members = []
 
     def setLocation(self, x, y, z):
         self.x = x
         self.y = y
         self.z = z
-
-    def addMemberOnXYPlane(self, member):
-        self.xy_members.append(member)
-
-    def addMemberOnZAxis(self, member):
-        self.z_members.append(member)
-
-    def addOtherMember(self, member):
-        self.other_members.append(member)
         
     def __str__(self):
         return str(self.name) + " (" + str(self.x) + "," + str(self.y) + "," + str(self.z) + ")"
@@ -243,14 +286,14 @@ class Member:
         # Use id if name is not provided
         self.name = name
         if not name:
-            self.name = Member.id
+            self.name = str(Member.id)
             Member.id +=  1
 
         self.start_node = start_node
         self.end_node = end_node
 
     def setNodes(self, start, end):
-        ''' set the start and end nodes '''
+        ''' set start and end nodes '''
         self.start_node = start
         self.end_node = end
 

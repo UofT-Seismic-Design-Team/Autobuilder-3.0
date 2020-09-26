@@ -16,7 +16,10 @@ class ProjectSettings(QDialog):
         super().__init__(*args, **kwargs)
 
         # Project Settings Data
-        self.projectSettingsData = ProjectSettingsData()
+        self.data = ProjectSettingsData()
+
+        # Tower
+        self.tower = Tower()
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -29,6 +32,9 @@ class ProjectSettings(QDialog):
         self.floorElev_add.clicked.connect(lambda x: self.floorElev_table.insertRow(self.floorElev_table.rowCount()))
         self.floorElev_del.clicked.connect(lambda x: self.floorElev_table.removeRow(self.floorElev_table.rowCount()-1))
         
+        # Control saving process
+        self.saveElevs = False
+
         # Section properties table row control
         self.sectionProp_add.clicked.connect(lambda x: self.sectionProp_table.insertRow(self.sectionProp_table.rowCount()))
         self.sectionProp_del.clicked.connect(lambda x: self.sectionProp_table.removeRow(self.sectionProp_table.rowCount()-1))
@@ -37,8 +43,11 @@ class ProjectSettings(QDialog):
         self.SAPModelLoc = ''
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
 
-    def setProjectSettingsData(self, projectSettingsData):
-        self.projectSettingsData = projectSettingsData
+    def setData(self, data):
+        self.data = data
+
+    def setTower(self, tower):
+        self.tower = tower
 
     def setIconsForButtons(self):
         self.floorElev_add.setIcon(QIcon(r"Icons\24x24\plus.png"))
@@ -48,7 +57,7 @@ class ProjectSettings(QDialog):
 
     def setOkandCancelButtons(self):
         self.OkButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Ok)
-        self.OkButton.clicked.connect(self.saveProjectSettings)
+        self.OkButton.clicked.connect(self.save)
 
         self.CancelButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda signal: self.close())
@@ -58,12 +67,13 @@ class ProjectSettings(QDialog):
         modelLoc = fileInfo[0]
         self.SAPModelLoc = modelLoc
 
-        fileName = modelLoc.split('/')[-1]
-        self.projectSettingsData.fileName = fileName
-        self.sapModelLoc_label.setText(fileName)
+        modelName = modelLoc.split('/')[-1]
+        self.data.modelName = modelName
+        self.sapModelLoc_label.setText(modelName)
 
-    def displayProjectSettingsData(self):
-        data = self.projectSettingsData
+    def display(self):
+        
+        data = self.data
 
         # Elevations
         i = 0
@@ -88,19 +98,20 @@ class ProjectSettings(QDialog):
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)
         self.analysisType_comboBox.setCurrentIndex(data.analysisType)
-        self.sapModelLoc_label.setText(data.fileName)
+        self.sapModelLoc_label.setText(data.modelName)
 
         # Render settings
         self.x_input.setText(str(data.renderX))
         self.y_input.setText(str(data.renderY))
         self.z_input.setText(str(data.renderZ))
 
-    def saveProjectSettings(self, signal):
+    def save(self, signal):
         warning = WarningMessage()
 
         # Elevations
-        self.projectSettingsData.floorElevs = [] # reset floor elevations
+        prev_floorElevs = list(self.data.floorElevs)
 
+        tempElevs = []
         rowNum = self.floorElev_table.rowCount()
         for i in range(rowNum):
             elevItem = self.floorElev_table.item(i,0)
@@ -112,13 +123,50 @@ class ProjectSettings(QDialog):
             try:
                 if elev == '':
                     break
-                self.projectSettingsData.floorElevs.append(int(elev))
+                tempElevs.append(float(elev))
             except:
-                warning.popUpWarningBox('Invalid input for elevations')
+                warning.popUpErrorBox('Invalid input for elevations')
+                return # terminate the saving process
+
+        # Check if floor elevations are modified
+        cancelSaving = False
+        if tempElevs != prev_floorElevs:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Warning")
+            msg.setInformativeText('Current model data will be deleted as floor elevations are modified')
+            msg.setWindowTitle("Warning")
+
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+            OkButton = msg.button(QMessageBox.Ok)
+            OkButton.clicked.connect(self.saveElevations)
+            OkButton.clicked.connect(lambda s: msg.close())
+
+            CancelButton = msg.button(QMessageBox.Cancel)
+            CancelButton.clicked.connect(lambda s: msg.close())
+
+            msg.exec_()
+
+            # if the Ok button was clicked, redefine floors and floor elevations
+            if self.saveElevs:
+                # clear data stored in project settings and tower (except for floor plans)
+                self.data.floorElevs.clear()
+                self.tower.elevations.clear()
+                self.tower.floors.clear()
+                self.tower.columns.clear()
+                self.tower.panels.clear()
+                self.tower.faces.clear()
+
+                for elev in tempElevs:
+                    self.data.floorElevs.append(elev) # will update elevations in tower object simultaneously
+                
+                self.tower.defineFloors()
+            else:
                 return # terminate the saving process
 
         # Section properties
-        self.projectSettingsData.sectionProps = [] # reset section properties
+        self.data.sectionProps.clear() # reset section properties
 
         rowNum = self.sectionProp_table.rowCount()
         for i in range(rowNum):
@@ -131,26 +179,29 @@ class ProjectSettings(QDialog):
                 # Check if the item is filled
                 if sect == '':
                     break
-                self.projectSettingsData.sectionProps.append(sect)
+                self.data.sectionProps.append(sect)
             except:
-                warning.popUpWarningBox('Invalid input for section properties')
+                warning.popUpErrorBox('Invalid input for section properties')
                 return # terminate the saving process
 
         # Render settings
         try:
-            self.projectSettingsData.renderX = int(self.x_input.text())
-            self.projectSettingsData.renderY = int(self.y_input.text())
-            self.projectSettingsData.renderZ = int(self.z_input.text())
+            self.data.renderX = float(self.x_input.text())
+            self.data.renderY = float(self.y_input.text())
+            self.data.renderZ = float(self.z_input.text())
         except:
-            warning.popUpWarningBox('Invalid input for render settings')
+            warning.popUpErrorBox('Invalid input for render settings')
             return # terminate the saving process
 
         # Analysis options
-        self.projectSettingsData.groundMotion = self.gm_checkBox.isChecked()
-        self.projectSettingsData.analysisType = self.analysisType_comboBox.currentIndex()
-        self.projectSettingsData.SAPModelLoc = self.SAPModelLoc
+        self.data.groundMotion = self.gm_checkBox.isChecked()
+        self.data.analysisType = self.analysisType_comboBox.currentIndex()
+        self.data.SAPModelLoc = self.SAPModelLoc
 
         self.close()
+
+    def saveElevations(self, s):
+        self.saveElevs = True
 
 # Enum for Analysis types
 class ATYPE:
@@ -161,14 +212,16 @@ class ATYPE:
 class ProjectSettingsData:
 
     def __init__(self):
-        self.floorElevs = [6,9,12,15,21,27,33,39,45,51,57,60]
+
+
+        self.floorElevs = [0.0,6.0,9.0,12.0,15.0,21.0,27.0,33.0,39.0,45.0,51.0,57.0,60.0]
         self.sectionProps = ['BALSA_0.5x0.5','BALSA_0.1875x0.1875']
 
         # Analysis options
         self.groundMotion = False
         self.analysisType = ATYPE.TIME_HISTORY
         self.SAPModelLoc = ''
-        self.fileName = ''
+        self.modelName = ''
 
         # Render Settings
         self.renderX = 12
