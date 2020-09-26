@@ -25,6 +25,9 @@ class MainWindow(QMainWindow):
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
 
+        # Bracing Design data object
+        self.bracingDesignData = BracingDesignData()
+        
         # Set project settings data for all views
         self.setProjectSettingsDataForViews()
 
@@ -187,6 +190,10 @@ class MainWindow(QMainWindow):
     # For Bracing Design --------------------------------------------
     def openBracingDesign(self, signal):
         bracingDesign = BracingDesign(self)
+        
+        bracingDesign.setBracingDesignData(self.bracingDesignData)
+        self.bracingDesignData = bracingDesign.displayBracingDesignData()
+
         bracingDesign.exec_()
 
     

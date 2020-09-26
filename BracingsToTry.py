@@ -7,6 +7,8 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+from WarningMessage import *
+
 class BracingsToTry(QDialog):
 
     def __init__(self, *args, **kwargs):
@@ -38,21 +40,49 @@ class BracingsToTry(QDialog):
             self.bracingsToTryTable.removeRow(index.row())
 
     def saveBracingsToTry(self):
-        for row in range(self.bracingsToTryTable.rowCount()):
-            for column in range(self.bracingsToTryTable.columnCount()):
-                item = self.bracingsToTryTable.item(row, column)
-                if item is not None:
-                    self.bracingsToTryData.bracings.append(item.text())
-        print(self.bracingsToTryData.bracings)
+        warning = WarningMessage()
+
+        rowNum = self.bracingsToTryTable.rowCount()
+        listofBracing = []
+        for i in range(rowNum):
+            bracItem = self.bracingsToTryTable.item(i,0)
+            # Check if the item exists
+            if bracItem == None:
+                break
+            brac = bracItem.text()
+            listofBracing.append(str(brac))
+        self.bracingsToTryData.bracings[self.bracingsToTryData.currDesign] = listofBracing
+
+    def displayBracingsToTryData(self):
+        data = self.bracingsToTryData
+        i = 0
+        bracings_rowNum = self.bracingsToTryTable.rowCount()
+        allBracing = self.bracingsToTryData.bracings
+        currDesign = self.bracingsToTryData.currDesign
+        if currDesign in allBracing:
+        #if not allBracing:
+           #self.bracingsToTryTable.insertRow(0)
+        #else:
+            currList = allBracing[currDesign]
+            for brac in currList:
+                item = QTableWidgetItem(str(brac))
+                if i < len(currList):
+                    self.bracingsToTryTable.insertRow(i)
+                    self.bracingsToTryTable.setItem(i,0,item)
+                    i += 1
+
+    def setBracingsToTryData(self, bracingsToTryData):
+        self.bracingsToTryData = bracingsToTryData
 
     def setOkandCancelButtons(self):
         self.OkButton = self.bracingsToTry_buttonBox.button(QDialogButtonBox.Ok)
-        self.OkButton.clicked.connect(lambda x: self.close())
         self.OkButton.clicked.connect(self.saveBracingsToTry)
-
+        self.OkButton.clicked.connect(lambda x: self.close())
+        
         self.CancelButton = self.bracingsToTry_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
 
 class BracingsToTryData:
     def __init__(self):
-        self.bracings = []
+        self.bracings = {}
+        self.currDesign = ""
