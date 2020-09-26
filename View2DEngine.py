@@ -25,7 +25,7 @@ class ViewSectionWidget(QWidget):
         self.elevation = 0
 
         self.last_x, self.last_y = None, None
-        self.pen_color = QColor('#000000')
+        self.pen_color = QColor('white')
 
         self.dimension_x = self.size().width()
         self.dimension_y = self.size().height()
@@ -33,6 +33,10 @@ class ViewSectionWidget(QWidget):
         self.panel_direction = 1
 
     def paintEvent(self, event):
+
+        if not self.tower.floors: # draw only when floors is provided
+            return
+
         painter = QPainter()
         painter.begin(self)
 
@@ -49,16 +53,14 @@ class ViewSectionWidget(QWidget):
         self.projectSettingsData = projectSettingsData
     
     def elevationUp(self):
-        self.elevation_index += 1
         # prevent list to go out of range
-        self.elevation_index = min(len(self.tower.elevations)-1, self.elevation_index)
+        self.elevation_index = min(len(self.tower.elevations)-1, self.elevation_index+1)
 
         self.elevation = self.tower.elevations[self.elevation_index]
 
     def elevationDown(self):
-        self.elevation_index -= 1
         # prevent list to go out of range
-        self.elevation_index = max(0, self.elevation_index)
+        self.elevation_index = max(0, self.elevation_index-1)
 
         self.elevation = self.tower.elevations[self.elevation_index]
 
@@ -104,6 +106,7 @@ class ViewSectionWidget(QWidget):
     def drawFloorPlan(self, painter):
 
         p = painter.pen()
+
         floor = self.tower.floors[self.elevation]
 
         colorIndex = 0
@@ -169,13 +172,13 @@ class ViewSectionWidget(QWidget):
                 angle = angle
             # Second quadrant
             elif orientationX < 0 and orientationY > 0:
-                angle += m.pi/2
+                angle = m.pi - angle
             # Third quadrant
             elif orientationX <= 0 and orientationY <= 0:
                 angle += m.pi
             # Fourth quardant
-            elif orientationX < 0 and orientationY < 0:
-                angle += m.pi * 3/2
+            elif orientationX > 0 and orientationY < 0:
+                angle = m.pi*2 - angle
 
             panel_orientation = self.panel_direction * m.pi/2
 
@@ -193,9 +196,14 @@ class ViewSectionWidget(QWidget):
             nodes = [lowerRight, upperRight, upperLeft, lowerLeft]
 
             for i in range(len(nodes)-1):
-
                 # y coordinates are negative since the y direction in the widget is downwards
-                painter.drawLine(nodes[i].x*view_factor+center_x, -nodes[i].y*view_factor+center_y, nodes[i+1].x*view_factor+center_x, -nodes[i+1].y*view_factor+center_y)
+                xStart = nodes[i].x*view_factor+center_x
+                yStart = -nodes[i].y*view_factor+center_y
+
+                xEnd = nodes[i+1].x*view_factor+center_x
+                yEnd = -nodes[i+1].y*view_factor+center_y
+
+                painter.drawLine(xStart, yStart, xEnd, yEnd)
             
             painter.drawText(idLocation.x*view_factor+center_x, -idLocation.y*view_factor+center_y, str(panel.name))
 

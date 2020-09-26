@@ -9,9 +9,9 @@ import os
 
 class WarningMessage:
     def __init__(self):
-        self.warningType = 0
+        self._ = 0
 
-    def popUpWarningBox(self, message):
+    def popUpErrorBox(self, message):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText("Error")
