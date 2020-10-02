@@ -11,6 +11,7 @@ class Tower:
         self.columns = {}
         self.floorPlans = {}
         self.panels = {}
+        self.bracings = {}
         self.faces = []
 
     def setElevations(self, elevs):
@@ -59,6 +60,10 @@ class Tower:
     def addPanel(self, panel):
         ''' Add panel object to panels '''
         self.panels[panel.name] = panel
+
+    def addBracings(self, bracing):
+        ''' Add bracing object to bracings '''
+        self.bracings[bracing.name] = bracing
 
     def addFloorPlansToFloors(self):
         ''' Add floor plans to floors based on the elevation '''
@@ -298,3 +303,31 @@ class Member:
         self.end_node = end
 
 # --------------------------------------------------------------------------
+class Bracing:
+
+     # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(Bracing.id)
+            Bracing.id += 1
+
+        self.nodePairs = []
+        self.members = []
+
+    def addNodes(self, node1, node2):
+        self.nodePairs.append([node1,node2])
+
+    def addMember(self, member):
+        self.members.append(member)
+
+    def generateMembersfromNodes(self):
+        numNodePairs = len(self.nodePairs)
+        for i in range(numNodePairs-1):
+            member = Member(self.nodePairs[i][0], self.nodePairs[i][1])
+            self.addMember(member)
+
+    def __str__(self):
+        return "Bracing " + str(self.name)

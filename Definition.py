@@ -7,3 +7,4 @@ class FileExtension:
     projectSettings = '/projectSettings.csv'
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
+    bracings = '/bracings.csv'

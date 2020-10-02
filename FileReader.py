@@ -1,5 +1,6 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
+import AssignBracingDesign
 
 class FileReader:
     def __init__(self, fileLoc, tower, psData):
@@ -23,6 +24,8 @@ class FileReader:
                     self.readFloorPlans(path)
                 elif fileType == 'Panels':
                     self.readPanels(path)
+                elif fileType == 'Bracings':
+                    self.readBracings(path)
 
                 else:
                     pass
@@ -127,3 +130,34 @@ class FileReader:
                 floorPlan.generateMemebersfromNodes()
 
                 self.tower.addFloorPlan(floorPlan)
+
+    def readBracings(self, path):
+        with open(path, 'r') as brFile:
+            header = brFile.readline()
+            numBracings = int(brFile.readline().split(',')[1])
+
+            # add possible bracing schemes
+            for i in range(numBracings):
+                junk = brFile.readline()
+
+                bracingName = brFile.readline().split(',')[1]
+                bracing = Bracing(bracingName)
+
+                numMembers = int(brFile.readline().split(',')[1])
+
+                for j in range(numMembers):
+                    memberInfo = brFile.readline().split(',')[1:]
+                    
+                    x1 = float(memberInfo[0])
+                    y1 = float(memberInfo[1])
+                    x2 = float(memberInfo[2])
+                    y2 = float(memberInfo[3])
+
+                    node1 = Node(x1,y1)
+                    node2 = Node(x2,y2)
+
+                    bracing.addNodes(node1,node2)
+                
+                bracing.generateMembersfromNodes()
+
+                self.tower.addBracings(bracing)

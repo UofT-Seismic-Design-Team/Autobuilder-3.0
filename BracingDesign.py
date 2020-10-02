@@ -88,15 +88,14 @@ class BracingDesign(QDialog):
         
         data = self.bracingDesignData.bracingVersions
         i = 0
-        rowNum = len(data)
+        bd_rowNum = self.bracingDesignTable.rowCount()
         for ver in data.keys():
             item = QTableWidgetItem(str(ver))
-            if i < rowNum:
+            if i >= bd_rowNum:
                 self.bracingDesignTable.insertRow(i)
-                self.bracingDesignTable.setItem(i,0,item)
+            self.bracingDesignTable.setItem(i,0,item)
             i += 1
-
-        return self.bracingDesignData
+        #return self.bracingDesignData
 
     def setBracingDesignData(self, bracingsToTryData):
         self.bracingDesignData = bracingsToTryData

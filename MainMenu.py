@@ -7,6 +7,7 @@ from PyQt5 import uic
 from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
+from AssignBracingDesign import *
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -27,6 +28,9 @@ class MainWindow(QMainWindow):
 
         # Bracing Design data object
         self.bracingDesignData = BracingDesignData()
+
+        # Bracing Design Assignment data object
+        self.assignmentData = AssignmentData()
 
         # Tower object
         elevs = self.projectSettingsData.floorElevs
@@ -137,7 +141,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.setting_button)
 
         # Add button for Editing Bracing Scheme
-        self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"),"Edit Brace Scheme", self)
+        self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"),"Edit Bracing Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
         self.functions_toolbar.addAction(self.brace_button)
@@ -155,17 +159,19 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Design variable
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variable", self)
-        self.editDesignVariable_button.setStatusTip("Edit Design Variable")
+        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Design", self)
+        self.editDesignVariable_button.setStatusTip("Edit Bracing Design")
 
         self.editDesignVariable_button.triggered.connect(self.openBracingDesign)
 
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
         # Add button for Assign Design variable
-        self.assignDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil_plus.png"),"Assign Design Variable", self)
-        self.assignDesignVariable_button.setStatusTip("Assign Design Variable")
+        self.assignDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil_plus.png"),"Assign Bracing Design", self)
+        self.assignDesignVariable_button.setStatusTip("Assign Bracing Design")
 
+        self.assignDesignVariable_button.triggered.connect(self.openAssignment)
+        
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
         # Add button for Generating Tower
@@ -198,6 +204,10 @@ class MainWindow(QMainWindow):
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
+        # Bracing Design
+        self.action_DesignVariable.triggered.connect(self.openBracingDesign)
+        # Assign Bracing Design
+        self.action_AssignVariable.triggered.connect(self.openAssignment)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
@@ -220,9 +230,10 @@ class MainWindow(QMainWindow):
         if fileLoc: # No action if no file was selected
             self.tower.reset()
 
-            filereader= FileReader(fileLoc, self.tower, self.projectSettingsData)
+            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData)
             filereader.readMainFile()
 
+            print(self.tower)
             self.tower.build()
 
 
@@ -259,10 +270,21 @@ class MainWindow(QMainWindow):
         bracingDesign = BracingDesign(self)
         
         bracingDesign.setBracingDesignData(self.bracingDesignData)
-        self.bracingDesignData = bracingDesign.displayBracingDesignData()
+        #self.bracingDesignData = bracingDesign.displayBracingDesignData()
+        bracingDesign.displayBracingDesignData()
 
         bracingDesign.exec_()
 
+    def openAssignment(self, signal):
+        assignment = AssignBracingDesign.AssignBracingDesign(self)
     
+        assignment.setAssignmentData(self.assignmentData)
+
+        ###############################CHECK IF THESE WORK!!!###################################################
+        self.assignmentData.assignments = self.tower.panels
+        self.assignmentData.possibleBracings = self.tower.bracings
+        assignment.displayAssignmentData()
+
+        assignment.exec_()
 
     
