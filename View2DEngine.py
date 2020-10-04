@@ -37,7 +37,7 @@ class ViewSectionWidget(QWidget):
 
     def setTower(self, tower):
         self.tower = tower
-        self.elevation = self.tower.elevations[self.elevation_index]
+        self.elevation = tower.elevations[self.elevation_index]
     
     def elevationUp(self):
         self.elevation_index += 1
@@ -57,6 +57,50 @@ class ViewSectionWidget(QWidget):
         self.panel_direction *= -1
 
     # need to be fixed in the future
+    def GenerateFloorPlan(self, painter,floorPlan):
+
+        p = painter.pen()
+        colorIndex = 0
+        p.setColor(QColor(COLORS_FLOOR_PLAN[colorIndex]))
+        painter.setPen(p)
+
+
+        for member in floorPlan.members:
+            start = member.start_node
+            end = member.end_node
+
+            # Determine the reference length
+            refLength = min(self.dimension_x, self.dimension_y)
+
+            # object to view ratio
+            ratio = 0.6
+
+            # Note: 12 is only for testing purposes; will be set by user in project settings
+            view_factor = refLength * ratio / 12
+
+            # translation required to center the object
+            center_x = self.dimension_x / 2 - view_factor * 12 / 2
+            center_y = view_factor * 12 + max(self.dimension_y / 12 * 0.6 - view_factor,
+                                              0) * 12 / 2 + self.dimension_y * 0.2
+
+            # Draw the members of the floor plan-------------------
+            p.setColor(QColor(COLORS_FLOOR_PLAN[colorIndex]))
+            p.setWidth(5)
+            painter.setPen(p)
+
+            # y coordinates are negative since the y direction in the widget is downwards
+            painter.drawLine(start.x * view_factor + center_x, -start.y * view_factor + center_y,
+                             end.x * view_factor + center_x, -end.y * view_factor + center_y)
+
+            # Draw the nodes of the floor plan-------------------
+            p.setColor(QColor(COLORS_NODE[0]))
+            p.setWidth(15)
+            painter.setPen(p)
+
+            painter.drawPoint(start.x * view_factor + center_x, -start.y * view_factor + center_y)
+            painter.drawPoint(end.x * view_factor + center_x, -end.y * view_factor + center_y)
+
+
     def drawFloorPlan(self, painter):
 
         p = painter.pen()

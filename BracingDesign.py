@@ -28,13 +28,8 @@ class BracingDesign(QDialog):
         # Open Bracings To Try Table
         self.bracingDesignTable.itemDoubleClicked.connect(self.openBracingsToTry)
 
-        # item = QTableWidgetItem('12/1/12')
-        # self.bracingDesignTable.setItem(0, 0, item)
-        # self.bracingDesignTable.setCurrentItem(item)
-        # create an cell widget
-        # btn = QPushButton(self.bracingDesignTable)
-        # btn.setText('Edit')
-        # self.bracingDesignTable.setCellWidget(0, 0, btn)
+
+
 
     def setIconsForButtons(self):
         self.addBracingDesignButton.setIcon(QIcon(r"Icons\24x24\plus.png"))

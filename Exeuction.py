@@ -7,7 +7,7 @@ def main():
     elevations = [0, 6, 9, 12, 15, 18, 21, 27, 33, 39, 45, 51, 57, 60]
     tower = Tower(elevations)
 
-    floorPlan = FloorPlan()
+    floorPlan = FloorPlan(name="floorPlan1")
 
     member1 = Member(Node(0,0), Node(4,0))
     member2 = Member(Node(4,0), Node(12,8))
@@ -20,8 +20,9 @@ def main():
     floorPlan.addMember(member3)
     floorPlan.addMember(member4)
     floorPlan.addMember(member5)
+    tower.floorsPlan.append(floorPlan)
 
-    floorPlan2 = FloorPlan()
+    floorPlan2 = FloorPlan(name="floorPlan2")
 
     member21 = Member(Node(0,0), Node(4,0))
     member22 = Member(Node(4,0), Node(4,8))
@@ -36,6 +37,7 @@ def main():
     floorPlan2.addMember(member24)
     floorPlan2.addMember(member25)
     floorPlan2.addMember(member26)
+    tower.floorsPlan.append(floorPlan2)
 
     for elev in elevations[5:]:
         floorPlan.addElevation(elev)
@@ -60,8 +62,7 @@ def main():
     app = QApplication(sys.argv)
 
     main = MainWindow()
-    main.setTowerfor3D(tower)
-    main.setTowerfor2D(tower)
+    main.setTower(tower)
 
     main.show()
     sys.exit(app.exec_())
