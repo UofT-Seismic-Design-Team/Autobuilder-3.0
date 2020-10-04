@@ -7,7 +7,7 @@ from PyQt5 import uic
 from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
-from AssignBracingDesign import *
+from AssignBracingDesign import *    # open panel assignment dialog
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -230,7 +230,7 @@ class MainWindow(QMainWindow):
         if fileLoc: # No action if no file was selected
             self.tower.reset()
 
-            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData)
+            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData, self.bracingDesignData, self.assignmentData)
             filereader.readMainFile()
 
             print(self.tower)
@@ -267,24 +267,18 @@ class MainWindow(QMainWindow):
 
     # For Bracing Design --------------------------------------------
     def openBracingDesign(self, signal):
-        bracingDesign = BracingDesign(self)
-        
+        bracingDesign = BracingDesign(self)  
         bracingDesign.setBracingDesignData(self.bracingDesignData)
-        #self.bracingDesignData = bracingDesign.displayBracingDesignData()
         bracingDesign.displayBracingDesignData()
 
         bracingDesign.exec_()
 
     def openAssignment(self, signal):
         assignment = AssignBracingDesign.AssignBracingDesign(self)
-    
-        assignment.setAssignmentData(self.assignmentData)
 
-        ###############################CHECK IF THESE WORK!!!###################################################
-        self.assignmentData.assignments = self.tower.panels
+        assignment.setAssignmentData(self.assignmentData)
+        self.assignmentData.panels = list(self.tower.panels.keys())
         self.assignmentData.possibleBracings = self.tower.bracings
         assignment.displayAssignmentData()
 
         assignment.exec_()
-
-    

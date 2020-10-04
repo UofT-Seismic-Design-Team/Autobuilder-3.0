@@ -21,31 +21,12 @@ class AssignBracingDesign(QDialog):
         uic.loadUi('UI/autobuilder_assignbracingdesign.ui', self)
 
         # Set UI Elements
-        #self.setIconsForButtons()
         self.setOkandCancelButtons()
 
-        # Add Empty Row to List of Assignments
-        #self.addAssignmentButton.clicked.connect(self.addAssignment)
-
-        # Delete Row from List of Assignments
-        #self.deleteAssignmentButton.clicked.connect(self.deleteAssignment)
-
-        #self.assignmentData = AssignmentData()
-        #self.bracingDesignData = BracingDesignData()
-
-    #def setIconsForButtons(self):
-        #self.addAssignmentButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        #self.deleteAssignmentButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
-
-    # Insert new row in bracing design table
-    #def addAssignment(self,signal):
-        #self.AssignmentTable.insertRow( self.AssignmentTable.rowCount() )
-
-    # Delete selected row in bracing design table
-    #def deleteAssignment(self,signal):
-        #indices = self.AssignmentTable.selectionModel().selectedRows()
-        #for index in sorted(indices):
-            #self.AssignmentTable.removeRow(index.row())
+        '''
+        Set right-click dropdown menu (to be implemented)
+        #self.setContextMenu()
+        '''
 
     # Save bracing design corresponding to each panel
     def saveAssignment(self):
@@ -72,46 +53,30 @@ class AssignBracingDesign(QDialog):
 
     # Display list of bracing designs
     def displayAssignmentData(self):
-        
-        for panel in self.assignments.keys():
-            #self.data.panels.append(panel)
-            panelItem = QTableWidgetItem(panel)
-            self.AssignmentTable.setItem(i,0,panelItem)
 
-            if panel in self.data.panels:
-                bracing = QTableWidgetItem(self.data.assignments.get(panel))
+        i = 0
+        assignment_rowNum = self.AssignmentTable.rowCount()
+
+        for panel in self.data.panels:
+
+            panelItem = QTableWidgetItem(panel)
+            if i >= assignment_rowNum:
+                self.AssignmentTable.insertRow(i)
+            self.AssignmentTable.setItem(i,0,panelItem)
+            
+            if panel in self.data.assignments.keys():
+                bracingItem = QTableWidgetItem(self.data.assignments.get(panel))
                 self.AssignmentTable.setItem(i,1,bracingItem)
+
             else:
                 TBD = QTableWidgetItem('TBD')
                 self.AssignmentTable.setItem(i,1,TBD)
-
-
-        # i = 0
-        # assign_rowNum = self.AssignmentTable.rowCount()
-        # while i < len(self.data.panels):
-        #     panelItem = self.data.panels[i]
-        #     if i >= assign_rowNum:
-        #         self.AssignmentTable.insertRow(i)
-        #     self.AssignmentTable.setItem(i,0,panelItem)
             
-        #     i += 1
-            # check if panel item in dict
-            
-        # i = 0
-        # assign_rowNum = self.AssignmentTable.rowCount()
-        # for panel in self.data.assignments.keys():
-        #     panelItem = QTableWidgetItem(panel)
-        #     bracingItem = QTableWidgetItem(self.data.assignments.get(panel))
-        #     if i >= assign_rowNum:
-        #         self.AssignmentTable.insertRow(i)
-        #     self.AssignmentTable.setItem(i,0,panelItem)
-        #     self.AssignmentTable.setItem(i,1,bracingItem)
-        #     i += 1
-        #     print(panelItem,bracingItem)
+            i += 1
         
-
     def setAssignmentData(self, data):
         self.data = data
+
     
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
@@ -121,6 +86,54 @@ class AssignBracingDesign(QDialog):
         
         self.CancelButton = self.Assignment_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
+
+    '''
+    def setContextMenu(self):
+        self.AssignmentTable.setContextMenuPolicy(Qt.ActionsContextMenu)
+        #self.AssignmentTable.customContextMenuRequested.connect(self._show_context_menu)
+        #self._contextMenu = QMenu()
+
+        # dropdown menu
+        self.AssignmentTable.addAction(pasteAction)
+
+    
+    def paste(self):
+        model=self.AssignmentTable()
+        pasteString=QtGui.QApplication.clipboard().text()
+
+        rows=pasteString.split('\n')
+        numRows=len(rows)
+        numCols=rows[0].count('\t')+1
+
+        selectionRanges=self.selectionModel().selection()
+
+        #make sure we only have one selection range and not non-contiguous selections
+        if len(selectionRanges)==1:
+            topLeftIndex=selectionRanges[0].topLeft()
+            selColumn=topLeftIndex.column()
+            selRow=topLeftIndex.row()
+            if selColumn+numCols>model.columnCount():
+                #the number of columns we have to paste, starting at the selected cell, go beyond how many columns exist.
+                #insert the amount of columns we need to accomodate the paste
+                model.insertColumns(model.columnCount(), numCols-(model.columnCount()-selColumn))
+
+            if selRow+numRows>model.rowCount():
+                #the number of rows we have to paste, starting at the selected cell, go beyond how many rows exist.
+                #insert the amount of rows we need to accomodate the paste
+                model.insertRows(model.rowCount(), numRows-(model.rowCount()-selRow))
+
+            #block signals so that the "dataChanged" signal from setData doesn't update the view for every cell we set
+            model.blockSignals(True)  
+
+            for row in xrange(numRows):
+                columns=rows[row].split('\t')
+
+                [model.setData(model.createIndex(selRow+row, selColumn+col), QVariant(columns[col])) for col in xrange(len(columns))]
+
+            #unblock the signal and emit dataChangesd ourselves to update all the view at once
+            model.blockSignals(False)
+            model.dataChanged.emit(topLeftIndex, model.createIndex(selRow+numRows, selColumn+numCols))
+    '''
 
 # Store list of bracing designs corresponding to each panel
 class AssignmentData:

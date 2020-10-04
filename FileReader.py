@@ -3,10 +3,12 @@ import ProjectSettings  # contains data in project settings
 import AssignBracingDesign
 
 class FileReader:
-    def __init__(self, fileLoc, tower, psData):
+    def __init__(self, fileLoc, tower, psData, bracings, assignmentData):
         self.mainFileLoc = fileLoc
         self.tower = tower
         self.psData = psData
+        self.bracings = bracings
+        self.assignmentData = assignmentData
 
     def readMainFile(self):
         with open(self.mainFileLoc, 'r') as mainFile:
@@ -26,6 +28,8 @@ class FileReader:
                     self.readPanels(path)
                 elif fileType == 'Bracings':
                     self.readBracings(path)
+                elif fileType == 'Panel_assignments':
+                    self.readAssignments(path)
 
                 else:
                     pass
@@ -161,3 +165,16 @@ class FileReader:
                 bracing.generateMembersfromNodes()
 
                 self.tower.addBracings(bracing)
+
+    def readAssignments(self, path):
+
+        with open(path, 'r') as paFile:
+            header = paFile.readline()
+            junk = paFile.readline()
+            lines = paFile.readlines()
+
+            for line in lines:
+                line = line.split(',')
+                var = line[0]
+                val = line[1]
+                self.assignmentData.assignments[var] = val

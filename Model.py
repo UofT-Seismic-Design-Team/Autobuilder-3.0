@@ -65,6 +65,10 @@ class Tower:
         ''' Add bracing object to bracings '''
         self.bracings[bracing.name] = bracing
 
+    def addAssignments(self,assignment):
+        ''' Add bracing assignment objects to bracing assignments '''
+        self.assignments[assignment.name] = assignment
+
     def addFloorPlansToFloors(self):
         ''' Add floor plans to floors based on the elevation '''
         for floorPlan in self.floorPlans.values():
@@ -331,3 +335,23 @@ class Bracing:
 
     def __str__(self):
         return "Bracing " + str(self.name)
+
+# --------------------------------------------------------------------------
+class Assignment:
+
+     # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(Assignment.id)
+            Assignment.id += 1
+
+        self.assignments = {}
+
+    def __str__(self):
+        return "Bracing Assignment" + str(self.name)
+
+
+'''ADD function to go back to bottom floor once top is reached'''
