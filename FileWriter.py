@@ -1,6 +1,7 @@
 import Model    # contains tower design components
 import ProjectSettings  # contains data in project settings
 from Definition import *    # file extensions
+import pandas as pd  # use data frame to write files
 
 import os   # create new directory
 
@@ -19,7 +20,7 @@ class FileWriter:
             pass
 
     def writeFiles(self):
-        ''' Wrapper method to write all files '''
+        ''' Wrapper function to write all files '''
         self.writeMainFile()
 
         self.writeProjectSettings()
@@ -84,53 +85,71 @@ class FileWriter:
         ''' Write floor plans to file '''
         floorPlanLoc = self.folderLoc + FileExtension.floorPlan
         tower = self.tower
+        floorPlans = tower.floorPlans
 
-        with open(floorPlanLoc, 'w') as fpFile:
-            floorPlans = tower.floorPlans
-            fpFile.write('#FLOOR_PLANS\n')
-            fpFile.write('numFPlans,' + str(len(floorPlans)) + ',\n')
-            fpFile.write('\n')
+        floorPlanData = {
+            'floorPlanName':[],
+            'elevation':[],
+            'x':[],
+            'y':[],
+        }
 
-            for fpName in floorPlans:
-                floorPlan = floorPlans[fpName]
-                numNodes = len(floorPlan.nodes)
-                fpFile.write('planName,' + str(fpName) + ',\n')
-
-                # Write elevations for the floor plan
-                fpFile.write('elevs,')
+        for fpName in floorPlans:
+            floorPlan = floorPlans[fpName]
+            for node in floorPlan.nodes:
+                # elevations
+                elevs = ''
                 for elev in floorPlan.elevations:
-                    fpFile.write(str(elev) + ' ')
-                fpFile.write(',\n')
+                    elevs = elevs + str(elev) + ' '
 
-                fpFile.write('numNodes,' + str(numNodes) + ',\n')
-                
-                # Write nodes in floor plan
-                i = 1
-                for node in floorPlan.nodes:
-                    fpFile.write(str(i) + ',' + str(node.x)+ ',' + str(node.y) + ',\n')
-                    i += 1
-                
-                fpFile.write('\n')
+                floorPlanData['floorPlanName'].append(str(fpName))
+                floorPlanData['elevation'].append(elevs)
+                floorPlanData['x'].append(str(node.x))
+                floorPlanData['y'].append(str(node.y))
+
+        df = pd.DataFrame(floorPlanData)
+        df.to_csv(floorPlanLoc)
 
     def writePanels(self):
         ''' Write panels to file '''
         panelLoc = self.folderLoc + FileExtension.panel
         tower = self.tower
-        
-        with open(panelLoc, 'w') as pFile:
-            panels = tower.panels
-            pFile.write('#PANELS\n')
-            pFile.write('numPanels,' + str(len(panels)) + ',\n')
-            pFile.write('\n')
+        panels = tower.panels
 
-            for pName in panels:
-                panel = panels[pName]
-                pFile.write('panelName,' + str(pName) + ',\n')
+        panelData = {
+            'panelName':[],
+            'nodeLocation':[],
+            'x':[],
+            'y':[],
+            'z':[],
+        }
 
-                # Write corners of panel to file
-                pFile.write('lowerLeft,' + str(panel.lowerLeft.x) + ',' + str(panel.lowerLeft.y) + ',' + str(panel.lowerLeft.z) + ',\n')
-                pFile.write('upperLeft,' + str(panel.upperLeft.x) + ',' + str(panel.upperLeft.y) + ',' + str(panel.upperLeft.z) + ',\n')
-                pFile.write('upperRight,' + str(panel.upperRight.x) + ',' + str(panel.upperRight.y) + ',' + str(panel.upperRight.z) + ',\n')
-                pFile.write('lowerRight,' + str(panel.lowerRight.x) + ',' + str(panel.lowerRight.y) + ',' + str(panel.lowerRight.z) + ',\n')
+        for pName in panels:
+            panel = panels[pName]
 
-                pFile.write('\n')
+            panelData['panelName'].append(str(pName))
+            panelData['nodeLocation'].append('lowerLeft')
+            panelData['x'].append(str(panel.lowerLeft.x))
+            panelData['y'].append(str(panel.lowerLeft.y))
+            panelData['z'].append(str(panel.lowerLeft.z))
+            
+            panelData['panelName'].append(str(pName))
+            panelData['nodeLocation'].append('upperLeft')
+            panelData['x'].append(str(panel.upperLeft.x))
+            panelData['y'].append(str(panel.upperLeft.y))
+            panelData['z'].append(str(panel.upperLeft.z))
+            
+            panelData['panelName'].append(str(pName))
+            panelData['nodeLocation'].append('upperRight')
+            panelData['x'].append(str(panel.upperRight.x))
+            panelData['y'].append(str(panel.upperRight.y))
+            panelData['z'].append(str(panel.upperRight.z))
+            
+            panelData['panelName'].append(str(pName))
+            panelData['nodeLocation'].append('lowerRight')
+            panelData['x'].append(str(panel.lowerRight.x))
+            panelData['y'].append(str(panel.lowerRight.y))
+            panelData['z'].append(str(panel.lowerRight.z))
+
+        df = pd.DataFrame(panelData)
+        df.to_csv(panelLoc)

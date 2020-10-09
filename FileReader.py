@@ -1,5 +1,6 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
+import pandas as pd  # use data frame to write files
 
 class FileReader:
     def __init__(self, fileLoc, tower, psData):
@@ -73,57 +74,58 @@ class FileReader:
                     self.psData.renderZ = float(val)
     
     def readPanels(self, path):
-        with open(path, 'r') as pFile:
-            header = pFile.readline()
-            numPanels = int(pFile.readline().split(',')[1])
+        df = pd.read_csv(path)
+        panelData = df.to_dict()
 
-            # add panels to tower
-            for i in range(numPanels):
-                junk = pFile.readline()
+        panels = self.tower.panels
 
-                panelName = pFile.readline().split(',')[1]
-                panel = Panel(panelName)
+        for row in panelData['panelName']:
+            pName = panelData['panelName'][row]
+            nodeLoc = panelData['nodeLocation'][row]
+            x = float(panelData['x'][row])
+            y = float(panelData['y'][row])
+            z = float(panelData['z'][row])
 
-                corners = []
+            if not (pName in panels):
+                newPanel = Panel(pName)
+                self.tower.addPanel(newPanel)
 
-                for i in range(4):
-                    corner = pFile.readline().split(',')[1:-1]
-                    x, y, z = [float(i) for i in corner]
-                    corners.append(Node(x, y, z))
-
-                lLeft, uLeft, uRight, lRight = corners
-                panel.definePanelWithNodes(lLeft, uLeft, uRight,lRight)
-
-                self.tower.addPanel(panel)
+            panel = panels[pName]
+            
+            if nodeLoc == 'lowerLeft':
+                panel.lowerLeft.setLocation(x, y, z)
+            elif nodeLoc == 'upperLeft':
+                panel.upperLeft.setLocation(x, y, z)
+            elif nodeLoc == 'upperRight':
+                panel.upperRight.setLocation(x, y, z)
+            elif nodeLoc == 'lowerRight':
+                panel.lowerRight.setLocation(x, y, z)
 
     def readFloorPlans(self, path):
-        with open(path, 'r') as fpFile:
-            header = fpFile.readline()
-            numFPlans = int(fpFile.readline().split(',')[1])
+        df = pd.read_csv(path)
+        floorPlanData = df.to_dict()
 
-            # add floor plans to tower
-            for i in range(numFPlans):
-                junk = fpFile.readline()
+        floorPlans = self.tower.floorPlans
 
-                planName = fpFile.readline().split(',')[1]
-                floorPlan = FloorPlan(planName)
+        floorPlans = self.tower.floorPlans
+        for row in floorPlanData['floorPlanName']:
+            fpName = floorPlanData['floorPlanName'][row]
+            elevation = floorPlanData['elevation'][row]
+            x = float(floorPlanData['x'][row])
+            y = float(floorPlanData['y'][row])
 
-                elevs = fpFile.readline().split(',')[1]
-                elevs = elevs.split(' ')[:-1] # remove the last empty element
+            if not (fpName in floorPlans):
+                elevs = elevation.split()
+                print(elevs)
+                newFloorPlan = FloorPlan(fpName)
                 for elev in elevs:
-                    floorPlan.addElevation(float(elev))
+                    newFloorPlan.addElevation(float(elev))
+                self.tower.addFloorPlan(newFloorPlan)
 
-                numNodes = int(fpFile.readline().split(',')[1])
+            floorPlan = floorPlans[fpName]
+            floorPlan.addNode(Node(x,y))
 
-                for j in range(numNodes):
-                    nodeInfo = fpFile.readline().split(',')[1:]
-
-                    x = float(nodeInfo[0])
-                    y = float(nodeInfo[1])
-
-                    node = Node(x, y)
-                    floorPlan.addNode(node)
-
-                floorPlan.generateMemebersfromNodes()
-
-                self.tower.addFloorPlan(floorPlan)
+        # Make sure members are generated
+        for fpName in floorPlans:
+            floorPlan = floorPlans[fpName]
+            floorPlan.generateMembersfromNodes()

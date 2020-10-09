@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
 
         floorPlan2 = FloorPlan()
         floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
-        floorPlan2.generateMemebersfromNodes()
+        floorPlan2.generateMembersfromNodes()
 
         for elev in elevs[5:]:
             floorPlan.addElevation(elev)
