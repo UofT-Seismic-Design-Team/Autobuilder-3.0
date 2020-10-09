@@ -6,6 +6,7 @@ from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
+from BracingDesign import *    # open design variable dialog
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -60,6 +61,7 @@ class MainWindow(QMainWindow):
         self.tower.generateColumnsByFace()
         '''
         #------------------------------------------------
+
         # Set project settings data for all views
         self.setProjectSettingsDataForViews()
 
@@ -153,6 +155,8 @@ class MainWindow(QMainWindow):
         self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variable", self)
         self.editDesignVariable_button.setStatusTip("Edit Design Variable")
 
+        self.editDesignVariable_button.triggered.connect(self.openBracingDesign)
+
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
         # Add button for Assign Design variable
@@ -218,6 +222,7 @@ class MainWindow(QMainWindow):
 
             self.tower.build()
 
+
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
@@ -245,6 +250,15 @@ class MainWindow(QMainWindow):
 
     def change_panel_orientation(self, signal):
         self.view_2D_painter.changePanelDirection()
+
+    # For Bracing Design --------------------------------------------
+    def openBracingDesign(self, signal):
+        bracingDesign = BracingDesign(self)
+        
+        bracingDesign.setBracingDesignData(self.bracingDesignData)
+        self.bracingDesignData = bracingDesign.displayBracingDesignData()
+
+        bracingDesign.exec_()
 
     
 
