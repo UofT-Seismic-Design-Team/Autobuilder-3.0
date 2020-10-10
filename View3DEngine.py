@@ -7,13 +7,15 @@ from OpenGL.GL import *       # python wrapping of OpenGL
 from OpenGL.GLU import *      # OpenGL Utility Library, extends OpenGL functionality
 from OpenGL.arrays import vbo
 
-from Model import * # geometry of the tower model
+from Model import * # tower and other design components
+from ProjectSettings import *   # project settings data
+
+from Definition import Algebra# constants
 
 import numpy as np
 import math as m
 
 import sys
-
 
 class View3DGLWidget(QGLWidget):
     def __init__(self, *args, **kwargs):
@@ -21,25 +23,24 @@ class View3DGLWidget(QGLWidget):
 
         self.tower = Tower()
 
-        # Member variables to control the states of the render
+        self.projectSettingsData = ProjectSettingsData()
+
+        # Member variables to control the states of the 3D view ----------------
         self.rotMultiplier_x = -90 # show the XZ Plane in the beginning
         self.rotMultiplier_y = 0
         self.rotMultiplier_z = 0
 
-        # TESTING
-        self.scalingFactor_x = 5/21
-        self.scalingFactor_y = 5/21
-        self.scalingFactor_z = 5/21
+        self.scalingFactor_x = 1/4
+        self.scalingFactor_y = 1/4
+        self.scalingFactor_z = 1/4
 
-        # TESTING
-        self.translation_x = 0
-        self.translation_y = 0
-        self.translation_z = -30
+        self.translation_z = 0
+        # ----------------------------------------------------------------------
 
         # Save the previous location of the cursor
         self.last_x, self.last_y = None, None
 
-    def initializeGL(self): # this is the init type of thing
+    def initializeGL(self):
         self.qglClearColor(QColor('black'))     # initialize the screen to black
         
         glEnable(GL_DEPTH_TEST)           # enable depth testing
@@ -48,7 +49,7 @@ class View3DGLWidget(QGLWidget):
         glViewport(0, 0, width, height)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        aspect = width / float(height)
+        aspect = width / (float(height) + Algebra.EPSILON)
 
         # Sample: gluPerspective(field_of_view, aspect_ratio, z_near, z_far)
         gluPerspective(45.0, aspect, 0.1, 50.0)
@@ -62,7 +63,6 @@ class View3DGLWidget(QGLWidget):
         glPushMatrix()    # push the current matrix to the current stack
 
         # Note: tranlate the object before rotating it
-        # Note: need to get this '-30' 
         glTranslate(0, 0, -30)    # third, translate cube to specified depth
 
         glRotate(self.rotMultiplier_x, 1, 0, 0)
@@ -79,9 +79,16 @@ class View3DGLWidget(QGLWidget):
         # Tower model
         self.tower = tower
 
+    def setProjectSettingsData(self, projectSettingsData):
+        self.projectSettingsData = projectSettingsData
+
     def renderTowerSkeleton(self):
         glLineWidth(2)
         glBegin(GL_LINES)
+
+        centerX = self.projectSettingsData.renderX/2
+        centerY = self.projectSettingsData.renderY/2
+        centerZ = self.projectSettingsData.renderZ/2
 
         # Render the floor plan
         for elev in self.tower.floors:
@@ -92,13 +99,13 @@ class View3DGLWidget(QGLWidget):
                 for member in floorPlan.members:
                     start_node = member.start_node
                     end_node = member.end_node
-                    
-                    vertex1 = (start_node.x-2, start_node.y-4, elev + self.translation_z)
+
                     glColor3fv((1,1,1))
+                    
+                    vertex1 = (start_node.x-centerX, start_node.y-centerY, elev-centerZ+self.translation_z)
                     glVertex3fv(vertex1)
 
-                    vertex2 = (end_node.x-2, end_node.y-4, elev + self.translation_z)
-                    glColor3fv((1,1,1))
+                    vertex2 = (end_node.x-centerX, end_node.y-centerY, elev-centerZ+self.translation_z)
                     glVertex3fv(vertex2)
 
         # Render the columns
@@ -106,24 +113,28 @@ class View3DGLWidget(QGLWidget):
             column = self.tower.columns[column_id]
             start_node = column.start_node
             end_node = column.end_node
-            
-            vertex1 = (start_node.x-2, start_node.y-4, start_node.z + self.translation_z)
+
             glColor3fv((1,0,0))
+            
+            vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex1)
 
-            vertex2 = (end_node.x-2, end_node.y-4, end_node.z + self.translation_z)
-            glColor3fv((1,0,0))
+            vertex2 = (end_node.x-centerX, end_node.y-centerY, end_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex2)
 
         glEnd()
 
     def rotate(self, delta_x, delta_y):
-
-        sumOfChange = abs(delta_x) + abs(delta_y)
+        sumOfChange = abs(delta_x) + abs(delta_y) + Algebra.EPSILON
 
         self.rotMultiplier_z += delta_x / sumOfChange * 5
-
         self.rotMultiplier_x += delta_y / sumOfChange * 5
+
+    def moveUp(self):
+        self.translation_z -= self.projectSettingsData.renderZ/20
+
+    def moveDown(self):
+        self.translation_z += self.projectSettingsData.renderZ/20
 
     def mouseMoveEvent(self, e):
         if self.last_x is None:
@@ -148,11 +159,11 @@ class View3DGLWidget(QGLWidget):
     
     def wheelEvent(self, e):
         scrollDirection = e.angleDelta().y()/120
-        # if u scroll up upward, magnify
+        # if you scroll up, zoom in
         if scrollDirection > 0:
             factor = 1.1
         else:
-        # otherwise, minimize 
+        # otherwise, zoom out 
             factor = 1/1.1
 
         self.scalingFactor_x *= factor
@@ -160,8 +171,8 @@ class View3DGLWidget(QGLWidget):
         self.scalingFactor_z *= factor
 
     def mouseDoubleClickEvent(self, e):
-        self.scalingFactor_x = 1
-        self.scalingFactor_y = 1
-        self.scalingFactor_z = 1
+        self.scalingFactor_x = 1/4
+        self.scalingFactor_y = 1/4
+        self.scalingFactor_z = 1/4
 
 

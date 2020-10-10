@@ -1,7 +1,3 @@
 {
-    "python.pythonPath": "C:\\Users\\shirl\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.banditEnabled": false
+    "git.ignoreLimitWarning": true
 }

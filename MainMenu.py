@@ -9,6 +9,9 @@ from BracingDesign import *  # open design variable dialog
 from FloorPlan import *  # open floor plan ui
 from Model import Tower
 
+from FileWriter import *    # save or overwrite file
+from FileReader import *    # open existing file
+
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
@@ -19,7 +22,50 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs,)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_mainwindow_v2.ui', self)
+        uic.loadUi(r'UI\autobuilder_mainwindow_v2.ui', self)
+
+        # Project Settings data object
+        self.projectSettingsData = ProjectSettingsData()
+
+        # Tower object
+        elevs = self.projectSettingsData.floorElevs
+        self.tower = Tower(elevs)
+
+        # TESTING ----------------------------------------------
+        '''
+        self.tower.defineFloors()
+
+        floorPlan = FloorPlan()
+        floorPlan.nodes = [Node(-1,0), Node(4,0), Node(13,6), Node(12,9), Node(0,30)]
+        floorPlan.generateMemebersfromNodes()
+
+        floorPlan2 = FloorPlan()
+        floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
+        floorPlan2.generateMembersfromNodes()
+
+        for elev in elevs[5:]:
+            floorPlan.addElevation(elev)
+
+        for elev in elevs[:5+1]:
+            floorPlan2.addElevation(elev)
+
+        self.tower.addFloorPlan(floorPlan)
+        self.tower.addFloorPlan(floorPlan2)
+
+        self.tower.addFloorPlansToFloors()
+
+        self.tower.generateFacesByFloorPlan(floorPlan)
+        self.tower.generateFacesByFloorPlan(floorPlan2)
+
+        self.tower.generatePanelsByFace()
+        self.tower.addPanelsToFloors()
+
+        self.tower.generateColumnsByFace()
+        '''
+        #------------------------------------------------
+
+        # Set project settings data for all views
+        self.setProjectSettingsDataForViews()
 
         # Set menu bar
         self.setMenu()
@@ -31,6 +77,9 @@ class MainWindow(QMainWindow):
 
         # Add icons to section view
         self.setIconsForSectionView()
+
+        # Views ----------------------------
+        self.setTowerInViews()
 
         # View 2D --------------------------
         self.view_2D_up.clicked.connect(self.translate_z_up_2DView)
@@ -50,7 +99,10 @@ class MainWindow(QMainWindow):
         self.view_2D_painter.setTower(tower)
         self.tower = tower
 
-
+    def setProjectSettingsDataForViews(self):
+        self.view_3D_opengl.setProjectSettingsData(self.projectSettingsData)
+        self.view_2D_painter.setProjectSettingsData(self.projectSettingsData)
+    
     def setIconsForSectionView(self):
         # Set icon for up button
         self.view_2D_up.setIcon(QIcon(r'Icons\24x24\arrow-090.png'))
@@ -66,12 +118,14 @@ class MainWindow(QMainWindow):
         # Add button for opening files
         self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"), "Open File", self)
         self.openFile_button.setStatusTip("Open File")
+        self.openFile_button.triggered.connect(self.openFile)
 
         self.files_toolbar.addAction(self.openFile_button)
 
         # Add button for saving files
         self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"), "Save File", self)
         self.saveFile_button.setStatusTip("Save File")
+        self.saveFile_button.triggered.connect(self.saveFile)
 
         self.files_toolbar.addAction(self.saveFile_button)
 
@@ -135,35 +189,58 @@ class MainWindow(QMainWindow):
         # Add button for going up the tower
         self.up_button = QAction(QIcon(r"Icons\24x24\arrow-090.png"), "Up", self)
         self.up_button.setStatusTip("Up")
-        self.up_button.triggered.connect(self.translate_z_up_3DView)
+        self.up_button.triggered.connect(lambda x: self.view_3D_opengl.moveUp())
 
         self.views_toolbar.addAction(self.up_button)
 
         # Add button for going down the tower
         self.down_button = QAction(QIcon(r"Icons\24x24\arrow-270.png"), "Down", self)
         self.down_button.setStatusTip("Down")
-        self.down_button.triggered.connect(self.translate_z_down_3DView)
+        self.down_button.triggered.connect(lambda x: self.view_3D_opengl.moveDown())
 
         self.views_toolbar.addAction(self.down_button)
 
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
-        self.action_DesignVariable.triggered.connect(self.openBracingDesign)
+        # Save File
+        self.action_Save.triggered.connect(self.saveFile)
+        # Open File
+        self.action_Open.triggered.connect(self.openFile)
         self.action_FloorPlan.triggered.connect(self.openFloorDesign)
+
+    # Save file
+    def saveFile(self, signal):
+        fileInfo = QFileDialog.getSaveFileName(self, "Save File", "autobuilder.ab", "Autobuilder files (*.ab)")
+        fileLoc = fileInfo[0]
+
+        if fileLoc:  # No action if no file was selected
+            filewriter = FileWriter(fileLoc, self.tower, self.projectSettingsData)
+            filewriter.writeFiles()
+
+    # Open file
+    def openFile(self, signal):
+        fileInfo = QFileDialog.getOpenFileName(self, "Open File", "autobuilder.ab", "Autobuilder files (*.ab)")
+        fileLoc = fileInfo[0]
+
+        if fileLoc: # No action if no file was selected
+            self.tower.reset()
+
+            filereader= FileReader(fileLoc, self.tower, self.projectSettingsData)
+            filereader.readMainFile()
+
+            self.tower.build()
+
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
-        projectSettings = ProjectSettings(self)
+        projectSettings = ProjectSettings.ProjectSettings(self)
+
+        projectSettings.setData(self.projectSettingsData)
+        projectSettings.setTower(self.tower)
+        projectSettings.display()
+
         projectSettings.exec_()
-
-    # For 3D view -----------------------------------------------------
-    # Testing for now
-    def translate_z_up_3DView(self, signal):
-        self.view_3D_opengl.translation_z -= 3
-
-    def translate_z_down_3DView(self, signal):
-        self.view_3D_opengl.translation_z += 3
 
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):
@@ -192,4 +269,8 @@ class MainWindow(QMainWindow):
     # For Bracing Design --------------------------------------------
     def openBracingDesign(self, signal):
         bracingDesign = BracingDesign(self)
+        
+        bracingDesign.setBracingDesignData(self.bracingDesignData)
+        self.bracingDesignData = bracingDesign.displayBracingDesignData()
+
         bracingDesign.exec_()
