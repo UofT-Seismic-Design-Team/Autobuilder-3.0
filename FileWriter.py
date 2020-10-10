@@ -108,7 +108,7 @@ class FileWriter:
                 floorPlanData['y'].append(str(node.y))
 
         df = pd.DataFrame(floorPlanData)
-        df.to_csv(floorPlanLoc)
+        df.to_csv(floorPlanLoc, index=False)
 
     def writePanels(self):
         ''' Write panels to file '''
@@ -152,4 +152,4 @@ class FileWriter:
             panelData['z'].append(str(panel.lowerRight.z))
 
         df = pd.DataFrame(panelData)
-        df.to_csv(panelLoc)
+        df.to_csv(panelLoc, index=False)

@@ -116,7 +116,6 @@ class FileReader:
 
             if not (fpName in floorPlans):
                 elevs = elevation.split()
-                print(elevs)
                 newFloorPlan = FloorPlan(fpName)
                 for elev in elevs:
                     newFloorPlan.addElevation(float(elev))
