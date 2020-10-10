@@ -7,7 +7,7 @@ from PyQt5 import uic
 from ProjectSettings import *  # open project settings dialog
 from BracingDesign import *  # open design variable dialog
 from FloorPlan import *  # open floor plan ui
-from Model import Tower
+from Model import *
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -32,12 +32,12 @@ class MainWindow(QMainWindow):
         self.tower = Tower(elevs)
 
         # TESTING ----------------------------------------------
-        '''
+
         self.tower.defineFloors()
 
         floorPlan = FloorPlan()
         floorPlan.nodes = [Node(-1,0), Node(4,0), Node(13,6), Node(12,9), Node(0,30)]
-        floorPlan.generateMemebersfromNodes()
+        floorPlan.generateMembersfromNodes()
 
         floorPlan2 = FloorPlan()
         floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
         self.tower.addPanelsToFloors()
 
         self.tower.generateColumnsByFace()
-        '''
+
         #------------------------------------------------
 
         # Set project settings data for all views
@@ -69,8 +69,6 @@ class MainWindow(QMainWindow):
 
         # Set menu bar
         self.setMenu()
-
-        self.tower = Tower()
 
         # Add icons to the toolbars
         self.setIconsForToolbar()
@@ -94,10 +92,9 @@ class MainWindow(QMainWindow):
         timer.timeout.connect(self.view_2D_painter.update)
         timer.start()
 
-    def setTower(self, tower):
-        self.view_3D_opengl.setTower(tower)
-        self.view_2D_painter.setTower(tower)
-        self.tower = tower
+    def setTowerInViews(self):
+        self.view_3D_opengl.setTower(self.tower)
+        self.view_2D_painter.setTower(self.tower)
 
     def setProjectSettingsDataForViews(self):
         self.view_3D_opengl.setProjectSettingsData(self.projectSettingsData)
@@ -262,7 +259,7 @@ class MainWindow(QMainWindow):
 
     # For FloorDesign--------------------------------------------
     def openFloorDesign(self, signal):
-        floorPlan = FloorPlan(self)
+        floorPlan = FloorPlanUI(self)
         floorPlan.exec_()
 
 

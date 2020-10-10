@@ -9,7 +9,7 @@ import os
 COLORS_FLOOR_PLAN = ['blue', 'violet']
 COLORS_NODE = ['green']
 
-class FloorPlan(QDialog):
+class FloorPlanUI(QDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -28,6 +28,7 @@ class FloorPlan(QDialog):
         self.floorPlanTable.itemSelectionChanged.connect(self.UpdateScreenXYElev)
         self.tower = args[0].tower
         self.Populate()
+        self.FloorPlanViewer.setProjectSettingsData(args[0].projectSettingsData)
         self.FloorPlanViewer.setTower(self.tower)
 
         timer = QTimer(self)
@@ -37,9 +38,9 @@ class FloorPlan(QDialog):
 
     def Populate(self):
         column = 0
-        for row, floorPlan in enumerate(self.tower.floorsPlan):
+        for i in self.tower.floorPlans:
             self.floorPlanTable.insertRow(self.floorPlanTable.rowCount())
-            self.floorPlanTable.setItem(row, column, QTableWidgetItem(floorPlan.name))
+            self.floorPlanTable.setItem(int(i)-1, column, QTableWidgetItem(self.tower.floorPlans[i].name))
 
 
     def UpdateScreenXYElev(self):
@@ -49,7 +50,7 @@ class FloorPlan(QDialog):
         X = 0
         Y = 1
         row = self.floorPlanTable.currentRow()
-        floorPlan = self.tower.floorsPlan[row]
+        floorPlan = self.tower.floorPlans[str(row+1)]
         for rows, member in enumerate(floorPlan.members):
             node = member.start_node
             self.XYCoordTable.insertRow(self.XYCoordTable.rowCount())

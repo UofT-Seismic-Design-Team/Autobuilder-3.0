@@ -7,7 +7,6 @@ class Tower:
 
     def __init__(self, elevations = []):
         self.elevations = elevations
-        self.floorsPlan = []
         self.floors = {}
         self.columns = {}
         self.floorPlans = {}
