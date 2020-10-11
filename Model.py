@@ -24,6 +24,7 @@ class Tower:
         self.columns.clear()
         self.floorPlans.clear()
         self.panels.clear()
+        self.bracings.clear()
         self.faces.clear()
 
     def build(self):

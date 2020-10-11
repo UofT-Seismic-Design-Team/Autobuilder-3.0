@@ -8,6 +8,7 @@ from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
 from AssignBracingDesign import *    # open panel assignment dialog
+from BracingScheme import *    # open panel assignment dialog
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -144,6 +145,8 @@ class MainWindow(QMainWindow):
         self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"),"Edit Bracing Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
+        self.setting_button.triggered.connect(self.openBracingScheme)
+
         self.functions_toolbar.addAction(self.brace_button)
 
         # Add button for Editing Floor Plan
@@ -204,6 +207,8 @@ class MainWindow(QMainWindow):
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
+        # Bracing Scheme
+        self.action_BracingScheme.triggered.connect(self.openBracingScheme)
         # Bracing Design
         self.action_DesignVariable.triggered.connect(self.openBracingDesign)
         # Assign Bracing Design
@@ -246,6 +251,14 @@ class MainWindow(QMainWindow):
         projectSettings.display()
 
         projectSettings.exec_()
+
+    # For Bracing Scheme --------------------------------------------
+    def openBracingScheme(self, signal):
+        bracingScheme = BracingScheme(self)
+        #bracingScheme.setData(self.bracingSchemeData)
+        #bracingScheme.display()
+
+        bracingScheme.exec_()
 
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):
