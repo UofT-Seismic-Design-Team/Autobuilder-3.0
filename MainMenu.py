@@ -1,7 +1,7 @@
-from PyQt5.QtCore import *    # core Qt functionality
+from PyQt5.QtCore import *  # core Qt functionality
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *       # extends QtCore with GUI functionality
-from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
+from PyQt5.QtGui import *  # extends QtCore with GUI functionality
+from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
@@ -9,6 +9,10 @@ from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
 from AssignBracingDesign import *    # open panel assignment dialog
 from BracingScheme import *    # open panel assignment dialog
+from ProjectSettings import *  # open project settings dialog
+from BracingDesign import *  # open design variable dialog
+from FloorPlan import *  # open floor plan ui
+from Model import *
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -16,10 +20,11 @@ from FileReader import *    # open existing file
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
+        super(MainWindow, self).__init__(*args, **kwargs,)
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_mainwindow_v2.ui', self)
@@ -38,16 +43,16 @@ class MainWindow(QMainWindow):
         self.tower = Tower(elevs)
 
         # TESTING ----------------------------------------------
-        '''
+
         self.tower.defineFloors()
 
         floorPlan = FloorPlan()
         floorPlan.nodes = [Node(-1,0), Node(4,0), Node(13,6), Node(12,9), Node(0,30)]
-        floorPlan.generateMemebersfromNodes()
+        floorPlan.generateMembersfromNodes()
 
         floorPlan2 = FloorPlan()
         floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
-        floorPlan2.generateMemebersfromNodes()
+        floorPlan2.generateMembersfromNodes()
 
         for elev in elevs[5:]:
             floorPlan.addElevation(elev)
@@ -67,7 +72,7 @@ class MainWindow(QMainWindow):
         self.tower.addPanelsToFloors()
 
         self.tower.generateColumnsByFace()
-        '''
+
         #------------------------------------------------
 
         # Set project settings data for all views
@@ -91,9 +96,9 @@ class MainWindow(QMainWindow):
         self.view_2D_panel_orientation.clicked.connect(self.change_panel_orientation)
 
         # Update the views
-        timer  = QTimer(self)
-        timer.setInterval(20) # period in miliseconds
-        timer.timeout.connect(self.view_3D_opengl.updateGL) # updateGL calls paintGL automatically!!
+        timer = QTimer(self)
+        timer.setInterval(20)  # period in miliseconds
+        timer.timeout.connect(self.view_3D_opengl.updateGL)  # updateGL calls paintGL automatically!!
         timer.timeout.connect(self.set2DViewDimension)
         timer.timeout.connect(self.view_2D_painter.update)
         timer.start()
@@ -119,14 +124,14 @@ class MainWindow(QMainWindow):
     def setIconsForToolbar(self):
         # For file managment tools----------------------------------
         # Add button for opening files
-        self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"),"Open File", self) 
+        self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"), "Open File", self)
         self.openFile_button.setStatusTip("Open File")
         self.openFile_button.triggered.connect(self.openFile)
 
         self.files_toolbar.addAction(self.openFile_button)
 
         # Add button for saving files
-        self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"),"Save File", self)
+        self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"), "Save File", self)
         self.saveFile_button.setStatusTip("Save File")
         self.saveFile_button.triggered.connect(self.saveFile)
 
@@ -134,7 +139,7 @@ class MainWindow(QMainWindow):
 
         # For general tools-------------------------------------------
         # Add button for Project Settings
-        self.setting_button = QAction(QIcon(r"Icons\24x24\gear.png"),"Project Settings", self)
+        self.setting_button = QAction(QIcon(r"Icons\24x24\gear.png"), "Project Settings", self)
         self.setting_button.setStatusTip("Project Settings")
 
         self.setting_button.triggered.connect(self.openProjectSettings)
@@ -142,7 +147,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.setting_button)
 
         # Add button for Editing Bracing Scheme
-        self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"),"Edit Bracing Scheme", self)
+        self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"), "Edit Brace Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
         self.setting_button.triggered.connect(self.openBracingScheme)
@@ -150,13 +155,15 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.brace_button)
 
         # Add button for Editing Floor Plan
-        self.floorPlan_button = QAction(QIcon(r"Icons\24x24\Floor Plan - 24x24.png"),"Edit Floor Plan", self)
+        self.floorPlan_button = QAction(QIcon(r"Icons\24x24\Floor Plan - 24x24.png"), "Edit Floor Plan", self)
         self.floorPlan_button.setStatusTip("Edit Floor Plan")
+
+        self.floorPlan_button.triggered.connect(self.openFloorDesign)
 
         self.functions_toolbar.addAction(self.floorPlan_button)
 
         # Add button for Editing Panel
-        self.panel_button = QAction(QIcon(r"Icons\24x24\Panel - 24x24.png"),"Edit Panel", self)
+        self.panel_button = QAction(QIcon(r"Icons\24x24\Panel - 24x24.png"), "Edit Panel", self)
         self.panel_button.setStatusTip("Edit Panel")
 
         self.functions_toolbar.addAction(self.panel_button)
@@ -178,27 +185,27 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
         # Add button for Generating Tower
-        self.generateTower_button = QAction(QIcon(r"Icons\24x24\Generate Tower - 24x24.png"),"Generate Tower", self)
+        self.generateTower_button = QAction(QIcon(r"Icons\24x24\Generate Tower - 24x24.png"), "Generate Tower", self)
         self.generateTower_button.setStatusTip("Generate Tower")
 
         self.functions_toolbar.addAction(self.generateTower_button)
 
         # Add button for Running Tower
-        self.runTower_button = QAction(QIcon(r"Icons\24x24\Run Tower - 24x24.png"),"Run Tower", self)
+        self.runTower_button = QAction(QIcon(r"Icons\24x24\Run Tower - 24x24.png"), "Run Tower", self)
         self.runTower_button.setStatusTip("Run Tower")
 
         self.functions_toolbar.addAction(self.runTower_button)
 
         # For views controls------------------------------------------
         # Add button for going up the tower
-        self.up_button = QAction(QIcon(r"Icons\24x24\arrow-090.png"),"Up", self)
+        self.up_button = QAction(QIcon(r"Icons\24x24\arrow-090.png"), "Up", self)
         self.up_button.setStatusTip("Up")
         self.up_button.triggered.connect(lambda x: self.view_3D_opengl.moveUp())
 
         self.views_toolbar.addAction(self.up_button)
 
         # Add button for going down the tower
-        self.down_button = QAction(QIcon(r"Icons\24x24\arrow-270.png"),"Down", self)
+        self.down_button = QAction(QIcon(r"Icons\24x24\arrow-270.png"), "Down", self)
         self.down_button.setStatusTip("Down")
         self.down_button.triggered.connect(lambda x: self.view_3D_opengl.moveDown())
 
@@ -217,6 +224,7 @@ class MainWindow(QMainWindow):
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
         self.action_Open.triggered.connect(self.openFile)
+        self.action_FloorPlan.triggered.connect(self.openFloorDesign)
 
     # Save file
     def saveFile(self, signal):
@@ -277,6 +285,12 @@ class MainWindow(QMainWindow):
 
     def change_panel_orientation(self, signal):
         self.view_2D_painter.changePanelDirection()
+
+    # For FloorDesign--------------------------------------------
+    def openFloorDesign(self, signal):
+        floorPlan = FloorPlanUI(self)
+        floorPlan.exec_()
+
 
     # For Bracing Design --------------------------------------------
     def openBracingDesign(self, signal):

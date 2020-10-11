@@ -1,7 +1,7 @@
-from PyQt5.QtCore import *    # core Qt functionality
+from PyQt5.QtCore import *  # core Qt functionality
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *       # extends QtCore with GUI functionality
-from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
+from PyQt5.QtGui import *  # extends QtCore with GUI functionality
+from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
 import sys  # We need sys so that we can pass argv to QApplication
@@ -9,6 +9,7 @@ import os
 
 from WarningMessage import *
 from BracingsToTry import *
+
 
 class BracingDesign(QDialog):
 
@@ -34,21 +35,20 @@ class BracingDesign(QDialog):
         self.bracingDesignData = BracingDesignData()
         self.bracingsToTryData = BracingsToTryData()
 
+
     def setIconsForButtons(self):
         self.addBracingDesignButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
         self.deleteBracingDesignButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
 
-    # Insert new row in bracing design table
-    def addBracingDesign(self,signal):
-        self.bracingDesignTable.insertRow( self.bracingDesignTable.rowCount() )
+    def addBracingDesign(self, signal):
+        self.bracingDesignTable.insertRow(self.bracingDesignTable.rowCount())
 
-    # Delete selected row in bracing design table
-    def deleteBracingDesign(self,signal):
+    def deleteBracingDesign(self, signal):
         indices = self.bracingDesignTable.selectionModel().selectedRows()
         for index in sorted(indices):
             self.bracingDesignTable.removeRow(index.row())
+
     
-    # Open bracings to try dialog after clicking on item in bracing design table
     def openBracingsToTry(self, signal):
         
         item = self.bracingDesignTable.currentItem()
