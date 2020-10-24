@@ -69,7 +69,7 @@
         </layout>
        </item>
        <item>
-        <widget class="ViewSectionWidget" name="bracingSchemeViewer" native="true">
+        <widget class="ViewBracingWidget" name="bracingSchemeViewer" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>1</horstretch>
@@ -155,6 +155,29 @@
            <property name="horizontalScrollMode">
             <enum>QAbstractItemView::ScrollPerItem</enum>
            </property>
+           <attribute name="horizontalHeaderCascadingSectionResizes">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderMinimumSectionSize">
+            <number>36</number>
+           </attribute>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>70</number>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>23</number>
+           </attribute>
+           <attribute name="verticalHeaderStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <row>
+            <property name="text">
+             <string>1</string>
+            </property>
+           </row>
            <column>
             <property name="text">
              <string>x1</string>
@@ -194,9 +217,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ViewSectionWidget</class>
+   <class>ViewBracingWidget</class>
    <extends>QWidget</extends>
-   <header location="global">View2DEngine</header>
+   <header>View2DEngine</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

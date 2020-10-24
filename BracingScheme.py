@@ -6,8 +6,6 @@ from PyQt5 import uic
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
-COLORS_BRACING = ['blue', 'violet']
-COLORS_NODE = ['green']
 
 class BracingScheme(QDialog):
 
@@ -28,40 +26,50 @@ class BracingScheme(QDialog):
         self.bracingSchemeTable.itemSelectionChanged.connect(self.UpdateScreenXYElev)
         self.tower = args[0].tower
         self.Populate()
-        #self.BracingViewer.setTower(self.tower)
+        self.bracingSchemeViewer.setProjectSettingsData(args[0].projectSettingsData)
+        self.bracingSchemeViewer.setTower(self.tower)
 
-        #timer = QTimer(self)
-        #timer.timeout.connect(self.set2DViewDimension)
-        #timer.timeout.connect(self.BracingViewer.update)
-        #timer.start()
+        timer = QTimer(self)
+        timer.timeout.connect(self.set2DViewDimension)
+        timer.timeout.connect(self.bracingSchemeViewer.update)
+        timer.start()
 
-    #A Add existing bracing schemes to bracingSchemeTable
+    # Add existing bracing schemes to bracingSchemeTable
     def Populate(self):
         column = 0
         for row, bracingScheme in enumerate(self.tower.bracings):
             self.bracingSchemeTable.insertRow(self.bracingSchemeTable.rowCount())
-            self.bracingSchemeTable.setItem(row, column, QTableWidgetItem(bracing.name))
+            self.bracingSchemeTable.setItem(row, column, QTableWidgetItem(bracingScheme))
 
+# floor plan are numbered, not named?
 
     def UpdateScreenXYElev(self):
         #Update BracingSchemeTable
         column = 0
-        self.XYCoordTable.setRowCount(0)
-        X = 0
-        Y = 1
-        row = self.BracingSchemeTable.currentRow()
-        bracing = self.tower.bracings[row]
-        for member in enumerate(floorPlan.members):
-            startNode = member.start_node
-            self.bracingCoordTable.insertRow(self.XYCoordTable.rowCount())
-            self.bracingCoordTable.setItem(rows, X, QTableWidgetItem(str(node.x)))
-            self.bracingCoordTable.setItem(rows, Y, QTableWidgetItem(str(node.y)))
+        self.bracingCoordTable.setRowCount(0)
+        X1 = 0
+        Y1 = 1
+        X2 = 2
+        Y2 = 3
+
+        row = self.bracingCoordTable.currentRow()
+        currBracing = self.bracingSchemeTable.currentItem().text()
+        bracing = self.tower.bracings[currBracing]
+        for rows, member in enumerate(bracing.members):
+            sNode = member.start_node
+            eNode = member.end_node
+            self.bracingCoordTable.insertRow(self.bracingCoordTable.rowCount())
+            self.bracingCoordTable.setItem(rows, X1, QTableWidgetItem(str(sNode.x)))
+            self.bracingCoordTable.setItem(rows, Y1, QTableWidgetItem(str(sNode.y)))
+            self.bracingCoordTable.setItem(rows, X2, QTableWidgetItem(str(eNode.x)))
+            self.bracingCoordTable.setItem(rows, Y2, QTableWidgetItem(str(eNode.y)))
+
 
     def set2DViewDimension(self):
-        size = self.FloorPlanViewer.size()
+        size = self.bracingSchemeViewer.size()
 
-        self.FloorPlanViewer.dimension_x = size.width()
-        self.FloorPlanViewer.dimension_y = size.height()
+        self.bracingSchemeViewer.dimension_x = size.width()
+        self.bracingSchemeViewer.dimension_y = size.height()
 
     def setIconsForButtons(self):
         self.addBracingSchemeButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
@@ -82,7 +90,6 @@ class BracingScheme(QDialog):
                 item = self.bracingSchemeTable.item(row, column)
                 if item is not None:
                     rowdata.append(item.text())
-        print(rowdata)
 
     def setOkandCancelButtons(self):
         self.OkButton = self.bracingSchemeButtonBox.button(QDialogButtonBox.Ok)

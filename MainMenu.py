@@ -8,11 +8,8 @@ from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
 from BracingDesign import *    # open design variable dialog
 from AssignBracingDesign import *    # open panel assignment dialog
-from BracingScheme import *    # open panel assignment dialog
-from ProjectSettings import *  # open project settings dialog
-from BracingDesign import *  # open design variable dialog
+from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from Model import *
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -47,12 +44,17 @@ class MainWindow(QMainWindow):
         self.tower.defineFloors()
 
         floorPlan = FloorPlan()
-        floorPlan.nodes = [Node(-1,0), Node(4,0), Node(13,6), Node(12,9), Node(0,30)]
+        floorPlan.nodes = [Node(0,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
         floorPlan.generateMembersfromNodes()
 
         floorPlan2 = FloorPlan()
-        floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
+        floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
         floorPlan2.generateMembersfromNodes()
+
+        '''
+        bracing1 = Bracing()
+        bracing.nodes = [[Node()]]
+        '''
 
         for elev in elevs[5:]:
             floorPlan.addElevation(elev)
@@ -150,7 +152,7 @@ class MainWindow(QMainWindow):
         self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"), "Edit Brace Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
-        self.setting_button.triggered.connect(self.openBracingScheme)
+        self.brace_button.triggered.connect(self.openBracingScheme)
 
         self.functions_toolbar.addAction(self.brace_button)
 

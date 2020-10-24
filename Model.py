@@ -12,6 +12,7 @@ class Tower:
         self.floorPlans = {}
         self.panels = {}
         self.bracings = {}
+        self.assignments = {}
         self.faces = []
 
     def setElevations(self, elevs):
@@ -25,6 +26,7 @@ class Tower:
         self.floorPlans.clear()
         self.panels.clear()
         self.bracings.clear()
+        self.assignments.clear()
         self.faces.clear()
 
     def build(self):
@@ -33,6 +35,8 @@ class Tower:
 
         self.addFloorPlansToFloors()
         self.addPanelsToFloors()
+
+        #self.addBracingAssignmentsToPanels()
 
         for name in self.floorPlans:
             self.generateFacesByFloorPlan(self.floorPlans[name])
@@ -62,11 +66,11 @@ class Tower:
         ''' Add panel object to panels '''
         self.panels[panel.name] = panel
 
-    def addBracings(self, bracing):
+    def addBracing(self, bracing):
         ''' Add bracing object to bracings '''
         self.bracings[bracing.name] = bracing
 
-    def addAssignments(self,assignment):
+    def addAssignment(self, assignment):
         ''' Add bracing assignment objects to bracing assignments '''
         self.assignments[assignment.name] = assignment
 
@@ -82,9 +86,16 @@ class Tower:
             panel = self.panels[panel_id]
             elevation = panel.lowerLeft.z
             
-            floor  = self.floors[elevation]
+            floor = self.floors[elevation]
 
             floor.addPanel(panel)
+
+    '''
+    def addBracingAssignmentsToPanels(self):
+        #Add bracing assignments to panels
+        for assignment_id in self.assignments:
+            self.panels.addAssignment(assignment_id)
+    '''
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -242,6 +253,9 @@ class Panel:
         self.upperRight = Node()
         self.lowerRight = Node()
 
+        # Bracing that is assigned to a panel object
+        self.assignments = []
+
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
         self.lowerLeft = lowerLeft
@@ -255,6 +269,9 @@ class Panel:
         self.lowerRight = bottomMember.end_node
         self.upperLeft = topMember.start_node
         self.upperRight = topMember.end_node
+
+    def addAssignment(self, assignment):
+        self.assignments.append(assignment)
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -346,13 +363,16 @@ class Assignment:
     def __init__(self, name=None):
         self.name = name    # name is in string form
         if not name:
-            self.name = str(Assignment.id)
-            Assignment.id += 1
+            self.name = str(assignment.id)
+            assingment.id += 1
 
-        self.assignments = {}
+        self.bracings = []
+
+    def addBracing(self, bracing):
+        self.bracings.append(bracing)
 
     def __str__(self):
-        return "Bracing Assignment" + str(self.name)
+        return "Assignment" + str(self.name)
 
 
 '''ADD function to go back to bottom floor once top is reached'''

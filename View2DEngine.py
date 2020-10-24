@@ -11,8 +11,110 @@ import math as m
 COLORS_FLOOR_PLAN = ['blue', 'violet']
 COLORS_PANEL = ['orange']
 COLORS_NODE = ['green']
+COLORS_BRACING = ['grey']
 
 VIEW_RATIO = 0.6 # constant for view to object ratio
+
+class ViewBracingWidget(QWidget):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+
+        self.tower = Tower()
+
+        self.last_x, self.last_y = None, None
+        self.pen_color = QColor('white')
+
+        self.dimension_x = self.size().width()
+        self.dimension_y = self.size().height()
+
+    def paintEvent(self, event):
+
+        painter = QPainter()
+        painter.begin(self)
+
+        self.drawBracing(painter)
+
+        painter.end()
+
+    def setProjectSettingsData(self, projectSettingsData):
+        self.projectSettingsData = projectSettingsData
+
+    def setTower(self, tower):
+        self.tower = tower
+
+    def centerdxdy(self):
+        ''' find the translations required to center the displayed object '''
+        xLength = self.projectSettingsData.renderX
+        yLength = self.projectSettingsData.renderY
+
+        view_factor, dummy, view_factor_y = self.viewFactors()
+
+        center_x = (self.dimension_x - view_factor*xLength)/2
+
+        # margin in the y direction
+        margin_y = self.dimension_y*(1-VIEW_RATIO)/2
+        # translation due to length difference of side lengths in x and y direction
+        lengthDiff = max(xLength - yLength, 0)/2
+        # translation due to the difference of the x and y dimensions of the view window
+        dimDiff = max(view_factor_y - view_factor, 0)*yLength/2
+
+        center_y = view_factor*yLength + margin_y + dimDiff + lengthDiff*view_factor
+
+        return center_x, center_y
+
+    def viewFactors(self):
+        xLength = self.projectSettingsData.renderX
+        yLength = self.projectSettingsData.renderY
+
+        # Maximum length in x y direction
+        maxLength = max(xLength, yLength) + Algebra.EPSILON
+
+        view_factor_x = self.dimension_x * VIEW_RATIO / maxLength
+        view_factor_y = self.dimension_y * VIEW_RATIO / maxLength
+
+        # Find the smallest view factor so that the object fits within the window
+        view_factor = min(view_factor_x, view_factor_y)
+
+        return view_factor, view_factor_x, view_factor_y
+
+    def drawBracing(self, painter):
+
+        p = painter.pen()
+        colorIndex = 0
+
+        for bracing_name in self.tower.bracings:
+
+            p.setColor(QColor(COLORS_BRACING[colorIndex]))
+            painter.setPen(p)
+
+            bracing = self.tower.bracings[bracing_name]
+
+            for member in bracing.members:
+
+                start = member.start_node
+                end = member.end_node
+
+                # Draw the members of the bracing -------------------
+                p.setColor(QColor(COLORS_BRACING[colorIndex]))
+                p.setWidth(5)
+                painter.setPen(p)
+
+                view_factor, dummy, view_factor_y = self.viewFactors()
+                center_x, center_y = self.centerdxdy()
+
+                # y coordinates are negative since the y direction in the widget is downwards
+
+                painter.drawLine(start.x*view_factor+center_x, -start.y*view_factor+center_y, end.x*view_factor+center_x, -end.y*view_factor+center_y)
+                
+                # Draw the nodes of the bracing -------------------
+                p.setColor(QColor(COLORS_NODE[0]))
+                p.setWidth(15)
+                painter.setPen(p)
+
+                painter.drawPoint(start.x*view_factor+center_x, -start.y*view_factor+center_y)
+                painter.drawPoint(end.x*view_factor+center_x, -end.y*view_factor+center_y)
+
+            #colorIndex += 1
 
 class ViewSectionWidget(QWidget):
     def __init__(self, *args, **kwargs):
@@ -252,3 +354,4 @@ class ViewSectionWidget(QWidget):
             painter.drawText(idLocation.x*view_factor+center_x, -idLocation.y*view_factor+center_y, str(panel.name))
 
             index += 1
+
