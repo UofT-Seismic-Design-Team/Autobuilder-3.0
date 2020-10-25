@@ -20,6 +20,7 @@ class ViewBracingWidget(QWidget):
         super().__init__()
 
         self.tower = Tower()
+        self.displayed_bracing = ''
 
         self.last_x, self.last_y = None, None
         self.pen_color = QColor('white')
@@ -41,6 +42,7 @@ class ViewBracingWidget(QWidget):
 
     def setTower(self, tower):
         self.tower = tower
+        self.displayed_bracing = 'singleCross'
 
     def centerdxdy(self):
         ''' find the translations required to center the displayed object '''
@@ -82,39 +84,36 @@ class ViewBracingWidget(QWidget):
         p = painter.pen()
         colorIndex = 0
 
-        for bracing_name in self.tower.bracings:
+        bracing = self.tower.bracings[self.displayed_bracing]
 
+        p.setColor(QColor(COLORS_BRACING[colorIndex]))
+        painter.setPen(p)
+
+        for member in bracing.members:
+
+            start = member.start_node
+            end = member.end_node
+
+            # Draw the members of the bracing -------------------
             p.setColor(QColor(COLORS_BRACING[colorIndex]))
+            p.setWidth(5)
             painter.setPen(p)
 
-            bracing = self.tower.bracings[bracing_name]
+            view_factor, dummy, view_factor_y = self.viewFactors()
+            center_x, center_y = self.centerdxdy()
 
-            for member in bracing.members:
+            # y coordinates are negative since the y direction in the widget is downwards
 
-                start = member.start_node
-                end = member.end_node
+            painter.drawLine(start.x*view_factor+center_x, -start.y*view_factor+center_y, end.x*view_factor+center_x, -end.y*view_factor+center_y)
+            
+            # Draw the nodes of the bracing -------------------
+            p.setColor(QColor(COLORS_NODE[0]))
+            p.setWidth(15)
+            painter.setPen(p)
 
-                # Draw the members of the bracing -------------------
-                p.setColor(QColor(COLORS_BRACING[colorIndex]))
-                p.setWidth(5)
-                painter.setPen(p)
+            painter.drawPoint(start.x*view_factor+center_x, -start.y*view_factor+center_y)
+            painter.drawPoint(end.x*view_factor+center_x, -end.y*view_factor+center_y)
 
-                view_factor, dummy, view_factor_y = self.viewFactors()
-                center_x, center_y = self.centerdxdy()
-
-                # y coordinates are negative since the y direction in the widget is downwards
-
-                painter.drawLine(start.x*view_factor+center_x, -start.y*view_factor+center_y, end.x*view_factor+center_x, -end.y*view_factor+center_y)
-                
-                # Draw the nodes of the bracing -------------------
-                p.setColor(QColor(COLORS_NODE[0]))
-                p.setWidth(15)
-                painter.setPen(p)
-
-                painter.drawPoint(start.x*view_factor+center_x, -start.y*view_factor+center_y)
-                painter.drawPoint(end.x*view_factor+center_x, -end.y*view_factor+center_y)
-
-            #colorIndex += 1
 
 class ViewSectionWidget(QWidget):
     def __init__(self, *args, **kwargs):

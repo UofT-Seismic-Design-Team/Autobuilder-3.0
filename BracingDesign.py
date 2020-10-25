@@ -47,7 +47,6 @@ class BracingDesign(QDialog):
         indices = self.bracingDesignTable.selectionModel().selectedRows()
         for index in sorted(indices):
             self.bracingDesignTable.removeRow(index.row())
-
     
     def openBracingsToTry(self, signal):
         

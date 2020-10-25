@@ -35,6 +35,9 @@ class MainWindow(QMainWindow):
         # Bracing Design Assignment data object
         self.assignmentData = AssignmentData()
 
+        # Bracing Scheme data object
+        #self.bracingSchemeData = BracingSchemeData()
+
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
@@ -44,16 +47,16 @@ class MainWindow(QMainWindow):
         self.tower.defineFloors()
 
         floorPlan = FloorPlan()
-        floorPlan.nodes = [Node(0,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
+        floorPlan.nodes = [Node(2,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
         floorPlan.generateMembersfromNodes()
 
         floorPlan2 = FloorPlan()
-        floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
+        floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
         floorPlan2.generateMembersfromNodes()
 
         '''
-        bracing1 = Bracing()
-        bracing.nodes = [[Node()]]
+        singleCross = Bracing()
+        singleCross.nodes = [[Node()]]
         '''
 
         for elev in elevs[5:]:

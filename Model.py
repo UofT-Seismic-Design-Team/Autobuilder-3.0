@@ -347,7 +347,7 @@ class Bracing:
 
     def generateMembersfromNodes(self):
         numNodePairs = len(self.nodePairs)
-        for i in range(numNodePairs-1):
+        for i in range(numNodePairs):
             member = Member(self.nodePairs[i][0], self.nodePairs[i][1])
             self.addMember(member)
 

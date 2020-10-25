@@ -12,39 +12,53 @@ class BracingScheme(QDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Bracing data
+        self.data = args[0].tower.bracings
+
         # Load the UI Page
         uic.loadUi('UI/autobuilder_bracingscheme_v1.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()
         self.setOkandCancelButtons()
+
+        # save xy coordinates of new bracing scheme
+        self.updateBracingButton.clicked.connect(self.updateBracing)
+        
         # Add Empty Row to List of Bracing Schemes
         self.addBracingSchemeButton.clicked.connect(self.addBracingScheme)
+
         # Delete Selected Row from List of Bracing Schemes
         self.deleteBracingSchemeButton.clicked.connect(self.deleteBracingScheme)
-        # passing in main.tower into floorPlan
+
+        # Passing in main.tower into floorPlan
         self.bracingSchemeTable.itemSelectionChanged.connect(self.UpdateScreenXYElev)
         self.tower = args[0].tower
+        
+        # Fill in bracing scheme table
         self.Populate()
+        
+        # Scale bracing scheme according to project settings
         self.bracingSchemeViewer.setProjectSettingsData(args[0].projectSettingsData)
+        
+        # Tower
         self.bracingSchemeViewer.setTower(self.tower)
 
+        # Update 2D view constantly
         timer = QTimer(self)
         timer.timeout.connect(self.set2DViewDimension)
         timer.timeout.connect(self.bracingSchemeViewer.update)
         timer.start()
 
-    # Add existing bracing schemes to bracingSchemeTable
     def Populate(self):
+        '''Add existing bracing schemes to bracingSchemeTable'''
         column = 0
         for row, bracingScheme in enumerate(self.tower.bracings):
             self.bracingSchemeTable.insertRow(self.bracingSchemeTable.rowCount())
             self.bracingSchemeTable.setItem(row, column, QTableWidgetItem(bracingScheme))
 
-# floor plan are numbered, not named?
-
     def UpdateScreenXYElev(self):
-        #Update BracingSchemeTable
+        '''Update BracingSchemeTable'''
         column = 0
         self.bracingCoordTable.setRowCount(0)
         X1 = 0
@@ -52,9 +66,11 @@ class BracingScheme(QDialog):
         X2 = 2
         Y2 = 3
 
-        row = self.bracingCoordTable.currentRow()
+        # Set currently selected cell as current bracing object
         currBracing = self.bracingSchemeTable.currentItem().text()
         bracing = self.tower.bracings[currBracing]
+
+        # Fill node coordinate table
         for rows, member in enumerate(bracing.members):
             sNode = member.start_node
             eNode = member.end_node
@@ -64,8 +80,14 @@ class BracingScheme(QDialog):
             self.bracingCoordTable.setItem(rows, X2, QTableWidgetItem(str(eNode.x)))
             self.bracingCoordTable.setItem(rows, Y2, QTableWidgetItem(str(eNode.y)))
 
+        # Display 2D view of currently selected bracing
+        self.bracingSchemeViewer.displayed_bracing = currBracing
+
+        # Display name of currently selected bracing
+        self.bracingNameEdit.setText(currBracing)
 
     def set2DViewDimension(self):
+        '''scale bracing based on project settings'''
         size = self.bracingSchemeViewer.size()
 
         self.bracingSchemeViewer.dimension_x = size.width()
@@ -83,18 +105,49 @@ class BracingScheme(QDialog):
         for index in sorted(indices):
             self.bracingSchemeTable.removeRow(index.row())
 
-    def saveBracingScheme(self):
-        rowdata = []
-        for row in range(self.bracingSchemeTable.rowCount()):
-            for column in range(self.bracingSchemeTable.columnCount()):
-                item = self.bracingSchemeTable.item(row, column)
+    def updateBracing(self, signal):
+
+        #warning = WarningMessage()
+        newBracingCoord = []
+
+        for row in range(self.bracingCoordTable.rowCount()):
+            for column in range(self.bracingCoordTable.columnCount()):
+                item = self.bracingCoordTable.item(row, column)
                 if item is not None:
-                    rowdata.append(item.text())
+                    newBracingCoord.append(item.text())
+
+        self.data[self.bracingNameEdit.text()] = newBracingCoord
+
+    def saveBracingScheme(self, signal):
+
+        self.data.clear() # reset assignment properties
+
+        rowNum = self.bracingSchemeTable.rowCount()
+        for i in range(rowNum):
+            bracingItem = self.bracingSchemeTable.item(i,0)
+            # Check if the row is filled
+            if panelItem == None:
+                break
+            bracing = bracingItem.text()
+            try:
+                # Check if the item is filled
+                if bracing == '':
+                    break
+                self.data.bracingNames.append()
+            except:
+                warning.popUpErrorBox('Invalid input for bracing names')
+                return # terminate the saving process
 
     def setOkandCancelButtons(self):
         self.OkButton = self.bracingSchemeButtonBox.button(QDialogButtonBox.Ok)
-        self.OkButton.clicked.connect(lambda x: self.close())
+        #self.OkButton.clicked.connect(lambda x: self.close())
         self.OkButton.clicked.connect(self.saveBracingScheme)
 
         self.CancelButton = self.bracingSchemeButtonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
+
+class BracingSchemeData:
+
+    def __init__(self):
+        self.bracingSchemes = {}
+        self.bracingNames = []
