@@ -215,7 +215,7 @@ class MainWindow(QMainWindow):
         fileLoc = fileInfo[0]
 
         if fileLoc: # No action if no file was selected
-            self.tower.reset()
+            self.tower.reset() # clean all data in tower
 
             filereader= FileReader(fileLoc, self.tower, self.projectSettingsData)
             filereader.readMainFile()
