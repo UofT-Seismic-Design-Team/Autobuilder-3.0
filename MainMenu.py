@@ -54,10 +54,10 @@ class MainWindow(QMainWindow):
         floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
         floorPlan2.generateMembersfromNodes()
 
-        '''
-        singleCross = Bracing()
-        singleCross.nodes = [[Node()]]
-        '''
+        default = Bracing('default')
+        default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
+        default.generateMembersfromNodes()
+        self.tower.addBracing(default)
 
         for elev in elevs[5:]:
             floorPlan.addElevation(elev)

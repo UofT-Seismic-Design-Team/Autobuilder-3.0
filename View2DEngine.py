@@ -42,7 +42,7 @@ class ViewBracingWidget(QWidget):
 
     def setTower(self, tower):
         self.tower = tower
-        self.displayed_bracing = 'singleCross'
+        self.displayed_bracing = 'default'
 
     def centerdxdy(self):
         ''' find the translations required to center the displayed object '''
