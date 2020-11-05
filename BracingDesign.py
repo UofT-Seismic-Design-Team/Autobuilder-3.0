@@ -54,7 +54,7 @@ class BracingDesign(QDialog):
         bracingsToTry = BracingsToTry(self)
         bracingsToTry.setBracingsToTryData(self.bracingsToTryData)
         self.bracingsToTryData.currDesign = str(item.text())
-        self.bracingsToTryData.bracings = self.bracingDesignData.bracingVersions
+        self.bracingsToTryData.bracings = self.bracingDesignData.bracingDesigns
         bracingsToTry.displayBracingsToTryData()
 
         bracingsToTry.exec_()
@@ -66,8 +66,8 @@ class BracingDesign(QDialog):
         bracingsToTry.setBracingsToTryData(self.bracingsToTryData)
         #add to bracing versions, not equal
         for key in bracingsToTry.bracingsToTryData.bracings:
-            if key not in self.bracingDesignData.bracingVersions:
-                self.bracingDesignData.bracingVersions[key] = bracingsToTry.bracingsToTryData.bracings.get(key)
+            if key not in self.bracingDesignData.bracingDesigns:
+                self.bracingDesignData.bracingDesigns[key] = bracingsToTry.bracingsToTryData.bracings.get(key)
             bracingsToTry.bracingsToTryData.bracings
 
         #delete design from BracingDesignData if deleted in table
@@ -78,14 +78,14 @@ class BracingDesign(QDialog):
             if self.bracingDesignTable.item(i,0) is not None:
                 curr_list.append(self.bracingDesignTable.item(i,0).text())
             i+=1
-        for ver in self.bracingDesignData.bracingVersions:
+        for ver in self.bracingDesignData.bracingDesignss:
             if ver not in curr_list:
-                del self.bracingDesignData.bracingVersions[ver]
+                del self.bracingDesignData.bracingDesigns[ver]
 
     # Display list of bracing designs
     def displayBracingDesignData(self):
         
-        data = self.bracingDesignData.bracingVersions
+        data = self.bracingDesignData.bracingDesigns
         i = 0
         bd_rowNum = self.bracingDesignTable.rowCount()
         for ver in data.keys():
@@ -111,5 +111,5 @@ class BracingDesign(QDialog):
 # Store list of bracings and corresponding bracing design
 class BracingDesignData:
     def __init__(self):
-        self.bracingVersions = {}
+        self.bracingDesigns = {}
     

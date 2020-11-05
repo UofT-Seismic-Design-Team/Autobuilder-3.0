@@ -12,6 +12,7 @@ class Tower:
         self.floorPlans = {}
         self.panels = {}
         self.bracings = {}
+        self.bracingGroups = {}
         self.assignments = {}
         self.faces = []
 
@@ -26,6 +27,7 @@ class Tower:
         self.floorPlans.clear()
         self.panels.clear()
         self.bracings.clear()
+        self.bracingGroups.clear()
         self.assignments.clear()
         self.faces.clear()
 
@@ -69,6 +71,10 @@ class Tower:
     def addBracing(self, bracing):
         ''' Add bracing object to bracings '''
         self.bracings[bracing.name] = bracing
+
+    def addBracingGroup(self, group):
+        ''' Add bracing object to bracings '''
+        self.bracingGroups[group.name] = group  
 
     def addAssignment(self, assignment):
         ''' Add bracing assignment objects to bracing assignments '''
@@ -327,7 +333,7 @@ class Member:
 # --------------------------------------------------------------------------
 class Bracing:
 
-     # static variable for id
+    # static variable for id
     id = 1
 
     def __init__(self, name=None):
@@ -354,6 +360,24 @@ class Bracing:
     def __str__(self):
         return "Bracing " + str(self.name)
 
+# --------------------------------------------------------------------------     
+
+class BracingGroup:
+    # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(BracingGroup.id)
+            BracingGroup.id += 1
+
+        self.bracings = []
+    
+    def addBracing(self, bracing):
+        self.bracings.append(bracing)
+
+
 # --------------------------------------------------------------------------
 class Assignment:
 
@@ -366,10 +390,10 @@ class Assignment:
             self.name = str(assignment.id)
             assingment.id += 1
 
-        self.bracings = []
+        self.bracingGroup = None
 
-    def addBracing(self, bracing):
-        self.bracings.append(bracing)
+    def addBracingGroup(self, group):
+        self.bracingGroup = group
 
     def __str__(self):
         return "Assignment" + str(self.name)

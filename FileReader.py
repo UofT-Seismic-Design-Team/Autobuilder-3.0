@@ -1,15 +1,15 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
-import AssignBracingDesign
+import AssignBracingDesign #TO DO: delete?
 import pandas as pd  # use data frame to write files
 
 class FileReader:
-    def __init__(self, fileLoc, tower, psData, bracings, assignmentData):
+    def __init__(self, fileLoc, tower, psData, bracings):
         self.mainFileLoc = fileLoc
         self.tower = tower
         self.psData = psData
-        self.bracings = bracings
-        self.assignmentData = assignmentData
+        self.bracings = bracings#TO DO: delete?
+        #self.assignmentData = assignmentData#TO DO: delete?
 
     def readMainFile(self):
         with open(self.mainFileLoc, 'r') as mainFile:
@@ -31,6 +31,8 @@ class FileReader:
                     self.readBracings(path)
                 elif fileType == 'Panel_assignments':
                     self.readAssignments(path)
+                elif fileType == 'Bracing_groups':
+                    self.readbracingGroups(path)
 
                 else:
                     pass
@@ -175,12 +177,32 @@ class FileReader:
         assignments = self.tower.assignments
 
         for row in assignmentData['panelName']:
-            amName = assignmentData['panelName'][row]
-            bracingDesign = assignmentData['bracingDesign'][row]
+            amName = int(assignmentData['panelName'][row])
+            bracingGroup = assignmentData['bracingGroup'][row]
 
             if not (amName in assignments):
                 newAssignment = Assignment(amName)
                 self.tower.addAssignment(newAssignment)
 
             assignment = assignments[amName]
+            assignment.addBracingGroup(bracingGroup)
             self.tower.addAssignment(assignment)
+
+    def readbracingGroups(self, path):
+        df = pd.read_csv(path)
+        bracingIterData = df.to_dict()
+
+        bracingGroups = self.tower.bracingGroups
+
+        for row in bracingIterData['bracingGroup']:
+            groupName = bracingIterData['bracingGroup'][row]
+            bracing = bracingIterData['bracing'][row]
+
+            if not (groupName in bracingGroups):
+                newGroup = BracingGroup(groupName)
+                self.tower.addBracingGroup(newGroup)
+
+            bracingGroup = bracingGroups[groupName]
+            bracingGroup.addBracing(bracing)
+
+            self.tower.addBracingGroup(bracingGroup)

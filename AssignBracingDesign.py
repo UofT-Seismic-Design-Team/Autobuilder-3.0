@@ -14,14 +14,18 @@ class AssignBracingDesign(QDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        # Assigning Bracing Design to Panel Data
-        self.data = AssignmentData()
+        # Passing in main.tower into assignment
+        self.tower = args[0].tower
 
         # Load the UI Page
         uic.loadUi('UI/autobuilder_assignbracingdesign.ui', self)
 
         # Set UI Elements
+        self.setIconsForButtons()
         self.setOkandCancelButtons()
+
+        # Fill in assignment table
+        self.displayAssignmentData()
 
         '''
         Set right-click dropdown menu (to be implemented)
@@ -31,7 +35,7 @@ class AssignBracingDesign(QDialog):
     # Save bracing design corresponding to each panel
     def saveAssignment(self):
         
-        self.data.assignments.clear() # reset assignment properties
+        self.tower.assignments.clear() # reset assignment properties
 
         rowNum = self.AssignmentTable.rowCount()
         for i in range(rowNum):
@@ -46,7 +50,7 @@ class AssignBracingDesign(QDialog):
                 # Check if the item is filled
                 if panel == '' or bracing == '':
                     break
-                self.data.assignments[panel] = bracing
+                self.tower.assignments[panel] = bracing
             except:
                 warning.popUpErrorBox('Invalid input for assignment properties')
                 return # terminate the saving process
@@ -57,15 +61,15 @@ class AssignBracingDesign(QDialog):
         i = 0
         assignment_rowNum = self.AssignmentTable.rowCount()
 
-        for panel in self.data.panels:
+        for panel in self.tower.panels:
 
-            panelItem = QTableWidgetItem(panel)
+            panelItem = QTableWidgetItem(str(panel))
             if i >= assignment_rowNum:
                 self.AssignmentTable.insertRow(i)
             self.AssignmentTable.setItem(i,0,panelItem)
             
-            if panel in self.data.assignments.keys():
-                bracingItem = QTableWidgetItem(self.data.assignments.get(panel))
+            if panel in self.tower.assignments.keys():
+                bracingItem = QTableWidgetItem(self.tower.assignments[panel].bracingGroup)
                 self.AssignmentTable.setItem(i,1,bracingItem)
 
             else:
@@ -73,11 +77,11 @@ class AssignBracingDesign(QDialog):
                 self.AssignmentTable.setItem(i,1,TBD)
             
             i += 1
-        
-    def setAssignmentData(self, data):
-        self.data = data
 
-    
+    def setIconsForButtons(self):
+        self.addAssignmentButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
+        self.deleteAssignmentButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
+
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(self.saveAssignment)
@@ -133,12 +137,11 @@ class AssignBracingDesign(QDialog):
             #unblock the signal and emit dataChangesd ourselves to update all the view at once
             model.blockSignals(False)
             model.dataChanged.emit(topLeftIndex, model.createIndex(selRow+numRows, selColumn+numCols))
-    '''
-
+ 
 # Store list of bracing designs corresponding to each panel
 class AssignmentData:
     def __init__(self):
         self.panels = []
         self.possibleBracings = {}
         self.assignments = {}
-    
+'''

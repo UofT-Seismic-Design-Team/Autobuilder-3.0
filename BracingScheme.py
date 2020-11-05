@@ -40,8 +40,10 @@ class BracingScheme(QDialog):
         # Delete Selected Row from List of Bracing Coordinates
         self.deleteCoordButton.clicked.connect(self.deleteBracingCoord)
 
-        # Passing in main.tower into floorPlan
+        # Navigate to new XY Coord Table 
         self.bracingSchemeTable.itemSelectionChanged.connect(self.UpdateScreenXYElev)
+        
+        # Passing in main.tower into bracing scheme
         self.tower = args[0].tower
         
         # Fill in bracing scheme table
@@ -72,6 +74,8 @@ class BracingScheme(QDialog):
     def UpdateScreenXYElev(self):
         '''Update BracingCoordTable'''
 
+        '''TO DO: set exceptions for user clicking on empty cell or trying to fill out cell'''
+
         # if switching to an existing bracing
         if self.bracingSchemeTable.currentItem() is not None:
 
@@ -83,8 +87,6 @@ class BracingScheme(QDialog):
 
             # Set currently selected cell as current bracing object
             currBracing = self.bracingSchemeTable.currentItem().text()
-
-            #if currBracing in self.tower.bracings:
             bracing = self.tower.bracings[currBracing]
             #bracing = self.data.bracingSchemes[currBracing]
 
@@ -118,9 +120,7 @@ class BracingScheme(QDialog):
         self.deleteCoordButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
         
     def addBracingScheme(self, signal):
-        '''add bracing and associated coord properties'''
-        
-        bracings = self.tower.bracings
+        '''add bracing and clear coord properties (not saved yet)'''
 
         # add new row to bracing scheme table
         self.bracingSchemeTable.insertRow(self.bracingSchemeTable.rowCount())
@@ -172,6 +172,7 @@ class BracingScheme(QDialog):
             self.bracingCoordTable.removeRow(index.row())
 
     def updateBracing(self, signal):
+        ''' Save new bracing and associated coord properties '''
 
         #warning = WarningMessage()
         bracings = self.tower.bracings
@@ -232,7 +233,7 @@ class BracingScheme(QDialog):
     '''
 
     def setOkandCancelButtons(self):
-        
+        '''OK and Cancel button both exit dialog but have no save function!'''
         self.OkButton = self.bracingSchemeButtonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(lambda x: self.close())
        #self.OkButton.clicked.connect(self.saveBracingSchemes)
