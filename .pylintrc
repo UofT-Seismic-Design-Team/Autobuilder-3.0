@@ -259,10 +259,10 @@ good-names-rgxs=
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
 
-# Naming style matching correct inline iteration names.
+# Naming style matching correct inline BGIteration names.
 inlinevar-naming-style=any
 
-# Regular expression matching correct inline iteration names. Overrides
+# Regular expression matching correct inline BGIteration names. Overrides
 # inlinevar-naming-style.
 #inlinevar-rgx=
 

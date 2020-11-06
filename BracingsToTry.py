@@ -20,25 +20,32 @@ class BracingsToTry(QDialog):
         # Set UI Elements
         self.setIconsForButtons()
         self.setOkandCancelButtons()
+
         # Add Empty Row to List of Bracing Schemes
         self.addBracingsToTryButton.clicked.connect(self.addBracingsToTry)
+
         # Delete Selected Row from List of Bracing Schemes
         self.deleteBracingsToTryButton.clicked.connect(self.deleteBracingsToTry)
 
+        # Bracings to try data object
         self.bracingsToTryData = BracingsToTryData()
+
 
     def setIconsForButtons(self):
         self.addBracingsToTryButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
         self.deleteBracingsToTryButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
     
+    # Insert new row in bracings to try table
     def addBracingsToTry(self,signal):
         self.bracingsToTryTable.insertRow( self.bracingsToTryTable.rowCount() )
     
+    # Delete row in bracings to try table
     def deleteBracingsToTry(self,signal):
         indices = self.bracingsToTryTable.selectionModel().selectedRows()
         for index in sorted(indices):
             self.bracingsToTryTable.removeRow(index.row())
 
+    # Save list of bracings corresponding to each design in BracingsToTryData
     def saveBracingsToTry(self):
         warning = WarningMessage()
 
@@ -53,16 +60,13 @@ class BracingsToTry(QDialog):
             listofBracing.append(str(brac))
         self.bracingsToTryData.bracings[self.bracingsToTryData.currDesign] = listofBracing
 
+    # Display list of bracings
     def displayBracingsToTryData(self):
-        data = self.bracingsToTryData
         i = 0
         bracings_rowNum = self.bracingsToTryTable.rowCount()
         allBracing = self.bracingsToTryData.bracings
         currDesign = self.bracingsToTryData.currDesign
         if currDesign in allBracing:
-        #if not allBracing:
-           #self.bracingsToTryTable.insertRow(0)
-        #else:
             currList = allBracing[currDesign]
             for brac in currList:
                 item = QTableWidgetItem(str(brac))
@@ -82,6 +86,7 @@ class BracingsToTry(QDialog):
         self.CancelButton = self.bracingsToTry_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
 
+# Store list of bracings and corresponding design
 class BracingsToTryData:
     def __init__(self):
         self.bracings = {}

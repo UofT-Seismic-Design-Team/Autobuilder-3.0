@@ -42,7 +42,6 @@ class FloorPlanUI(QDialog):
             self.floorPlanTable.insertRow(self.floorPlanTable.rowCount())
             self.floorPlanTable.setItem(int(i)-1, column, QTableWidgetItem(self.tower.floorPlans[i].name))
 
-
     def UpdateScreenXYElev(self):
         #Update FloorPlanTable
         column = 0
@@ -79,8 +78,6 @@ class FloorPlanUI(QDialog):
         elev = floorPlan.elevations[1]
         self.FloorPlanViewer.elevation = elev
 
-
-
     def set2DViewDimension(self):
         size = self.FloorPlanViewer.size()
 
@@ -106,7 +103,6 @@ class FloorPlanUI(QDialog):
                 item = self.floorPlanTable.item(row, column)
                 if item is not None:
                     rowdata.append(item.text())
-        print(rowdata)
 
     def setOkandCancelButtons(self):
         self.OkButton = self.FloorPlan_buttonBox.button(QDialogButtonBox.Ok)

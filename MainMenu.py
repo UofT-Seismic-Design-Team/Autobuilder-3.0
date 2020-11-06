@@ -4,10 +4,13 @@ from PyQt5.QtGui import *  # extends QtCore with GUI functionality
 from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
-from ProjectSettings import *  # open project settings dialog
-from BracingDesign import *  # open design variable dialog
+from Model import * # import Model to access tower objects
+from ProjectSettings import *   # open project settings dialog
+from BracingDesign import *    # open design variable dialog
+from AssignBracingDesign import *    # open panel assignment dialog
+from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from Model import *
+from BracingIteration import * # open bracing group UI
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
@@ -27,6 +30,15 @@ class MainWindow(QMainWindow):
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
 
+        # Bracing Design data object
+        self.bracingDesignData = BracingDesignData()
+
+        # Bracing Design Assignment data object
+        #self.assignmentData = AssignmentData()
+
+        # Bracing Scheme data object
+        #self.bracingSchemeData = BracingSchemeData()
+
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
@@ -36,12 +48,17 @@ class MainWindow(QMainWindow):
         self.tower.defineFloors()
 
         floorPlan = FloorPlan()
-        floorPlan.nodes = [Node(-1,0), Node(4,0), Node(13,6), Node(12,9), Node(0,30)]
+        floorPlan.nodes = [Node(2,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
         floorPlan.generateMembersfromNodes()
 
         floorPlan2 = FloorPlan()
-        floorPlan2.nodes = [Node(0,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,30)]
+        floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
         floorPlan2.generateMembersfromNodes()
+
+        default = Bracing('default')
+        default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
+        default.generateMembersfromNodes()
+        self.tower.addBracing(default)
 
         for elev in elevs[5:]:
             floorPlan.addElevation(elev)
@@ -139,6 +156,8 @@ class MainWindow(QMainWindow):
         self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"), "Edit Brace Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
+        self.brace_button.triggered.connect(self.openBracingScheme)
+
         self.functions_toolbar.addAction(self.brace_button)
 
         # Add button for Editing Floor Plan
@@ -155,19 +174,20 @@ class MainWindow(QMainWindow):
 
         self.functions_toolbar.addAction(self.panel_button)
 
-        # Add button for Editing Design variable
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"), "Edit Design Variable", self)
-        self.editDesignVariable_button.setStatusTip("Edit Design Variable")
+        # Add button for Editing Bracing Groups
+        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
+        self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
 
-        self.editDesignVariable_button.triggered.connect(self.openBracingDesign)
+        self.editDesignVariable_button.triggered.connect(self.openBracingIteration)
 
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
         # Add button for Assign Design variable
-        self.assignDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil_plus.png"), "Assign Design Variable",
-                                                   self)
-        self.assignDesignVariable_button.setStatusTip("Assign Design Variable")
+        self.assignDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil_plus.png"),"Assign Bracing Design", self)
+        self.assignDesignVariable_button.setStatusTip("Assign Bracing Design")
 
+        self.assignDesignVariable_button.triggered.connect(self.openAssignment)
+        
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
         # Add button for Generating Tower
@@ -200,6 +220,12 @@ class MainWindow(QMainWindow):
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
+        # Bracing Scheme
+        self.action_BracingScheme.triggered.connect(self.openBracingScheme)
+        # Bracing Design
+        self.action_DesignVariable.triggered.connect(self.openBracingIteration)
+        # Assign Bracing Design
+        self.action_AssignVariable.triggered.connect(self.openAssignment)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
@@ -223,9 +249,10 @@ class MainWindow(QMainWindow):
         if fileLoc: # No action if no file was selected
             self.tower.reset() # clean all data in tower
 
-            filereader= FileReader(fileLoc, self.tower, self.projectSettingsData)
+            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData, self.bracingDesignData)
             filereader.readMainFile()
 
+            print(self.tower)
             self.tower.build()
 
 
@@ -238,6 +265,14 @@ class MainWindow(QMainWindow):
         projectSettings.display()
 
         projectSettings.exec_()
+
+    # For Bracing Scheme --------------------------------------------
+    def openBracingScheme(self, signal):
+        bracingScheme = BracingScheme(self)
+        #bracingScheme.setData(self.bracingSchemeData)
+        #bracingScheme.display()
+
+        bracingScheme.exec_()
 
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):
@@ -262,12 +297,17 @@ class MainWindow(QMainWindow):
         floorPlan = FloorPlanUI(self)
         floorPlan.exec_()
 
+    # For Bracing Group --------------------------------------------
+    def openBracingIteration(self, signal):
+        bracingIteration = BracingIteration(self)
+        bracingIteration.exec_()
 
-    # For Bracing Design --------------------------------------------
-    def openBracingDesign(self, signal):
-        bracingDesign = BracingDesign(self)
-        
-        bracingDesign.setBracingDesignData(self.bracingDesignData)
-        self.bracingDesignData = bracingDesign.displayBracingDesignData()
+    def openAssignment(self, signal):
+        assignment = AssignBracingDesign.AssignBracingDesign(self)
 
-        bracingDesign.exec_()
+        #assignment.setAssignmentData(self.assignmentData)
+        #self.assignmentData.panels = list(self.tower.panels.keys())
+        #self.assignmentData.possibleBracings = self.tower.bracings
+        assignment.displayAssignmentData()
+
+        assignment.exec_()

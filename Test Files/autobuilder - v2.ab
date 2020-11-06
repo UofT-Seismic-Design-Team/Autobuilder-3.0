@@ -1,4 +1,7 @@
 #PATHS
-Project_settings,C:/Users/Kaison/Documents/Seismic Design Team/Autobuilder/Test files/autobuilder - v2/projectSettings.csv,
-Floor_plans,C:/Users/Kaison/Documents/Seismic Design Team/Autobuilder/Test files/autobuilder - v2/floorPlan.csv,
-Panels,C:/Users/Kaison/Documents/Seismic Design Team/Autobuilder/Test files/autobuilder - v2/panel.csv,
+Project_settings,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\projectSettings.csv,
+Floor_plans,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\floorPlan.csv,
+Panels,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\panel.csv,
+Bracings,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\bracing.csv,
+Panel_assignments,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\panelAssignment.csv,
+Bracing_groups,C:\Users\shirl\OneDrive - University of Toronto\Desktop\Seismic\Autobuilder-3.0\Test Files\autobuilder - v2\bracingGroup.csv,

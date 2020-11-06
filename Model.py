@@ -11,6 +11,9 @@ class Tower:
         self.columns = {}
         self.floorPlans = {}
         self.panels = {}
+        self.bracings = {}
+        self.bracingGroups = {}
+        self.assignments = {}
         self.faces = []
 
     def setElevations(self, elevs):
@@ -23,6 +26,9 @@ class Tower:
         self.columns.clear()
         self.floorPlans.clear()
         self.panels.clear()
+        self.bracings.clear()
+        self.bracingGroups.clear()
+        self.assignments.clear()
         self.faces.clear()
 
     def build(self):
@@ -31,6 +37,8 @@ class Tower:
 
         self.addFloorPlansToFloors()
         self.addPanelsToFloors()
+
+        #self.addBracingAssignmentsToPanels()
 
         for name in self.floorPlans:
             self.generateFacesByFloorPlan(self.floorPlans[name])
@@ -60,6 +68,18 @@ class Tower:
         ''' Add panel object to panels '''
         self.panels[panel.name] = panel
 
+    def addBracing(self, bracing):
+        ''' Add bracing object to bracings '''
+        self.bracings[bracing.name] = bracing
+
+    def addBracingGroup(self, group):
+        ''' Add bracing object to bracings '''
+        self.bracingGroups[group.name] = group  
+
+    def addAssignment(self, assignment):
+        ''' Add bracing assignment objects to bracing assignments '''
+        self.assignments[assignment.name] = assignment
+
     def addFloorPlansToFloors(self):
         ''' Add floor plans to floors based on the elevation '''
         for floorPlan in self.floorPlans.values():
@@ -72,9 +92,16 @@ class Tower:
             panel = self.panels[panel_id]
             elevation = panel.lowerLeft.z
             
-            floor  = self.floors[elevation]
+            floor = self.floors[elevation]
 
             floor.addPanel(panel)
+
+    '''
+    def addBracingAssignmentsToPanels(self):
+        #Add bracing assignments to panels
+        for assignment_id in self.assignments:
+            self.panels.addAssignment(assignment_id)
+    '''
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -232,6 +259,9 @@ class Panel:
         self.upperRight = Node()
         self.lowerRight = Node()
 
+        # Bracing that is assigned to a panel object
+        self.assignments = []
+
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
         self.lowerLeft = lowerLeft
@@ -245,6 +275,9 @@ class Panel:
         self.lowerRight = bottomMember.end_node
         self.upperLeft = topMember.start_node
         self.upperRight = topMember.end_node
+
+    def addAssignment(self, assignment):
+        self.assignments.append(assignment)
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -298,3 +331,72 @@ class Member:
         self.end_node = end
 
 # --------------------------------------------------------------------------
+class Bracing:
+
+    # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(Bracing.id)
+            Bracing.id += 1
+
+        self.nodePairs = []
+        self.members = []
+
+    def addNodes(self, node1, node2):
+        self.nodePairs.append([node1,node2])
+
+    def addMember(self, member):
+        self.members.append(member)
+
+    def generateMembersfromNodes(self):
+        numNodePairs = len(self.nodePairs)
+        for i in range(numNodePairs):
+            member = Member(self.nodePairs[i][0], self.nodePairs[i][1])
+            self.addMember(member)
+
+    def __str__(self):
+        return "Bracing " + str(self.name)
+
+# --------------------------------------------------------------------------     
+
+class BracingGroup:
+    # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(BracingGroup.id)
+            BracingGroup.id += 1
+
+        self.bracings = []
+    
+    def addBracing(self, bracing):
+        self.bracings.append(bracing)
+
+
+# --------------------------------------------------------------------------
+class Assignment:
+
+     # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(assignment.id)
+            assingment.id += 1
+
+        self.bracingGroup = None
+
+    def addBracingGroup(self, group):
+        self.bracingGroup = group
+
+    def __str__(self):
+        return "Assignment" + str(self.name)
+
+
+'''ADD function to go back to bottom floor once top is reached'''
