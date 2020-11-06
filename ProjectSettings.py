@@ -63,12 +63,11 @@ class ProjectSettings(QDialog):
         self.CancelButton.clicked.connect(lambda signal: self.close())
 
     def saveSAPModelLoc(self, signal):
-        fileInfo = QFileDialog.getOpenFileName(self, 'Open SAP2000 model') # returns a tuple: ('file_name', 'file_type')
+        fileInfo = QFileDialog.getOpenFileName(self, 'Open SAP2000 model', '', 'SAP2000 files (*.sdb)') # returns a tuple: ('file_name', 'file_type')
         modelLoc = fileInfo[0]
         self.SAPModelLoc = modelLoc
 
         modelName = modelLoc.split('/')[-1]
-        self.data.modelName = modelName
         self.sapModelLoc_label.setText(modelName)
 
     def display(self):
@@ -98,6 +97,7 @@ class ProjectSettings(QDialog):
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)
         self.analysisType_comboBox.setCurrentIndex(data.analysisType)
+        self.SAPModelLoc = data.SAPModelLoc
         self.sapModelLoc_label.setText(data.modelName)
 
         # Render settings
@@ -197,6 +197,7 @@ class ProjectSettings(QDialog):
         self.data.groundMotion = self.gm_checkBox.isChecked()
         self.data.analysisType = self.analysisType_comboBox.currentIndex()
         self.data.SAPModelLoc = self.SAPModelLoc
+        self.data.modelName = self.sapModelLoc_label.text()
 
         self.close()
 
@@ -212,8 +213,6 @@ class ATYPE:
 class ProjectSettingsData:
 
     def __init__(self):
-
-
         self.floorElevs = [0.0,6.0,9.0,12.0,15.0,21.0,27.0,33.0,39.0,45.0,51.0,57.0,60.0]
         self.sectionProps = ['BALSA_0.5x0.5','BALSA_0.1875x0.1875']
 

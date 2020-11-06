@@ -1,7 +1,9 @@
 import Model    # contains tower design components
 import ProjectSettings  # contains data in project settings
-from Definition import *    # file extensions
+from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
+
+import json # testing
 
 import os   # create new directory
 
@@ -21,65 +23,88 @@ class FileWriter:
 
     def writeFiles(self):
         ''' Wrapper function to write all files '''
-        self.writeMainFile()
 
         self.writeProjectSettings()
         self.writeFloorPlans()
         self.writePanels()
 
+        self.writeMainFile()
+
     def writeMainFile(self):
-        ''' Write paths for other files ''' 
+        psettings = ''
+        projectSettingsLoc = self.folderLoc + FileExtension.projectSettings
+        with open(projectSettingsLoc, 'r') as f:
+            psettings = f.read()
+
+        floorPlan = ''
+        floorPlanLoc = self.folderLoc + FileExtension.floorPlan
+        with open(floorPlanLoc, 'r') as f:
+            floorPlan = f.read()
+
+        panel = ''
+        panelLoc = self.folderLoc + FileExtension.panel
+        with open(panelLoc, 'r') as f:
+            panel = f.read()
+
         with open(self.mainFileLoc, 'w') as mainFile:
-            mainFile.write('#PATHS')
+            mainFile.write('#Project_Settings')
             mainFile.write('\n')
+            mainFile.write(psettings)
 
-            mainFile.write('Project_settings,')
-            mainFile.write(self.folderLoc + FileExtension.projectSettings)
-            mainFile.write(',\n')
+            mainFile.write('\n')
+            mainFile.write('#Floor_Plans')
+            mainFile.write('\n')
+            mainFile.write(floorPlan)
 
-            mainFile.write('Floor_plans,')
-            mainFile.write(self.folderLoc + FileExtension.floorPlan)
-            mainFile.write(',\n')
+            mainFile.write('\n')
+            mainFile.write('#Panels')
+            mainFile.write('\n')
+            mainFile.write(panel)
 
-            mainFile.write('Panels,')
-            mainFile.write(self.folderLoc + FileExtension.panel)
-            mainFile.write(',\n')
 
     def writeProjectSettings(self):
         ''' Write project settings data to file '''
         projectSettingsLoc = self.folderLoc + FileExtension.projectSettings
         psData = self.psData
 
-        with open(projectSettingsLoc, 'w') as psFile:
+        psData_dict = {
+            'setting':[],
+            'value':[],
+        }
 
-            psFile.write('#PROJECT_SETTINGS')
-            psFile.write('\n')
+        psData_dict['setting'] = [
+            'tower_elevs',
+            'sect_props',
+            'gm',
+            'analysis',
+            'modelLoc',
+            'modelName',
+            'renderX',
+            'renderY',
+            'renderZ',
+        ]
 
-            psFile.write('tower_elevs,')
-            for elev in psData.floorElevs:
-                psFile.write(str(elev) + ' ')
-            psFile.write(',\n')
+        # Convert to string
+        elevs = ' '.join([str(elev) for elev in psData.floorElevs])
+        sectProps = ' '.join([str(sect) for sect in psData.sectionProps])
+        aType = EnumToString.ATYPE[psData.analysisType]
+        
+        values = [
+            elevs,
+            sectProps,
+            psData.groundMotion,
+            aType,
+            psData.SAPModelLoc,
+            psData.modelName,
+            psData.renderX,
+            psData.renderY,
+            psData.renderZ,
+        ]
 
-            psFile.write('sect_props,')
-            for sect in psData.sectionProps:
-                psFile.write(str(sect) + ' ')
-            psFile.write(',\n')
+        psData_dict['value'] = [str(i) for i in values] # convert values into string
 
-            psFile.write('gm,' + str(psData.groundMotion))
-            psFile.write(',\n')
-
-            psFile.write('analyis,' + str(psData.analysisType))
-            psFile.write(',\n')
-
-            psFile.write('modelLoc,' + str(psData.SAPModelLoc))
-            psFile.write(',\n')
-
-            psFile.write('modelName,'+ str(psData.modelName))
-            psFile.write(',\n')
-
-            psFile.write('renderX,' + str(psData.renderX) + ',\n')
-            psFile.write('renderY,' + str(psData.renderY) + ',\n')
-            psFile.write('renderZ,' + str(psData.renderZ) + ',\n')
+        df = pd.DataFrame(psData_dict)
+        df.to_csv(projectSettingsLoc, index=False)
 
     def writeFloorPlans(self):
         ''' Write floor plans to file '''
@@ -96,11 +121,9 @@ class FileWriter:
 
         for fpName in floorPlans:
             floorPlan = floorPlans[fpName]
+
             for node in floorPlan.nodes:
-                # elevations
-                elevs = ''
-                for elev in floorPlan.elevations:
-                    elevs = elevs + str(elev) + ' '
+                elevs = ' '.join([str(elev) for elev in floorPlan.elevations])
 
                 floorPlanData['floorPlanName'].append(str(fpName))
                 floorPlanData['elevation'].append(elevs)

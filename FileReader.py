@@ -1,6 +1,7 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
-import pandas as pd  # use data frame to write files
+from Definition import StringToEnum  # StringToEnum conversion
+import pandas as pd  # use data frame to read files
 
 class FileReader:
     def __init__(self, fileLoc, tower, psData):
@@ -10,81 +11,69 @@ class FileReader:
 
     def readMainFile(self):
         with open(self.mainFileLoc, 'r') as mainFile:
-            header = mainFile.readline()
             lines = mainFile.readlines()
 
-            for line in lines:
-                line = line.split(',')
-                fileType = line[0]
-                path = line[1]
+            # Find header
+            pSettings_index = lines.index('#Project_Settings\n')
+            fPlans_index = lines.index('#Floor_Plans\n')
+            panels_index = lines.index('#Panels\n')
 
-                if fileType == 'Project_settings':
-                    self.readProjectSettings(path)
-                elif fileType == 'Floor_plans':
-                    self.readFloorPlans(path)
-                elif fileType == 'Panels':
-                    self.readPanels(path)
+            # Group data
+            pSettings_data = lines[pSettings_index+1:fPlans_index-1]
+            fPlans_data = lines[fPlans_index+1:panels_index-1]
+            panels_data = lines[panels_index+1:-1]
 
-                else:
-                    pass
-    
-    def readProjectSettings(self, path):
-        with open(path, 'r') as psFile:
-            header = psFile.readline()
-            lines = psFile.readlines()
+            self.readProjectSettings(pSettings_data)
+            self.readFloorPlans(fPlans_data)
+            self.readPanels(panels_data)
 
-            for line in lines:
-                line = line.split(',')
-                var = line[0]
-                val = line[1]
+    def readProjectSettings(self, data):
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
 
-                if var == 'tower_elevs':
-                    elevs = val.split()
+            var = line[0]
+            val = line[1]
+            
+            if var == 'tower_elevs':
+                elevs = val.split()
+                for elev in elevs:
+                    self.psData.floorElevs.append(float(elev)) # will update floor elevations in tower object simultaneously (pointer)
 
-                    for elev in elevs:
-                        self.psData.floorElevs.append(float(elev)) # will update floor elevations in tower object simultaneously (pointer)
+            elif var == 'sect_props':
+                self.psData.sectionProps = val.split()
 
-                elif var == 'sect_props':
-                    self.psData.sectionProps = val.split()
+            elif var == 'gm':
+                self.psData.groundMotion = (val == 'True') # return True if the value is 'True'
 
-                elif var == 'gm':
-                    if val == 'True':
-                        gm = True
-                    else:
-                        gm = False
+            elif var == 'analysis':
+                self.psData.analysisType = StringToEnum.ATYPE[val]
 
-                    self.psData.groundMotion = gm
+            elif var == 'modelLoc':
+                self.psData.SAPModelLoc = val
 
-                elif var == 'analysis':
-                    self.psData.analysisType = int(val)
+            elif var == 'modelName':
+                self.psData.modelName = val
+            
+            elif var == 'renderX':
+                self.psData.renderX = float(val)
 
-                elif var == 'modelLoc':
-                    self.psData.modelLoc = val
+            elif var == 'renderY':
+                self.psData.renderY = float(val)
 
-                elif var == 'modelName':
-                    self.psData.modelName = val
-                
-                elif var == 'renderX':
-                    self.psData.renderX = float(val)
+            elif var == 'renderZ':
+                self.psData.renderZ = float(val)
 
-                elif var == 'renderY':
-                    self.psData.renderY = float(val)
-
-                elif var == 'renderZ':
-                    self.psData.renderZ = float(val)
-    
-    def readPanels(self, path):
-        df = pd.read_csv(path)
-        panelData = df.to_dict()
-
+    def readPanels(self, data):
         panels = self.tower.panels
 
-        for row in panelData['panelName']:
-            pName = panelData['panelName'][row]
-            nodeLoc = panelData['nodeLocation'][row]
-            x = float(panelData['x'][row])
-            y = float(panelData['y'][row])
-            z = float(panelData['z'][row])
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            pName = line[0]
+            nodeLoc = line[1]
+            x = float(line[2])
+            y = float(line[3])
+            z = float(line[4])
 
             if not (pName in panels):
                 newPanel = Panel(pName)
@@ -101,18 +90,16 @@ class FileReader:
             elif nodeLoc == 'lowerRight':
                 panel.lowerRight.setLocation(x, y, z)
 
-    def readFloorPlans(self, path):
-        df = pd.read_csv(path)
-        floorPlanData = df.to_dict()
-
+    def readFloorPlans(self, data):
         floorPlans = self.tower.floorPlans
 
-        floorPlans = self.tower.floorPlans
-        for row in floorPlanData['floorPlanName']:
-            fpName = floorPlanData['floorPlanName'][row]
-            elevation = floorPlanData['elevation'][row]
-            x = float(floorPlanData['x'][row])
-            y = float(floorPlanData['y'][row])
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            fpName = line[0]
+            elevation = line[1]
+            x = float(line[2])
+            y = float(line[3])
 
             if not (fpName in floorPlans):
                 elevs = elevation.split()

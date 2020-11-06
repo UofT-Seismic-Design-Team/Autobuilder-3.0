@@ -7,3 +7,15 @@ class FileExtension:
     projectSettings = '/projectSettings.csv'
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
+
+class EnumToString:
+    ATYPE = {
+        0: 'Time_History',
+        1: 'RSA'
+    }
+
+class StringToEnum:
+    ATYPE = {
+        'Time_History': 0,
+        'RSA': 1,
+    }
