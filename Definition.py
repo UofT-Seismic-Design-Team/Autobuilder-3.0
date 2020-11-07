@@ -11,7 +11,7 @@ class FileExtension:
 class EnumToString:
     ATYPE = {
         0: 'Time_History',
-        1: 'RSA'
+        1: 'RSA',
     }
 
 class StringToEnum:
@@ -19,3 +19,34 @@ class StringToEnum:
         'Time_History': 0,
         'RSA': 1,
     }
+
+class Color:
+    Node = {
+        'MainMenu': 'green',
+    }
+
+    FloorPlan = { 
+        'MainMenu': (
+            'blue',
+            'violet',
+            'red',
+            'pink',
+            'purple',
+        ),
+    }
+
+    Panel = {
+        'MainMenu': 'orange'
+    }
+
+    Text = {
+        'MainMenu': 'orange'
+    }
+       
+class View2DConstants:
+    RATIO = 0.6 # constant for view to object ratio
+
+    # Size constants --------------------
+    MEMBER_SIZE = 5.0
+    NODE_SIZE = 15.0
+    TEXT_SIZE = 7.0
