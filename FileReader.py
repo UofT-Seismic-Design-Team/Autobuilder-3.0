@@ -19,15 +19,26 @@ class FileReader:
             pSettings_index = lines.index('#Project_Settings\n')
             fPlans_index = lines.index('#Floor_Plans\n')
             panels_index = lines.index('#Panels\n')
+            bracings_index = lines.index('#Bracings\n')
+            assignments_index = lines.index('#Bracing_Assignments\n')
+            bracingGroups_index = lines.index('#Bracing_Groups\n')
+            
             # Group data
             pSettings_data = lines[pSettings_index+1:fPlans_index-1]
             fPlans_data = lines[fPlans_index+1:panels_index-1]
-            panels_data = lines[panels_index+1:-1]
+            panels_data = lines[panels_index+1:bracings_index-1]
+            bracings_data = lines[bracings_index+1:assignments_index-1]
+            assignments_data = lines[assignments_index+1:bracingGroups_index-1]
+            bracingGroups_data = lines[bracingGroups_index+1:1]
+            
 
             self.readProjectSettings(pSettings_data)
             self.readFloorPlans(fPlans_data)
             self.readPanels(panels_data)
-
+            self.readBracings(bracings_data)
+            self.readAssignments(assignments_data)
+            self.readBracingGroups(bracingGroups_data)
+            
     def readProjectSettings(self, data):
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -118,28 +129,26 @@ class FileReader:
             floorPlan = floorPlans[fpName]
             floorPlan.generateMembersfromNodes()
 
-    def readBracings(self, path):
-        df = pd.read_csv(path)
-        bracingData = df.to_dict()
-
+    def readBracings(self, data):
         bracings = self.tower.bracings
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
 
-        for row in bracingData['bracingName']:
-            bcName = bracingData['bracingName'][row]
-            x1 = float(bracingData['x1'][row])
-            x2 = float(bracingData['x2'][row])
-            y1 = float(bracingData['y1'][row])
-            y2 = float(bracingData['y2'][row])
-            material = bracingData['material'][row]
+            bcName = line[0]
+            x1 = float(line[1])
+            y1 = float(line[2])
+            x2 = float(line[3])
+            y2 = float(line[4])
+            material = str(line[5])
 
             if not (bcName in bracings):
                 newBracing = Bracing(bcName)
                 self.tower.addBracing(newBracing)
 
+            bracing = bracings[bcName]
+
             node1 = Node(x1,y1)
             node2 = Node(x2,y2)
-
-            bracing = bracings[bcName]
             bracing.addNodes(node1, node2)
             bracing.addMat(material)
 
@@ -150,15 +159,13 @@ class FileReader:
             bracing = bracings[bcName]
             bracing.generateMembersfromNodes()
 
-    def readAssignments(self, path):
-        df = pd.read_csv(path)
-        assignmentData = df.to_dict()
-        
+    def readAssignments(self, data):
         assignments = self.tower.assignments
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
 
-        for row in assignmentData['panelName']:
-            amName = int(assignmentData['panelName'][row])
-            bracingGroup = assignmentData['bracingGroup'][row]
+            amName = int(line[0])
+            bracingGroup = str(line[1])
 
             if not (amName in assignments):
                 newAssignment = Assignment(amName)
@@ -168,15 +175,13 @@ class FileReader:
             assignment.addBracingGroup(bracingGroup)
             self.tower.addAssignment(assignment)
 
-    def readbracingGroups(self, path):
-        df = pd.read_csv(path)
-        bracingIterData = df.to_dict()
-
+    def readBracingGroups(self, data):
         bracingGroups = self.tower.bracingGroups
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
 
-        for row in bracingIterData['bracingGroup']:
-            groupName = bracingIterData['bracingGroup'][row]
-            bracing = bracingIterData['bracing'][row]
+            groupName = str(line[0])
+            bracing = str(line[1])
 
             if not (groupName in bracingGroups):
                 newGroup = BracingGroup(groupName)
@@ -184,5 +189,4 @@ class FileReader:
 
             bracingGroup = bracingGroups[groupName]
             bracingGroup.addBracing(bracing)
-
             self.tower.addBracingGroup(bracingGroup)
