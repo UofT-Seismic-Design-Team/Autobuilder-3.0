@@ -69,7 +69,7 @@
         </layout>
        </item>
        <item>
-        <widget class="ViewBracingWidget" name="bracingSchemeViewer" native="true">
+        <widget class="View2DWidget" name="bracingSchemeViewer" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>1</horstretch>
@@ -263,9 +263,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ViewBracingWidget</class>
+   <class>View2DWidget</class>
    <extends>QWidget</extends>
-   <header>View2DEngine</header>
+   <header location="global">View2DEngine</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

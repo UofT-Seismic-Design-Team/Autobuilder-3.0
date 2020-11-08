@@ -24,6 +24,7 @@ class StringToEnum:
 class Color:
     Node = {
         'MainMenu': 'green',
+        'Bracing': 'green'
     }
 
     FloorPlan = { 
@@ -40,9 +41,14 @@ class Color:
         'MainMenu': 'orange'
     }
 
+    Member = {
+        'Bracing': 'grey'
+    }
+
     Text = {
         'MainMenu': 'orange'
     }
+
        
 class View2DConstants:
     RATIO = 0.6 # constant for view to object ratio

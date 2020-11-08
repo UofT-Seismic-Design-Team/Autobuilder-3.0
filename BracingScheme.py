@@ -7,16 +7,14 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
-from Model import *
+from Model import *    # import Model to access tower objects
+from View2DEngine import *
+from Definition import *    # import constants from Definition
 
 class BracingScheme(QDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        # Bracing data
-        #self.data = args[0].tower.bracings
-        #self.data = BracingSchemeData
 
         # Load the UI Page
         uic.loadUi('UI/autobuilder_bracingscheme_v1.ui', self)
@@ -48,19 +46,68 @@ class BracingScheme(QDialog):
         
         # Fill in bracing scheme table
         self.Populate()
-        
-        # Scale bracing scheme according to project settings
-        self.bracingSchemeViewer.setProjectSettingsData(args[0].projectSettingsData)
-        
-        # Tower
-        self.bracingSchemeViewer.setTower(self.tower)
 
         # Update 2D view constantly
         timer = QTimer(self)
         timer.timeout.connect(self.set2DViewDimension)
+        timer.timeout.connect(self.updateBracingView)
         timer.timeout.connect(self.bracingSchemeViewer.update)
         timer.start()
 
+    def updateBracingView(self):
+        vMembers, vNodes = self.View2DBracings()
+
+        self.bracingSchemeViewer.reset()
+
+        for vMember in vMembers:
+            self.bracingSchemeViewer.addMember(vMember)
+
+        for vNode in vNodes:
+            self.bracingSchemeViewer.addNode(vNode)
+
+    def View2DBracings(self):
+        renderX = 1.0 # scaled to 1.0x regardless of project setting
+        renderY = 1.0
+
+        vMembers = []
+        vNodes = []
+
+        # display default bracing if no existing bracing is selected (i.e. initializing dialog)
+        bracing = self.tower.bracings[self.bracingSchemeViewer.displayed_bracing]
+
+        color_bracing = Color.Member['Bracing']
+        color_node = Color.Node['Bracing']
+
+        vMember = ViewMember()
+        vNode = ViewNode()
+
+        # Set View Objects attributes
+        vMember.setColor(color_bracing)
+        vMember.setSize(View2DConstants.MEMBER_SIZE)
+        vMember.setDimX(renderX)
+        vMember.setDimY(renderY)
+
+        vNode.setColor(color_node)
+        vNode.setSize(View2DConstants.NODE_SIZE)
+        vNode.setDimX(renderX)
+        vNode.setDimY(renderY)
+
+        for member in bracing.members:
+            vMember.addMember(member)
+            
+            vNode.addNode(member.start_node)
+            vNode.addNode(member.end_node)
+
+        vMembers.append(vMember)
+        vNodes.append(vNode)
+        
+        return vMembers, vNodes
+
+
+    def set2DViewDimension(self):
+        self.bracingSchemeViewer.dimension_x = size.width()
+        self.bracingSchemeViewer.dimension_y = size.height()
+    
     def Populate(self):
         '''Add existing bracing schemes to bracingSchemeTable'''
         column = 0

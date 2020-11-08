@@ -35,15 +35,6 @@ class MainWindow(QMainWindow):
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
 
-        # Bracing Design data object
-        #self.bracingDesignData = BracingDesignData()
-
-        # Bracing Design Assignment data object
-        #self.assignmentData = AssignmentData()
-
-        # Bracing Scheme data object
-        #self.bracingSchemeData = BracingSchemeData()
-
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
@@ -277,8 +268,6 @@ class MainWindow(QMainWindow):
     # For Bracing Scheme --------------------------------------------
     def openBracingScheme(self, signal):
         bracingScheme = BracingScheme(self)
-        #bracingScheme.setData(self.bracingSchemeData)
-        #bracingScheme.display()
 
         bracingScheme.exec_()
 
@@ -436,10 +425,6 @@ class MainWindow(QMainWindow):
 
     def openAssignment(self, signal):
         assignment = BracingAssignment(self)
-
-        #assignment.setAssignmentData(self.assignmentData)
-        #self.assignmentData.panels = list(self.tower.panels.keys())
-        #self.assignmentData.possibleBracings = self.tower.bracings
         assignment.displayAssignmentData()
 
         assignment.exec_()
