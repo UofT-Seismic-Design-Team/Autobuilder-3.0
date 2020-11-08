@@ -1,3 +1,6 @@
+from Definition import *    # for constants
+import math as m
+
 # Module description: 
 # - Stores classes that define the geometry of the tower and its components
 
@@ -335,6 +338,32 @@ class Member:
         self.start_node = start
         self.end_node = end
 
+    def angle(self):
+        ''' Find angle between the member and the x axis --> in radians '''
+        start = self.start_node
+        end = self.end_node
+
+        slope = (end.y - start.y) / (end.x - start.x + Algebra.EPSILON) # tolerance to avoid divison by zero
+        
+        orientationX = end.x - start.x
+        orientationY = end.y - start.y
+
+        angle = abs(m.atan(slope))
+        
+        # First quadrant
+        if orientationX >= 0 and orientationY >= 0:
+            angle = angle
+        # Second quadrant
+        elif orientationX < 0 and orientationY > 0:
+            angle = m.pi - angle
+        # Third quadrant
+        elif orientationX <= 0 and orientationY <= 0:
+            angle += m.pi
+        # Fourth quardant
+        elif orientationX > 0 and orientationY < 0:
+            angle = m.pi*2 - angle
+
+        return angle
 # --------------------------------------------------------------------------
 class Bracing:
 

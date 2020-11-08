@@ -1,18 +1,24 @@
 from PyQt5.QtCore import *  # core Qt functionality
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *  # extends QtCore with GUI functionality
-from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
+from PyQt5.QtGui import *   # extends QtCore with GUI functionality
+from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
+from Definition import *    # import constants from Definition
+
 from ProjectSettings import *   # open project settings dialog
 from AssignBracingDesign import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from BracingIteration import * # open bracing group UI
 
+from View2DEngine import *  # import View2DEngine
+
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
+
+import math as m
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -24,7 +30,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs,)
 
         # Load the UI Page
-        uic.loadUi(r'UI\autobuilder_mainwindow_v2.ui', self)
+        uic.loadUi(r'UI\autobuilder_mainwindow_v3.ui', self)
 
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
@@ -97,25 +103,28 @@ class MainWindow(QMainWindow):
         self.setTowerInViews()
 
         # View 2D --------------------------
+        self.elevation_index = 0
+        self.elevation = 0
+        self.panel_direction = 1
+
         self.view_2D_up.clicked.connect(self.translate_z_up_2DView)
         self.view_2D_down.clicked.connect(self.translate_z_down_2DView)
         self.view_2D_panel_orientation.clicked.connect(self.change_panel_orientation)
 
-        # Update the views
-        timer = QTimer(self)
-        timer.setInterval(20)  # period in miliseconds
-        timer.timeout.connect(self.view_3D_opengl.updateGL)  # updateGL calls paintGL automatically!!
+        # Update views -----------------------------
+        timer  = QTimer(self)
+        timer.setInterval(20) # period in miliseconds
+        timer.timeout.connect(self.view_3D_opengl.updateGL) # updateGL calls paintGL automatically!!
         timer.timeout.connect(self.set2DViewDimension)
+        timer.timeout.connect(self.updateSectionView)
         timer.timeout.connect(self.view_2D_painter.update)
         timer.start()
 
     def setTowerInViews(self):
         self.view_3D_opengl.setTower(self.tower)
-        self.view_2D_painter.setTower(self.tower)
 
     def setProjectSettingsDataForViews(self):
         self.view_3D_opengl.setProjectSettingsData(self.projectSettingsData)
-        self.view_2D_painter.setProjectSettingsData(self.projectSettingsData)
     
     def setIconsForSectionView(self):
         # Set icon for up button
@@ -232,7 +241,7 @@ class MainWindow(QMainWindow):
         self.action_Open.triggered.connect(self.openFile)
         self.action_FloorPlan.triggered.connect(self.openFloorDesign)
 
-    # Save file
+    # Save file ------------------------------------------------------------------------------
     def saveFile(self, signal):
         fileInfo = QFileDialog.getSaveFileName(self, "Save File", "autobuilder.ab", "Autobuilder files (*.ab)")
         fileLoc = fileInfo[0]
@@ -241,7 +250,7 @@ class MainWindow(QMainWindow):
             filewriter = FileWriter(fileLoc, self.tower, self.projectSettingsData)
             filewriter.writeFiles()
 
-    # Open file
+    # Open file ------------------------------------------------------------------------------
     def openFile(self, signal):
         fileInfo = QFileDialog.getOpenFileName(self, "Open File", "autobuilder.ab", "Autobuilder files (*.ab)")
         fileLoc = fileInfo[0]
@@ -254,7 +263,6 @@ class MainWindow(QMainWindow):
 
             print(self.tower)
             self.tower.build()
-
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
@@ -281,16 +289,140 @@ class MainWindow(QMainWindow):
         self.view_2D_painter.dimension_x = size.width()
         self.view_2D_painter.dimension_y = size.height()
 
+    def View2DObjects(self):
+        ''' --> list(ViewMember), list(ViewNode), list(ViewText) '''
+
+        renderX = self.projectSettingsData.renderX
+        renderY = self.projectSettingsData.renderY
+
+        # Step 1: Get floor plan and panels at the current elevation level
+        floor = self.tower.floors[self.elevation]
+
+        floorPlans = floor.floorPlans
+        panels = floor.panels
+
+        vMembers = []
+        vNodes = []
+        vTexts = []
+
+        # Step 2: Create view objects for panels
+        color_panel = Color.Panel['MainMenu']
+        color_text = Color.Text['MainMenu']
+
+        vText = ViewText()
+        for panel in panels:
+            vMember = ViewMember()
+
+            # Set View Objects attributes --------------------------------
+            vMember.setColor(color_panel)
+            vMember.setSize(View2DConstants.MEMBER_SIZE)
+            vMember.setDimX(renderX)
+            vMember.setDimY(renderY)
+
+            vText.setColor(color_text)
+            vText.setSize(View2DConstants.TEXT_SIZE)
+            vText.setDimX(renderX)
+            vText.setDimY(renderY)
+
+            # Find panel corners coordinates
+            lowerLeft = panel.lowerLeft
+            lowerRight = panel.lowerRight
+            
+            base = Member(lowerLeft, lowerRight)
+            angle = base.angle()
+
+            rot = self.panel_direction * m.pi/2
+
+            dx = m.cos(angle - rot)
+            dy = m.sin(angle - rot)
+
+            upperLeft = Node(lowerLeft.x + dx, lowerLeft.y + dy)
+            upperRight =  Node(lowerRight.x + dx, lowerRight.y + dy)
+
+            # Panel members ------------------------------------
+            vMember.addMember(Member(lowerLeft, upperLeft))
+            vMember.addMember(Member(upperLeft, upperRight))
+            vMember.addMember(Member(upperRight, lowerRight))
+
+            vMembers.append(vMember)
+
+            # Panel labels --------------------------------------
+            vText.addMember(Member(lowerLeft, lowerRight))
+            vText.addText(panel.name)
+            vText.setLocation(Node(0.5, 0.5*self.panel_direction)) # midpoint
+
+        vTexts.append(vText)
+
+        # Step 3: Create view object for floor plans
+        color_fplan = Color.FloorPlan['MainMenu']
+        color_node = Color.Node['MainMenu']
+
+        limit = len(color_fplan) - 1
+        i = 0
+        for fpName in floorPlans:
+            vMember = ViewMember()
+            vNode = ViewNode()
+
+            # Set View Objects attributes --------------------------------
+            vMember.setColor(color_fplan[min(i, limit)])
+            vMember.setSize(View2DConstants.MEMBER_SIZE)
+            vMember.setDimX(renderX)
+            vMember.setDimY(renderY)
+
+            vNode.setColor(color_node)
+            vNode.setSize(View2DConstants.NODE_SIZE)
+            vNode.setDimX(renderX)
+            vNode.setDimY(renderY)
+            
+            # Floor plan members and nodes -------------------------------
+            floorPlan = floorPlans[fpName]
+
+            for member in floorPlan.members:
+                vMember.addMember(member)
+                
+                vNode.addNode(member.start_node)
+                vNode.addNode(member.end_node) # redundant but just in case
+
+            vMembers.append(vMember)
+            vNodes.append(vNode)
+
+            i += 1
+
+        return vMembers, vNodes, vTexts
+
+    def updateSectionView(self):
+        if not self.tower.floors: # update only when floors are provided
+            return
+        
+        vMembers, vNodes, vTexts = self.View2DObjects()
+
+        self.view_2D_painter.reset()    # clear all the existing objects
+
+        for vMember in vMembers:
+            self.view_2D_painter.addMember(vMember)
+
+        for vNode in vNodes:
+            self.view_2D_painter.addNode(vNode)
+
+        for vText in vTexts:
+            self.view_2D_painter.addText(vText)
+
     def translate_z_up_2DView(self, signal):
-        self.view_2D_painter.elevationUp()
-        self.view_2D_elevation.setText("Z = " + str(self.view_2D_painter.elevation))
+        # prevent list to go out of range
+        self.elevation_index = min(len(self.tower.elevations)-1, self.elevation_index+1)
+        self.elevation = self.tower.elevations[self.elevation_index]
+
+        self.view_2D_elevation.setText("Z = " + str(self.elevation))
 
     def translate_z_down_2DView(self, signal):
-        self.view_2D_painter.elevationDown()
-        self.view_2D_elevation.setText("Z = " + str(self.view_2D_painter.elevation))
+         # prevent list to go out of range
+        self.elevation_index = max(0, self.elevation_index-1)
+        self.elevation = self.tower.elevations[self.elevation_index]
+
+        self.view_2D_elevation.setText("Z = " + str(self.elevation))
 
     def change_panel_orientation(self, signal):
-        self.view_2D_painter.changePanelDirection()
+        self.panel_direction *= -1
 
     # For FloorDesign--------------------------------------------
     def openFloorDesign(self, signal):
