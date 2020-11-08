@@ -135,7 +135,7 @@ class ViewSectionWidget(QWidget):
 
     def paintEvent(self, event):
 
-        if not self.tower.floors: # draw only when floors is provided
+        if not self.tower.floors: # draw only when floors are provided
             return
 
         painter = QPainter()
