@@ -1,14 +1,13 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
-import AssignBracingDesign #TO DO: delete?
 import pandas as pd  # use data frame to write files
 
 class FileReader:
-    def __init__(self, fileLoc, tower, psData, bracings):
+    def __init__(self, fileLoc, tower, psData):
         self.mainFileLoc = fileLoc
         self.tower = tower
         self.psData = psData
-        self.bracings = bracings#TO DO: delete?
+        #self.bracings = bracings#TO DO: delete?
         #self.assignmentData = assignmentData#TO DO: delete?
 
     def readMainFile(self):
@@ -162,6 +161,7 @@ class FileReader:
 
             bracing = bracings[bcName]
             bracing.addNodes(node1, node2)
+            bracing.addMat(material)
 
             self.tower.addBracing(bracing)
 

@@ -6,7 +6,6 @@ from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
 from ProjectSettings import *   # open project settings dialog
-from BracingDesign import *    # open design variable dialog
 from AssignBracingDesign import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
@@ -31,7 +30,7 @@ class MainWindow(QMainWindow):
         self.projectSettingsData = ProjectSettingsData()
 
         # Bracing Design data object
-        self.bracingDesignData = BracingDesignData()
+        #self.bracingDesignData = BracingDesignData()
 
         # Bracing Design Assignment data object
         #self.assignmentData = AssignmentData()
@@ -57,6 +56,7 @@ class MainWindow(QMainWindow):
 
         default = Bracing('default')
         default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
+        default.materials = ['BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875']
         default.generateMembersfromNodes()
         self.tower.addBracing(default)
 
@@ -249,7 +249,7 @@ class MainWindow(QMainWindow):
         if fileLoc: # No action if no file was selected
             self.tower.reset()
 
-            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData, self.bracingDesignData)
+            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData)
             filereader.readMainFile()
 
             print(self.tower)
@@ -303,7 +303,7 @@ class MainWindow(QMainWindow):
         bracingIteration.exec_()
 
     def openAssignment(self, signal):
-        assignment = AssignBracingDesign.AssignBracingDesign(self)
+        assignment = BracingAssignment(self)
 
         #assignment.setAssignmentData(self.assignmentData)
         #self.assignmentData.panels = list(self.tower.panels.keys())

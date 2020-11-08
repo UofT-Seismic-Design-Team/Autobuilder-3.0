@@ -84,6 +84,7 @@ class BracingScheme(QDialog):
             Y1 = 1
             X2 = 2
             Y2 = 3
+            mat = 4
 
             # Set currently selected cell as current bracing object
             currBracing = self.bracingSchemeTable.currentItem().text()
@@ -99,6 +100,7 @@ class BracingScheme(QDialog):
                 self.bracingCoordTable.setItem(rows, Y1, QTableWidgetItem(str(sNode.y)))
                 self.bracingCoordTable.setItem(rows, X2, QTableWidgetItem(str(eNode.x)))
                 self.bracingCoordTable.setItem(rows, Y2, QTableWidgetItem(str(eNode.y)))
+                self.bracingCoordTable.setItem(rows, mat, QTableWidgetItem(str(member.material)))
                 
             # Display 2D view of currently selected bracing
             self.bracingSchemeViewer.displayed_bracing = currBracing
@@ -190,10 +192,12 @@ class BracingScheme(QDialog):
             y1 = float(self.bracingCoordTable.item(row, 1).text())
             x2 = float(self.bracingCoordTable.item(row, 2).text())
             y2 = float(self.bracingCoordTable.item(row, 3).text())
+            material = str(self.bracingCoordTable.item(row, 4).text())
 
             node1 = Node(x1, y1)
             node2 = Node(x2, y2)
 
+            bracing.addMat(material)
             bracing.addNodes(node1, node2)
 
         # generate members
