@@ -7,7 +7,7 @@ class FileExtension:
     projectSettings = '/projectSettings.csv'
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
-	bracings = '/bracings.csv'
+    bracings = '/bracings.csv'
 
 class EnumToString:
     ATYPE = {

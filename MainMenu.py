@@ -13,6 +13,8 @@ from FloorPlan import *  # open floor plan ui
 from BracingIteration import * # open bracing group UI
 
 from FileWriter import *    # save or overwrite file
+
+
 from FileReader import *    # open existing file
 
 import sys  # We need sys so that we can pass argv to QApplication
@@ -277,7 +279,6 @@ class MainWindow(QMainWindow):
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):
         size = self.view_2D_painter.size()
-
         self.view_2D_painter.dimension_x = size.width()
         self.view_2D_painter.dimension_y = size.height()
 

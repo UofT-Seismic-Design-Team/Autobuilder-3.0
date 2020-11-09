@@ -6,24 +6,30 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>929</width>
-    <height>521</height>
+    <width>750</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>750</width>
+    <height>500</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="fullWidget">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="displayBox">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QVBoxLayout" name="editFloorPlanTab">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="editFloorPlanHeader">
            <item>
-            <widget class="QLabel" name="FloorLabel">
+            <widget class="QLabel" name="floorLabel">
              <property name="font">
               <font>
                <weight>75</weight>
@@ -36,14 +42,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="Add">
+            <widget class="QToolButton" name="add">
              <property name="text">
               <string/>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="Delete">
+            <widget class="QToolButton" name="delete_2">
              <property name="text">
               <string/>
              </property>
@@ -69,7 +75,7 @@
         </layout>
        </item>
        <item>
-        <widget class="ViewSectionWidget" name="FloorPlanViewer" native="true">
+        <widget class="ViewSectionWidget" name="floorPlanViewer" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>1</horstretch>
@@ -85,7 +91,7 @@
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,0,1,5">
+        <layout class="QVBoxLayout" name="RIghtBar" stretch="1,1,0,0,1,5">
          <property name="spacing">
           <number>6</number>
          </property>
@@ -144,24 +150,57 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="readOnly">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
             </widget>
            </item>
           </layout>
          </item>
          <item>
-          <widget class="QLabel" name="XYCoord">
-           <property name="text">
-            <string>X Y Coordinates</string>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
            </property>
-          </widget>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="XYCoord">
+             <property name="text">
+              <string>X Y Coordinates</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="addCoord">
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="deleteCoord">
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
           <widget class="QTableWidget" name="XYCoordTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <column>
             <property name="text">
              <string>X</string>
+            </property>
+            <property name="textAlignment">
+             <set>AlignCenter</set>
             </property>
            </column>
            <column>
