@@ -4,12 +4,12 @@ from PyQt5.QtGui import *  # extends QtCore with GUI functionality
 from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 from Model import *
+
+from View2DEngine import *  # import View2DEngine
 import copy
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
-COLORS_FLOOR_PLAN = ['blue', 'violet']
-COLORS_NODE = ['green']
 
 class FloorPlanUI(QDialog):
 
@@ -37,7 +37,7 @@ class FloorPlanUI(QDialog):
         self.deleteCoord.clicked.connect(self.deleteCoordinate)
 
         #Call update on the Coordinate table upon change in cell
-        self.XYCoordTable.cellChanged.connect(self.updateCoordinates)
+        self.XYCoordTable.itemSelectionChanged.connect(self.updateCoordinates)
 
         #Call update in the elevation Table upon the table being clicked
         self.ElevationTable.itemClicked.connect(self.updateElevations)
@@ -57,15 +57,15 @@ class FloorPlanUI(QDialog):
         #Call cell name change
         self.floorPlanTable.cellChanged.connect(self.nameChange)
 
-        #set 2d Viewer to have same properties
-        self.floorPlanViewer.setProjectSettingsData(args[0].projectSettingsData)
-        self.floorPlanViewer.setTower(self.tower)
+        self.projectSettingsData = args[0].projectSettingsData
+
         #reference to existing tower for cache
         self.towerRef = args[0].tower
 
 
         timer = QTimer(self)
         timer.timeout.connect(self.set2DViewDimension)
+        timer.timeout.connect(self.updateSectionView)
         timer.timeout.connect(self.floorPlanViewer.update)
         timer.start()
 
@@ -155,11 +155,7 @@ class FloorPlanUI(QDialog):
             self.updateScreenXYElev()
 
 
-    def set2DViewDimension(self):
-        '''Resize the 2D dimensions of the width and height of the object'''
-        size = self.floorPlanViewer.size()
-        self.floorPlanViewer.dimension_x = size.width()
-        self.floorPlanViewer.dimension_y = size.height()
+
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''
@@ -183,9 +179,10 @@ class FloorPlanUI(QDialog):
         '''Delete floor plan from tower'''
         indices = self.floorPlanTable.selectionModel().selectedRows()
         for index in sorted(indices):
-            self.floorPlanTable.removeRow(index.row())
             item = self.floorPlanTable.item(index.row(),index.column())
             del self.tower.floorPlans[item.text()]
+        for index in sorted(indices):
+            self.floorPlanTable.removeRow(index.row())
 
     def updateCoordinates(self):
         '''Update the coordinates associated with the floor plan based on current '''
@@ -221,15 +218,14 @@ class FloorPlanUI(QDialog):
         self.updateCoordinates()
 
     def cancelFloorPlan(self):
-        '''Clean up and delete tower associaated with flooPlan UI'''
-        del self.tower
+        '''do Nothing'''
+        self.towerRef = self.towerRef
 
     def saveFloorPlan(self):
         '''Overwrite the tower linked to the main model'''
         self.towerRef.floorPlans = self.tower.floorPlans
         self.towerRef.clearFloor()
         self.towerRef.addFloorPlansToFloors()
-        del self.tower
 
 
     def setOkandCancelButtons(self):
@@ -241,3 +237,74 @@ class FloorPlanUI(QDialog):
         self.CancelButton = self.FloorPlan_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
         self.CancelButton.clicked.connect(self.cancelFloorPlan)
+
+    # For 2D view -----------------------------------------------------
+    def set2DViewDimension(self):
+        size = self.floorPlanViewer.size()
+        self.floorPlanViewer.dimension_x = size.width()
+        self.floorPlanViewer.dimension_y = size.height()
+
+    def View2DObjects(self):
+        ''' --> list(ViewMember), list(ViewNode), list(ViewText) '''
+
+        renderX = self.projectSettingsData.renderX
+        renderY = self.projectSettingsData.renderY
+
+        # Step 1: Get floor plan from text
+
+        vMembers = []
+        vNodes = []
+        vTexts = []
+
+
+        # Step 2: Create view object for floor plans
+        color_fplan = Color.FloorPlan['MainMenu']
+        color_node = Color.Node['MainMenu']
+
+        vMember = ViewMember()
+        vNode = ViewNode()
+
+        # Set View Objects attributes --------------------------------
+        vMember.setColor(color_fplan[0])
+        vMember.setSize(View2DConstants.MEMBER_SIZE)
+        vMember.setDimX(renderX)
+        vMember.setDimY(renderY)
+
+        vNode.setColor(color_node)
+        vNode.setSize(View2DConstants.NODE_SIZE)
+        vNode.setDimX(renderX)
+        vNode.setDimY(renderY)
+
+        # Floor plan members and nodes -------------------------------
+        if self.SelectedFloorName.toPlainText() in self.tower.floorPlans.keys():
+            floorPlan= self.tower.floorPlans[self.SelectedFloorName.toPlainText()]
+            for member in floorPlan.members:
+                vMember.addMember(member)
+
+                vNode.addNode(member.start_node)
+                vNode.addNode(member.end_node)  # redundant but just in case
+
+            vMembers.append(vMember)
+            vNodes.append(vNode)
+
+
+
+        return vMembers, vNodes, vTexts
+
+    def updateSectionView(self):
+        if not self.tower.floors:  # update only when floors are provided
+            return
+
+        vMembers, vNodes, vTexts = self.View2DObjects()
+
+        self.floorPlanViewer.reset()  # clear all the existing objects
+
+        for vMember in vMembers:
+            self.floorPlanViewer.addMember(vMember)
+
+        for vNode in vNodes:
+            self.floorPlanViewer.addNode(vNode)
+
+        for vText in vTexts:
+            self.floorPlanViewer.addText(vText)
+
