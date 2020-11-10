@@ -98,6 +98,10 @@ class View2DWidget(QWidget):
         self.dimension_x = self.size().width()
         self.dimension_y = self.size().height()
 
+        # display default bracing if no existing bracing is selected (i.e. initializing dialog)
+        # DO NOT DELETE default bracing! TO DO: implement warning or alternative display (e.g. blank screen)
+        self.displayed_bracing = 'default'
+
     def addMember(self, vMember):
         self.members.append(vMember)
 
@@ -160,7 +164,7 @@ class View2DWidget(QWidget):
         painter.setPen(p)
 
         painter.setFont(QFont("Times", vText.size))
-        
+
         location = vText.location
 
         for i in range(len(vText.texts)):
@@ -176,8 +180,8 @@ class View2DWidget(QWidget):
 
             # translate text perpendicular to the member
             angle = member.angle()
-            dx = m.cos(angle - m.pi/2) * location.y
-            dy = m.sin(angle - m.pi/2) * location.y
+            dx = m.cos(angle - m.pi / 2) * location.y
+            dy = m.sin(angle - m.pi / 2) * location.y
 
             x1, y1 = self.convertCoordinates(vText, x + dx, y + dy)
 
@@ -190,12 +194,12 @@ class View2DWidget(QWidget):
 
         # y coordinate is negative since y postive is downward in QPainter
         coordinates = (
-            x * view_factor + center_x, 
-            -y * view_factor + center_y, 
+            x * view_factor + center_x,
+            -y * view_factor + center_y,
         )
 
         return coordinates
-    
+
     def viewFactors(self, vObject):
         dim_x = vObject.dim_x
         dim_y = vObject.dim_y
@@ -218,16 +222,16 @@ class View2DWidget(QWidget):
 
         view_factor, dummy, view_factor_y = self.viewFactors(vObject)
 
-        center_x = (self.dimension_x - view_factor*dim_x)/2
+        center_x = (self.dimension_x - view_factor * dim_x) / 2
 
         # margin in the y direction
-        margin_y = self.dimension_y*(1-View2DConstants.RATIO)/2
+        margin_y = self.dimension_y * (1 - View2DConstants.RATIO) / 2
         # translation due to the difference of side lengths in x and y direction
-        lengthDiff = max(dim_x - dim_y, 0)/2
+        lengthDiff = max(dim_x - dim_y, 0) / 2
         # translation due to the difference of the x and y dimensions of the view window
-        dimDiff = max(view_factor_y - view_factor, 0)*dim_y/2
+        dimDiff = max(view_factor_y - view_factor, 0) * dim_y / 2
 
-        center_y = view_factor*dim_y + margin_y + dimDiff + lengthDiff*view_factor
+        center_y = view_factor * dim_y + margin_y + dimDiff + lengthDiff * view_factor
 
         return center_x, center_y
 
@@ -269,7 +273,7 @@ class ViewSectionWidget(QWidget):
 
     def setProjectSettingsData(self, projectSettingsData):
         self.projectSettingsData = projectSettingsData
-    
+
     def elevationUp(self):
         # prevent list to go out of range
         self.elevation_index = min(len(self.tower.elevations)-1, self.elevation_index+1)
@@ -349,7 +353,7 @@ class ViewSectionWidget(QWidget):
 
                 # y coordinates are negative since the y direction in the widget is downwards
                 painter.drawLine(start.x*view_factor+center_x, -start.y*view_factor+center_y, end.x*view_factor+center_x, -end.y*view_factor+center_y)
-                
+
                 # Draw the nodes of the floor plan-------------------
                 p.setColor(QColor(COLORS_NODE[0]))
                 p.setWidth(15)
@@ -379,12 +383,12 @@ class ViewSectionWidget(QWidget):
 
             # Get slope of base member
             baseSlope = (lowerRight.y - lowerLeft.y) / (lowerRight.x - lowerLeft.x + Algebra.EPSILON) # tolerance to avoid divison by zero
-            
+
             orientationX = lowerRight.x - lowerLeft.x
             orientationY = lowerRight.y - lowerLeft.y
 
             angle = abs(m.atan(baseSlope))
-            
+
             # First quadrant
             if orientationX >= 0 and orientationY >= 0:
                 angle = angle
@@ -422,7 +426,7 @@ class ViewSectionWidget(QWidget):
                 yEnd = -nodes[i+1].y*view_factor+center_y
 
                 painter.drawLine(xStart, yStart, xEnd, yEnd)
-            
+
             painter.drawText(idLocation.x*view_factor+center_x, -idLocation.y*view_factor+center_y, str(panel.name))
 
             index += 1
