@@ -9,7 +9,7 @@ import os
 
 from WarningMessage import *
 
-class AssignBracingDesign(QDialog):
+class BracingAssignment(QDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,7 +18,7 @@ class AssignBracingDesign(QDialog):
         self.tower = args[0].tower
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_assignbracingdesign.ui', self)
+        uic.loadUi('UI/autobuilder_bracingassignment.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()

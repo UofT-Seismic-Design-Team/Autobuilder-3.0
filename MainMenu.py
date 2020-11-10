@@ -1,22 +1,21 @@
 from PyQt5.QtCore import *  # core Qt functionality
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *  # extends QtCore with GUI functionality
-from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
+from PyQt5.QtGui import *   # extends QtCore with GUI functionality
+from PyQt5.QtOpenGL import *    # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
+from Definition import *    # import constants from Definition
+
 from ProjectSettings import *   # open project settings dialog
-from BracingDesign import *    # open design variable dialog
 from AssignBracingDesign import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from BracingIteration import * # open bracing group UI
+from DesignVariable import * # open bracing group UI
 
 from View2DEngine import *  # import View2DEngine
 
 from FileWriter import *    # save or overwrite file
-
-
 from FileReader import *    # open existing file
 
 import math as m
@@ -36,15 +35,6 @@ class MainWindow(QMainWindow):
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
 
-        # Bracing Design data object
-        self.bracingDesignData = BracingDesignData()
-
-        # Bracing Design Assignment data object
-        #self.assignmentData = AssignmentData()
-
-        # Bracing Scheme data object
-        #self.bracingSchemeData = BracingSchemeData()
-
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
@@ -63,6 +53,7 @@ class MainWindow(QMainWindow):
 
         default = Bracing('default')
         default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
+        default.materials = ['BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875']
         default.generateMembersfromNodes()
         self.tower.addBracing(default)
 
@@ -139,14 +130,14 @@ class MainWindow(QMainWindow):
     def setIconsForToolbar(self):
         # For file managment tools----------------------------------
         # Add button for opening files
-        self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"),"Open File", self) 
+        self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"), "Open File", self)
         self.openFile_button.setStatusTip("Open File")
         self.openFile_button.triggered.connect(self.openFile)
 
         self.files_toolbar.addAction(self.openFile_button)
 
         # Add button for saving files
-        self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"),"Save File", self)
+        self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"), "Save File", self)
         self.saveFile_button.setStatusTip("Save File")
         self.saveFile_button.triggered.connect(self.saveFile)
 
@@ -187,7 +178,7 @@ class MainWindow(QMainWindow):
         self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
         self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
 
-        self.editDesignVariable_button.triggered.connect(self.openBracingIteration)
+        self.editDesignVariable_button.triggered.connect(self.DesignVariable)
 
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
@@ -232,7 +223,7 @@ class MainWindow(QMainWindow):
         # Bracing Scheme
         self.action_BracingScheme.triggered.connect(self.openBracingScheme)
         # Bracing Design
-        self.action_DesignVariable.triggered.connect(self.openBracingIteration)
+        self.action_DesignVariable.triggered.connect(self.DesignVariable)
         # Assign Bracing Design
         self.action_AssignVariable.triggered.connect(self.openAssignment)
         # Save File
@@ -258,7 +249,7 @@ class MainWindow(QMainWindow):
         if fileLoc: # No action if no file was selected
             self.tower.reset() # clean all data in tower
 
-            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData, self.bracingDesignData)
+            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData)
             filereader.readMainFile()
 
             print(self.tower)
@@ -277,14 +268,13 @@ class MainWindow(QMainWindow):
     # For Bracing Scheme --------------------------------------------
     def openBracingScheme(self, signal):
         bracingScheme = BracingScheme(self)
-        #bracingScheme.setData(self.bracingSchemeData)
-        #bracingScheme.display()
 
         bracingScheme.exec_()
 
     # For 2D view -----------------------------------------------------
     def set2DViewDimension(self):
         size = self.view_2D_painter.size()
+
         self.view_2D_painter.dimension_x = size.width()
         self.view_2D_painter.dimension_y = size.height()
 
@@ -429,16 +419,12 @@ class MainWindow(QMainWindow):
         floorPlan.exec_()
 
     # For Bracing Group --------------------------------------------
-    def openBracingIteration(self, signal):
-        bracingIteration = BracingIteration(self)
-        bracingIteration.exec_()
+    def DesignVariable(self, signal):
+        designVariable = DesignVariable(self)
+        designVariable.exec_()
 
     def openAssignment(self, signal):
-        assignment = AssignBracingDesign.AssignBracingDesign(self)
-
-        #assignment.setAssignmentData(self.assignmentData)
-        #self.assignmentData.panels = list(self.tower.panels.keys())
-        #self.assignmentData.possibleBracings = self.tower.bracings
+        assignment = BracingAssignment(self)
         assignment.displayAssignmentData()
 
         assignment.exec_()

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 setting,value
 tower_elevs,0.0 6.0 9.0 12.0 15.0 21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0
 sect_props,BALSA_0.5x0.5 BALSA_0.1875x0.1875
@@ -8,3 +9,15 @@ modelName,Assignment 3.sdb
 renderX,12.0
 renderY,9.0
 renderZ,60.0
+=======
+setting,value
+tower_elevs,0.0 6.0 9.0 12.0 15.0 21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0
+sect_props,BALSA_0.5x0.5 BALSA_0.1875x0.1875
+gm,True
+analysis,Time_History
+modelLoc,C:/Users/Kaison/Documents/UofT Civil Engineering/2020-2021 Fall/CIV312 - Steel/SAP2000 Tutorial/Assignment 3.sdb
+modelName,Assignment 3.sdb
+renderX,12.0
+renderY,9.0
+renderZ,60.0
+>>>>>>> fbdb1d5ff5078487f22b634c46d87c76bfe6d1da

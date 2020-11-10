@@ -89,12 +89,6 @@ class Tower:
             for elev in floorPlan.elevations:
                 self.floors[elev].addFloorPlan(floorPlan)
 
-    def clearFloor(self):
-        '''Clears the floor plan prior to updating them'''
-        for floorPlan in self.floorPlans.values():
-            for elev in floorPlan.elevations:
-                self.floors[elev].floorPlans.clear()
-
     def addPanelsToFloors(self):
         ''' Add panels to floors based on the elevation '''
         for panel_id in self.panels:
@@ -214,7 +208,7 @@ class FloorPlan:
         self.members.append(member)
 
     def generateMembersfromNodes(self):
-        self.members.clear()
+		self.members.clear()
         numNodes = len(self.nodes)
         for i in range(numNodes-1):
             member = Member(self.nodes[i], self.nodes[i+1])
@@ -335,6 +329,11 @@ class Member:
         self.start_node = start_node
         self.end_node = end_node
 
+        self.material = None
+
+    def addMaterial(self, mat):
+        self.material = mat
+
     def setNodes(self, start, end):
         ''' set start and end nodes '''
         self.start_node = start
@@ -380,6 +379,7 @@ class Bracing:
 
         self.nodePairs = []
         self.members = []
+        self.materials = []
 
     def addNodes(self, node1, node2):
         self.nodePairs.append([node1,node2])
@@ -387,10 +387,14 @@ class Bracing:
     def addMember(self, member):
         self.members.append(member)
 
+    def addMat(self, mat):
+        self.materials.append(mat)
+
     def generateMembersfromNodes(self):
         numNodePairs = len(self.nodePairs)
         for i in range(numNodePairs):
             member = Member(self.nodePairs[i][0], self.nodePairs[i][1])
+            member.addMaterial(self.materials[i])
             self.addMember(member)
 
     def __str__(self):
