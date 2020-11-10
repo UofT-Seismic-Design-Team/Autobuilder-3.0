@@ -17,42 +17,56 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="BracingGroupLabel">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Edit Bracing Group</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="addBracingGroupButton">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="deleteBracingGroupButton">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLabel" name="BracingGroupLabel">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Edit Parameter</string>
+           </property>
+          </widget>
          </item>
          <item>
+          <widget class="QToolButton" name="addBracingGroupButton">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="deleteBracingGroupButton">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="bracingGroupTab">
+          <attribute name="title">
+           <string>Bracing Group</string>
+          </attribute>
           <widget class="QTableWidget" name="bracingGroupTable">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>231</width>
+             <height>391</height>
+            </rect>
+           </property>
            <property name="sizeAdjustPolicy">
             <enum>QAbstractScrollArea::AdjustIgnored</enum>
            </property>
@@ -65,8 +79,31 @@
             </property>
            </column>
           </widget>
-         </item>
-        </layout>
+         </widget>
+         <widget class="QWidget" name="memberGroupTab">
+          <attribute name="title">
+           <string>Member Group</string>
+          </attribute>
+          <widget class="QTableWidget" name="memberGroupTable">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>231</width>
+             <height>391</height>
+            </rect>
+           </property>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Member Group</string>
+            </property>
+           </column>
+          </widget>
+         </widget>
+        </widget>
        </item>
       </layout>
      </item>
@@ -83,7 +120,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Define Bracing Group</string>
+            <string>Define Variable</string>
            </property>
            <property name="margin">
             <number>5</number>
@@ -111,7 +148,7 @@
          <item>
           <widget class="QLabel" name="IterationsLabel">
            <property name="text">
-            <string>Bracing Iterations</string>
+            <string>Variable Iterations</string>
            </property>
           </widget>
          </item>
@@ -138,7 +175,7 @@
          </attribute>
          <column>
           <property name="text">
-           <string>Bracing Name</string>
+           <string>Bracing or Section Name</string>
           </property>
          </column>
         </widget>

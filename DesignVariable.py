@@ -10,13 +10,13 @@ import os
 from Model import *
 #from WarningMessage import *
 
-class BracingIteration(QDialog):
+class DesignVariable(QDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_bracinggroup_v1.ui', self)
+        uic.loadUi('UI/autobuilder_designvariable_v1.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()
@@ -126,7 +126,8 @@ class BracingIteration(QDialog):
 
         for row in range(self.BGIterationTable.rowCount()):
             bracing = self.BGIterationTable.item(row,0).text()
-            BG.addBracing(bracing)
+            if bracing not in BG.bracings:
+                BG.addBracing(bracing)
 
         # Change BG name in main table
         newRow = self.bracingGroupTable.rowCount()
