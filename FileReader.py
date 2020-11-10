@@ -29,7 +29,7 @@ class FileReader:
             panels_data = lines[panels_index+1:bracings_index-1]
             bracings_data = lines[bracings_index+1:assignments_index-1]
             assignments_data = lines[assignments_index+1:bracingGroups_index-1]
-            bracingGroups_data = lines[bracingGroups_index+1:1]
+            bracingGroups_data = lines[bracingGroups_index+1:-1]
             
 
             self.readProjectSettings(pSettings_data)

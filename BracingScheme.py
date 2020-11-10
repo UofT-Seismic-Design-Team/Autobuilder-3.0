@@ -227,11 +227,12 @@ class BracingScheme(QDialog):
         bracings = self.tower.bracings
         bcName = self.bracingNameEdit.text()
 
-        if not (bcName in bracings):
-            newBracing = Bracing(bcName)
-            self.tower.addBracing(newBracing)
+        #delete existing bracing definition
+        if bcName in bracings:
+            bracings.pop('bcName', None)
 
-        bracing = bracings[bcName]
+        newBracing = Bracing(bcName)
+        self.tower.addBracing(newBracing)
 
         for row in range(self.bracingCoordTable.rowCount()):
             # changed from 1,2,3,4
@@ -243,12 +244,12 @@ class BracingScheme(QDialog):
 
             node1 = Node(x1, y1)
             node2 = Node(x2, y2)
-
-            bracing.addMat(material)
-            bracing.addNodes(node1, node2)
+            
+            newBracing.addNodes(node1,node2)
+            newBracing.addMat(material)
 
         # generate members
-        bracing.generateMembersfromNodes()
+        newBracing.generateMembersfromNodes()
 
         # change bracing name in main table
         newRow = self.bracingSchemeTable.rowCount()
@@ -259,29 +260,6 @@ class BracingScheme(QDialog):
 
         # set displayed bracing to new bracing
         self.bracingSchemeViewer.displayed_bracing = bcName
-
-
-    '''
-    def saveBracingSchemes(self, signal):
-
-        self.data.clear() # reset assignment properties
-
-        rowNum = self.bracingSchemeTable.rowCount()
-        for i in range(rowNum):
-            bracingItem = self.bracingSchemeTable.item(i,0)
-            # Check if the row is filled
-            if panelItem == None:
-                break
-            bracing = bracingItem.text()
-            try:
-                # Check if the item is filled
-                if bracing == '':
-                    break
-                self.data.bracingNames.append()
-            except:
-                warning.popUpErrorBox('Invalid input for bracing names')
-                return # terminate the saving process
-    '''
 
     def setOkandCancelButtons(self):
         '''OK and Cancel button both exit dialog but have no save function!'''

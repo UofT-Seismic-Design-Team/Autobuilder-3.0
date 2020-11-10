@@ -11,7 +11,7 @@ from ProjectSettings import *   # open project settings dialog
 from AssignBracingDesign import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from BracingIteration import * # open bracing group UI
+from DesignVariable import * # open bracing group UI
 
 from View2DEngine import *  # import View2DEngine
 
@@ -178,7 +178,7 @@ class MainWindow(QMainWindow):
         self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
         self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
 
-        self.editDesignVariable_button.triggered.connect(self.openBracingIteration)
+        self.editDesignVariable_button.triggered.connect(self.DesignVariable)
 
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
@@ -223,7 +223,7 @@ class MainWindow(QMainWindow):
         # Bracing Scheme
         self.action_BracingScheme.triggered.connect(self.openBracingScheme)
         # Bracing Design
-        self.action_DesignVariable.triggered.connect(self.openBracingIteration)
+        self.action_DesignVariable.triggered.connect(self.DesignVariable)
         # Assign Bracing Design
         self.action_AssignVariable.triggered.connect(self.openAssignment)
         # Save File
@@ -419,9 +419,9 @@ class MainWindow(QMainWindow):
         floorPlan.exec_()
 
     # For Bracing Group --------------------------------------------
-    def openBracingIteration(self, signal):
-        bracingIteration = BracingIteration(self)
-        bracingIteration.exec_()
+    def DesignVariable(self, signal):
+        designVariable = DesignVariable(self)
+        designVariable.exec_()
 
     def openAssignment(self, signal):
         assignment = BracingAssignment(self)
