@@ -16,10 +16,10 @@ class ProjectSettings(QDialog):
         super().__init__(*args, **kwargs)
 
         # Project Settings Data
-        self.data = ProjectSettingsData()
+        self.data = args[0].projectSettingsData
 
-        # Tower
-        self.tower = Tower()
+        # Reference to existing tower
+        self.tower = args[0].tower 
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -42,12 +42,6 @@ class ProjectSettings(QDialog):
         # SAP2000 model location
         self.SAPModelLoc = ''
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
-
-    def setData(self, data):
-        self.data = data
-
-    def setTower(self, tower):
-        self.tower = tower
 
     def setIconsForButtons(self):
         self.floorElev_add.setIcon(QIcon(r"Icons\24x24\plus.png"))

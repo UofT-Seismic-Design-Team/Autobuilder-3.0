@@ -258,9 +258,7 @@ class MainWindow(QMainWindow):
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
-
-        projectSettings.setData(self.projectSettingsData)
-        projectSettings.setTower(self.tower)
+        
         projectSettings.display()
 
         projectSettings.exec_()
