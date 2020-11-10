@@ -6,9 +6,7 @@ class Algebra:
 class FileExtension:
     projectSettings = '/projectSettings.csv'
     floorPlan = '/floorPlan.csv'
-    panel = '/panel.csv'
-    bracings = '/bracings.csv'
-
+    panel = '/panel.csv'    bracings = '/bracings.csv
 class EnumToString:
     ATYPE = {
         0: 'Time_History',
@@ -24,6 +22,7 @@ class StringToEnum:
 class Color:
     Node = {
         'MainMenu': 'green',
+        'Bracing': 'green'
     }
 
     FloorPlan = { 
@@ -40,9 +39,14 @@ class Color:
         'MainMenu': 'orange'
     }
 
+    Member = {
+        'Bracing': 'grey'
+    }
+
     Text = {
         'MainMenu': 'orange'
     }
+
        
 class View2DConstants:
     RATIO = 0.6 # constant for view to object ratio
@@ -50,4 +54,5 @@ class View2DConstants:
     # Size constants --------------------
     MEMBER_SIZE = 5.0
     NODE_SIZE = 15.0
-    TEXT_SIZE = 7.0
+
+
