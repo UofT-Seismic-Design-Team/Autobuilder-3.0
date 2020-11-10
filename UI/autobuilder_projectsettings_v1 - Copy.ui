@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>448</width>
-    <height>692</height>
+    <width>357</width>
+    <height>758</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,11 +78,11 @@
          <attribute name="verticalHeaderVisible">
           <bool>true</bool>
          </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>27</number>
-         </attribute>
          <attribute name="verticalHeaderMinimumSectionSize">
           <number>20</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>27</number>
          </attribute>
          <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
@@ -183,11 +183,11 @@
          <attribute name="verticalHeaderVisible">
           <bool>true</bool>
          </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>27</number>
-         </attribute>
          <attribute name="verticalHeaderMinimumSectionSize">
           <number>20</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>27</number>
          </attribute>
          <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
@@ -281,7 +281,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="sapModelLoc_label">
+            <widget class="QLabel" name="fileloc_label">
              <property name="text">
               <string>file location...</string>
              </property>

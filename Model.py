@@ -89,6 +89,12 @@ class Tower:
             for elev in floorPlan.elevations:
                 self.floors[elev].addFloorPlan(floorPlan)
 
+    def clearFloor(self):
+        '''Clears the floor plan prior to updating them'''
+        for floorPlan in self.floorPlans.values():
+            for elev in floorPlan.elevations:
+                self.floors[elev].floorPlans.clear()
+
     def addPanelsToFloors(self):
         ''' Add panels to floors based on the elevation '''
         for panel_id in self.panels:
