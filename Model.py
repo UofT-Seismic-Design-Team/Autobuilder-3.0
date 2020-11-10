@@ -208,7 +208,7 @@ class FloorPlan:
         self.members.append(member)
 
     def generateMembersfromNodes(self):
-		self.members.clear()
+        self.members.clear()
         numNodes = len(self.nodes)
         for i in range(numNodes-1):
             member = Member(self.nodes[i], self.nodes[i+1])
