@@ -22,6 +22,7 @@ class FileReader:
             bracings_index = lines.index('#Bracings\n')
             assignments_index = lines.index('#Bracing_Assignments\n')
             bracingGroups_index = lines.index('#Bracing_Groups\n')
+            sectionGroups_index = lines.index('#Section_Groups\n')
             
             # Group data
             pSettings_data = lines[pSettings_index+1:fPlans_index-1]
@@ -29,15 +30,16 @@ class FileReader:
             panels_data = lines[panels_index+1:bracings_index-1]
             bracings_data = lines[bracings_index+1:assignments_index-1]
             assignments_data = lines[assignments_index+1:bracingGroups_index-1]
-            bracingGroups_data = lines[bracingGroups_index+1:-1]
+            bracingGroups_data = lines[bracingGroups_index+1:sectionGroups_index-1]
+            sectionGroups_data = lines[sectionGroups_index+1:]
             
-
             self.readProjectSettings(pSettings_data)
             self.readFloorPlans(fPlans_data)
             self.readPanels(panels_data)
             self.readBracings(bracings_data)
             self.readAssignments(assignments_data)
             self.readBracingGroups(bracingGroups_data)
+            self.readSectionGroups(sectionGroups_data)
             
     def readProjectSettings(self, data):
         for line in data[1:]: # skip header
@@ -190,3 +192,19 @@ class FileReader:
             bracingGroup = bracingGroups[groupName]
             bracingGroup.addBracing(bracing)
             self.tower.addBracingGroup(bracingGroup)
+
+    def readSectionGroups(self, data):
+        sectionGroups = self.tower.sectionGroups
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            groupName = str(line[0])
+            section = str(line[1])
+
+            if not (groupName in sectionGroups):
+                newGroup = SectionGroup(groupName)
+                self.tower.addSectionGroup(newGroup)
+
+            sectionGroup = sectionGroups[groupName]
+            sectionGroup.addSection(section)
+            self.tower.addSectionGroup(sectionGroup)

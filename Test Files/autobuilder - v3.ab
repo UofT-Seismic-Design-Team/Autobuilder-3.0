@@ -412,3 +412,10 @@ V1,singleCross
 V1,doubleCross
 V2,cheveron
 V2,kBracing
+
+#Section_Groups
+sectionGroup,section
+S1,BALSA_0.5x0.5
+S1,BALSA_0.1875x0.1875
+S2,BALSA_0.5_ANGLE
+S2,BALSA_3/16x8/16

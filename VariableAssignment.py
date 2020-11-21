@@ -9,7 +9,7 @@ import os
 
 from WarningMessage import *
 
-class BracingAssignment(QDialog):
+class VariableAssignment(QDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,7 +18,7 @@ class BracingAssignment(QDialog):
         self.tower = args[0].tower
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_bracingassignment.ui', self)
+        uic.loadUi('UI/autobuilder_variableassignment.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()
@@ -26,11 +26,6 @@ class BracingAssignment(QDialog):
 
         # Fill in assignment table
         self.displayAssignmentData()
-
-        '''
-        Set right-click dropdown menu (to be implemented)
-        #self.setContextMenu()
-        '''
 
     # Save bracing design corresponding to each panel
     def saveAssignment(self):

@@ -98,10 +98,6 @@ class View2DWidget(QWidget):
         self.dimension_x = self.size().width()
         self.dimension_y = self.size().height()
 
-        # display default bracing if no existing bracing is selected (i.e. initializing dialog)
-        # DO NOT DELETE default bracing! TO DO: implement warning or alternative display (e.g. blank screen)
-        self.displayed_bracing = 'default'
-
     def addMember(self, vMember):
         self.members.append(vMember)
 

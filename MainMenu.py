@@ -8,7 +8,7 @@ from Model import * # import Model to access tower objects
 from Definition import *    # import constants from Definition
 
 from ProjectSettings import *   # open project settings dialog
-from AssignBracingDesign import *    # open panel assignment dialog
+from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from DesignVariable import * # open bracing group UI
@@ -175,8 +175,8 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Bracing Groups
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
-        self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
+        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variables", self)
+        self.editDesignVariable_button.setStatusTip("Edit Design Variables")
 
         self.editDesignVariable_button.triggered.connect(self.DesignVariable)
 
@@ -424,7 +424,7 @@ class MainWindow(QMainWindow):
         designVariable.exec_()
 
     def openAssignment(self, signal):
-        assignment = BracingAssignment(self)
+        assignment = VariableAssignment(self)
         assignment.displayAssignmentData()
 
         assignment.exec_()

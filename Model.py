@@ -16,6 +16,7 @@ class Tower:
         self.panels = {}
         self.bracings = {}
         self.bracingGroups = {}
+        self.sectionGroups = {}
         self.assignments = {}
         self.faces = []
 
@@ -31,6 +32,7 @@ class Tower:
         self.panels.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
+        self.sectionGroups.clear()
         self.assignments.clear()
         self.faces.clear()
 
@@ -40,8 +42,6 @@ class Tower:
 
         self.addFloorPlansToFloors()
         self.addPanelsToFloors()
-
-        #self.addBracingAssignmentsToPanels()
 
         for name in self.floorPlans:
             self.generateFacesByFloorPlan(self.floorPlans[name])
@@ -76,8 +76,12 @@ class Tower:
         self.bracings[bracing.name] = bracing
 
     def addBracingGroup(self, group):
-        ''' Add bracing object to bracings '''
-        self.bracingGroups[group.name] = group  
+        ''' Add bracing group object to bracing groups '''
+        self.bracingGroups[group.name] = group
+
+    def addSectionGroup(self, group):
+        ''' Add section group object to section groups '''
+        self.sectionGroups[group.name] = group
 
     def addAssignment(self, assignment):
         ''' Add bracing assignment objects to bracing assignments '''
@@ -104,13 +108,6 @@ class Tower:
             floor = self.floors[elevation]
 
             floor.addPanel(panel)
-
-    '''
-    def addBracingAssignmentsToPanels(self):
-        #Add bracing assignments to panels
-        for assignment_id in self.assignments:
-            self.panels.addAssignment(assignment_id)
-    '''
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -423,6 +420,20 @@ class BracingGroup:
     def addBracing(self, bracing):
         self.bracings.append(bracing)
 
+class SectionGroup:
+    # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(SectionGroup.id)
+            SectionGroup.id += 1
+
+        self.sections = []
+    
+    def addSection(self, section):
+        self.sections.append(section)
 
 # --------------------------------------------------------------------------
 class Assignment:
