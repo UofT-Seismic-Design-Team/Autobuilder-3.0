@@ -24,55 +24,36 @@ class VariableAssignment(QDialog):
         self.setIconsForButtons()
         self.setOkandCancelButtons()
 
+        # Add or delete list of assignments
+        self.addAssignmentButton.clicked.connect(self.addAssignment)
+        self.deleteAssignmentButton.clicked.connect(self.deleteAssignment)
+
         # Fill in assignment table
         self.displayAssignmentData()
 
-    # Save bracing design corresponding to each panel
-    def saveAssignment(self):
-        
-        self.tower.assignments.clear() # reset assignment properties
+    def addAssignment(self):
+        # If currently on Bracing tab:
+        if self.tabWidget.currentIndex() == 0:
+            row = self.BracingAssignmentTable.rowCount()
+            self.BracingAssignmentTable.insertRow(row)
 
-        rowNum = self.AssignmentTable.rowCount()
-        for i in range(rowNum):
-            panelItem = self.AssignmentTable.item(i,0)
-            bracingItem = self.AssignmentTable.item(i,1)
-            # Check if the row is filled
-            if panelItem == None or bracingItem == None:
-                break
-            panel = panelItem.text()
-            bracing = bracingItem.text()
-            try:
-                # Check if the item is filled
-                if panel == '' or bracing == '':
-                    break
-                self.tower.assignments[panel] = bracing
-            except:
-                warning.popUpErrorBox('Invalid input for assignment properties')
-                return # terminate the saving process
+        elif self.tabWidget.currentIndex() == 1:
+            row = self.SectionAssignmentTable.rowCount()
+            self.SectionAssignmentTable.insertRow(row)
 
-    # Display list of bracing designs
-    def displayAssignmentData(self):
+    def deleteAssignment(self):
+        if self.tabWidget.currentIndex() == 0:
+            #indices = self.BracingAssignmentTable.selectionModel().selectedRows()
+            indices = self.BracingAssignmentTable.selectionModel().selectedIndexes()
+            for index in sorted(indices):
+                self.BracingAssignmentTable.removeRow(index.row())
 
-        i = 0
-        assignment_rowNum = self.AssignmentTable.rowCount()
-
-        for panel in self.tower.panels:
-
-            panelItem = QTableWidgetItem(str(panel))
-            if i >= assignment_rowNum:
-                self.AssignmentTable.insertRow(i)
-            self.AssignmentTable.setItem(i,0,panelItem)
-            
-            if panel in self.tower.assignments.keys():
-                bracingItem = QTableWidgetItem(self.tower.assignments[panel].bracingGroup)
-                self.AssignmentTable.setItem(i,1,bracingItem)
-
-            else:
-                TBD = QTableWidgetItem('TBD')
-                self.AssignmentTable.setItem(i,1,TBD)
-            
-            i += 1
-
+        elif self.tabWidget.currentIndex() == 1:
+            #indices = self.SectionAssignmentTable.selectionModel().selectedRows()
+            indices = self.SectionAssignmentTable.selectionModel().selectedIndexes()
+            for index in sorted(indices):
+                self.SectionAssignmentTable.removeRow(index.row())
+    
     def setIconsForButtons(self):
         self.addAssignmentButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
         self.deleteAssignmentButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
@@ -80,11 +61,92 @@ class VariableAssignment(QDialog):
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(self.saveAssignment)
-
         self.OkButton.clicked.connect(lambda x: self.close())
         
         self.CancelButton = self.Assignment_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
+    
+    # Save bracing design corresponding to each panel
+    def saveAssignment(self):
+        # clear all existing assignments
+        for panel in self.tower.panels:
+            self.tower.panels[panel].bracingGroup = ''
+            self.tower.panels[panel].sectionGroup = ''
+
+        warning = WarningMessage()
+        rowNumB = self.BracingAssignmentTable.rowCount()
+        for i in range(rowNumB):
+            panelItem = self.BracingAssignmentTable.item(i,0)
+            bracingItem = self.BracingAssignmentTable.item(i,1)
+            # Check if the row is filled
+            if panelItem == None or bracingItem == None:
+                break
+            panel = panelItem.text()
+            bg = bracingItem.text()
+            try:
+                # Check if the item is filled
+                if panel == '' or bg == '':
+                    break
+                # check if bracing group has been defined
+                key = self.tower.bracingGroups[bg]
+                # add bracing group to tower object
+                self.tower.panels[panel].bracingGroup = bg
+                bg in self.tower.bracingGroups
+            except:
+                warning.popUpErrorBox('Invalid input for assignment properties')
+                return # terminate the saving process
+        
+        rowNumS = self.SectionAssignmentTable.rowCount()
+        for i in range(rowNumS):
+            panelItem = self.SectionAssignmentTable.item(i,0)
+            sectionItem = self.SectionAssignmentTable.item(i,1)
+            # Check if the row is filled
+            if panelItem == None or sectionItem == None:
+                break
+            panel = panelItem.text()
+            section = sectionItem.text()
+            try:
+                # Check if the item is filled
+                if panel == '' or section == '':
+                    break
+                # check if bracing group has been defined
+                key = self.tower.sectionGroups[section]
+                # add section group to tower object
+                self.tower.panels[panel].sectionGroup = section
+            except:
+                warning.popUpErrorBox('Invalid input for assignment properties')
+                return # terminate the saving process
+
+
+    # Display list of bracing designs
+    def displayAssignmentData(self):
+
+        #Add warning for non existent bracing or member group
+        i = 0
+        j = 0
+        assignment_rowNumB = self.BracingAssignmentTable.rowCount()
+        assignment_rowNumS = self.SectionAssignmentTable.rowCount()
+        panels = self.tower.panels
+
+        for panel in panels:
+            if panels[panel].bracingGroup != '':
+                panelItem = QTableWidgetItem(str(panel))
+                bgItem = QTableWidgetItem(str(panels[panel].bracingGroup))
+                if i >= assignment_rowNumB:
+                    self.BracingAssignmentTable.insertRow(i)
+                    self.BracingAssignmentTable.setItem(i,0,panelItem)
+                    self.BracingAssignmentTable.setItem(i,1,bgItem)
+                i += 1
+            
+            if panels[panel].sectionGroup != '':
+                panelItem = QTableWidgetItem(str(panel))
+                sgItem = QTableWidgetItem(str(panels[panel].sectionGroup))
+                if j >= assignment_rowNumS:
+                    self.SectionAssignmentTable.insertRow(j)
+                    self.SectionAssignmentTable.setItem(j,0,panelItem)
+                    self.SectionAssignmentTable.setItem(j,1,sgItem)
+
+                j += 1
 
     '''
     def setContextMenu(self):

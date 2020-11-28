@@ -425,6 +425,6 @@ class MainWindow(QMainWindow):
 
     def openAssignment(self, signal):
         assignment = VariableAssignment(self)
-        assignment.displayAssignmentData()
+        #assignment.displayAssignmentData()
 
         assignment.exec_()

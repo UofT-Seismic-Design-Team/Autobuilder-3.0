@@ -138,7 +138,7 @@
               <enum>QTextEdit::WidgetWidth</enum>
              </property>
              <property name="readOnly">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="tabStopWidth">
               <number>80</number>

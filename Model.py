@@ -267,7 +267,8 @@ class Panel:
         self.lowerRight = Node()
 
         # Bracing that is assigned to a panel object
-        self.assignments = []
+        self.bracingGroup = ''
+        self.sectionGroup = ''
 
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
@@ -283,8 +284,11 @@ class Panel:
         self.upperLeft = topMember.start_node
         self.upperRight = topMember.end_node
 
-    def addAssignment(self, assignment):
-        self.assignments.append(assignment)
+    def addBracingAssignment(self, bGroup):
+        self.bracingGroup = bGroup
+
+    def addSectionAssignment(self, sGroup):
+        self.sectionGroup = sGroup
 
     def __str__(self):
         return "Panel " + str(self.name)

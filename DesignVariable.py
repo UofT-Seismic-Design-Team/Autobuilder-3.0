@@ -27,7 +27,7 @@ class DesignVariable(QDialog):
         self.addGroupButton.clicked.connect(self.addGroup)
         self.deleteGroupButton.clicked.connect(self.deleteGroup)
 
-        # Update whole screen after a gorup is picked
+        # Update whole screen after a group is picked
         self.bracingGroupTable.itemClicked.connect(self.updateScreen)
         self.sectionGroupTable.itemClicked.connect(self.updateScreen)
 
@@ -66,7 +66,6 @@ class DesignVariable(QDialog):
 
     def changeTab(self):
         '''wipe group name and repopulate dialog'''
-        print(self.GroupNameEdit.toPlainText())
         self.GroupNameEdit.clear()
         if self.bracingGroupTable.item(0,0) is not None:
             self.currentBracingGroupName = self.bracingGroupTable.item(0,0).text()
@@ -167,10 +166,8 @@ class DesignVariable(QDialog):
                 for rows, bracing in enumerate(bg.bracings):
                     self.IterationTable.insertRow(self.IterationTable.rowCount())
                     self.IterationTable.setItem(rows, 0, QTableWidgetItem(str(bracing)))
-                    print(str(bracing))
 
                 self.GroupNameEdit.setText(self.bracingGroupTable.item(row,0).text())
-                print(self.bracingGroupTable.item(row,0).text())
 
         elif self.tabWidget.currentIndex() == 1:
             if self.currentSectionGroupName is not None:
@@ -183,10 +180,8 @@ class DesignVariable(QDialog):
                 for rows, section in enumerate(sg.sections):
                     self.IterationTable.insertRow(self.IterationTable.rowCount())
                     self.IterationTable.setItem(rows, 0, QTableWidgetItem(str(section)))
-                    print(str(section))
        
                 self.GroupNameEdit.setText(self.sectionGroupTable.item(row,0).text())
-                print(self.sectionGroupTable.item(row,0).text())
 
     def addIteration(self):
         ''' Add empty row to iteration table '''
