@@ -6,6 +6,7 @@ from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
 from Definition import *    # import constants from Definition
+from WarningMessage import *    # pop up window for illegal entries
 
 from ProjectSettings import *   # open project settings dialog
 from VariableAssignment import *    # open panel assignment dialog
@@ -425,6 +426,14 @@ class MainWindow(QMainWindow):
 
     def openAssignment(self, signal):
         assignment = VariableAssignment(self)
-        #assignment.displayAssignmentData()
+        warning = WarningMessage()
+        try:
+            # make sure bracing groups and section groups have been defined
+            skey = list(self.tower.bracingGroups.keys())[0]
+            bkey = list(self.tower.sectionGroups.keys())[0]
+            assignment.exec_()
+        except:
+                warning.popUpErrorBox('Please define bracing and section groups first!')
+                return # terminate the saving process
 
-        assignment.exec_()
+        

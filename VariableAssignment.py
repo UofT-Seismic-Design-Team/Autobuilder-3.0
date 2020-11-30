@@ -36,10 +36,22 @@ class VariableAssignment(QDialog):
         if self.tabWidget.currentIndex() == 0:
             row = self.BracingAssignmentTable.rowCount()
             self.BracingAssignmentTable.insertRow(row)
+            # Add drop down menu
+            bCombo = QComboBox()
+            for t in self.tower.bracingGroups.keys():
+                bCombo.addItem(t)
+            self.BracingAssignmentTable.setCellWidget(row,1,bCombo)
+            bCombo.setCurrentText(list(self.tower.bracingGroups.keys())[0])
 
         elif self.tabWidget.currentIndex() == 1:
             row = self.SectionAssignmentTable.rowCount()
             self.SectionAssignmentTable.insertRow(row)
+            # Add drop down menu
+            sCombo = QComboBox()
+            for t in self.tower.sectionGroups.keys():
+                sCombo.addItem(t)
+            self.SectionAssignmentTable.setCellWidget(row,1,sCombo)
+            sCombo.setCurrentText(list(self.tower.sectionGroups.keys())[0])
 
     def deleteAssignment(self):
         if self.tabWidget.currentIndex() == 0:
@@ -68,54 +80,59 @@ class VariableAssignment(QDialog):
     
     # Save bracing design corresponding to each panel
     def saveAssignment(self):
+        # Check for duplicates first before clearing
+        warning = WarningMessage()
+
+        rowNumB = self.BracingAssignmentTable.rowCount()
+        rowNumS = self.SectionAssignmentTable.rowCount()
+        tempB = []
+        tempS = []
+
+        for i in range(rowNumB):
+            panel = self.BracingAssignmentTable.item(i,0).text()
+            if panel not in tempB and panel in self.tower.panels.keys():
+                tempB.append(panel)
+            else:
+                warning.popUpErrorBox('Invalid input for assignment properties')
+                return
+
+        for i in range(rowNumS):
+            panel = self.SectionAssignmentTable.item(i,0).text()
+            if panel not in tempS and panel in self.tower.panels.keys():
+                tempS.append(panel)
+            else:
+                warning.popUpErrorBox('Invalid input for assignment properties')
+                return
+
         # clear all existing assignments
         for panel in self.tower.panels:
             self.tower.panels[panel].bracingGroup = ''
             self.tower.panels[panel].sectionGroup = ''
 
-        warning = WarningMessage()
-        rowNumB = self.BracingAssignmentTable.rowCount()
         for i in range(rowNumB):
             panelItem = self.BracingAssignmentTable.item(i,0)
-            bracingItem = self.BracingAssignmentTable.item(i,1)
+            bg = self.BracingAssignmentTable.cellWidget(i,1).currentText()
+            '''TEST'''
+            print(bg)
+
             # Check if the row is filled
-            if panelItem == None or bracingItem == None:
+            if panelItem == None or bg == None:
                 break
+                # warning here?
             panel = panelItem.text()
-            bg = bracingItem.text()
-            try:
-                # Check if the item is filled
-                if panel == '' or bg == '':
-                    break
-                # check if bracing group has been defined
-                key = self.tower.bracingGroups[bg]
-                # add bracing group to tower object
-                self.tower.panels[panel].bracingGroup = bg
-                bg in self.tower.bracingGroups
-            except:
-                warning.popUpErrorBox('Invalid input for assignment properties')
-                return # terminate the saving process
+            self.tower.panels[panel].bracingGroup = bg
         
-        rowNumS = self.SectionAssignmentTable.rowCount()
+        
         for i in range(rowNumS):
             panelItem = self.SectionAssignmentTable.item(i,0)
-            sectionItem = self.SectionAssignmentTable.item(i,1)
+            section = self.SectionAssignmentTable.cellWidget(i,1).currentText()
             # Check if the row is filled
-            if panelItem == None or sectionItem == None:
+            if panelItem == None or section == None:
                 break
             panel = panelItem.text()
-            section = sectionItem.text()
-            try:
-                # Check if the item is filled
-                if panel == '' or section == '':
-                    break
-                # check if bracing group has been defined
-                key = self.tower.sectionGroups[section]
-                # add section group to tower object
-                self.tower.panels[panel].sectionGroup = section
-            except:
-                warning.popUpErrorBox('Invalid input for assignment properties')
-                return # terminate the saving process
+            '''TEST'''
+            print(section)
+            self.tower.panels[panel].sectionGroup = section
 
 
     # Display list of bracing designs
@@ -129,24 +146,46 @@ class VariableAssignment(QDialog):
         panels = self.tower.panels
 
         for panel in panels:
+            # Display bracing group table
             if panels[panel].bracingGroup != '':
+                # Populate cells
                 panelItem = QTableWidgetItem(str(panel))
-                bgItem = QTableWidgetItem(str(panels[panel].bracingGroup))
+                #bgItem = QTableWidgetItem(str(panels[panel].bracingGroup))
+                bgItem = str(panels[panel].bracingGroup)
                 if i >= assignment_rowNumB:
                     self.BracingAssignmentTable.insertRow(i)
                     self.BracingAssignmentTable.setItem(i,0,panelItem)
-                    self.BracingAssignmentTable.setItem(i,1,bgItem)
+                    #self.BracingAssignmentTable.setItem(i,1,bgItem)
+
+                    # Set dropdown menu with existing groups
+                    bCombo = QComboBox()
+                    for t in self.tower.bracingGroups.keys():
+                        bCombo.addItem(t)
+                    self.BracingAssignmentTable.setCellWidget(i,1,bCombo)
+                    bCombo.setCurrentText(bgItem)
                 i += 1
             
+            # Display section group table
             if panels[panel].sectionGroup != '':
                 panelItem = QTableWidgetItem(str(panel))
-                sgItem = QTableWidgetItem(str(panels[panel].sectionGroup))
+                #sgItem = QTableWidgetItem(str(panels[panel].sectionGroup))
+                sgItem = str(panels[panel].sectionGroup)
                 if j >= assignment_rowNumS:
                     self.SectionAssignmentTable.insertRow(j)
                     self.SectionAssignmentTable.setItem(j,0,panelItem)
-                    self.SectionAssignmentTable.setItem(j,1,sgItem)
+                    #self.SectionAssignmentTable.setItem(j,1,sgItem)
+
+                    # Set dropdown menu with existing groups
+                    sCombo = QComboBox()
+                    for t in self.tower.sectionGroups.keys():
+                        sCombo.addItem(t)
+                    self.SectionAssignmentTable.setCellWidget(j,1,sCombo)
+                    sCombo.setCurrentText(sgItem)
 
                 j += 1
+
+        
+
 
     '''
     def setContextMenu(self):
