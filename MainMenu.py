@@ -6,9 +6,10 @@ from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
 from Definition import *    # import constants from Definition
+from WarningMessage import *    # pop up window for illegal entries
 
 from ProjectSettings import *   # open project settings dialog
-from AssignBracingDesign import *    # open panel assignment dialog
+from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from DesignVariable import * # open bracing group UI
@@ -175,8 +176,8 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Bracing Groups
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
-        self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
+        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variables", self)
+        self.editDesignVariable_button.setStatusTip("Edit Design Variables")
 
         self.editDesignVariable_button.triggered.connect(self.DesignVariable)
 
@@ -422,7 +423,15 @@ class MainWindow(QMainWindow):
         designVariable.exec_()
 
     def openAssignment(self, signal):
-        assignment = BracingAssignment(self)
-        assignment.displayAssignmentData()
+        assignment = VariableAssignment(self)
+        warning = WarningMessage()
+        try:
+            # make sure bracing groups and section groups have been defined
+            skey = list(self.tower.bracingGroups.keys())[0]
+            bkey = list(self.tower.sectionGroups.keys())[0]
+            assignment.exec_()
+        except:
+                warning.popUpErrorBox('Please define bracing and section groups first!')
+                return # terminate the saving process
 
-        assignment.exec_()
+        

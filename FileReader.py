@@ -8,8 +8,6 @@ class FileReader:
         self.mainFileLoc = fileLoc
         self.tower = tower
         self.psData = psData
-        #self.bracings = bracings#TO DO: delete?
-        #self.assignmentData = assignmentData#TO DO: delete?
 
     def readMainFile(self):
         with open(self.mainFileLoc, 'r') as mainFile:
@@ -20,24 +18,29 @@ class FileReader:
             fPlans_index = lines.index('#Floor_Plans\n')
             panels_index = lines.index('#Panels\n')
             bracings_index = lines.index('#Bracings\n')
-            assignments_index = lines.index('#Bracing_Assignments\n')
             bracingGroups_index = lines.index('#Bracing_Groups\n')
+            sectionGroups_index = lines.index('#Section_Groups\n')
+            b_assignments_index = lines.index('#Bracing_Assignments\n')
+            s_assignments_index = lines.index('#Section_Assignments\n')
             
             # Group data
             pSettings_data = lines[pSettings_index+1:fPlans_index-1]
             fPlans_data = lines[fPlans_index+1:panels_index-1]
             panels_data = lines[panels_index+1:bracings_index-1]
-            bracings_data = lines[bracings_index+1:assignments_index-1]
-            assignments_data = lines[assignments_index+1:bracingGroups_index-1]
-            bracingGroups_data = lines[bracingGroups_index+1:-1]
+            bracings_data = lines[bracings_index+1:bracingGroups_index-1]
+            bracingGroups_data = lines[bracingGroups_index+1:sectionGroups_index-1]
+            sectionGroups_data = lines[sectionGroups_index+1:b_assignments_index-1]
+            b_assignments_data = lines[b_assignments_index+1:s_assignments_index-1]
+            s_assignments_data = lines[s_assignments_index+1:]
             
-
             self.readProjectSettings(pSettings_data)
             self.readFloorPlans(fPlans_data)
             self.readPanels(panels_data)
             self.readBracings(bracings_data)
-            self.readAssignments(assignments_data)
             self.readBracingGroups(bracingGroups_data)
+            self.readSectionGroups(sectionGroups_data)
+            self.readBracingAssignments(b_assignments_data)
+            self.readSectionAssignments(s_assignments_data)
             
     def readProjectSettings(self, data):
         for line in data[1:]: # skip header
@@ -159,22 +162,6 @@ class FileReader:
             bracing = bracings[bcName]
             bracing.generateMembersfromNodes()
 
-    def readAssignments(self, data):
-        assignments = self.tower.assignments
-        for line in data[1:]: # skip header
-            line = line.rstrip('\n').split(',') # remove trailing newline 
-
-            amName = int(line[0])
-            bracingGroup = str(line[1])
-
-            if not (amName in assignments):
-                newAssignment = Assignment(amName)
-                self.tower.addAssignment(newAssignment)
-
-            assignment = assignments[amName]
-            assignment.addBracingGroup(bracingGroup)
-            self.tower.addAssignment(assignment)
-
     def readBracingGroups(self, data):
         bracingGroups = self.tower.bracingGroups
         for line in data[1:]: # skip header
@@ -190,3 +177,43 @@ class FileReader:
             bracingGroup = bracingGroups[groupName]
             bracingGroup.addBracing(bracing)
             self.tower.addBracingGroup(bracingGroup)
+
+    def readSectionGroups(self, data):
+        sectionGroups = self.tower.sectionGroups
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            groupName = str(line[0])
+            section = str(line[1])
+
+            if not (groupName in sectionGroups):
+                newGroup = SectionGroup(groupName)
+                self.tower.addSectionGroup(newGroup)
+
+            sectionGroup = sectionGroups[groupName]
+            sectionGroup.addSection(section)
+            self.tower.addSectionGroup(sectionGroup)
+
+    def readBracingAssignments(self, data):
+        panels = self.tower.panels
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            panelName = str(line[0])
+            bGroup = str(line[1])
+
+            for panel in panels:
+                if panelName == panel:
+                    panels[panel].addBracingAssignment(bGroup)
+
+    def readSectionAssignments(self, data):
+        panels = self.tower.panels
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            panelName = str(line[0])
+            sGroup = str(line[1])
+
+            for panel in panels:
+                if panelName == panel:
+                    panels[panel].addSectionAssignment(sGroup)
