@@ -35,6 +35,9 @@ class View3DGLWidget(QGLWidget):
         self.scalingFactor_z = 1/4
 
         self.translation_z = 0
+
+        #For panel nodes to be highlighted
+        self.nodes =[]
         # ----------------------------------------------------------------------
 
         # Save the previous location of the cursor
@@ -116,6 +119,22 @@ class View3DGLWidget(QGLWidget):
 
             glColor3fv((1,0,0))
             
+            vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
+            glVertex3fv(vertex1)
+
+            vertex2 = (end_node.x-centerX, end_node.y-centerY, end_node.z-centerZ+self.translation_z)
+            glVertex3fv(vertex2)
+
+        glEnd()
+
+        #Render the Panel if any
+        glBegin(GL_QUADS) # GL_QUADS: take 4 vertices as input
+        for node in self.nodes:
+            start_node = node[0]
+            end_node = node[1]
+
+            glColor3fv((0,0,1))
+
             vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex1)
 
