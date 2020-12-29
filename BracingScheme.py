@@ -11,7 +11,7 @@ import copy
 from Model import *    # import Model to access tower objects
 from View2DEngine import *
 from Definition import *    # import constants from Definition
-from WarningMessage import *
+from Message import *
 
 class BracingScheme(QDialog):
 

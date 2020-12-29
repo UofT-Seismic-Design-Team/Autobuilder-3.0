@@ -8,6 +8,11 @@ class FileExtension:
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
     bracings = '/bracings.csv'
+    bracingGroups = '/bracingGroups.csv'
+    sectionGroups = '/sectionGroups.csv'
+    bracingAssignments = '/bracingAssignments.csv'
+    sectionAssignments = '/sectionAssignments.csv'
+    inputTable = '/inputTable.csv'
 
 class EnumToString:
     ATYPE = {

@@ -7,7 +7,7 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
-from WarningMessage import *
+from Message import *
 from BracingsToTry import *
 
 

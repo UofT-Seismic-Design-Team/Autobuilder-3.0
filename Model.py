@@ -9,16 +9,23 @@ import math as m
 class Tower:
 
     def __init__(self, elevations = []):
+        # Geometry
         self.elevations = elevations
         self.floors = {}
         self.columns = {}
         self.floorPlans = {}
         self.panels = {}
         self.bracings = {}
+        self.faces = []
+
+        # Groups and assignments
         self.bracingGroups = {}
         self.sectionGroups = {}
         self.assignments = {}
-        self.faces = []
+        
+        # Input table
+        self.member_ids = {} # Member id from SAP2000 model (key: member_id; value: sectionGroup)
+        self.inputTable = {}
 
     def setElevations(self, elevs):
         self.elevations = elevs
@@ -98,6 +105,7 @@ class Tower:
         for floorPlan in self.floorPlans.values():
             for elev in floorPlan.elevations:
                 self.floors[elev].floorPlans.clear()
+                self.floors[elev].panels.clear()
 
     def addPanelsToFloors(self):
         ''' Add panels to floors based on the elevation '''
@@ -167,6 +175,9 @@ class Tower:
 
                 self.columns[leftColumn.name] = leftColumn
                 self.columns[rightColumn.name] = rightColumn
+
+    def updateInputTable(self,inputTable):
+        self.inputTable = inputTable
 
 # -------------------------------------------------------------------------
 class Floor:
@@ -268,7 +279,6 @@ class Panel:
 
         # Bracing that is assigned to a panel object
         self.bracingGroup = ''
-        self.sectionGroup = ''
 
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
@@ -286,9 +296,6 @@ class Panel:
 
     def addBracingAssignment(self, bGroup):
         self.bracingGroup = bGroup
-
-    def addSectionAssignment(self, sGroup):
-        self.sectionGroup = sGroup
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -420,9 +427,13 @@ class BracingGroup:
             BracingGroup.id += 1
 
         self.bracings = []
+        self.panelAssignments = []
     
     def addBracing(self, bracing):
         self.bracings.append(bracing)
+
+    def addPanel(self, panel):
+        self.panelAssignments.append(panel)
 
 class SectionGroup:
     # static variable for id
@@ -435,9 +446,13 @@ class SectionGroup:
             SectionGroup.id += 1
 
         self.sections = []
+        self.memberIdAssignments = []
     
     def addSection(self, section):
         self.sections.append(section)
+
+    def addMemberId(self, member_id):
+        self.memberIdAssignments.append(member_id)
 
 # --------------------------------------------------------------------------
 class Assignment:

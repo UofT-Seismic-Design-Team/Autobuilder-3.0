@@ -207,13 +207,11 @@ class FileReader:
                     panels[panel].addBracingAssignment(bGroup)
 
     def readSectionAssignments(self, data):
-        panels = self.tower.panels
+        member_ids = self.tower.member_ids
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
 
-            panelName = str(line[0])
+            member_id = str(line[0])
             sGroup = str(line[1])
 
-            for panel in panels:
-                if panelName == panel:
-                    panels[panel].addSectionAssignment(sGroup)
+            member_ids[member_id] = sGroup

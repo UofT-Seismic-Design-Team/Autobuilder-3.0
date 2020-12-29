@@ -12,17 +12,17 @@ renderZ,60.0
 
 #Floor_Plans
 floorPlanName,elevation,x,y
-1,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,0.0,0.0
-1,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,4.0,0.0
-1,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,12.0,6.0
-1,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,12.0,9.0
-1,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,0.0,9.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,0.0,0.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,4.0,0.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,4.0,6.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,12.0,6.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,12.0,9.0
-2,0.0 6.0 9.0 12.0 15.0 21.0,0.0,9.0
+Diamond,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,0.0,0.0
+Diamond,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,4.0,0.0
+Diamond,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,12.0,6.0
+Diamond,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,12.0,9.0
+Diamond,21.0 27.0 33.0 39.0 45.0 51.0 57.0 60.0,0.0,9.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,0.0,0.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,4.0,0.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,4.0,6.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,12.0,6.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,12.0,9.0
+L shape,0.0 6.0 9.0 12.0 15.0 21.0,0.0,9.0
 
 #Panels
 panelName,nodeLocation,x,y,z
@@ -285,79 +285,86 @@ panelName,nodeLocation,x,y,z
 65,lowerLeft,0.0,9.0,15.0
 65,upperLeft,0.0,9.0,21.0
 65,upperRight,0.0,0.0,21.0
-65,lowerRight,0,0,0
+65,lowerRight,0.0,0.0,0.0
 
 #Bracings
 bracingName,x1,y1,x2,y2,material
-default,0,0,0,1,BALSA_0.1875X0.1875
-default,0,1,1,1,BALSA_0.1875X0.1875
-default,1,1,1,0,BALSA_0.1875X0.1875
-default,1,0,0,0,BALSA_0.1875X0.1875
-doubleCross,0,0,0.25,0.5,BALSA_0.1875X0.1875
-doubleCross,0.25,0.5,0.5,1,BALSA_0.1875X0.1875
-doubleCross,0.5,0,0.25,0.5,BALSA_0.1875X0.1875
-doubleCross,0.25,0.5,0,1,BALSA_0.1875X0.1875
-doubleCross,0.5,0,0.75,0.5,BALSA_0.1875X0.1875
-doubleCross,0.75,0.5,1,1,BALSA_0.1875X0.1875
-doubleCross,1,0,0.75,0.5,BALSA_0.1875X0.1875
-doubleCross,0.75,0.5,0.5,1,BALSA_0.1875X0.1875
-singleCross,0,0,0.5,0.5,BALSA_0.1875X0.1875
-singleCross,0.5,0.5,1,1,BALSA_0.1875X0.1875
-singleCross,0,1,0.5,0.5,BALSA_0.1875X0.1875
-singleCross,0.5,0.5,1,0,BALSA_0.1875X0.1875
-kBracing,0,0.5,0.5,1,BALSA_0.1875X0.1875
-kBracing,0.5,1,1,0.5,BALSA_0.1875X0.1875
-kBracing,1,0.5,0.5,0,BALSA_0.1875X0.1875
-kBracing,0.5,0,0,0.5,BALSA_0.1875X0.1875
-cheveron,0,0,0.25,0.5,BALSA_0.1875X0.1875
-cheveron,0.25,0.5,0.5,1,BALSA_0.1875X0.1875
-cheveron,0.5,1,0.75,0.5,BALSA_0.1875X0.1875
-cheveron,0.75,0.5,1,0,BALSA_0.1875X0.1875
-invertedCheveron,0,1,0.25,0.5,BALSA_0.1875X0.1875
-invertedCheveron,0.25,0.5,0.5,0,BALSA_0.1875X0.1875
-invertedCheveron,0.5,0,0.75,0.5,BALSA_0.1875X0.1875
-invertedCheveron,0.75,0.5,1,1,BALSA_0.1875X0.1875
-3/4Cross,0,1,0.5,0.75,BALSA_0.1875X0.1875
-3/4Cross,1,1,0.5,0.75,BALSA_0.1875X0.1875
-3/4Cross,0,0,0.5,0.75,BALSA_0.1875X0.1875
-3/4Cross,1,0,0.5,0.75,BALSA_0.1875X0.1875
-QuadrupleCross,0,0,0.25,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,0.5,0,0.25,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,0.5,0,0.75,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,1,0,0.75,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,0,0.5,0.25,0.25,BALSA_0.1875X0.1875
+default,0.0,0.0,0.0,1.0,BALSA_0.1875X0.1875
+default,0.0,1.0,1.0,1.0,BALSA_0.1875X0.1875
+default,1.0,1.0,1.0,0.0,BALSA_0.1875X0.1875
+default,1.0,0.0,0.0,0.0,BALSA_0.1875X0.1875
+doubleCross,0.0,0.0,0.25,0.5,BALSA_0.1875X0.1875
+doubleCross,0.25,0.5,0.5,1.0,BALSA_0.1875X0.1875
+doubleCross,0.5,0.0,0.25,0.5,BALSA_0.1875X0.1875
+doubleCross,0.25,0.5,0.0,1.0,BALSA_0.1875X0.1875
+doubleCross,0.5,0.0,0.75,0.5,BALSA_0.1875X0.1875
+doubleCross,0.75,0.5,1.0,1.0,BALSA_0.1875X0.1875
+doubleCross,1.0,0.0,0.75,0.5,BALSA_0.1875X0.1875
+doubleCross,0.75,0.5,0.5,1.0,BALSA_0.1875X0.1875
+singleCross,0.0,0.0,0.5,0.5,BALSA_0.1875X0.1875
+singleCross,0.5,0.5,1.0,1.0,BALSA_0.1875X0.1875
+singleCross,0.0,1.0,0.5,0.5,BALSA_0.1875X0.1875
+singleCross,0.5,0.5,1.0,0.0,BALSA_0.1875X0.1875
+kBracing,0.0,0.5,0.5,1.0,BALSA_0.1875X0.1875
+kBracing,0.5,1.0,1.0,0.5,BALSA_0.1875X0.1875
+kBracing,1.0,0.5,0.5,0.0,BALSA_0.1875X0.1875
+kBracing,0.5,0.0,0.0,0.5,BALSA_0.1875X0.1875
+cheveron,0.0,0.0,0.25,0.5,BALSA_0.1875X0.1875
+cheveron,0.25,0.5,0.5,1.0,BALSA_0.1875X0.1875
+cheveron,0.5,1.0,0.75,0.5,BALSA_0.1875X0.1875
+cheveron,0.75,0.5,1.0,0.0,BALSA_0.1875X0.1875
+invertedCheveron,0.0,1.0,0.25,0.5,BALSA_0.1875X0.1875
+invertedCheveron,0.25,0.5,0.5,0.0,BALSA_0.1875X0.1875
+invertedCheveron,0.5,0.0,0.75,0.5,BALSA_0.1875X0.1875
+invertedCheveron,0.75,0.5,1.0,1.0,BALSA_0.1875X0.1875
+3/4Cross,0.0,1.0,0.5,0.75,BALSA_0.1875X0.1875
+3/4Cross,1.0,1.0,0.5,0.75,BALSA_0.1875X0.1875
+3/4Cross,0.0,0.0,0.5,0.75,BALSA_0.1875X0.1875
+3/4Cross,1.0,0.0,0.5,0.75,BALSA_0.1875X0.1875
+QuadrupleCross,0.0,0.0,0.25,0.25,BALSA_0.1875X0.1875
+QuadrupleCross,0.5,0.0,0.25,0.25,BALSA_0.1875X0.1875
+QuadrupleCross,0.5,0.0,0.75,0.25,BALSA_0.1875X0.1875
+QuadrupleCross,1.0,0.0,0.75,0.25,BALSA_0.1875X0.1875
+QuadrupleCross,0.0,0.5,0.25,0.25,BALSA_0.1875X0.1875
 QuadrupleCross,0.5,0.5,0.25,0.25,BALSA_0.1875X0.1875
 QuadrupleCross,0.5,0.5,0.75,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,1,0.5,0.75,0.25,BALSA_0.1875X0.1875
-QuadrupleCross,0.25,0.75,0,0.5,BALSA_0.1875X0.1875
+QuadrupleCross,1.0,0.5,0.75,0.25,BALSA_0.1875X0.1875
+QuadrupleCross,0.25,0.75,0.0,0.5,BALSA_0.1875X0.1875
 QuadrupleCross,0.25,0.75,0.5,0.5,BALSA_0.1875X0.1875
 QuadrupleCross,0.75,0.75,0.5,0.5,BALSA_0.1875X0.1875
-QuadrupleCross,0.75,0.75,1,0.5,BALSA_0.1875X0.1875
-QuadrupleCross,0,1,0.25,0.75,BALSA_0.1875X0.1875
-QuadrupleCross,0.5,1,0.25,0.75,BALSA_0.1875X0.1875
-QuadrupleCross,0.5,1,0.75,0.75,BALSA_0.1875X0.1875
-QuadrupleCross,0.75,0.75,1,1,BALSA_0.1875X0.1875
+QuadrupleCross,0.75,0.75,1.0,0.5,BALSA_0.1875X0.1875
+QuadrupleCross,0.0,1.0,0.25,0.75,BALSA_0.1875X0.1875
+QuadrupleCross,0.5,1.0,0.25,0.75,BALSA_0.1875X0.1875
+QuadrupleCross,0.5,1.0,0.75,0.75,BALSA_0.1875X0.1875
+QuadrupleCross,0.75,0.75,1.0,1.0,BALSA_0.1875X0.1875
 
 #Bracing_Groups
 bracingGroup,bracing
 V1,singleCross
 V1,doubleCross
+V1,QuadrupleCross
 V2,cheveron
 V2,kBracing
 
 #Section_Groups
 sectionGroup,section
-S1,BALSA_0.5x0.5
-S1,BALSA_0.1875x0.1875
 S2,BALSA_0.5_ANGLE
 S2,BALSA_3/16x8/16
+S1,BALSA_0.5x0.5
+S1,BALSA_0.1875x0.1875
 
 #Bracing_Assignments
 panelName,bracingGroup
 1,V1
 2,V2
+3,V1
+4,V2
+5,V1
+6,V2
+7,V1
 
 #Section_Assignments
-panelName,sectionGroup
+memberid,sectionGroup
 1,S1
 2,S2
+3,S2

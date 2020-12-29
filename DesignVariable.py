@@ -9,7 +9,7 @@ import os
 import copy
 
 from Model import *
-from WarningMessage import *
+from Message import *
 
 class DesignVariable(QDialog):
 
