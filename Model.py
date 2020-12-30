@@ -42,6 +42,8 @@ class Tower:
         self.sectionGroups.clear()
         self.assignments.clear()
         self.faces.clear()
+        self.member_ids.clear()
+        self.inputTable.clear()
 
     def build(self):
         ''' build tower (assume all tower components are saved in tower)'''
