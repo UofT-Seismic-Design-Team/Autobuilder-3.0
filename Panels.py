@@ -147,7 +147,7 @@ class panelsUI(QDialog):
             panel = self.tower.panels[self.currentPanelName]
             panel.name =  item.text()
             self.tower.panels[item.text()]=self.tower.panels.pop(self.currentPanelName)
-            self.updateScreenXYZ
+            self.updateScreenXYElev
 
 
     def setIconsForButtons(self):
