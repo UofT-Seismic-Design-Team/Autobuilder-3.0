@@ -14,6 +14,7 @@ from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from DesignVariable import * # open bracing group UI
 from TowerVariation import *    # gnerate tower variations
+from Panels import *
 
 from View2DEngine import *  # import View2DEngine
 
@@ -180,6 +181,7 @@ class MainWindow(QMainWindow):
         # Add button for Editing Panel
         self.panel_button = QAction(QIcon(r"Icons\24x24\Panel - 24x24.png"), "Edit Panel", self)
         self.panel_button.setStatusTip("Edit Panel")
+        self.panel_button.triggered.connect(self.openPanel)
 
         self.functions_toolbar.addAction(self.panel_button)
 
@@ -423,6 +425,11 @@ class MainWindow(QMainWindow):
     def openFloorDesign(self, signal):
         floorPlan = FloorPlanUI(self)
         floorPlan.exec_()
+
+    # For Panel--------------------------------------------
+    def openPanel(self, signal):
+        panel= panelsUI(self)
+        panel.exec_()
 
     # For Bracing Group --------------------------------------------
     def DesignVariable(self, signal):
