@@ -6,12 +6,14 @@ from PyQt5 import uic
 
 from Model import * # import Model to access tower objects
 from Definition import *    # import constants from Definition
+from Message import *    # pop up window for illegal entries
 
 from ProjectSettings import *   # open project settings dialog
-from AssignBracingDesign import *    # open panel assignment dialog
+from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from DesignVariable import * # open bracing group UI
+from TowerVariation import *    # gnerate tower variations
 from Panels import *
 
 from View2DEngine import *  # import View2DEngine
@@ -20,6 +22,8 @@ from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
 
 import math as m
+
+import time
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -39,6 +43,9 @@ class MainWindow(QMainWindow):
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
+
+        # File location
+        self.fileLoc = ''
 
         # TESTING ----------------------------------------------
 
@@ -78,7 +85,6 @@ class MainWindow(QMainWindow):
         self.tower.generateColumnsByFace()
 
         #------------------------------------------------
-
         # Set project settings data for all views
         self.setProjectSettingsDataForViews()
 
@@ -90,6 +96,9 @@ class MainWindow(QMainWindow):
 
         # Add icons to section view
         self.setIconsForSectionView()
+
+        # Icon for MainWindow
+        self.setWindowIcon(QIcon(r'Icons\24x24\letter_A_blue-512.png'))
 
         # Views ----------------------------
         self.setTowerInViews()
@@ -177,8 +186,8 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Bracing Groups
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Bracing Group", self)
-        self.editDesignVariable_button.setStatusTip("Edit Bracing Group")
+        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variables", self)
+        self.editDesignVariable_button.setStatusTip("Edit Design Variables")
 
         self.editDesignVariable_button.triggered.connect(self.DesignVariable)
 
@@ -195,6 +204,8 @@ class MainWindow(QMainWindow):
         # Add button for Generating Tower
         self.generateTower_button = QAction(QIcon(r"Icons\24x24\Generate Tower - 24x24.png"), "Generate Tower", self)
         self.generateTower_button.setStatusTip("Generate Tower")
+
+        self.generateTower_button.triggered.connect(self.generateInputTable)
 
         self.functions_toolbar.addAction(self.generateTower_button)
 
@@ -235,34 +246,31 @@ class MainWindow(QMainWindow):
         self.action_FloorPlan.triggered.connect(self.openFloorDesign)
 
     # Save file ------------------------------------------------------------------------------
-    def saveFile(self, signal):
+    def saveFile(self, signal=None):
         fileInfo = QFileDialog.getSaveFileName(self, "Save File", "autobuilder.ab", "Autobuilder files (*.ab)")
-        fileLoc = fileInfo[0]
+        self.fileLoc = fileInfo[0]
 
-        if fileLoc:  # No action if no file was selected
-            filewriter = FileWriter(fileLoc, self.tower, self.projectSettingsData)
+        if self.fileLoc:  # No action if no file was selected
+            filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             filewriter.writeFiles()
 
     # Open file ------------------------------------------------------------------------------
-    def openFile(self, signal):
+    def openFile(self, signal=None):
         fileInfo = QFileDialog.getOpenFileName(self, "Open File", "autobuilder.ab", "Autobuilder files (*.ab)")
-        fileLoc = fileInfo[0]
+        self.fileLoc = fileInfo[0]
 
-        if fileLoc: # No action if no file was selected
+        if self.fileLoc: # No action if no file was selected
             self.tower.reset() # clean all data in tower
 
-            filereader = FileReader(fileLoc, self.tower, self.projectSettingsData)
+            filereader = FileReader(self.fileLoc, self.tower, self.projectSettingsData)
             filereader.readMainFile()
 
-            print(self.tower)
             self.tower.build()
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
-
-        projectSettings.setData(self.projectSettingsData)
-        projectSettings.setTower(self.tower)
+        
         projectSettings.display()
 
         projectSettings.exec_()
@@ -349,8 +357,8 @@ class MainWindow(QMainWindow):
         color_node = Color.Node['MainMenu']
 
         limit = len(color_fplan) - 1
-        i = 0
-        for fpName in floorPlans:
+
+        for i, fpName in enumerate(floorPlans):
             vMember = ViewMember()
             vNode = ViewNode()
 
@@ -376,8 +384,6 @@ class MainWindow(QMainWindow):
 
             vMembers.append(vMember)
             vNodes.append(vNode)
-
-            i += 1
 
         return vMembers, vNodes, vTexts
 
@@ -431,7 +437,18 @@ class MainWindow(QMainWindow):
         designVariable.exec_()
 
     def openAssignment(self, signal):
-        assignment = BracingAssignment(self)
-        assignment.displayAssignmentData()
+        assignment = VariableAssignment(self)
+        warning = WarningMessage()
+        try:
+            # make sure bracing groups and section groups have been defined
+            skey = list(self.tower.bracingGroups.keys())[0]
+            bkey = list(self.tower.sectionGroups.keys())[0]
+            assignment.exec_()
+        except:
+                warning.popUpErrorBox('Please define bracing and section groups first!')
+                return # terminate the saving process
 
-        assignment.exec_()
+    # For Tower Variations --------------------------------------------
+    def generateInputTable(self, signal):
+        generateTower = GenerateTower(self)
+        generateTower.exec_()

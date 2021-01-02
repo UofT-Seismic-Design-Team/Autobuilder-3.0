@@ -3,12 +3,10 @@ import ProjectSettings  # contains data in project settings
 from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
 
-import json # testing
-
 import os   # create new directory
 
 class FileWriter:
-    def __init__(self, fileLoc, tower, psData):
+    def __init__(self, fileLoc, tower=None, psData=None):
         self.mainFileLoc = fileLoc
         self.folderLoc = fileLoc.replace('.ab', '')
 
@@ -27,6 +25,11 @@ class FileWriter:
         self.writeProjectSettings()
         self.writeFloorPlans()
         self.writePanels()
+        self.writeBracings()
+        self.writeBracingGroups()
+        self.writeSectionGroups()
+        self.writeBracingAssignments()
+        self.writeSectionAssignments()
 
         self.writeMainFile()
 
@@ -46,6 +49,31 @@ class FileWriter:
         with open(panelLoc, 'r') as f:
             panel = f.read()
 
+        bracings = ''
+        bracingsLoc = self.folderLoc + FileExtension.bracings
+        with open(bracingsLoc, 'r') as f:
+            bracings = f.read()
+
+        bGroups = ''
+        bGroupsLoc = self.folderLoc + FileExtension.bracingGroups
+        with open(bGroupsLoc, 'r') as f:
+            bGroups = f.read()
+
+        sGroups = ''
+        sGroupsLoc = self.folderLoc + FileExtension.sectionGroups
+        with open(sGroupsLoc, 'r') as f:
+            sGroups = f.read()
+
+        bAssignments = ''
+        bAssignmentsLoc = self.folderLoc + FileExtension.bracingAssignments
+        with open(bAssignmentsLoc, 'r') as f:
+            bAssignments = f.read()
+        
+        sAssignments = ''
+        sAssignmentsLoc = self.folderLoc + FileExtension.sectionAssignments
+        with open(sAssignmentsLoc, 'r') as f:
+            sAssignments = f.read()
+
         with open(self.mainFileLoc, 'w') as mainFile:
             mainFile.write('#Project_Settings')
             mainFile.write('\n')
@@ -61,6 +89,30 @@ class FileWriter:
             mainFile.write('\n')
             mainFile.write(panel)
 
+            mainFile.write('\n')
+            mainFile.write('#Bracings')
+            mainFile.write('\n')
+            mainFile.write(bracings)
+            
+            mainFile.write('\n')
+            mainFile.write('#Bracing_Groups')
+            mainFile.write('\n')
+            mainFile.write(bGroups)
+
+            mainFile.write('\n')
+            mainFile.write('#Section_Groups')
+            mainFile.write('\n')
+            mainFile.write(sGroups)
+
+            mainFile.write('\n')
+            mainFile.write('#Bracing_Assignments')
+            mainFile.write('\n')
+            mainFile.write(bAssignments)
+
+            mainFile.write('\n')
+            mainFile.write('#Section_Assignments')
+            mainFile.write('\n')
+            mainFile.write(sAssignments)
 
     def writeProjectSettings(self):
         ''' Write project settings data to file '''
@@ -176,3 +228,130 @@ class FileWriter:
 
         df = pd.DataFrame(panelData)
         df.to_csv(panelLoc, index=False)
+
+    def writeBracings(self):
+        ''' Write Bracings to file '''
+        bracingsLoc = self.folderLoc + FileExtension.bracings
+        tower = self.tower
+        bracings = tower.bracings
+
+        bracingsData = {
+            'bracingName':[],
+            'x1':[],
+            'y1':[],
+            'x2':[],
+            'y2':[],
+            'material':[],
+        }
+
+        for bName in bracings:
+            bracing = bracings[bName]
+
+            for member in bracing.members:
+                x1 = member.start_node.x
+                y1 = member.start_node.y
+                x2 = member.end_node.x
+                y2 = member.end_node.y
+
+                mat = member.material
+
+                bracingsData['bracingName'].append(bName)
+                bracingsData['x1'].append(str(x1))
+                bracingsData['y1'].append(str(y1))
+                bracingsData['x2'].append(str(x2))
+                bracingsData['y2'].append(str(y2))
+                bracingsData['material'].append(mat)
+
+        df = pd.DataFrame(bracingsData)
+        df.to_csv(bracingsLoc, index=False)
+
+    def writeBracingGroups(self):
+        ''' Write Bracing Groups to file '''
+        bGroupsLoc = self.folderLoc + FileExtension.bracingGroups
+        tower = self.tower
+        bGroups = tower.bracingGroups
+
+        bGroupsData = {
+            'bracingGroup':[],
+            'bracing':[],
+        }
+
+        for bGroupName in bGroups:
+            bGroup = bGroups[bGroupName]
+
+            for bName in bGroup.bracings:
+                bGroupsData['bracingGroup'].append(bGroupName)
+                bGroupsData['bracing'].append(bName)
+
+        df = pd.DataFrame(bGroupsData)
+        df.to_csv(bGroupsLoc, index=False)
+
+    def writeSectionGroups(self):
+        ''' Write Section Groups to file '''
+        sGroupsLoc = self.folderLoc + FileExtension.sectionGroups
+        tower = self.tower
+        sGroups = tower.sectionGroups
+
+        sGroupsData = {
+            'sectionGroup':[],
+            'section':[],
+        }
+
+        for sGroupName in sGroups:
+            sGroup = sGroups[sGroupName]
+
+            for sName in sGroup.sections:
+                sGroupsData['sectionGroup'].append(sGroupName)
+                sGroupsData['section'].append(sName)
+
+        df = pd.DataFrame(sGroupsData)
+        df.to_csv(sGroupsLoc, index=False)
+
+    def writeBracingAssignments(self):
+        ''' Write Bracing Assignments to file '''
+        bAssignmentsLoc = self.folderLoc + FileExtension.bracingAssignments
+        tower = self.tower
+        panels = tower.panels
+
+        bAssignmentsData = {
+            'panelName':[],
+            'bracingGroup':[],
+        }
+
+        for pName in panels:
+            panel = panels[pName]
+            bGroup = panel.bracingGroup
+
+            if bGroup:
+                bAssignmentsData['panelName'].append(pName)
+                bAssignmentsData['bracingGroup'].append(bGroup)
+
+        df = pd.DataFrame(bAssignmentsData)
+        df.to_csv(bAssignmentsLoc, index=False)
+
+    def writeSectionAssignments(self):
+        ''' Write Section Assignments to file '''
+        sAssignmentsLoc = self.folderLoc + FileExtension.sectionAssignments
+        tower = self.tower
+        member_ids = tower.member_ids
+
+        sAssignmentsData = {
+            'memberid':[],
+            'sectionGroup':[],
+        }
+
+        for member_id in member_ids:
+            sGroup = member_ids[member_id]
+
+            sAssignmentsData['memberid'].append(member_id)
+            sAssignmentsData['sectionGroup'].append(sGroup)
+
+        df = pd.DataFrame(sAssignmentsData)
+        df.to_csv(sAssignmentsLoc, index=False)
+
+    def writeInputTable(self, inputTable):
+        ''' Write Input Table to file '''
+        inputTableLoc = self.folderLoc + FileExtension.inputTable
+
+        df = pd.DataFrame(inputTable)
+        df.to_csv(inputTableLoc, index=False)

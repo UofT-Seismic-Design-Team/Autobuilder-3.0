@@ -6,7 +6,7 @@ from PyQt5 import uic
 
 from Model import *
 
-from WarningMessage import *
+from Message import *
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -16,10 +16,10 @@ class ProjectSettings(QDialog):
         super().__init__(*args, **kwargs)
 
         # Project Settings Data
-        self.data = ProjectSettingsData()
+        self.data = args[0].projectSettingsData
 
-        # Tower
-        self.tower = Tower()
+        # Reference to existing tower
+        self.tower = args[0].tower 
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -42,12 +42,6 @@ class ProjectSettings(QDialog):
         # SAP2000 model location
         self.SAPModelLoc = ''
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
-
-    def setData(self, data):
-        self.data = data
-
-    def setTower(self, tower):
-        self.tower = tower
 
     def setIconsForButtons(self):
         self.floorElev_add.setIcon(QIcon(r"Icons\24x24\plus.png"))
@@ -75,24 +69,20 @@ class ProjectSettings(QDialog):
         data = self.data
 
         # Elevations
-        i = 0
         floorElev_rowNum = self.floorElev_table.rowCount()
-        for elev in data.floorElevs:
+        for i, elev in enumerate(data.floorElevs):
             item = QTableWidgetItem(str(elev))
             if i >= floorElev_rowNum:
                 self.floorElev_table.insertRow(i)
             self.floorElev_table.setItem(i,0,item)
-            i += 1
 
         # Section properties
-        i = 0
         sectionProp_rowNum = self.sectionProp_table.rowCount()
-        for sect in data.sectionProps:
+        for i, sect in enumerate(data.sectionProps):
             item = QTableWidgetItem(str(sect))
             if i >= sectionProp_rowNum:
                 self.sectionProp_table.insertRow(i)
             self.sectionProp_table.setItem(i,0,item)
-            i += 1
 
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)

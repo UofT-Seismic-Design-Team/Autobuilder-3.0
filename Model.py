@@ -9,15 +9,23 @@ import math as m
 class Tower:
 
     def __init__(self, elevations = []):
+        # Geometry
         self.elevations = elevations
         self.floors = {}
         self.columns = {}
         self.floorPlans = {}
         self.panels = {}
         self.bracings = {}
-        self.bracingGroups = {}
-        self.assignments = {}
         self.faces = []
+
+        # Groups and assignments
+        self.bracingGroups = {}
+        self.sectionGroups = {}
+        self.assignments = {}
+        
+        # Input table
+        self.member_ids = {} # Member id from SAP2000 model (key: member_id; value: sectionGroup)
+        self.inputTable = {}
 
     def setElevations(self, elevs):
         self.elevations = elevs
@@ -31,8 +39,11 @@ class Tower:
         self.panels.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
+        self.sectionGroups.clear()
         self.assignments.clear()
         self.faces.clear()
+        self.member_ids.clear()
+        self.inputTable.clear()
 
     def build(self):
         ''' build tower (assume all tower components are saved in tower)'''
@@ -40,8 +51,6 @@ class Tower:
 
         self.addFloorPlansToFloors()
         self.addPanelsToFloors()
-
-        #self.addBracingAssignmentsToPanels()
 
         for name in self.floorPlans:
             self.generateFacesByFloorPlan(self.floorPlans[name])
@@ -76,8 +85,12 @@ class Tower:
         self.bracings[bracing.name] = bracing
 
     def addBracingGroup(self, group):
-        ''' Add bracing object to bracings '''
-        self.bracingGroups[group.name] = group  
+        ''' Add bracing group object to bracing groups '''
+        self.bracingGroups[group.name] = group
+
+    def addSectionGroup(self, group):
+        ''' Add section group object to section groups '''
+        self.sectionGroups[group.name] = group
 
     def addAssignment(self, assignment):
         ''' Add bracing assignment objects to bracing assignments '''
@@ -94,6 +107,7 @@ class Tower:
         for floorPlan in self.floorPlans.values():
             for elev in floorPlan.elevations:
                 self.floors[elev].floorPlans.clear()
+                self.floors[elev].panels.clear()
 
     def addPanelsToFloors(self):
         ''' Add panels to floors based on the elevation '''
@@ -104,13 +118,6 @@ class Tower:
             floor = self.floors[elevation]
 
             floor.addPanel(panel)
-
-    '''
-    def addBracingAssignmentsToPanels(self):
-        #Add bracing assignments to panels
-        for assignment_id in self.assignments:
-            self.panels.addAssignment(assignment_id)
-    '''
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -170,6 +177,9 @@ class Tower:
 
                 self.columns[leftColumn.name] = leftColumn
                 self.columns[rightColumn.name] = rightColumn
+
+    def updateInputTable(self,inputTable):
+        self.inputTable = inputTable
 
 # -------------------------------------------------------------------------
 class Floor:
@@ -270,7 +280,7 @@ class Panel:
         self.lowerRight = Node()
 
         # Bracing that is assigned to a panel object
-        self.assignments = []
+        self.bracingGroup = ''
 
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
@@ -286,8 +296,8 @@ class Panel:
         self.upperLeft = topMember.start_node
         self.upperRight = topMember.end_node
 
-    def addAssignment(self, assignment):
-        self.assignments.append(assignment)
+    def addBracingAssignment(self, bGroup):
+        self.bracingGroup = bGroup
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -419,10 +429,32 @@ class BracingGroup:
             BracingGroup.id += 1
 
         self.bracings = []
+        self.panelAssignments = []
     
     def addBracing(self, bracing):
         self.bracings.append(bracing)
 
+    def addPanel(self, panel):
+        self.panelAssignments.append(panel)
+
+class SectionGroup:
+    # static variable for id
+    id = 1
+
+    def __init__(self, name=None):
+        self.name = name    # name is in string form
+        if not name:
+            self.name = str(SectionGroup.id)
+            SectionGroup.id += 1
+
+        self.sections = []
+        self.memberIdAssignments = []
+    
+    def addSection(self, section):
+        self.sections.append(section)
+
+    def addMemberId(self, member_id):
+        self.memberIdAssignments.append(member_id)
 
 # --------------------------------------------------------------------------
 class Assignment:
