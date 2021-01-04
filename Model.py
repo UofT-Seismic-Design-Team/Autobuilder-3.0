@@ -18,6 +18,9 @@ class Tower:
         self.bracings = {}
         self.faces = []
 
+        # Section properties
+        self.sections = {}
+
         # Groups and assignments
         self.bracingGroups = {}
         self.sectionGroups = {}
@@ -30,6 +33,9 @@ class Tower:
     def setElevations(self, elevs):
         self.elevations = elevs
 
+    def setSections(self, sects):
+        self.sections = sects
+
     def reset(self):
         ''' clear all data '''
         self.elevations.clear()
@@ -37,6 +43,7 @@ class Tower:
         self.columns.clear()
         self.floorPlans.clear()
         self.panels.clear()
+        self.sections.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
         self.sectionGroups.clear()
@@ -478,3 +485,15 @@ class Assignment:
 
 
 '''ADD function to go back to bottom floor once top is reached'''
+
+class Section:
+
+    def __init__(self, name, rank):
+        self.name = name
+        self.rank = rank
+
+    def setName(self, name):
+        self.name = name
+
+    def setRank(self, rank):
+        self.rank = rank

@@ -73,7 +73,6 @@ class VariableAssignment(QDialog):
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(self.saveAssignment)
-        self.OkButton.clicked.connect(lambda x: self.close())
         
         self.CancelButton = self.Assignment_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
@@ -147,6 +146,7 @@ class VariableAssignment(QDialog):
 
             print(self.tower.member_ids)
 
+        self.close()    # close only if the saving process is completed successfully
 
     # Display list of bracing designs
     def displayAssignmentData(self):

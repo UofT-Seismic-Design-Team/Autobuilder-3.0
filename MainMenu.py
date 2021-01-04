@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
+        self.tower.setSections(self.projectSettingsData.sections)
 
         # File location
         self.fileLoc = ''

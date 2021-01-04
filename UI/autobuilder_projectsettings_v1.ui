@@ -72,6 +72,9 @@
          <attribute name="horizontalHeaderDefaultSectionSize">
           <number>120</number>
          </attribute>
+         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+          <bool>false</bool>
+         </attribute>
          <attribute name="horizontalHeaderStretchLastSection">
           <bool>true</bool>
          </attribute>
@@ -181,7 +184,7 @@
           <bool>true</bool>
          </attribute>
          <attribute name="verticalHeaderVisible">
-          <bool>true</bool>
+          <bool>false</bool>
          </attribute>
          <attribute name="verticalHeaderDefaultSectionSize">
           <number>27</number>
@@ -217,6 +220,11 @@
            <string>5</string>
           </property>
          </row>
+         <column>
+          <property name="text">
+           <string>Rank</string>
+          </property>
+         </column>
          <column>
           <property name="text">
            <string>Section</string>
