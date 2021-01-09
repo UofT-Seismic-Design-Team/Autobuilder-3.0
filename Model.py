@@ -107,12 +107,13 @@ class Tower:
         ''' Add floor plans to floors based on the elevation '''
         for floorPlan in self.floorPlans.values():
             for elev in floorPlan.elevations:
-                self.floors[elev].addFloorPlan(floorPlan)
+                if elev in self.floors:
+                    self.floors[elev].addFloorPlan(floorPlan)
 
     def clearFloor(self):
         '''Clears the floor plan prior to updating them'''
-        for floorPlan in self.floorPlans.values():
-            for elev in floorPlan.elevations:
+        for elev in self.elevations:
+            if elev in self.floors:
                 self.floors[elev].floorPlans.clear()
                 self.floors[elev].panels.clear()
 
@@ -126,6 +127,10 @@ class Tower:
 
             floor.addPanel(panel)
 
+    def generatePanels_addToFloors(self):
+        self.generatePanelsByFace()
+        self.addPanelsToFloors()
+
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
 
@@ -136,7 +141,7 @@ class Tower:
                 memberStart = member.start_node
                 memberEnd = member.end_node
 
-                # Add elevation to memeber
+                # Add elevation to member
                 start = Node()
                 start.setLocation(memberStart.x, memberStart.y, elev)
                 end = Node()

@@ -19,7 +19,10 @@ class ProjectSettings(QDialog):
         self.data = args[0].projectSettingsData
 
         # Reference to existing tower
-        self.tower = args[0].tower 
+        self.tower = args[0].tower
+
+        # Main Menu
+        self.mainmenu = args[0]
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -151,6 +154,8 @@ class ProjectSettings(QDialog):
                 self.tower.columns.clear()
                 self.tower.panels.clear()
                 self.tower.faces.clear()
+                for floorPlan in self.tower.floorPlans.values():
+                    floorPlan.elevations.clear()
 
                 for elev in tempElevs:
                     self.data.floorElevs.append(elev) # will update elevations in tower object simultaneously
@@ -158,6 +163,10 @@ class ProjectSettings(QDialog):
                 self.tower.defineFloors()
             else:
                 return # terminate the saving process
+
+        # View 2D
+        self.mainmenu.elevation_index = 0
+        self.mainmenu.elevation = self.tower.elevations[self.mainmenu.elevation_index]
 
         # Section properties
         self.data.sections.clear() # reset section properties

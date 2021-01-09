@@ -144,8 +144,6 @@ class VariableAssignment(QDialog):
             '''TEST'''
             self.tower.member_ids[member_id] = sg
 
-            print(self.tower.member_ids)
-
         self.close()    # close only if the saving process is completed successfully
 
     # Display list of bracing designs

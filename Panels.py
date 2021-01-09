@@ -40,7 +40,10 @@ class panelsUI(QDialog):
         self.populate()
 
         #Save the current floorplan table name and intialize for the first one for later use in changing and saving the name
-        self.currentPanelName = self.panelTable.item(0,0).text()
+        if self.panelTable.item(0,0):
+            self.currentPanelName = self.panelTable.item(0,0).text()
+        else:
+            self.currentPanelName = ''
 
         #Call update upon ScreenXYElev to update the whole screen upon picking floor plan
         self.panelTable.itemClicked.connect(self.updateScreenXYElev)
