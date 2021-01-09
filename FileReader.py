@@ -55,7 +55,13 @@ class FileReader:
                     self.psData.floorElevs.append(float(elev)) # will update floor elevations in tower object simultaneously (pointer)
 
             elif var == 'sect_props':
-                self.psData.sectionProps = val.split()
+                temp = val.split()
+
+                name = temp[0]
+                rank = int(temp[1])
+                sect = Section(name, rank)
+
+                self.psData.sections[name] = sect
 
             elif var == 'gm':
                 self.psData.groundMotion = (val == 'True') # return True if the value is 'True'

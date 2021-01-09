@@ -124,9 +124,21 @@ class FileWriter:
             'value':[],
         }
 
-        psData_dict['setting'] = [
-            'tower_elevs',
-            'sect_props',
+        # Convert to string
+        # elevations
+        elevs = ' '.join([str(elev) for elev in psData.floorElevs])
+        psData_dict['setting'].append('tower_elevs')
+        psData_dict['value'].append(elevs)
+
+        # sections
+        for key in psData.sections:
+            sect = psData.sections[key]
+            psData_dict['setting'].append('sect_props')
+            val = str(sect.name) + ' ' + str(sect.rank)
+            psData_dict['value'].append(val)
+
+        # Other settings
+        psKeys = [
             'gm',
             'analysis',
             'modelLoc',
@@ -135,17 +147,10 @@ class FileWriter:
             'renderY',
             'renderZ',
         ]
-
-        # Convert to string
-        elevs = ' '.join([str(elev) for elev in psData.floorElevs])
-        sectProps = ' '.join([str(sect) for sect in psData.sectionProps])
-        aType = EnumToString.ATYPE[psData.analysisType]
         
         values = [
-            elevs,
-            sectProps,
             psData.groundMotion,
-            aType,
+            EnumToString.ATYPE[psData.analysisType],
             psData.SAPModelLoc,
             psData.modelName,
             psData.renderX,
@@ -153,7 +158,9 @@ class FileWriter:
             psData.renderZ,
         ]
 
-        psData_dict['value'] = [str(i) for i in values] # convert values into string
+        for i, psKey in enumerate(psKeys):
+            psData_dict['setting'].append(psKey)
+            psData_dict['value'].append(values[i])
 
         df = pd.DataFrame(psData_dict)
         df.to_csv(projectSettingsLoc, index=False)

@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         # Tower object
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
+        self.tower.setSections(self.projectSettingsData.sections)
 
         # File location
         self.fileLoc = ''
@@ -233,6 +234,12 @@ class MainWindow(QMainWindow):
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
+        # Floor plans
+        self.action_FloorPlan.triggered.connect(self.openFloorDesign)
+        # Generate Panels from Floor Plans
+        self.action_GPFromFloorPlan.triggered.connect(self.generatePanelsFromFloorPlan)
+        # Panels
+        self.action_Panel.triggered.connect(self.openPanel)
         # Bracing Scheme
         self.action_BracingScheme.triggered.connect(self.openBracingScheme)
         # Bracing Design
@@ -243,7 +250,6 @@ class MainWindow(QMainWindow):
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
         self.action_Open.triggered.connect(self.openFile)
-        self.action_FloorPlan.triggered.connect(self.openFloorDesign)
 
     # Save file ------------------------------------------------------------------------------
     def saveFile(self, signal=None):
@@ -404,19 +410,17 @@ class MainWindow(QMainWindow):
         for vText in vTexts:
             self.view_2D_painter.addText(vText)
 
+        self.view_2D_elevation.setText("Z = " + str(self.elevation))
+
     def translate_z_up_2DView(self, signal):
         # prevent list to go out of range
         self.elevation_index = min(len(self.tower.elevations)-1, self.elevation_index+1)
         self.elevation = self.tower.elevations[self.elevation_index]
 
-        self.view_2D_elevation.setText("Z = " + str(self.elevation))
-
     def translate_z_down_2DView(self, signal):
          # prevent list to go out of range
         self.elevation_index = max(0, self.elevation_index-1)
         self.elevation = self.tower.elevations[self.elevation_index]
-
-        self.view_2D_elevation.setText("Z = " + str(self.elevation))
 
     def change_panel_orientation(self, signal):
         self.panel_direction *= -1
@@ -430,6 +434,28 @@ class MainWindow(QMainWindow):
     def openPanel(self, signal):
         panel= panelsUI(self)
         panel.exec_()
+
+    def generatePanelsFromFloorPlan(self, signal):  
+        if self.tower.panels:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Warning")
+            msg.setInformativeText('Do you want to generate panels in addition to the existing ones?')
+            msg.setWindowTitle("Warning")
+
+            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+            OkButton = msg.button(QMessageBox.Ok)
+            OkButton.clicked.connect(lambda s: self.tower.generatePanels_addToFloors())
+            OkButton.clicked.connect(lambda s: msg.close())
+
+            CancelButton = msg.button(QMessageBox.Cancel)
+            CancelButton.clicked.connect(lambda s: msg.close())
+
+            msg.exec_()
+
+        else:
+            self.tower.generatePanels_addToFloors()
 
     # For Bracing Group --------------------------------------------
     def DesignVariable(self, signal):

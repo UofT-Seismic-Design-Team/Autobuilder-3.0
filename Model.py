@@ -18,6 +18,9 @@ class Tower:
         self.bracings = {}
         self.faces = []
 
+        # Section properties
+        self.sections = {}
+
         # Groups and assignments
         self.bracingGroups = {}
         self.sectionGroups = {}
@@ -30,6 +33,9 @@ class Tower:
     def setElevations(self, elevs):
         self.elevations = elevs
 
+    def setSections(self, sects):
+        self.sections = sects
+
     def reset(self):
         ''' clear all data '''
         self.elevations.clear()
@@ -37,6 +43,7 @@ class Tower:
         self.columns.clear()
         self.floorPlans.clear()
         self.panels.clear()
+        self.sections.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
         self.sectionGroups.clear()
@@ -100,12 +107,13 @@ class Tower:
         ''' Add floor plans to floors based on the elevation '''
         for floorPlan in self.floorPlans.values():
             for elev in floorPlan.elevations:
-                self.floors[elev].addFloorPlan(floorPlan)
+                if elev in self.floors:
+                    self.floors[elev].addFloorPlan(floorPlan)
 
     def clearFloor(self):
         '''Clears the floor plan prior to updating them'''
-        for floorPlan in self.floorPlans.values():
-            for elev in floorPlan.elevations:
+        for elev in self.elevations:
+            if elev in self.floors:
                 self.floors[elev].floorPlans.clear()
                 self.floors[elev].panels.clear()
 
@@ -119,6 +127,10 @@ class Tower:
 
             floor.addPanel(panel)
 
+    def generatePanels_addToFloors(self):
+        self.generatePanelsByFace()
+        self.addPanelsToFloors()
+
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
 
@@ -129,7 +141,7 @@ class Tower:
                 memberStart = member.start_node
                 memberEnd = member.end_node
 
-                # Add elevation to memeber
+                # Add elevation to member
                 start = Node()
                 start.setLocation(memberStart.x, memberStart.y, elev)
                 end = Node()
@@ -478,3 +490,15 @@ class Assignment:
 
 
 '''ADD function to go back to bottom floor once top is reached'''
+
+class Section:
+
+    def __init__(self, name, rank):
+        self.name = name
+        self.rank = rank
+
+    def setName(self, name):
+        self.name = name
+
+    def setRank(self, rank):
+        self.rank = rank

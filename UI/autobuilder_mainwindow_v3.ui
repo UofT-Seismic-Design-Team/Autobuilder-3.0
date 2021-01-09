@@ -140,6 +140,12 @@
        <layout class="QVBoxLayout" name="view_3D_container">
         <item>
          <widget class="QLabel" name="view_3D_header">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -197,8 +203,15 @@
     <property name="title">
      <string>Edit</string>
     </property>
+    <widget class="QMenu" name="menu_GeneratePanel">
+     <property name="title">
+      <string>Generate Panel</string>
+     </property>
+     <addaction name="action_GPFromFloorPlan"/>
+    </widget>
     <addaction name="action_FloorPlan"/>
     <addaction name="action_BracingScheme"/>
+    <addaction name="menu_GeneratePanel"/>
     <addaction name="action_Panel"/>
     <addaction name="action_DesignVariable"/>
     <addaction name="action_AssignVariable"/>
@@ -287,11 +300,6 @@
     <string>Bracing Scheme</string>
    </property>
   </action>
-  <action name="action_Panel">
-   <property name="text">
-    <string>Panel</string>
-   </property>
-  </action>
   <action name="action_DesignVariable">
    <property name="text">
     <string>Design Variable</string>
@@ -317,12 +325,27 @@
     <string>Project Settings</string>
    </property>
   </action>
+  <action name="action_GeneratePanelsFromFloorPlans">
+   <property name="text">
+    <string>Generate Panels from Floor Plans</string>
+   </property>
+  </action>
+  <action name="action_Panel">
+   <property name="text">
+    <string>Panel</string>
+   </property>
+  </action>
+  <action name="action_GPFromFloorPlan">
+   <property name="text">
+    <string>With Floor Plan</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>View3DGLWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>View3DEngine</header>
+   <header location="global">View3DEngine</header>
   </customwidget>
   <customwidget>
    <class>View2DWidget</class>

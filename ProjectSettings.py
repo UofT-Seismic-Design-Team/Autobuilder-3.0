@@ -19,7 +19,10 @@ class ProjectSettings(QDialog):
         self.data = args[0].projectSettingsData
 
         # Reference to existing tower
-        self.tower = args[0].tower 
+        self.tower = args[0].tower
+
+        # Main Menu
+        self.mainmenu = args[0]
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -78,11 +81,14 @@ class ProjectSettings(QDialog):
 
         # Section properties
         sectionProp_rowNum = self.sectionProp_table.rowCount()
-        for i, sect in enumerate(data.sectionProps):
-            item = QTableWidgetItem(str(sect))
+        for i, key in enumerate(data.sections):
+            sect = data.sections[key]
+            sectName = QTableWidgetItem(str(sect.name))
+            rank = QTableWidgetItem(str(sect.rank))
             if i >= sectionProp_rowNum:
                 self.sectionProp_table.insertRow(i)
-            self.sectionProp_table.setItem(i,0,item)
+            self.sectionProp_table.setItem(i,1,sectName)
+            self.sectionProp_table.setItem(i,0,rank)
 
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)
@@ -138,15 +144,18 @@ class ProjectSettings(QDialog):
 
             msg.exec_()
 
-            # if the Ok button was clicked, redefine floors and floor elevations
+            # if the Ok button is clicked, redefine floors and floor elevations
             if self.saveElevs:
                 # clear data stored in project settings and tower (except for floor plans)
                 self.data.floorElevs.clear()
+                self.data.sections.clear()
                 self.tower.elevations.clear()
                 self.tower.floors.clear()
                 self.tower.columns.clear()
                 self.tower.panels.clear()
                 self.tower.faces.clear()
+                for floorPlan in self.tower.floorPlans.values():
+                    floorPlan.elevations.clear()
 
                 for elev in tempElevs:
                     self.data.floorElevs.append(elev) # will update elevations in tower object simultaneously
@@ -155,21 +164,28 @@ class ProjectSettings(QDialog):
             else:
                 return # terminate the saving process
 
+        # View 2D
+        self.mainmenu.elevation_index = 0
+        self.mainmenu.elevation = self.tower.elevations[self.mainmenu.elevation_index]
+
         # Section properties
-        self.data.sectionProps.clear() # reset section properties
+        self.data.sections.clear() # reset section properties
 
         rowNum = self.sectionProp_table.rowCount()
         for i in range(rowNum):
-            sectItem = self.sectionProp_table.item(i,0)
+            nameItem = self.sectionProp_table.item(i,1)
+            rankItem = self.sectionProp_table.item(i,0)
             # Check if the row is filled
-            if sectItem == None:
+            if nameItem == None:
                 break
-            sect = sectItem.text()
+            name = nameItem.text()
+            rank = rankItem.text()
             try:
                 # Check if the item is filled
-                if sect == '':
+                if name == '':
                     break
-                self.data.sectionProps.append(sect)
+                sect = Section(name, int(rank))
+                self.data.sections[name] = sect
             except:
                 warning.popUpErrorBox('Invalid input for section properties')
                 return # terminate the saving process
@@ -204,7 +220,8 @@ class ProjectSettingsData:
 
     def __init__(self):
         self.floorElevs = [0.0,6.0,9.0,12.0,15.0,21.0,27.0,33.0,39.0,45.0,51.0,57.0,60.0]
-        self.sectionProps = ['BALSA_0.5x0.5','BALSA_0.1875x0.1875']
+        self.sections = {'BALSA_0.5x0.5': Section('BALSA_0.5x0.5',1)
+        ,'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)}
 
         # Analysis options
         self.groundMotion = False
