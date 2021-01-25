@@ -202,6 +202,14 @@ class MainWindow(QMainWindow):
         
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
+        # Add button for Constraint
+        self.constraint_button = QAction(QIcon(r"Icons\24x24\filter - 24x24.png"), "Modify Constraint", self)
+        self.constraint_button.setStatusTip("Modify Constraint")
+
+        self.constraint_button.triggered.connect(lambda x: x)    # add function
+
+        self.functions_toolbar.addAction(self.constraint_button)
+
         # Add button for Generating Tower
         self.generateTower_button = QAction(QIcon(r"Icons\24x24\Generate Tower - 24x24.png"), "Generate Tower", self)
         self.generateTower_button.setStatusTip("Generate Tower")
@@ -246,6 +254,8 @@ class MainWindow(QMainWindow):
         self.action_DesignVariable.triggered.connect(self.DesignVariable)
         # Assign Bracing Design
         self.action_AssignVariable.triggered.connect(self.openAssignment)
+        # Modify Constraint
+        self.action_Constraint.triggered.connect(lambda x: x)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File

@@ -215,6 +215,7 @@
     <addaction name="action_Panel"/>
     <addaction name="action_DesignVariable"/>
     <addaction name="action_AssignVariable"/>
+    <addaction name="action_Constraint"/>
    </widget>
    <widget class="QMenu" name="menu_Analysis">
     <property name="title">
@@ -338,6 +339,11 @@
   <action name="action_GPFromFloorPlan">
    <property name="text">
     <string>With Floor Plan</string>
+   </property>
+  </action>
+  <action name="action_Constraint">
+   <property name="text">
+    <string>Constraint</string>
    </property>
   </action>
  </widget>
