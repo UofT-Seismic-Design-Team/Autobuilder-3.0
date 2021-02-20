@@ -34,8 +34,11 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs,)
 
-        # Load the UI Page
-        uic.loadUi(r'UI\autobuilder_mainwindow_v3.ui', self)
+        # Load the UI
+        fileh = QtCore.QFile(r'UI\autobuilder_mainwindow_v3.ui')
+        fileh.open(QtCore.QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Project Settings data object
         self.projectSettingsData = ProjectSettingsData()
@@ -387,7 +390,7 @@ class MainWindow(QMainWindow):
 
             value = [
                 'P-' + panel.name,
-                'L=' + str(panel.sideLength()),
+                'L=' + str(panel.sideLength()), # maybe side length is misleading?
             ]
 
             for i, check in enumerate(checkList):

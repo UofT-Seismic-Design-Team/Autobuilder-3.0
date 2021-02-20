@@ -13,7 +13,7 @@ renderZ,60.0
 
 #Display_Settings
 setting,value
-2D_pName,True
+2D_pName,False
 2D_pLength,True
 
 #Floor_Plans

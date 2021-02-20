@@ -18,7 +18,10 @@ class panelsUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_paneldesign_v1.ui', self)
+        fileh = QtCore.QFile('UI/autobuilder_paneldesign_v1.ui')
+        fileh.open(QtCore.QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Set UI Elements
         self.setIconsForButtons()

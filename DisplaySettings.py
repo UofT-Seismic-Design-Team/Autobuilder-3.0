@@ -16,15 +16,18 @@ class DisplaySettingsUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi(r'UI\autobuilder_displaysettings_v1.ui', self)
+        fileh = QtCore.QFile(r'UI\autobuilder_displaysettings_v1.ui')
+        fileh.open(QtCore.QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Reference to existing tower for cache
         self.displaySettingsRef = args[0].tower.displaySettings
 
-        self.populate()
-
         # Set UI Elements
         self.setOkandCancelButtons()
+
+        self.populate()
 
     def setOkandCancelButtons(self):
         self.OkButton = self.displaySettings_buttonBox.button(QDialogButtonBox.Ok)
