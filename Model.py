@@ -1,5 +1,6 @@
 from Definition import *    # for constants
 import math as m
+from DisplaySettings import DisplaySettings
 
 # Module description: 
 # - Stores classes that define the geometry of the tower and its components
@@ -9,6 +10,9 @@ import math as m
 class Tower:
 
     def __init__(self, elevations = []):
+        # Display Settings
+        self.displaySettings = DisplaySettings()
+
         # Geometry
         self.elevations = elevations
         self.floors = {}
@@ -311,6 +315,10 @@ class Panel:
     def addBracingAssignment(self, bGroup):
         self.bracingGroup = bGroup
 
+    def sideLength(self):
+        member = Member(self.lowerLeft, self.upperLeft)
+        return member.length()
+
     def __str__(self):
         return "Panel " + str(self.name)
 
@@ -367,6 +375,7 @@ class Member:
         self.start_node = start
         self.end_node = end
 
+    # TODO: make this function more generic --> use dot product and numpy
     def angle(self):
         ''' Find angle between the member and the x axis --> in radians '''
         start = self.start_node
@@ -393,6 +402,14 @@ class Member:
             angle = m.pi*2 - angle
 
         return angle
+    
+    def length(self):
+        ''' Euclidean distance from start node to end node '''
+        dX = self.end_node.x - self.start_node.x
+        dY = self.end_node.y - self.start_node.y
+        dZ = self.end_node.z - self.start_node.z
+
+        return m.sqrt(dX**2 + dY**2 + dZ**2)
 # --------------------------------------------------------------------------
 class Bracing:
 
@@ -490,7 +507,6 @@ class Assignment:
 
 
 '''ADD function to go back to bottom floor once top is reached'''
-
 class Section:
 
     def __init__(self, name, rank):

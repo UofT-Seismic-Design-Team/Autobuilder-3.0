@@ -1,5 +1,6 @@
 import Model    # contains tower design components
 import ProjectSettings  # contains data in project settings
+import DisplaySettings  # contains data in display settings
 from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
 
@@ -23,6 +24,7 @@ class FileWriter:
         ''' Wrapper function to write all files '''
 
         self.writeProjectSettings()
+        self.writeDisplaySettings()
         self.writeFloorPlans()
         self.writePanels()
         self.writeBracings()
@@ -38,6 +40,11 @@ class FileWriter:
         projectSettingsLoc = self.folderLoc + FileExtension.projectSettings
         with open(projectSettingsLoc, 'r') as f:
             psettings = f.read()
+
+        dsettings = ''
+        displaySettingsLoc = self.folderLoc + FileExtension.displaySettings
+        with open(displaySettingsLoc, 'r') as f:
+            dsettings = f.read()
 
         floorPlan = ''
         floorPlanLoc = self.folderLoc + FileExtension.floorPlan
@@ -78,6 +85,11 @@ class FileWriter:
             mainFile.write('#Project_Settings')
             mainFile.write('\n')
             mainFile.write(psettings)
+
+            mainFile.write('\n')
+            mainFile.write('#Display_Settings')
+            mainFile.write('\n')
+            mainFile.write(dsettings)
 
             mainFile.write('\n')
             mainFile.write('#Floor_Plans')
@@ -164,6 +176,33 @@ class FileWriter:
 
         df = pd.DataFrame(psData_dict)
         df.to_csv(projectSettingsLoc, index=False)
+
+    def writeDisplaySettings(self):
+        ''' Write display settings to file '''
+        displaySettingsLoc = self.folderLoc + FileExtension.displaySettings
+        dSettings = self.tower.displaySettings
+
+        dSettings_dict = {
+            'setting':[],
+            'value':[],
+        }
+
+        dsKeys = [
+            '2D_pName',
+            '2D_pLength',
+        ]
+
+        values = [
+            dSettings.pName,
+            dSettings.pLength,
+        ]
+
+        for i, dsKey in enumerate(dsKeys):
+            dSettings_dict['setting'].append(dsKey)
+            dSettings_dict['value'].append(values[i])
+
+        df = pd.DataFrame(dSettings_dict)
+        df.to_csv(displaySettingsLoc, index=False)
 
     def writeFloorPlans(self):
         ''' Write floor plans to file '''

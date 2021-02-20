@@ -9,6 +9,7 @@ from Definition import *    # import constants from Definition
 from Message import *    # pop up window for illegal entries
 
 from ProjectSettings import *   # open project settings dialog
+from DisplaySettings import *   # open display settings dialog
 from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
@@ -27,7 +28,6 @@ import time
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
-
 
 class MainWindow(QMainWindow):
 
@@ -163,6 +163,14 @@ class MainWindow(QMainWindow):
 
         self.functions_toolbar.addAction(self.setting_button)
 
+        # Add button for Display Settings
+        self.displaySetting_button = QAction(QIcon(r"Icons\24x24\application-sidebar.png"), "Display Settings", self)
+        self.displaySetting_button.setStatusTip("Display Settings")
+
+        self.displaySetting_button.triggered.connect(self.openDisplaySettings)
+
+        self.functions_toolbar.addAction(self.displaySetting_button)
+
         # Add button for Editing Bracing Scheme
         self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"), "Edit Brace Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
@@ -291,6 +299,12 @@ class MainWindow(QMainWindow):
 
         projectSettings.exec_()
 
+    # For Display Settings --------------------------------------------
+    def openDisplaySettings(self, signal):
+        displaySettings = DisplaySettingsUI(self)
+        
+        displaySettings.exec_()
+
     # For Bracing Scheme --------------------------------------------
     def openBracingScheme(self, signal):
         bracingScheme = BracingScheme(self)
@@ -362,8 +376,26 @@ class MainWindow(QMainWindow):
             vMembers.append(vMember)
 
             # Panel labels --------------------------------------
+            label = ''
+
+            dsettings = self.tower.displaySettings
+
+            checkList = [
+                dsettings.pName,
+                dsettings.pLength,
+            ]
+
+            value = [
+                'P-' + panel.name,
+                'L=' + str(panel.sideLength()),
+            ]
+
+            for i, check in enumerate(checkList):
+                if check:
+                    label = label + value[i] + ' '
+
             vText.addMember(Member(lowerLeft, lowerRight))
-            vText.addText(panel.name)
+            vText.addText(label)
             vText.setLocation(Node(0.5, 0.5*self.panel_direction)) # midpoint
 
         vTexts.append(vText)

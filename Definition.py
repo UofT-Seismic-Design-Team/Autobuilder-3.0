@@ -5,6 +5,7 @@ class Algebra:
 
 class FileExtension:
     projectSettings = '/projectSettings.csv'
+    displaySettings = '/displaySettings.csv'
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
     bracings = '/bracings.csv'
@@ -51,7 +52,7 @@ class Color:
     }
 
     Text = {
-        'MainMenu': 'orange'
+        'MainMenu': 'black'
     }
 
        
