@@ -53,6 +53,9 @@ class DesignVariable(QDialog):
         # Refresh tables after changing tabs
         self.tabWidget.currentChanged.connect(self.changeTab)
 
+        self.currentBracingGroupName = ""
+        self.currentSectionGroupName = ""
+
         # Save the current bracing group name if it exists
         if self.bracingGroupTable.item(0,0) is not None:
             self.currentBracingGroupName = self.bracingGroupTable.item(0,0).text()
