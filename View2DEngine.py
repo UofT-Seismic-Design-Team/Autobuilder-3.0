@@ -8,6 +8,7 @@ from Definition import *
 
 import math as m
 
+# -------------------------------- TO BE REMOVED --------------------------------
 COLORS_FLOOR_PLAN = ['blue', 'violet']
 COLORS_PANEL = ['orange']
 COLORS_NODE = ['green']
@@ -230,8 +231,8 @@ class View2DWidget(QWidget):
         center_y = view_factor * dim_y + margin_y + dimDiff + lengthDiff * view_factor
 
         return center_x, center_y
-
-#-----------------------------------------
+'''
+#------------------------------------------ TO BE REMOVED ------------------------------
 class ViewSectionWidget(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__()
@@ -286,7 +287,6 @@ class ViewSectionWidget(QWidget):
         self.panel_direction *= -1
 
     def centerdxdy(self):
-        ''' find the translations required to center the displayed object '''
         xLength = self.projectSettingsData.renderX
         yLength = self.projectSettingsData.renderY
 
@@ -320,7 +320,6 @@ class ViewSectionWidget(QWidget):
 
         return view_factor, view_factor_x, view_factor_y
 
-    # need to be fixed in the future
     def drawFloorPlan(self, painter):
 
         p = painter.pen()
@@ -427,5 +426,5 @@ class ViewSectionWidget(QWidget):
 
             index += 1
             
-
+'''
         

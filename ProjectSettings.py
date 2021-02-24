@@ -6,7 +6,7 @@ from PyQt5 import uic
 
 from Model import *
 
-from WarningMessage import *
+from Message import *
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -16,10 +16,13 @@ class ProjectSettings(QDialog):
         super().__init__(*args, **kwargs)
 
         # Project Settings Data
-        self.data = ProjectSettingsData()
+        self.data = args[0].projectSettingsData
 
-        # Tower
-        self.tower = Tower()
+        # Reference to existing tower
+        self.tower = args[0].tower
+
+        # Main Menu
+        self.mainmenu = args[0]
 
         # Load the UI Page
         uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
@@ -42,12 +45,6 @@ class ProjectSettings(QDialog):
         # SAP2000 model location
         self.SAPModelLoc = ''
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
-
-    def setData(self, data):
-        self.data = data
-
-    def setTower(self, tower):
-        self.tower = tower
 
     def setIconsForButtons(self):
         self.floorElev_add.setIcon(QIcon(r"Icons\24x24\plus.png"))
@@ -75,24 +72,23 @@ class ProjectSettings(QDialog):
         data = self.data
 
         # Elevations
-        i = 0
         floorElev_rowNum = self.floorElev_table.rowCount()
-        for elev in data.floorElevs:
+        for i, elev in enumerate(data.floorElevs):
             item = QTableWidgetItem(str(elev))
             if i >= floorElev_rowNum:
                 self.floorElev_table.insertRow(i)
             self.floorElev_table.setItem(i,0,item)
-            i += 1
 
         # Section properties
-        i = 0
         sectionProp_rowNum = self.sectionProp_table.rowCount()
-        for sect in data.sectionProps:
-            item = QTableWidgetItem(str(sect))
+        for i, key in enumerate(data.sections):
+            sect = data.sections[key]
+            sectName = QTableWidgetItem(str(sect.name))
+            rank = QTableWidgetItem(str(sect.rank))
             if i >= sectionProp_rowNum:
                 self.sectionProp_table.insertRow(i)
-            self.sectionProp_table.setItem(i,0,item)
-            i += 1
+            self.sectionProp_table.setItem(i,1,sectName)
+            self.sectionProp_table.setItem(i,0,rank)
 
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)
@@ -148,15 +144,18 @@ class ProjectSettings(QDialog):
 
             msg.exec_()
 
-            # if the Ok button was clicked, redefine floors and floor elevations
+            # if the Ok button is clicked, redefine floors and floor elevations
             if self.saveElevs:
                 # clear data stored in project settings and tower (except for floor plans)
                 self.data.floorElevs.clear()
+                self.data.sections.clear()
                 self.tower.elevations.clear()
                 self.tower.floors.clear()
                 self.tower.columns.clear()
                 self.tower.panels.clear()
                 self.tower.faces.clear()
+                for floorPlan in self.tower.floorPlans.values():
+                    floorPlan.elevations.clear()
 
                 for elev in tempElevs:
                     self.data.floorElevs.append(elev) # will update elevations in tower object simultaneously
@@ -165,21 +164,28 @@ class ProjectSettings(QDialog):
             else:
                 return # terminate the saving process
 
+        # View 2D
+        self.mainmenu.elevation_index = 0
+        self.mainmenu.elevation = self.tower.elevations[self.mainmenu.elevation_index]
+
         # Section properties
-        self.data.sectionProps.clear() # reset section properties
+        self.data.sections.clear() # reset section properties
 
         rowNum = self.sectionProp_table.rowCount()
         for i in range(rowNum):
-            sectItem = self.sectionProp_table.item(i,0)
+            nameItem = self.sectionProp_table.item(i,1)
+            rankItem = self.sectionProp_table.item(i,0)
             # Check if the row is filled
-            if sectItem == None:
+            if nameItem == None:
                 break
-            sect = sectItem.text()
+            name = nameItem.text()
+            rank = rankItem.text()
             try:
                 # Check if the item is filled
-                if sect == '':
+                if name == '':
                     break
-                self.data.sectionProps.append(sect)
+                sect = Section(name, int(rank))
+                self.data.sections[name] = sect
             except:
                 warning.popUpErrorBox('Invalid input for section properties')
                 return # terminate the saving process
@@ -214,7 +220,8 @@ class ProjectSettingsData:
 
     def __init__(self):
         self.floorElevs = [0.0,6.0,9.0,12.0,15.0,21.0,27.0,33.0,39.0,45.0,51.0,57.0,60.0]
-        self.sectionProps = ['BALSA_0.5x0.5','BALSA_0.1875x0.1875']
+        self.sections = {'BALSA_0.5x0.5': Section('BALSA_0.5x0.5',1)
+        ,'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)}
 
         # Analysis options
         self.groundMotion = False

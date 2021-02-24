@@ -224,10 +224,19 @@ class FloorPlanUI(QDialog):
     def saveFloorPlan(self):
         '''Overwrite the tower linked to the main model'''
         self.towerRef.floorPlans = self.tower.floorPlans
+
+        # Maybe need a wrapper function ---------------------
+        # clear all faces and panels if floor plan is updated
         self.towerRef.clearFloor()
+        self.towerRef.faces.clear()
+        self.towerRef.panels.clear()
+        self.towerRef.columns.clear()
+
         self.towerRef.addFloorPlansToFloors()
-
-
+        for name in self.towerRef.floorPlans:
+            self.towerRef.generateFacesByFloorPlan(self.towerRef.floorPlans[name])
+        self.towerRef.generateColumnsByFace()     
+        
     def setOkandCancelButtons(self):
         #Constructor
         self.OkButton = self.FloorPlan_buttonBox.button(QDialogButtonBox.Ok)

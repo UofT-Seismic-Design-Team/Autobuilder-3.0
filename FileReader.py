@@ -55,7 +55,13 @@ class FileReader:
                     self.psData.floorElevs.append(float(elev)) # will update floor elevations in tower object simultaneously (pointer)
 
             elif var == 'sect_props':
-                self.psData.sectionProps = val.split()
+                temp = val.split()
+
+                name = temp[0]
+                rank = int(temp[1])
+                sect = Section(name, rank)
+
+                self.psData.sections[name] = sect
 
             elif var == 'gm':
                 self.psData.groundMotion = (val == 'True') # return True if the value is 'True'
@@ -207,13 +213,11 @@ class FileReader:
                     panels[panel].addBracingAssignment(bGroup)
 
     def readSectionAssignments(self, data):
-        panels = self.tower.panels
+        member_ids = self.tower.member_ids
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
 
-            panelName = str(line[0])
+            member_id = str(line[0])
             sGroup = str(line[1])
 
-            for panel in panels:
-                if panelName == panel:
-                    panels[panel].addSectionAssignment(sGroup)
+            member_ids[member_id] = sGroup

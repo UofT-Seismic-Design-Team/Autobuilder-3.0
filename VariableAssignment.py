@@ -7,7 +7,7 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
-from WarningMessage import *
+from Message import *
 
 class VariableAssignment(QDialog):
 
@@ -73,7 +73,6 @@ class VariableAssignment(QDialog):
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(self.saveAssignment)
-        self.OkButton.clicked.connect(lambda x: self.close())
         
         self.CancelButton = self.Assignment_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
@@ -89,17 +88,30 @@ class VariableAssignment(QDialog):
         tempS = []
 
         for i in range(rowNumB):
-            panel = self.BracingAssignmentTable.item(i,0).text()
+            panelInput = self.BracingAssignmentTable.item(i,0)
+
+            if panelInput:
+                panel = panelInput.text()
+            else:
+                panel = ''
+
             if panel not in tempB and panel in self.tower.panels.keys():
                 tempB.append(panel)
             else:
                 warning.popUpErrorBox('Duplicate or non-existent panels!')
                 return
 
+        # NOTE: changed panel to member id
         for i in range(rowNumS):
-            panel = self.SectionAssignmentTable.item(i,0).text()
-            if panel not in tempS and panel in self.tower.panels.keys():
-                tempS.append(panel)
+            member_idInput = self.SectionAssignmentTable.item(i,0)
+
+            if member_idInput:
+                member_id = member_idInput.text()
+            else:
+                member_id = ''
+
+            if member_id not in tempS:
+                tempS.append(member_id)
             else:
                 warning.popUpErrorBox('Duplicate or non-existent panels!')
                 return
@@ -122,18 +134,17 @@ class VariableAssignment(QDialog):
             panel = panelItem.text()
             self.tower.panels[panel].bracingGroup = bg
         
-        
         for i in range(rowNumS):
-            panelItem = self.SectionAssignmentTable.item(i,0)
-            section = self.SectionAssignmentTable.cellWidget(i,1).currentText()
+            member_idItem = self.SectionAssignmentTable.item(i,0)
+            sg = self.SectionAssignmentTable.cellWidget(i,1).currentText()
             # Check if the row is filled
-            if panelItem == None or section == None:
+            if panelItem == None or sg == None:
                 break
-            panel = panelItem.text()
+            member_id = member_idItem.text()
             '''TEST'''
-            print(section)
-            self.tower.panels[panel].sectionGroup = section
+            self.tower.member_ids[member_id] = sg
 
+        self.close()    # close only if the saving process is completed successfully
 
     # Display list of bracing designs
     def displayAssignmentData(self):
@@ -143,7 +154,9 @@ class VariableAssignment(QDialog):
         j = 0
         assignment_rowNumB = self.BracingAssignmentTable.rowCount()
         assignment_rowNumS = self.SectionAssignmentTable.rowCount()
+
         panels = self.tower.panels
+        member_ids = self.tower.member_ids
 
         for panel in panels:
             # Display bracing group table
@@ -164,15 +177,16 @@ class VariableAssignment(QDialog):
                     self.BracingAssignmentTable.setCellWidget(i,1,bCombo)
                     bCombo.setCurrentText(bgItem)
                 i += 1
-            
+        
+        for member_id in member_ids:
             # Display section group table
-            if panels[panel].sectionGroup != '':
-                panelItem = QTableWidgetItem(str(panel))
+            if member_id != '':
+                member_idItem = QTableWidgetItem(str(member_id))
                 #sgItem = QTableWidgetItem(str(panels[panel].sectionGroup))
-                sgItem = str(panels[panel].sectionGroup)
+                sgItem = str(member_ids[member_id])
                 if j >= assignment_rowNumS:
                     self.SectionAssignmentTable.insertRow(j)
-                    self.SectionAssignmentTable.setItem(j,0,panelItem)
+                    self.SectionAssignmentTable.setItem(j,0,member_idItem)
                     #self.SectionAssignmentTable.setItem(j,1,sgItem)
 
                     # Set dropdown menu with existing groups

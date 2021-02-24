@@ -9,19 +9,32 @@ import math as m
 class Tower:
 
     def __init__(self, elevations = []):
+        # Geometry
         self.elevations = elevations
         self.floors = {}
         self.columns = {}
         self.floorPlans = {}
         self.panels = {}
         self.bracings = {}
+        self.faces = []
+
+        # Section properties
+        self.sections = {}
+
+        # Groups and assignments
         self.bracingGroups = {}
         self.sectionGroups = {}
         self.assignments = {}
-        self.faces = []
+        
+        # Input table
+        self.member_ids = {} # Member id from SAP2000 model (key: member_id; value: sectionGroup)
+        self.inputTable = {}
 
     def setElevations(self, elevs):
         self.elevations = elevs
+
+    def setSections(self, sects):
+        self.sections = sects
 
     def reset(self):
         ''' clear all data '''
@@ -30,11 +43,14 @@ class Tower:
         self.columns.clear()
         self.floorPlans.clear()
         self.panels.clear()
+        self.sections.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
         self.sectionGroups.clear()
         self.assignments.clear()
         self.faces.clear()
+        self.member_ids.clear()
+        self.inputTable.clear()
 
     def build(self):
         ''' build tower (assume all tower components are saved in tower)'''
@@ -91,13 +107,15 @@ class Tower:
         ''' Add floor plans to floors based on the elevation '''
         for floorPlan in self.floorPlans.values():
             for elev in floorPlan.elevations:
-                self.floors[elev].addFloorPlan(floorPlan)
+                if elev in self.floors:
+                    self.floors[elev].addFloorPlan(floorPlan)
 
     def clearFloor(self):
         '''Clears the floor plan prior to updating them'''
-        for floorPlan in self.floorPlans.values():
-            for elev in floorPlan.elevations:
+        for elev in self.elevations:
+            if elev in self.floors:
                 self.floors[elev].floorPlans.clear()
+                self.floors[elev].panels.clear()
 
     def addPanelsToFloors(self):
         ''' Add panels to floors based on the elevation '''
@@ -109,6 +127,10 @@ class Tower:
 
             floor.addPanel(panel)
 
+    def generatePanels_addToFloors(self):
+        self.generatePanelsByFace()
+        self.addPanelsToFloors()
+
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
 
@@ -119,7 +141,7 @@ class Tower:
                 memberStart = member.start_node
                 memberEnd = member.end_node
 
-                # Add elevation to memeber
+                # Add elevation to member
                 start = Node()
                 start.setLocation(memberStart.x, memberStart.y, elev)
                 end = Node()
@@ -167,6 +189,9 @@ class Tower:
 
                 self.columns[leftColumn.name] = leftColumn
                 self.columns[rightColumn.name] = rightColumn
+
+    def updateInputTable(self,inputTable):
+        self.inputTable = inputTable
 
 # -------------------------------------------------------------------------
 class Floor:
@@ -268,7 +293,6 @@ class Panel:
 
         # Bracing that is assigned to a panel object
         self.bracingGroup = ''
-        self.sectionGroup = ''
 
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
@@ -286,9 +310,6 @@ class Panel:
 
     def addBracingAssignment(self, bGroup):
         self.bracingGroup = bGroup
-
-    def addSectionAssignment(self, sGroup):
-        self.sectionGroup = sGroup
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -420,9 +441,13 @@ class BracingGroup:
             BracingGroup.id += 1
 
         self.bracings = []
+        self.panelAssignments = []
     
     def addBracing(self, bracing):
         self.bracings.append(bracing)
+
+    def addPanel(self, panel):
+        self.panelAssignments.append(panel)
 
 class SectionGroup:
     # static variable for id
@@ -435,9 +460,13 @@ class SectionGroup:
             SectionGroup.id += 1
 
         self.sections = []
+        self.memberIdAssignments = []
     
     def addSection(self, section):
         self.sections.append(section)
+
+    def addMemberId(self, member_id):
+        self.memberIdAssignments.append(member_id)
 
 # --------------------------------------------------------------------------
 class Assignment:
@@ -461,3 +490,15 @@ class Assignment:
 
 
 '''ADD function to go back to bottom floor once top is reached'''
+
+class Section:
+
+    def __init__(self, name, rank):
+        self.name = name
+        self.rank = rank
+
+    def setName(self, name):
+        self.name = name
+
+    def setRank(self, rank):
+        self.rank = rank
