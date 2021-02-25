@@ -50,15 +50,86 @@ class MainWindow(QMainWindow):
 
         # TESTING ----------------------------------------------
 
+        # self.tower.defineFloors()
+
+        # floorPlan = FloorPlan()
+        # floorPlan.nodes = [Node(2,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
+        # floorPlan.generateMembersfromNodes()
+
+        # floorPlan2 = FloorPlan()
+        # floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
+        # floorPlan2.generateMembersfromNodes()
+
+        # default = Bracing('default')
+        # default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
+        # default.materials = ['BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875']
+        # default.generateMembersfromNodes()
+        # self.tower.addBracing(default)
+
+        # for elev in elevs[5:]:
+        #     floorPlan.addElevation(elev)
+
+        # for elev in elevs[:5+1]:
+        #     floorPlan2.addElevation(elev)
+
+        # self.tower.addFloorPlan(floorPlan)
+        # self.tower.addFloorPlan(floorPlan2)
+
+        # self.tower.addFloorPlansToFloors()
+
+        # self.tower.generateFacesByFloorPlan(floorPlan)
+        # self.tower.generateFacesByFloorPlan(floorPlan2)
+
+        # self.tower.generatePanelsByFace()
+        # self.tower.addPanelsToFloors()
+
+        # self.tower.generateColumnsByFace()
+
+        # Default for 2021 competition tower
+
         self.tower.defineFloors()
 
-        floorPlan = FloorPlan()
-        floorPlan.nodes = [Node(2,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
-        floorPlan.generateMembersfromNodes()
+        floorPlan11 = FloorPlan()
+        floorPlan11.nodes = [Node(0,0), Node(12,0), Node(12,12), Node(0,12)]
+        floorPlan11.generateMembersfromNodes()
 
-        floorPlan2 = FloorPlan()
-        floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
-        floorPlan2.generateMembersfromNodes()
+        floorPlan12 = FloorPlan()
+        floorPlan12.nodes = [Node(0,0), Node(11+1/3,0),Node(11+1/3,12),Node(0,12)]
+        floorPlan12.generateMembersfromNodes()
+
+        floorPlan13 = FloorPlan()
+        floorPlan13.nodes = [Node(0,0), Node(10+2/3,0),Node(10+2/3,12),Node(0,12)]
+        floorPlan13.generateMembersfromNodes()
+
+        floorPlan14 = FloorPlan()
+        floorPlan14.nodes = [Node(0,0), Node(10,0),Node(10,12),Node(0,12)]
+        floorPlan14.generateMembersfromNodes()
+
+        floorPlan15 = FloorPlan()
+        floorPlan15.nodes = [Node(0,0), Node(9+1/3,0),Node(9+1/3,12),Node(0,12)]
+        floorPlan15.generateMembersfromNodes()
+
+        floorPlan16 = FloorPlan()
+        floorPlan16.nodes = [Node(0,0), Node(8+2/3,0),Node(8+2/3,12),Node(0,12)]
+        floorPlan16.generateMembersfromNodes()        
+
+        floorPlan17 = FloorPlan()
+        floorPlan17.nodes = [Node(0,0), Node(8,0),Node(8,12),Node(0,12)]
+        floorPlan17.generateMembersfromNodes()
+
+        floorPlan18 = FloorPlan()
+        floorPlan18.nodes = [Node(0,0), Node(7+1/3,0),Node(7+1/3,12),Node(0,12)]
+        floorPlan18.generateMembersfromNodes()
+
+        floorPlan19 = FloorPlan()
+        floorPlan19.nodes = [Node(0,0), Node(6+2/3,0),Node(6+2/3,12),Node(0,12)]
+        floorPlan19.generateMembersfromNodes()
+
+        floorPlan20 = FloorPlan()
+        floorPlan20.nodes = [Node(0,0), Node(6,0),Node(6,12),Node(0,12)]
+        floorPlan20.generateMembersfromNodes()   
+
+        allFloorPlans = [floorPlan11, floorPlan12, floorPlan13, floorPlan14, floorPlan15, floorPlan16, floorPlan17, floorPlan18, floorPlan19, floorPlan20] 
 
         default = Bracing('default')
         default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
@@ -66,23 +137,49 @@ class MainWindow(QMainWindow):
         default.generateMembersfromNodes()
         self.tower.addBracing(default)
 
-        for elev in elevs[5:]:
-            floorPlan.addElevation(elev)
+        # for i, plan in enumerate(allFloorPlans):
+        #     plan.addElevation(elevs[10+i])
 
-        for elev in elevs[:5+1]:
-            floorPlan2.addElevation(elev)
+        for elev in elevs[10:11+1]:
+            floorPlan12.addElevation(elev)
+        
+        for elev in elevs[11:12+1]:
+            floorPlan13.addElevation(elev)
 
-        self.tower.addFloorPlan(floorPlan)
-        self.tower.addFloorPlan(floorPlan2)
+        for elev in elevs[12:13+1]:
+            floorPlan14.addElevation(elev)
+
+        for elev in elevs[13:14+1]:
+            floorPlan15.addElevation(elev)
+        
+        for elev in elevs[14:15+1]:
+            floorPlan16.addElevation(elev)
+
+        for elev in elevs[15:16+1]:
+            floorPlan17.addElevation(elev)
+        
+        for elev in elevs[16:17+1]:
+            floorPlan18.addElevation(elev)        
+
+        for elev in elevs[17:18+1]:
+            floorPlan19.addElevation(elev)
+
+        for elev in elevs[18:19+1]:
+            floorPlan20.addElevation(elev)
+
+        for elev in elevs[:10+1]:
+            floorPlan11.addElevation(elev)
+
+        for plan in allFloorPlans:
+            self.tower.addFloorPlan(plan)
 
         self.tower.addFloorPlansToFloors()
 
-        self.tower.generateFacesByFloorPlan(floorPlan)
-        self.tower.generateFacesByFloorPlan(floorPlan2)
+        for plan in allFloorPlans:
+            self.tower.generateFacesByFloorPlan(plan)
 
         self.tower.generatePanelsByFace()
         self.tower.addPanelsToFloors()
-
         self.tower.generateColumnsByFace()
 
         #------------------------------------------------
