@@ -1,17 +1,7 @@
 import os
-import win32com.client
-import openpyxl
-import random
-from openpyxl import *
-import re
-import time
-import ReadExcel
-import scipy
-import numpy
-from scipy.stats import norm
-import datetime
-import matplotlib.pyplot as plt
-import shapely.geometry
+import sys
+import comtypes.client
+import comtypes.gen
 
 
 def build_floor_plan_and_bracing(SapModel, tower, all_floor_plans, all_floor_bracing, floor_num, floor_elev):
@@ -764,6 +754,47 @@ ModelLocations = [r"C:\Users\kotab\Documents\Seismic\Autobuilder Run Feb 8, 2020
 WBLocations = [r"C:\Users\kotab\Documents\Seismic\Autobuilder Run Feb 8, 2020\02-08-2020 0Shear.xlsm", r"C:\Users\kotab\Documents\Seismic\Autobuilder Run Feb 8, 2020\02-08-2020 6Shear.xlsm"]
 
 i = 0
+
+# Start SAP2000
+# set the following flag to True to attach to an existing instance of the program
+# otherwise a new instance of the program will be started
+AttachToInstance = True
+# set the following flag to True to manually specify the path to SAP2000.exe
+# this allows for a connection to a version of SAP2000 other than the latest installation
+# otherwise the latest installed version of SAP2000 will be launched
+SpecifyPath = False
+# if the above flag is set to True, specify the path to SAP2000 below
+ProgramPath = 'C:\Program Files\Computers and Structures\SAP2000 21\SAP2000.exe'
+
+if AttachToInstance:
+    # attach to a running instance of SAP2000
+    try:
+        # get the active SapObject
+        mySapObject = comtypes.client.GetActiveObject("CSI.SAP2000.API.SapObject")
+    except (OSError, comtypes.COMError):
+        print("No running instance of the program found or failed to attach.")
+        sys.exit(-1)
+else:
+    # create API helper object
+    helper = comtypes.client.CreateObject('SAP2000v1.Helper')
+    helper = helper.QueryInterface(comtypes.gen.SAP2000v1.cHelper)
+    if SpecifyPath:
+        try:
+            # 'create an instance of the SAPObject from the specified path
+            mySapObject = helper.CreateObject(ProgramPath)
+        except (OSError, comtypes.COMError):
+            print("Cannot start a new instance of the program from " + ProgramPath)
+            sys.exit(-1)
+    else:
+        try:
+            # create an instance of the SAPObject from the latest installed SAP2000
+            mySapObject = helper.CreateObjectProgID("CSI.SAP2000.API.SapObject")
+        except (OSError, comtypes.COMError):
+            print("Cannot start a new instance of the program.")
+            sys.exit(-1)
+    # start SAP2000 application
+    mySapObject.ApplicationStart()
+
 
 while i < len(ModelLocations):
     model_loc = ModelLocations[i]
