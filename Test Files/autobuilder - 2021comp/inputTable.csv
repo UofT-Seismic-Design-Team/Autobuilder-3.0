@@ -1,0 +1,17 @@
+towerNumber,Panel 70,Panel 76,Member 1362,Member 1363
+1,singleCross,singleCross,Column,Column
+2,singleCross,singleCross,Column,Beam
+3,singleCross,singleCross,Beam,Column
+4,singleCross,singleCross,Beam,Beam
+5,singleCross,doubleCross,Column,Column
+6,singleCross,doubleCross,Column,Beam
+7,singleCross,doubleCross,Beam,Column
+8,singleCross,doubleCross,Beam,Beam
+9,doubleCross,singleCross,Column,Column
+10,doubleCross,singleCross,Column,Beam
+11,doubleCross,singleCross,Beam,Column
+12,doubleCross,singleCross,Beam,Beam
+13,doubleCross,doubleCross,Column,Column
+14,doubleCross,doubleCross,Column,Beam
+15,doubleCross,doubleCross,Beam,Column
+16,doubleCross,doubleCross,Beam,Beam
