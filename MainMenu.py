@@ -331,7 +331,7 @@ class MainWindow(QMainWindow):
         # Generate Tower
         self.action_GenerateTowers.triggered.connect(self.generateInputTable)
         # Run Tower
-        
+        self.action_RunTowers.triggered.connect(lambda x: x)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
