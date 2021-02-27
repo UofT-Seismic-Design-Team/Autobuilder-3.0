@@ -40,7 +40,8 @@ class BracingScheme(QDialog):
         # Delete Selected Row from List of Bracing Coordinates
         self.deleteCoordButton.clicked.connect(self.deleteBracingCoord)
 
-        # Update XY Coord Table upon cell change
+        # Update XY Coord Table upon SELECTION change
+        # ie. change is only saved when user clicks on a different cell after editing
         self.bracingCoordTable.itemSelectionChanged.connect(self.updateCoord)
         
         # Passing in main.tower into bracing scheme

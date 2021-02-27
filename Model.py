@@ -55,12 +55,11 @@ class Tower:
     def build(self):
         ''' build tower (assume all tower components are saved in tower)'''
         self.defineFloors()
-
         self.addFloorPlansToFloors()
         self.addPanelsToFloors()
-
-        for name in self.floorPlans:
-            self.generateFacesByFloorPlan(self.floorPlans[name])
+        self.generateFacesByFloorPlans(list(self.floorPlans.values()))
+        #for name in self.floorPlans:
+            #self.generateFacesByFloorPlan(self.floorPlans[name])
         self.generateColumnsByFace()     
 
     def defineFloors(self):
@@ -153,6 +152,49 @@ class Tower:
                 face.addMember(elev, member)
 
             self.faces.append(face)
+
+    def generateFacesByFloorPlans(self, floorPlans):
+        ''' Generate face objects by floor plans '''
+
+        # Create dictionary for floor plan (value) at every elevation (key)
+        allPlans = {}
+        for floorPlan in floorPlans:
+            for elevation in floorPlan.elevations:
+                    allPlans[elevation] = floorPlan
+
+        elevs = list(allPlans.keys())
+        elevs.sort()
+        
+        for i in range (len(elevs)-1):
+            # assume all plans have same number of members
+            for j in range (len(allPlans[elevs[i]].members)):
+                face = Face()
+
+                topMemberStart = allPlans[elevs[i+1]].members[j].start_node
+                topMemberEnd = allPlans[elevs[i+1]].members[j].end_node
+
+                botMemberStart = allPlans[elevs[i]].members[j].start_node
+                botMemberEnd = allPlans[elevs[i]].members[j].end_node
+
+                topStart = Node()
+                topStart.setLocation(topMemberStart.x, topMemberStart.y, elevs[i+1])
+                topEnd = Node()
+                topEnd.setLocation(topMemberEnd.x, topMemberEnd.y, elevs[i+1])
+
+                botStart = Node()
+                botStart.setLocation(botMemberStart.x, botMemberStart.y, elevs[i])
+                botEnd = Node()
+                botEnd.setLocation(botMemberEnd.x, botMemberEnd.y, elevs[i])
+
+                topMember = Member()
+                topMember.setNodes(topStart, topEnd)
+                bottomMember = Member()
+                bottomMember.setNodes(botStart, botEnd)
+
+                face.addMember(elevs[i], bottomMember)
+                face.addMember(elevs[i+1], topMember)
+
+                self.faces.append(face)
 
     def generatePanelsByFace(self):
         ''' Generate panel objects by faces '''

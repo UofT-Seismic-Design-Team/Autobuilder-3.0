@@ -219,7 +219,7 @@ class ATYPE:
 class ProjectSettingsData:
 
     def __init__(self):
-        self.floorElevs = [0.0,6.0,9.0,12.0,15.0,21.0,27.0,33.0,39.0,45.0,51.0,57.0,60.0]
+        self.floorElevs = [0.0,6.0,9.0,12.0,15.0,18.0,21.0,24.0,27.0,30.0,33.0,36.0,39.0,42.0,45.0,48.0,51.0,54.0,57.0,60.0]
         self.sections = {'BALSA_0.5x0.5': Section('BALSA_0.5x0.5',1)
         ,'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)}
 
