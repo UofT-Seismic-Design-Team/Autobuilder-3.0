@@ -233,8 +233,11 @@ class FloorPlanUI(QDialog):
         self.towerRef.columns.clear()
 
         self.towerRef.addFloorPlansToFloors()
-        for name in self.towerRef.floorPlans:
-            self.towerRef.generateFacesByFloorPlan(self.towerRef.floorPlans[name])
+        # for name in self.towerRef.floorPlans:
+        #     self.towerRef.generateFacesByFloorPlan(self.towerRef.floorPlans[name])
+        self.towerRef.generateFacesByFloorPlans(list(self.towerRef.floorPlans.values()))
+        self.towerRef.generatePanelsByFace()
+        self.towerRef.addPanelsToFloors()
         self.towerRef.generateColumnsByFace()     
         
     def setOkandCancelButtons(self):

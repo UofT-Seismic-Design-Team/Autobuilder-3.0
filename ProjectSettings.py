@@ -226,8 +226,9 @@ class ProjectSettingsData:
         # Analysis options
         self.groundMotion = False
         self.analysisType = ATYPE.TIME_HISTORY
-        self.SAPModelLoc = ''
-        self.modelName = ''
+        # folder name for SAP2000 model (must be in working directory of Python script)
+        self.SAPModelLoc = 'SAP'
+        self.modelName = 'Existing_Structure_Feb_22.sdb'
 
         # Render Settings
         self.renderX = 12
