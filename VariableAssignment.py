@@ -18,10 +18,7 @@ class VariableAssignment(QDialog):
         self.tower = args[0].tower
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_variableassignment.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
-        uic.loadUi(fileh, self)
-        fileh.close()
+        uic.loadUi('UI/autobuilder_variableassignment.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()

@@ -17,10 +17,7 @@ class DesignVariable(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_designvariable_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
-        uic.loadUi(fileh, self)
-        fileh.close()
+        uic.loadUi('UI/autobuilder_designvariable_v1.ui', self)
 
         # Set UI Elements
         self.setIconsForButtons()

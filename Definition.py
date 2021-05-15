@@ -1,11 +1,10 @@
 # Module to store constants
 
 class Algebra:
-    EPSILON = 0.00001
+    EPSILON = 0.0001
 
 class FileExtension:
     projectSettings = '/projectSettings.csv'
-    displaySettings = '/displaySettings.csv'
     floorPlan = '/floorPlan.csv'
     panel = '/panel.csv'
     bracings = '/bracings.csv'
@@ -44,16 +43,17 @@ class Color:
     }
 
     Panel = {
-        'MainMenu': 'orange',
+        'MainMenu': 'orange'
     }
 
     Member = {
-        'Bracing': 'grey',
+        'Bracing': 'grey'
     }
 
     Text = {
-        'MainMenu': 'black',
+        'MainMenu': 'orange'
     }
+
        
 class View2DConstants:
     RATIO = 0.6 # constant for view to object ratio

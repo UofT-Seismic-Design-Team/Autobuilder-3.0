@@ -22,10 +22,7 @@ class GenerateTower(QDialog):
         super().__init__(*args, **kwargs)
   
         # Load the UI Page
-        fileh = QtCore.QFile(r'UI\autobuilder_generatetower.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
-        uic.loadUi(fileh, self)
-        fileh.close()
+        uic.loadUi(r'UI\autobuilder_generatetower.ui', self)
 
         self.tower = args[0].tower
         self.fileLoc = args[0].fileLoc

@@ -15,7 +15,6 @@ class FileReader:
 
             # Find header
             pSettings_index = lines.index('#Project_Settings\n')
-            dSettings_index = lines.index('#Display_Settings\n')
             fPlans_index = lines.index('#Floor_Plans\n')
             panels_index = lines.index('#Panels\n')
             bracings_index = lines.index('#Bracings\n')
@@ -26,8 +25,6 @@ class FileReader:
             
             # Group data
             pSettings_data = lines[pSettings_index+1:fPlans_index-1]
-            pSettings_data = lines[pSettings_index+1:dSettings_index-1]
-            dSettings_data = lines[dSettings_index+1:fPlans_index-1]
             fPlans_data = lines[fPlans_index+1:panels_index-1]
             panels_data = lines[panels_index+1:bracings_index-1]
             bracings_data = lines[bracings_index+1:bracingGroups_index-1]
@@ -37,7 +34,6 @@ class FileReader:
             s_assignments_data = lines[s_assignments_index+1:]
             
             self.readProjectSettings(pSettings_data)
-            self.readDisplaySettings(dSettings_data)
             self.readFloorPlans(fPlans_data)
             self.readPanels(panels_data)
             self.readBracings(bracings_data)
@@ -87,21 +83,6 @@ class FileReader:
 
             elif var == 'renderZ':
                 self.psData.renderZ = float(val)
-
-    def readDisplaySettings(self, data):
-        dSettings = self.tower.displaySettings
-
-        for line in data[1:]: # skip header
-            line = line.rstrip('\n').split(',') # remove trailing newline
-
-            var = line[0]
-            val = line[1]
-
-            if var == '2D_pName':
-                dSettings.pName = (val == 'True')
-
-            elif var == '2D_pLength':
-                dSettings.pLength = (val == 'True') 
 
     def readPanels(self, data):
         panels = self.tower.panels
