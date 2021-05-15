@@ -114,7 +114,7 @@ class View2DWidget(QWidget):
         self.texts.clear()
 
     def paintEvent(self, event):
-
+        
         painter = QPainter()
         painter.begin(self)
 

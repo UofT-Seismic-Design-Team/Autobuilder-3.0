@@ -6,6 +6,8 @@ from PyQt5 import uic
 from Model import * # Tower, Bracings, Bracing Groups, Section Groups etc.
 from FileWriter import *    # save inputTable file
 
+import resources    # For icons and UIs
+
 from itertools import product
 
 # 1. Get the tower object
@@ -22,8 +24,8 @@ class GenerateTower(QDialog):
         super().__init__(*args, **kwargs)
   
         # Load the UI Page
-        fileh = QtCore.QFile(r'UI\autobuilder_generatetower.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_generatetower.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 

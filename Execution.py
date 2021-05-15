@@ -1,6 +1,13 @@
 from MainMenu import *
 from Model import *
 
+try:
+    # Include in try/except block if you're also targeting Mac/Linux
+    from PyQt5.QtWinExtras import QtWin
+    myappid = 'com.seismic.autobuilder'
+    QtWin.setCurrentProcessExplicitAppUserModelID(myappid)    
+except ImportError:
+    pass
 
 # TESTING only 
 def main():

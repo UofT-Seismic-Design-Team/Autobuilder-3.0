@@ -11,6 +11,8 @@ from Message import *
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+import resources    # For icons and UIs
+
 class ProjectSettings(QDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,8 +27,8 @@ class ProjectSettings(QDialog):
         self.mainmenu = args[0]
 
         # Load the UI Page
-        fileh = QtCore.QFile(r'UI\autobuilder_projectsettings_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_projectsettings_v1.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -50,10 +52,10 @@ class ProjectSettings(QDialog):
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
 
     def setIconsForButtons(self):
-        self.floorElev_add.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.sectionProp_add.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.floorElev_del.setIcon(QIcon(r"Icons\24x24\minus.png"))
-        self.sectionProp_del.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.floorElev_add.setIcon(QIcon(':/Icons/plus.png'))
+        self.sectionProp_add.setIcon(QIcon(':/Icons/plus.png'))
+        self.floorElev_del.setIcon(QIcon(':/Icons/minus.png'))
+        self.sectionProp_del.setIcon(QIcon(':/Icons/minus.png'))
 
     def setOkandCancelButtons(self):
         self.OkButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Ok)

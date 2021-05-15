@@ -8,6 +8,8 @@ import sys  # We need sys so that we can pass argv to QApplication
 import os
 import copy
 
+import resources    # For icons and UIs
+
 from Model import *
 from Message import *
 
@@ -17,8 +19,8 @@ class DesignVariable(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_designvariable_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_designvariable_v1.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -80,10 +82,10 @@ class DesignVariable(QDialog):
         self.Populate()
 
     def setIconsForButtons(self):
-        self.addGroupButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteGroupButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
-        self.addIterationButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteIterationButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.addGroupButton.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteGroupButton.setIcon(QIcon(':/Icons/minus.png'))
+        self.addIterationButton.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteIterationButton.setIcon(QIcon(':/Icons/minus.png'))
 
     def setOkandCancelButtons(self):
         '''OK and Cancel button both exit dialog but have no save function!'''

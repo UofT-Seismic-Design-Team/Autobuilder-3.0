@@ -8,6 +8,8 @@ import sys  # We need sys so that we can pass argv to QApplication
 import os
 import copy
 
+import resources    # For icons and UIs
+
 from Model import *    # import Model to access tower objects
 from View2DEngine import *
 from Definition import *    # import constants from Definition
@@ -19,7 +21,10 @@ class BracingScheme(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_bracingscheme_v1.ui', self)
+        fileh = QFile(':/UI/autobuilder_bracingscheme_v1.ui', self)
+        fileh.open(QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Set UI Elements
         self.setIconsForButtons()
@@ -70,10 +75,10 @@ class BracingScheme(QDialog):
         timer.start()
 
     def setIconsForButtons(self):
-        self.addBracingSchemeButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteBracingSchemeButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
-        self.addCoordButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteCoordButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.addBracingSchemeButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
+        self.deleteBracingSchemeButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
+        self.addCoordButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
+        self.deleteCoordButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
 
     def setOkandCancelButtons(self):
         '''OK and Cancel button both exit dialog but have no save function!'''
@@ -318,7 +323,8 @@ class BracingScheme(QDialog):
         newRow = self.bracingSchemeTable.rowCount()
         bcItem = QTableWidgetItem(bcName)
         #How to disable clicking?
-        #bcItem.setFlags(QtCore.Qt.ItemIsEditable)
+        #bcItem.setFlags(
+Qt.ItemIsEditable)
         self.bracingSchemeTable.setItem(int(newRow)-1,0,bcItem)
 
         # set displayed bracing to new bracing

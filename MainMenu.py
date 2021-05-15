@@ -18,13 +18,14 @@ from TowerVariation import *    # gnerate tower variations
 from Panels import *
 
 from View2DEngine import *  # import View2DEngine
+from View3DEngine import * # import View3DEngine
 
 from FileWriter import *    # save or overwrite file
 from FileReader import *    # open existing file
 
-import math as m
+import resources    # For icons and UIs
 
-import time
+import math as m
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -35,8 +36,8 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs,)
 
         # Load the UI
-        fileh = QtCore.QFile(r'UI\autobuilder_mainwindow_v3.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_mainwindow_v3.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -174,7 +175,7 @@ class MainWindow(QMainWindow):
         self.setIconsForSectionView()
 
         # Icon for MainWindow
-        self.setWindowIcon(QIcon(r'Icons\24x24\letter_A_blue-512.png'))
+        self.setWindowIcon(QIcon(':/Icons/letter_A_blue-512.png'))
 
         # Views ----------------------------
         self.setTowerInViews()
@@ -205,25 +206,25 @@ class MainWindow(QMainWindow):
     
     def setIconsForSectionView(self):
         # Set icon for up button
-        self.view_2D_up.setIcon(QIcon(r'Icons\24x24\arrow-090.png'))
+        self.view_2D_up.setIcon(QIcon(':/Icons/arrow-090.png'))
 
         # Set icon for down button
-        self.view_2D_down.setIcon(QIcon(r"Icons\24x24\arrow-270.png"))
+        self.view_2D_down.setIcon(QIcon(':/Icons/arrow-270.png'))
 
         # Set icon for panels orientation button
-        self.view_2D_panel_orientation.setIcon(QIcon(r"Icons\24x24\flip.png"))
+        self.view_2D_panel_orientation.setIcon(QIcon(':/Icons/flip.png'))
 
     def setIconsForToolbar(self):
         # For file managment tools----------------------------------
         # Add button for opening files
-        self.openFile_button = QAction(QIcon(r"Icons\24x24\folder-horizontal-open.png"), "Open File", self)
+        self.openFile_button = QAction(QIcon(':/Icons/folder-horizontal-open.png'), "Open File", self)
         self.openFile_button.setStatusTip("Open File")
         self.openFile_button.triggered.connect(self.openFile)
 
         self.files_toolbar.addAction(self.openFile_button)
 
         # Add button for saving files
-        self.saveFile_button = QAction(QIcon(r"Icons\24x24\disk.png"), "Save File", self)
+        self.saveFile_button = QAction(QIcon(':/Icons/disk.png'), "Save File", self)
         self.saveFile_button.setStatusTip("Save File")
         self.saveFile_button.triggered.connect(self.saveFile)
 
@@ -231,7 +232,7 @@ class MainWindow(QMainWindow):
 
         # For general tools-------------------------------------------
         # Add button for Project Settings
-        self.setting_button = QAction(QIcon(r"Icons\24x24\gear.png"), "Project Settings", self)
+        self.setting_button = QAction(QIcon(':/Icons/gear.png'), "Project Settings", self)
         self.setting_button.setStatusTip("Project Settings")
 
         self.setting_button.triggered.connect(self.openProjectSettings)
@@ -239,7 +240,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.setting_button)
 
         # Add button for Display Settings
-        self.displaySetting_button = QAction(QIcon(r"Icons\24x24\application-sidebar.png"), "Display Settings", self)
+        self.displaySetting_button = QAction(QIcon(':/Icons/application-sidebar.png'), "Display Settings", self)
         self.displaySetting_button.setStatusTip("Display Settings")
 
         self.displaySetting_button.triggered.connect(self.openDisplaySettings)
@@ -247,7 +248,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.displaySetting_button)
 
         # Add button for Editing Bracing Scheme
-        self.brace_button = QAction(QIcon(r"Icons\24x24\Bracing - 24x24.png"), "Edit Brace Scheme", self)
+        self.brace_button = QAction(QIcon(':/Icons/Bracing - 24x24.png'), "Edit Brace Scheme", self)
         self.brace_button.setStatusTip("Edit Brace Scheme")
 
         self.brace_button.triggered.connect(self.openBracingScheme)
@@ -255,7 +256,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.brace_button)
 
         # Add button for Editing Floor Plan
-        self.floorPlan_button = QAction(QIcon(r"Icons\24x24\Floor Plan - 24x24.png"), "Edit Floor Plan", self)
+        self.floorPlan_button = QAction(QIcon(':/Icons/Floor Plan - 24x24.png'), "Edit Floor Plan", self)
         self.floorPlan_button.setStatusTip("Edit Floor Plan")
 
         self.floorPlan_button.triggered.connect(self.openFloorDesign)
@@ -263,14 +264,14 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.floorPlan_button)
 
         # Add button for Editing Panel
-        self.panel_button = QAction(QIcon(r"Icons\24x24\Panel - 24x24.png"), "Edit Panel", self)
+        self.panel_button = QAction(QIcon(':/Icons/Panel - 24x24.png'), "Edit Panel", self)
         self.panel_button.setStatusTip("Edit Panel")
         self.panel_button.triggered.connect(self.openPanel)
 
         self.functions_toolbar.addAction(self.panel_button)
 
         # Add button for Editing Bracing Groups
-        self.editDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil.png"),"Edit Design Variables", self)
+        self.editDesignVariable_button = QAction(QIcon(':/Icons/pencil.png'),"Edit Design Variables", self)
         self.editDesignVariable_button.setStatusTip("Edit Design Variables")
 
         self.editDesignVariable_button.triggered.connect(self.DesignVariable)
@@ -278,7 +279,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.editDesignVariable_button)
 
         # Add button for Assign Design variable
-        self.assignDesignVariable_button = QAction(QIcon(r"Icons\24x24\pencil_plus.png"),"Assign Bracing Design", self)
+        self.assignDesignVariable_button = QAction(QIcon(':/Icons/pencil_plus.png'),"Assign Bracing Design", self)
         self.assignDesignVariable_button.setStatusTip("Assign Bracing Design")
 
         self.assignDesignVariable_button.triggered.connect(self.openAssignment)
@@ -286,7 +287,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
         # Add button for Constraint
-        self.constraint_button = QAction(QIcon(r"Icons\24x24\filter - 24x24.png"), "Modify Constraint", self)
+        self.constraint_button = QAction(QIcon(':/Icons/filter - 24x24.png'), "Modify Constraint", self)
         self.constraint_button.setStatusTip("Modify Constraint")
 
         self.constraint_button.triggered.connect(lambda x: x)    # add function
@@ -294,7 +295,7 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.constraint_button)
 
         # Add button for Generating Tower
-        self.generateTower_button = QAction(QIcon(r"Icons\24x24\Generate Tower - 24x24.png"), "Generate Tower", self)
+        self.generateTower_button = QAction(QIcon(':/Icons/Generate Tower - 24x24.png'), "Generate Tower", self)
         self.generateTower_button.setStatusTip("Generate Tower")
 
         self.generateTower_button.triggered.connect(self.generateInputTable)
@@ -302,21 +303,21 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.generateTower_button)
 
         # Add button for Running Tower
-        self.runTower_button = QAction(QIcon(r"Icons\24x24\Run Tower - 24x24.png"), "Run Tower", self)
+        self.runTower_button = QAction(QIcon(':/Icons/Run Tower - 24x24.png'), "Run Tower", self)
         self.runTower_button.setStatusTip("Run Tower")
 
         self.functions_toolbar.addAction(self.runTower_button)
 
         # For views controls------------------------------------------
         # Add button for going up the tower
-        self.up_button = QAction(QIcon(r"Icons\24x24\arrow-090.png"), "Up", self)
+        self.up_button = QAction(QIcon(':/Icons/arrow-090.png'), "Up", self)
         self.up_button.setStatusTip("Up")
         self.up_button.triggered.connect(lambda x: self.view_3D_opengl.moveUp())
 
         self.views_toolbar.addAction(self.up_button)
 
         # Add button for going down the tower
-        self.down_button = QAction(QIcon(r"Icons\24x24\arrow-270.png"), "Down", self)
+        self.down_button = QAction(QIcon(':/Icons/arrow-270.png'), "Down", self)
         self.down_button.setStatusTip("Down")
         self.down_button.triggered.connect(lambda x: self.view_3D_opengl.moveDown())
 

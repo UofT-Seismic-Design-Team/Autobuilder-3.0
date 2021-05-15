@@ -7,6 +7,8 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+import resources    # For icons and UIs
+
 from Message import *
 
 class VariableAssignment(QDialog):
@@ -18,8 +20,8 @@ class VariableAssignment(QDialog):
         self.tower = args[0].tower
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_variableassignment.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_variableassignment.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -70,8 +72,8 @@ class VariableAssignment(QDialog):
                 self.SectionAssignmentTable.removeRow(index.row())
     
     def setIconsForButtons(self):
-        self.addAssignmentButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteAssignmentButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.addAssignmentButton.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteAssignmentButton.setIcon(QIcon(':/Icons/minus.png'))
 
     def setOkandCancelButtons(self):
         self.OkButton = self.Assignment_buttonBox.button(QDialogButtonBox.Ok)
@@ -128,7 +130,7 @@ class VariableAssignment(QDialog):
             panelItem = self.BracingAssignmentTable.item(i,0)
             bg = self.BracingAssignmentTable.cellWidget(i,1).currentText()
             '''TEST'''
-            print(bg)
+            #print(bg)
 
             # Check if the row is filled
             if panelItem == None or bg == None:
