@@ -45,7 +45,8 @@ class BracingScheme(QDialog):
         # Delete Selected Row from List of Bracing Coordinates
         self.deleteCoordButton.clicked.connect(self.deleteBracingCoord)
 
-        # Update XY Coord Table upon cell change
+        # Update XY Coord Table upon SELECTION change
+        # ie. change is only saved when user clicks on a different cell after editing
         self.bracingCoordTable.itemSelectionChanged.connect(self.updateCoord)
         
         # Passing in main.tower into bracing scheme
@@ -179,6 +180,7 @@ class BracingScheme(QDialog):
 
     def updateCoord(self):
         '''Update coordinates and material associated with current bracing'''
+        # problematic when currname isn't defined?
         currName = self.bracingNameEdit.toPlainText()
         if  currName != "":
             newBracing = self.tower.bracings[currName]
@@ -212,6 +214,8 @@ class BracingScheme(QDialog):
 
     def nameChange(self):
         ''' change bracing name after it is defined in main table '''
+        # add exception for defining name with an empty string?
+        # check if second condition is necessary
         row = self.bracingSchemeTable.currentRow() #returns -1 when repopulating empty table
         if row != -1 and self.currentBracingName != None:
             bcName = self.bracingSchemeTable.item(row,0)

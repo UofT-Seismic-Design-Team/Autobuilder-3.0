@@ -103,7 +103,7 @@ class VariableAssignment(QDialog):
             if panel not in tempB and panel in self.tower.panels.keys():
                 tempB.append(panel)
             else:
-                warning.popUpErrorBox('Invalid input for assignment properties')
+                warning.popUpErrorBox('Duplicate or non-existent panels!')
                 return
 
         # NOTE: changed panel to member id
@@ -118,7 +118,7 @@ class VariableAssignment(QDialog):
             if member_id not in tempS:
                 tempS.append(member_id)
             else:
-                warning.popUpErrorBox('Invalid input for assignment properties')
+                warning.popUpErrorBox('Duplicate or non-existent panels!')
                 return
 
         # clear all existing assignments

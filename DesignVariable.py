@@ -43,8 +43,8 @@ class DesignVariable(QDialog):
         self.deleteIterationButton.clicked.connect(self.deleteIteration)
 
         # Update iteration table upon cell change
-        self.bracingGroupTable.itemSelectionChanged.connect(self.updateIteration)
-        self.sectionGroupTable.itemSelectionChanged.connect(self.updateIteration)
+        self.IterationTable.itemSelectionChanged.connect(self.updateIteration)
+        self.IterationTable.itemSelectionChanged.connect(self.updateIteration)
         
         # Passing in main.tower into bracing scheme
         self.towerRef = args[0].tower
@@ -57,6 +57,9 @@ class DesignVariable(QDialog):
 
         # Refresh tables after changing tabs
         self.tabWidget.currentChanged.connect(self.changeTab)
+
+        self.currentBracingGroupName = ""
+        self.currentSectionGroupName = ""
 
         # Save the current bracing group name if it exists
         if self.bracingGroupTable.item(0,0) is not None:
