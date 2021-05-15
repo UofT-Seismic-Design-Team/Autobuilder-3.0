@@ -25,7 +25,10 @@ class ProjectSettings(QDialog):
         self.mainmenu = args[0]
 
         # Load the UI Page
-        uic.loadUi(r'UI\autobuilder_projectsettings_v1.ui', self)
+        fileh = QtCore.QFile(r'UI\autobuilder_projectsettings_v1.ui')
+        fileh.open(QtCore.QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Set UI Elements
         self.setIconsForButtons()
