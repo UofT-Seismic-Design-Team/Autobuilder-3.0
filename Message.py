@@ -6,6 +6,8 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+import resources    # For icons and UIs
+
 class WarningMessage:
     def __init__(self):
         self._ = 0

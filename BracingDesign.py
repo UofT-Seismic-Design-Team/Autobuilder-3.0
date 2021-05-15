@@ -7,6 +7,8 @@ from PyQt5 import uic
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+import resources    # For icons and UIs
+
 from Message import *
 from BracingsToTry import *
 
@@ -17,7 +19,10 @@ class BracingDesign(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        uic.loadUi('UI/autobuilder_bracingdesign_v3.ui', self)
+        fileh = QFile(':/UI/autobuilder_bracingdesign_v3.ui', self)
+        fileh.open(QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Set UI Elements
         self.setIconsForButtons()
@@ -37,8 +42,8 @@ class BracingDesign(QDialog):
 
 
     def setIconsForButtons(self):
-        self.addBracingDesignButton.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteBracingDesignButton.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.addBracingDesignButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
+        self.deleteBracingDesignButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
 
     def addBracingDesign(self, signal):
         self.bracingDesignTable.insertRow(self.bracingDesignTable.rowCount())

@@ -8,6 +8,8 @@ from Model import *
 
 from Message import *
 
+import resources    # For icons and UIs
+
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
@@ -16,8 +18,8 @@ class DisplaySettingsUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QtCore.QFile(r'UI\autobuilder_displaysettings_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_displaysettings_v1.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 

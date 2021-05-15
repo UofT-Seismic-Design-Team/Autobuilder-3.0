@@ -8,6 +8,8 @@ from Model import *
 from View2DEngine import *  # import View2DEngine
 import copy
 
+import resources    # For icons and UIs
+
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
@@ -18,8 +20,8 @@ class FloorPlanUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_floordesign_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_floordesign_v1.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -162,10 +164,10 @@ class FloorPlanUI(QDialog):
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''
-        self.add.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.delete_2.setIcon(QIcon(r"Icons\24x24\minus.png"))
-        self.addCoord.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.deleteCoord.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.add.setIcon(QIcon(':/Icons/plus.png'))
+        self.delete_2.setIcon(QIcon(':/Icons/minus.png'))
+        self.addCoord.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteCoord.setIcon(QIcon(':/Icons/minus.png'))
 
     def addFloorPlan(self):
         '''Adding new floor plans'''

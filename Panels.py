@@ -11,6 +11,8 @@ import copy
 import sys  # We need sys so that we can pass argv to QApplication
 import os
 
+import resources    # For icons and UIs
+
 class panelsUI(QDialog):
 
 
@@ -18,8 +20,8 @@ class panelsUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QtCore.QFile('UI/autobuilder_paneldesign_v1.ui')
-        fileh.open(QtCore.QFile.ReadOnly)
+        fileh = QFile(':/UI/autobuilder_paneldesign_v1.ui')
+        fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
@@ -158,8 +160,8 @@ class panelsUI(QDialog):
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''
-        self.add.setIcon(QIcon(r"Icons\24x24\plus.png"))
-        self.delete_2.setIcon(QIcon(r"Icons\24x24\minus.png"))
+        self.add.setIcon(QIcon(':/Icons/plus.png'))
+        self.delete_2.setIcon(QIcon(':/Icons/minus.png'))
 
     def addPanel(self):
         '''Adding new floor plans'''
