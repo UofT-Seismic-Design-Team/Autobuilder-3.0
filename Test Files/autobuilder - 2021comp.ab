@@ -11,6 +11,11 @@ renderX,12.0
 renderY,12.0
 renderZ,60.0
 
+#Display_Settings
+setting,value
+2D_pName,True
+2D_pLength,False
+
 #Floor_Plans
 floorPlanName,elevation,x,y
 1,0.0 6.0 9.0 12.0 15.0 18.0 21.0 24.0 27.0 30.0 33.0 36.0,0.0,0.0

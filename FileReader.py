@@ -1,6 +1,6 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
-from Definition import StringToEnum  # StringToEnum conversion
+from Definition import MFHeader, StringToEnum
 import pandas as pd  # use data frame to read files
 
 class FileReader:
@@ -12,41 +12,57 @@ class FileReader:
     def readMainFile(self):
         with open(self.mainFileLoc, 'r') as mainFile:
             lines = mainFile.readlines()
+ 
+            # value: [header, location of header, data --> list]
+            comps = {
+                'pSettings':[MFHeader.projectSettings+'\n',-1],
+                'dSettings':[MFHeader.displaySettings+'\n',-1],
+                'fPlans':[MFHeader.floorPlans+'\n',-1],
+                'panels':[MFHeader.panels+'\n',-1],
+                'bracings':[MFHeader.bracings+'\n',-1],
+                'bracingGroups':[MFHeader.bracingGroups+'\n',-1],
+                'sectionGroups':[MFHeader.sectionGroups+'\n',-1],
+                'b_assignments':[MFHeader.bracingAssignments+'\n',-1],
+                's_assignments':[MFHeader.sectionAssignments+'\n',-1],
+            }
+
+            sortedHeaderLoc = []
 
             # Find header
-            pSettings_index = lines.index('#Project_Settings\n')
-            dSettings_index = lines.index('#Display_Settings\n')
-            fPlans_index = lines.index('#Floor_Plans\n')
-            panels_index = lines.index('#Panels\n')
-            bracings_index = lines.index('#Bracings\n')
-            bracingGroups_index = lines.index('#Bracing_Groups\n')
-            sectionGroups_index = lines.index('#Section_Groups\n')
-            b_assignments_index = lines.index('#Bracing_Assignments\n')
-            s_assignments_index = lines.index('#Section_Assignments\n')
-            
+            for comp in comps.values():
+                if comp[0] in lines:
+                    comp[1] = lines.index(comp[0])
+                    sortedHeaderLoc.append(comp[1])
+
+            sortedHeaderLoc.sort()
+
             # Group data
-            pSettings_data = lines[pSettings_index+1:fPlans_index-1]
-            pSettings_data = lines[pSettings_index+1:dSettings_index-1]
-            dSettings_data = lines[dSettings_index+1:fPlans_index-1]
-            fPlans_data = lines[fPlans_index+1:panels_index-1]
-            panels_data = lines[panels_index+1:bracings_index-1]
-            bracings_data = lines[bracings_index+1:bracingGroups_index-1]
-            bracingGroups_data = lines[bracingGroups_index+1:sectionGroups_index-1]
-            sectionGroups_data = lines[sectionGroups_index+1:b_assignments_index-1]
-            b_assignments_data = lines[b_assignments_index+1:s_assignments_index-1]
-            s_assignments_data = lines[s_assignments_index+1:]
+            for comp in comps.values():
+                if comp[1] == -1: # skip if comp is missing
+                    comp.append(None)
+                    continue
+
+                start = comp[1]+1
+                if start < sortedHeaderLoc[-1]:
+                    end = sortedHeaderLoc[sortedHeaderLoc.index(comp[1])+1]-1
+                    comp.append(lines[start:end])
+                else:
+                    comp.append(lines[start:])
             
-            self.readProjectSettings(pSettings_data)
-            self.readDisplaySettings(dSettings_data)
-            self.readFloorPlans(fPlans_data)
-            self.readPanels(panels_data)
-            self.readBracings(bracings_data)
-            self.readBracingGroups(bracingGroups_data)
-            self.readSectionGroups(sectionGroups_data)
-            self.readBracingAssignments(b_assignments_data)
-            self.readSectionAssignments(s_assignments_data)
+            self.readProjectSettings(comps['pSettings'][2])
+            self.readDisplaySettings(comps['dSettings'][2])
+            self.readFloorPlans(comps['fPlans'][2])
+            self.readPanels(comps['panels'][2])
+            self.readBracings(comps['bracings'][2])
+            self.readBracingGroups(comps['bracingGroups'][2])
+            self.readSectionGroups(comps['sectionGroups'][2])
+            self.readBracingAssignments(comps['b_assignments'][2])
+            self.readSectionAssignments(comps['s_assignments'][2])
             
     def readProjectSettings(self, data):
+        if not data:
+            return None
+        
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
 
@@ -89,6 +105,9 @@ class FileReader:
                 self.psData.renderZ = float(val)
 
     def readDisplaySettings(self, data):
+        if not data:
+            return None
+
         dSettings = self.tower.displaySettings
 
         for line in data[1:]: # skip header
@@ -104,6 +123,9 @@ class FileReader:
                 dSettings.pLength = (val == 'True') 
 
     def readPanels(self, data):
+        if not data:
+            return None
+
         panels = self.tower.panels
 
         for line in data[1:]: # skip header
@@ -131,6 +153,9 @@ class FileReader:
                 panel.lowerRight.setLocation(x, y, z)
 
     def readFloorPlans(self, data):
+        if not data:
+            return None
+
         floorPlans = self.tower.floorPlans
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -158,6 +183,9 @@ class FileReader:
             floorPlan.generateMembersfromNodes()
 
     def readBracings(self, data):
+        if not data:
+            return None
+
         bracings = self.tower.bracings
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -188,6 +216,9 @@ class FileReader:
             bracing.generateMembersfromNodes()
 
     def readBracingGroups(self, data):
+        if not data:
+            return None
+
         bracingGroups = self.tower.bracingGroups
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -204,6 +235,9 @@ class FileReader:
             self.tower.addBracingGroup(bracingGroup)
 
     def readSectionGroups(self, data):
+        if not data:
+            return None
+
         sectionGroups = self.tower.sectionGroups
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -220,6 +254,9 @@ class FileReader:
             self.tower.addSectionGroup(sectionGroup)
 
     def readBracingAssignments(self, data):
+        if not data:
+            return None
+
         panels = self.tower.panels
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 
@@ -232,6 +269,9 @@ class FileReader:
                     panels[panel].addBracingAssignment(bGroup)
 
     def readSectionAssignments(self, data):
+        if not data:
+            return None
+
         member_ids = self.tower.member_ids
         for line in data[1:]: # skip header
             line = line.rstrip('\n').split(',') # remove trailing newline 

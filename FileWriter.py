@@ -82,47 +82,47 @@ class FileWriter:
             sAssignments = f.read()
 
         with open(self.mainFileLoc, 'w') as mainFile:
-            mainFile.write('#Project_Settings')
+            mainFile.write(MFHeader.projectSettings)
             mainFile.write('\n')
             mainFile.write(psettings)
 
             mainFile.write('\n')
-            mainFile.write('#Display_Settings')
+            mainFile.write(MFHeader.displaySettings)
             mainFile.write('\n')
             mainFile.write(dsettings)
 
             mainFile.write('\n')
-            mainFile.write('#Floor_Plans')
+            mainFile.write(MFHeader.floorPlans)
             mainFile.write('\n')
             mainFile.write(floorPlan)
 
             mainFile.write('\n')
-            mainFile.write('#Panels')
+            mainFile.write(MFHeader.panels)
             mainFile.write('\n')
             mainFile.write(panel)
 
             mainFile.write('\n')
-            mainFile.write('#Bracings')
+            mainFile.write(MFHeader.bracings)
             mainFile.write('\n')
             mainFile.write(bracings)
             
             mainFile.write('\n')
-            mainFile.write('#Bracing_Groups')
+            mainFile.write(MFHeader.bracingGroups)
             mainFile.write('\n')
             mainFile.write(bGroups)
 
             mainFile.write('\n')
-            mainFile.write('#Section_Groups')
+            mainFile.write(MFHeader.sectionGroups)
             mainFile.write('\n')
             mainFile.write(sGroups)
 
             mainFile.write('\n')
-            mainFile.write('#Bracing_Assignments')
+            mainFile.write(MFHeader.bracingAssignments)
             mainFile.write('\n')
             mainFile.write(bAssignments)
 
             mainFile.write('\n')
-            mainFile.write('#Section_Assignments')
+            mainFile.write(MFHeader.sectionAssignments)
             mainFile.write('\n')
             mainFile.write(sAssignments)
 

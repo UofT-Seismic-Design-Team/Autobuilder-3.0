@@ -15,6 +15,18 @@ class FileExtension:
     sectionAssignments = '/sectionAssignments.csv'
     inputTable = '/inputTable.csv'
 
+class MFHeader:
+    ''' Main file header '''
+    projectSettings = '#Project_Settings'
+    displaySettings = '#Display_Settings'
+    floorPlans = '#Floor_Plans'
+    panels = '#Panels'
+    bracings = '#Bracings'
+    bracingGroups = '#Bracing_Groups'
+    sectionGroups = '#Section_Groups'
+    bracingAssignments = '#Bracing_Assignments'
+    sectionAssignments = '#Section_Assignments'
+
 class EnumToString:
     ATYPE = {
         0: 'Time_History',
