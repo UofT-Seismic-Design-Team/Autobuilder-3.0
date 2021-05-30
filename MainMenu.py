@@ -130,11 +130,17 @@ class MainWindow(QMainWindow):
         floorPlan19.generateMembersfromNodes()
 
         floorPlan20 = FloorPlan()
-        floorPlan20.nodes = [Node(6,0), Node(6,0),Node(12,12), Node(6,12)]
+        floorPlan20.nodes = [Node(6,0), Node(12,0),Node(12,12), Node(6,12)]
         floorPlan20.generateMembersfromNodes()   
 
         allFloorPlans = [floorPlan11, floorPlan12, floorPlan13, floorPlan14, floorPlan15, floorPlan16, floorPlan17, floorPlan18, floorPlan19, floorPlan20] 
         #allFloorPlans = [floorPlan11, floorPlan12] 
+
+        for fp in allFloorPlans:
+            numNodes = len(fp.nodes)
+            for i in range(numNodes):
+                fp.addTopConnection(str(i+1), i)
+                fp.addBottomConnection(str(i+1), i)
 
         default = Bracing('default')
         default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
@@ -142,24 +148,22 @@ class MainWindow(QMainWindow):
         default.generateMembersfromNodes()
         self.tower.addBracing(default)
 
-        for elev in elevs[:12]:
-            floorPlan11.addElevation(elev)
+        for elev in elevs[:13]:
+            self.tower.floors[elev].addFloorPlan(floorPlan11)
 
         for i, elev in enumerate(elevs[12:]):
-            allFloorPlans[i+1].addElevation(elev)
+            self.tower.floors[elev].addFloorPlan(allFloorPlans[i+1])
         
         for plan in allFloorPlans:
             self.tower.addFloorPlan(plan)
 
-        self.tower.addFloorPlansToFloors()
-
         # for plan in allFloorPlans:
         #     self.tower.generateFacesByFloorPlan(plan)
 
-        self.tower.generateFacesByFloorPlans(allFloorPlans)       
-        self.tower.generatePanelsByFace()
-        self.tower.addPanelsToFloors()
-        self.tower.generateColumnsByFace()
+        # self.tower.generateFacesByFloorPlans(allFloorPlans)       
+        # self.tower.generatePanelsByFace()
+        # self.tower.addPanelsToFloors()
+        # self.tower.generateColumnsByFace()
 
         #------------------------------------------------
         # Set project settings data for all views
@@ -467,7 +471,7 @@ class MainWindow(QMainWindow):
 
             value = [
                 'P-' + panel.name,
-                'L=' + str(panel.sideLength()), # maybe side length is misleading?
+                'L=' + str(panel.averageSideLength()),
             ]
 
             for i, check in enumerate(checkList):
@@ -486,7 +490,7 @@ class MainWindow(QMainWindow):
 
         limit = len(color_fplan) - 1
 
-        for i, fpName in enumerate(floorPlans):
+        for i, floorPlan in enumerate(floorPlans):
             vMember = ViewMember()
             vNode = ViewNode()
 
@@ -501,9 +505,7 @@ class MainWindow(QMainWindow):
             vNode.setDimX(renderX)
             vNode.setDimY(renderY)
             
-            # Floor plan members and nodes -------------------------------
-            floorPlan = floorPlans[fpName]
-
+            # Floor plan members and nodes ------------------------------
             for member in floorPlan.members:
                 vMember.addMember(member)
                 

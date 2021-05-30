@@ -42,8 +42,8 @@ class BracingDesign(QDialog):
 
 
     def setIconsForButtons(self):
-        self.addBracingDesignButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
-        self.deleteBracingDesignButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
+        self.addBracingDesignButton.setIcon(QIcon(':/Icons/24x24/plus.png'))
+        self.deleteBracingDesignButton.setIcon(QIcon(':/Icons/24x24/minus.png'))
 
     def addBracingDesign(self, signal):
         self.bracingDesignTable.insertRow(self.bracingDesignTable.rowCount())

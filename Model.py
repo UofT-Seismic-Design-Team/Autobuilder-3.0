@@ -1,6 +1,7 @@
 from Definition import *    # for constants
 import math as m
 from DisplaySettings import DisplaySettings
+from typing import List
 
 # Module description: 
 # - Stores classes that define the geometry of the tower and its components
@@ -124,15 +125,106 @@ class Tower:
         ''' Add panels to floors based on the elevation '''
         for panel_id in self.panels:
             panel = self.panels[panel_id]
-            elevation = panel.lowerLeft.z
+            panelElevation = panel.lowerLeft.z
             
-            floor = self.floors[elevation]
-
-            floor.addPanel(panel)
+            if panelElevation in self.elevations: # avoid error due to wrong panel creation
+                floor = self.floors[panelElevation]
+                floor.addPanel(panel)
 
     def generatePanels_addToFloors(self):
         self.generatePanelsByFace()
         self.addPanelsToFloors()
+
+    def generateFaces(self):
+        ''' Generate face objects '''
+        for i in range(len(self.elevations)-1):
+            currentElev = self.elevations[i]
+            nextElev = self.elevations[i+1]
+
+            currentFloor = self.floors[currentElev]
+            nextFloor = self.floors[nextElev]
+
+            numCurrentFloorPlans = len(currentFloor.floorPlans)
+            numNextFloorPlans = len(nextFloor.floorPlans)
+
+            if numCurrentFloorPlans > 0 and numNextFloorPlans > 0: # check if floor plan is assigned to floor
+
+                currentFloorPlan = currentFloor.floorPlans[0]
+                if numCurrentFloorPlans == 2:
+                    currentFloorPlan = currentFloor.floorPlans[1]
+
+                nextFloorPlan = nextFloor.floorPlans[0]
+
+                # 1: Convert top connections to list (in order)
+                dict_currentTopConnections = currentFloorPlan.topConnections
+                list_currentTopConnections = ['' for i in range(len(currentFloorPlan.nodes))]
+
+                for label in dict_currentTopConnections:
+                    indices = dict_currentTopConnections[label]
+                    for index in indices:
+                        list_currentTopConnections[index] = label
+
+                # make sure the last node is the first node
+                list_currentTopConnections.append(list_currentTopConnections[0])
+
+                # 2: Construct Face object
+                currentMembers = currentFloorPlan.members 
+                #currentNodes.append(currentFloorPlan.nodes[-1])
+                nextNodes = nextFloorPlan.nodes
+                #nextNodes.append(currentFloorPlan.nodes[-1])
+                print('numNodes:', len(currentMembers))
+                if len(currentMembers) > 1:
+                    for j in range(len(currentMembers)):
+
+                        # 2a) Add bottom member
+                        currentMember = currentMembers[j]
+
+                        bottomStart = currentMember.start_node
+                        bottomStart = Node(bottomStart.x, bottomStart.y, currentElev)
+                        bottomEnd = currentMember.end_node
+                        bottomEnd = Node(bottomEnd.x, bottomEnd.y, currentElev)
+
+                        bottomMember = Member()
+                        bottomMember.setNodes(bottomStart, bottomEnd)
+
+                        # 2b) Add top member
+                        topStartLabel = list_currentTopConnections[j]
+                        topEndLabel = list_currentTopConnections[j+1]
+
+                        print('top connections:', currentFloorPlan.bottomConnections)
+                        print('bottom connections:', nextFloorPlan.bottomConnections)
+
+                        topStartIndices = [0]
+                        if topStartLabel in nextFloorPlan.bottomConnections:
+                            topStartIndices = nextFloorPlan.bottomConnections[topStartLabel]
+
+                        topEndIndices = [0]
+                        if topEndLabel in nextFloorPlan.bottomConnections:
+                            topEndIndices = nextFloorPlan.bottomConnections[topEndLabel]
+
+                        # Generate all permutations
+                        for topStartIndex in topStartIndices:
+                            for topEndIndex in topEndIndices:
+                                topMember = Member()
+
+                                topStart = nextNodes[topStartIndex]
+                                topStart = Node(topStart.x, topStart.y, nextElev)
+                                topEnd = nextNodes[topEndIndex]
+                                topEnd = Node(topEnd.x, topEnd.y, nextElev)
+
+                                topMember.setNodes(topStart, topEnd)
+
+                                face = Face()
+                                face.addMember(currentElev, bottomMember)
+                                face.addMember(nextElev, topMember)
+
+                                self.faces.append(face)
+
+                                for elev in face.members:
+                                    member = face.members[elev]
+                                    print(elev)
+                                    print('Start:', member.start_node.x, member.start_node.y)
+                                    print('End:', member.end_node.x, member.end_node.y)
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''
@@ -159,6 +251,10 @@ class Tower:
 
     def generateFacesByFloorPlans(self, floorPlans):
         ''' Generate face objects by floor plans '''
+
+        # 1. Loop through each floor
+        # 2. Retrieve all floor plans
+        # 3. Convert to list?
 
         # Create dictionary for floor plan (value) at every elevation (key)
         allPlans = {}
@@ -244,7 +340,7 @@ class Floor:
     def __init__(self, elevation):
         self.elevation = elevation
         self.nodes = []
-        self.floorPlans = {}
+        self.floorPlans = []
         self.panels = []
     
     def addPanel(self, panel):
@@ -254,7 +350,7 @@ class Floor:
         self.nodes.append(node)
 
     def addFloorPlan(self, floorPlan):
-        self.floorPlans[floorPlan.name] = floorPlan
+        self.floorPlans.append(floorPlan)
 
     def __str__(self):
         return "Floor elevation: " + str(self.elevation)
@@ -262,7 +358,7 @@ class Floor:
 # -------------------------------------------------------------------------
 class FloorPlan:
 
-     # static variable for id
+    # static variable for id
     id = 1
 
     def __init__(self, name=None):
@@ -272,8 +368,15 @@ class FloorPlan:
             FloorPlan.id += 1
 
         self.nodes = []
+
         self.members = []
         self.elevations = []
+
+        # Top and Bottom connections
+        # keys (str): connection label
+        # values (list(int)): index of self.nodes
+        self.topConnections = {}
+        self.bottomConnections = {}
 
     def addNode(self, node):
         self.nodes.append(node)
@@ -290,8 +393,20 @@ class FloorPlan:
         member = Member(self.nodes[numNodes-1], self.nodes[0])
         self.addMember(member)
 
-    def addElevation(self, elevation):
+    def addElevation(self, elevation: float):
         self.elevations.append(elevation)
+
+    def addTopConnection(self, label: str, index: List[int]):
+        if label in self.topConnections:
+            self.topConnections[label].append(index)
+        else:
+            self.topConnections[label] = [index]
+
+    def addBottomConnection(self, label: str, index: List[int]):
+        if label in self.bottomConnections:
+            self.bottomConnections[label].append(index)
+        else:
+            self.bottomConnections[label] = [index]
 
     def __str__(self):
         return "Floor Plan " + str(self.name)
@@ -357,9 +472,11 @@ class Panel:
     def addBracingAssignment(self, bGroup):
         self.bracingGroup = bGroup
 
-    def sideLength(self):
-        member = Member(self.lowerLeft, self.upperLeft)
-        return member.length()
+    def averageSideLength(self):
+        ''' Calculate the average side length of panel'''
+        leftMember = Member(self.lowerLeft, self.upperLeft)
+        rightMember = Member(self.lowerRight, self.upperRight)
+        return (leftMember.length() + rightMember.length())/2
 
     def __str__(self):
         return "Panel " + str(self.name)
@@ -536,8 +653,8 @@ class Assignment:
     def __init__(self, name=None):
         self.name = name    # name is in string form
         if not name:
-            self.name = str(assignment.id)
-            assingment.id += 1
+            self.name = str(Assignment.id)
+            Assignment.id += 1
 
         self.bracingGroup = None
 
