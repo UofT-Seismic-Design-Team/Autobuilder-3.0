@@ -14,7 +14,8 @@ from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
 from DesignVariable import * # open bracing group UI
-from TowerVariation import *    # gnerate tower variations
+from TowerVariation import *    # generate tower variations
+from SAPModelCreation import * # create and run towers in SAP2000
 from Panels import *
 
 from View2DEngine import *  # import View2DEngine
@@ -134,7 +135,6 @@ class MainWindow(QMainWindow):
         floorPlan20.generateMembersfromNodes()   
 
         allFloorPlans = [floorPlan11, floorPlan12, floorPlan13, floorPlan14, floorPlan15, floorPlan16, floorPlan17, floorPlan18, floorPlan19, floorPlan20] 
-        #allFloorPlans = [floorPlan11, floorPlan12] 
 
         for fp in allFloorPlans:
             numNodes = len(fp.nodes)
@@ -310,6 +310,8 @@ class MainWindow(QMainWindow):
         self.runTower_button = QAction(QIcon(':/Icons/Run Tower - 24x24.png'), "Run Tower", self)
         self.runTower_button.setStatusTip("Run Tower")
 
+        self.runTower_button.triggered.connect(self.createSAPModels)
+
         self.functions_toolbar.addAction(self.runTower_button)
 
         # For views controls------------------------------------------
@@ -347,7 +349,7 @@ class MainWindow(QMainWindow):
         # Generate Tower
         self.action_GenerateTowers.triggered.connect(self.generateInputTable)
         # Run Tower
-        self.action_RunTowers.triggered.connect(lambda x: x)
+        self.action_RunTowers.triggered.connect(self.createSAPModels)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
@@ -378,7 +380,6 @@ class MainWindow(QMainWindow):
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
-        
         projectSettings.display()
 
         projectSettings.exec_()
@@ -602,3 +603,7 @@ class MainWindow(QMainWindow):
     def generateInputTable(self, signal):
         generateTower = GenerateTower(self)
         generateTower.exec_()
+
+    def createSAPModels(self, signal):
+        runTower = RunTower(self)
+        runTower.exec_()

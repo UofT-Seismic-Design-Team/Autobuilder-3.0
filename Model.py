@@ -452,6 +452,9 @@ class Panel:
         self.upperRight = Node()
         self.lowerRight = Node()
 
+        # Member IDs contained in Panel
+        self.IDs = ['UNKNOWN']
+
         # Bracing that is assigned to a panel object
         self.bracingGroup = ''
 
