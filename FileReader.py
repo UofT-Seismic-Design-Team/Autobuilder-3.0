@@ -18,6 +18,7 @@ class FileReader:
                 'pSettings':[MFHeader.projectSettings+'\n',-1],
                 'dSettings':[MFHeader.displaySettings+'\n',-1],
                 'fPlans':[MFHeader.floorPlans+'\n',-1],
+                'floors':[MFHeader.floors+'\n',-1],
                 'panels':[MFHeader.panels+'\n',-1],
                 'bracings':[MFHeader.bracings+'\n',-1],
                 'bracingGroups':[MFHeader.bracingGroups+'\n',-1],
@@ -52,6 +53,7 @@ class FileReader:
             self.readProjectSettings(comps['pSettings'][2])
             self.readDisplaySettings(comps['dSettings'][2])
             self.readFloorPlans(comps['fPlans'][2])
+            self.readFloors(comps['floors'][2])
             self.readPanels(comps['panels'][2])
             self.readBracings(comps['bracings'][2])
             self.readBracingGroups(comps['bracingGroups'][2])
@@ -161,19 +163,29 @@ class FileReader:
             line = line.rstrip('\n').split(',') # remove trailing newline 
 
             fpName = line[0]
-            elevation = line[1]
-            x = float(line[2])
-            y = float(line[3])
+            x = float(line[1])
+            y = float(line[2])
+            bot = line[3]
+            top = line[4]
 
             if not (fpName in floorPlans):
-                elevs = elevation.split()
                 newFloorPlan = FloorPlan(fpName)
-                for elev in elevs:
-                    newFloorPlan.addElevation(float(elev))
                 self.tower.addFloorPlan(newFloorPlan)
 
             floorPlan = floorPlans[fpName]
             floorPlan.addNode(Node(x,y))
+
+            nodeIndex = len(floorPlan.nodes) - 1
+
+            if bot in floorPlan.bottomConnections:
+                floorPlan.bottomConnections[bot].append(nodeIndex)
+            else:
+                floorPlan.bottomConnections[bot] = [nodeIndex]
+
+            if top in floorPlan.topConnections:
+                floorPlan.topConnections[top].append(nodeIndex)
+            else:
+                floorPlan.topConnections[top] = [nodeIndex]
 
             self.tower.addFloorPlan(floorPlan)
 
@@ -181,6 +193,25 @@ class FileReader:
         for fpName in floorPlans:
             floorPlan = floorPlans[fpName]
             floorPlan.generateMembersfromNodes()
+
+    def readFloors(self, data):
+        if not data:
+            return None
+
+        self.tower.defineFloors()
+
+        floors = self.tower.floors
+        floorPlans = self.tower.floorPlans
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            elev = float(line[0])
+            fpNames = line[1]
+
+            floor = floors[elev]
+            fpNames = fpNames.split()
+            for fpName in fpNames:
+                floor.addFloorPlan(floorPlans[fpName])
 
     def readBracings(self, data):
         if not data:

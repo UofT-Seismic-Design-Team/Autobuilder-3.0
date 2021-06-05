@@ -13,7 +13,7 @@ from DisplaySettings import *   # open display settings dialog
 from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from DesignVariable import * # open bracing group UI
+from DesignVariable import * # open bracing and section group UI
 from TowerVariation import *    # generate tower variations
 from SAPModelCreation import * # create and run towers in SAP2000
 from Panels import *
@@ -156,6 +156,9 @@ class MainWindow(QMainWindow):
         
         for plan in allFloorPlans:
             self.tower.addFloorPlan(plan)
+
+        self.tower.generateFaces()
+        self.tower.generateColumnsByFace()
 
         # for plan in allFloorPlans:
         #     self.tower.generateFacesByFloorPlan(plan)
@@ -601,6 +604,10 @@ class MainWindow(QMainWindow):
 
     # For Tower Variations --------------------------------------------
     def generateInputTable(self, signal):
+        if self.fileLoc == '':
+            msg = WarningMessage()
+            msg.popUpErrorBox('Please save before generating input table')
+            return
         generateTower = GenerateTower(self)
         generateTower.exec_()
 

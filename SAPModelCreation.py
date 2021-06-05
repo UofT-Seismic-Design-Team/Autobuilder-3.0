@@ -31,7 +31,10 @@ class RunTower(QDialog):
         super().__init__(*args, **kwargs)
   
         # Load the UI Page
-        uic.loadUi(r'UI\autobuilder_buildtower.ui', self)
+        fileh = QFile(':/UI/autobuilder_buildtower.ui')
+        fileh.open(QFile.ReadOnly)
+        uic.loadUi(fileh, self)
+        fileh.close()
 
         # Project Settings Data
         self.projectSettingsData = args[0].projectSettingsData

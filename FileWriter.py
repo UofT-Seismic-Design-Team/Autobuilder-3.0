@@ -26,6 +26,7 @@ class FileWriter:
         self.writeProjectSettings()
         self.writeDisplaySettings()
         self.writeFloorPlans()
+        self.writeFloors()
         self.writePanels()
         self.writeBracings()
         self.writeBracingGroups()
@@ -50,6 +51,11 @@ class FileWriter:
         floorPlanLoc = self.folderLoc + FileExtension.floorPlan
         with open(floorPlanLoc, 'r') as f:
             floorPlan = f.read()
+
+        floor = ''
+        floorLoc = self.folderLoc + FileExtension.floor
+        with open(floorLoc, 'r') as f:
+            floor = f.read()
 
         panel = ''
         panelLoc = self.folderLoc + FileExtension.panel
@@ -95,6 +101,11 @@ class FileWriter:
             mainFile.write(MFHeader.floorPlans)
             mainFile.write('\n')
             mainFile.write(floorPlan)
+
+            mainFile.write('\n')
+            mainFile.write(MFHeader.floors)
+            mainFile.write('\n')
+            mainFile.write(floor)
 
             mainFile.write('\n')
             mainFile.write(MFHeader.panels)
@@ -212,24 +223,54 @@ class FileWriter:
 
         floorPlanData = {
             'floorPlanName':[],
-            'elevation':[],
             'x':[],
             'y':[],
+            'bot':[],
+            'top':[],
         }
 
         for fpName in floorPlans:
             floorPlan = floorPlans[fpName]
 
-            for node in floorPlan.nodes:
-                elevs = ' '.join([str(elev) for elev in floorPlan.elevations])
+            botConnections = [0 for i in range(len(floorPlan.nodes))]
+            for botLabel in floorPlan.bottomConnections:
+                for index in floorPlan.bottomConnections[botLabel]:
+                    botConnections[index] = botLabel
 
+            topConnections = [0 for i in range(len(floorPlan.nodes))]
+            for topLabel in floorPlan.topConnections:
+                for index in floorPlan.topConnections[topLabel]:
+                    topConnections[index] = topLabel
+
+            for i, node in enumerate(floorPlan.nodes):
                 floorPlanData['floorPlanName'].append(str(fpName))
-                floorPlanData['elevation'].append(elevs)
                 floorPlanData['x'].append(str(node.x))
                 floorPlanData['y'].append(str(node.y))
+                floorPlanData['bot'].append(str(botConnections[i]))
+                floorPlanData['top'].append(str(topConnections[i]))
 
         df = pd.DataFrame(floorPlanData)
         df.to_csv(floorPlanLoc, index=False)
+
+    def writeFloors(self):
+        ''' Write floors to file '''
+        floorLoc = self.folderLoc + FileExtension.floor
+        floors = self.tower.floors
+
+        floorData = {
+            'elevation':[],
+            'floorPlans':[],
+        }
+
+        for elev in floors:
+            floor = floors[elev]
+            fpNames = ' '.join([str(fp.name) for fp in floor.floorPlans])
+
+            floorData['elevation'].append(str(elev))
+            floorData['floorPlans'].append(fpNames)
+
+        df = pd.DataFrame(floorData)
+        df.to_csv(floorLoc, index=False)
 
     def writePanels(self):
         ''' Write panels to file '''

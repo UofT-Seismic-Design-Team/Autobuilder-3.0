@@ -59,10 +59,8 @@ class Tower:
 
     def build(self):
         ''' build tower (assume all tower components are saved in tower)'''
-        self.defineFloors()
-        self.addFloorPlansToFloors()
         self.addPanelsToFloors()
-        self.generateFacesByFloorPlans(list(self.floorPlans.values()))
+        self.generateFaces()
         #for name in self.floorPlans:
             #self.generateFacesByFloorPlan(self.floorPlans[name])
         self.generateColumnsByFace()     
