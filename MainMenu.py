@@ -13,8 +13,9 @@ from DisplaySettings import *   # open display settings dialog
 from VariableAssignment import *    # open panel assignment dialog
 from BracingScheme import *    # open bracing definition dialog
 from FloorPlan import *  # open floor plan ui
-from DesignVariable import * # open bracing group UI
-from TowerVariation import *    # gnerate tower variations
+from DesignVariable import * # open bracing and section group UI
+from TowerVariation import *    # generate tower variations
+from SAPModelCreation import * # create and run towers in SAP2000
 from Panels import *
 
 from View2DEngine import *  # import View2DEngine
@@ -130,11 +131,16 @@ class MainWindow(QMainWindow):
         floorPlan19.generateMembersfromNodes()
 
         floorPlan20 = FloorPlan()
-        floorPlan20.nodes = [Node(6,0), Node(6,0),Node(12,12), Node(6,12)]
+        floorPlan20.nodes = [Node(6,0), Node(12,0),Node(12,12), Node(6,12)]
         floorPlan20.generateMembersfromNodes()   
 
         allFloorPlans = [floorPlan11, floorPlan12, floorPlan13, floorPlan14, floorPlan15, floorPlan16, floorPlan17, floorPlan18, floorPlan19, floorPlan20] 
-        #allFloorPlans = [floorPlan11, floorPlan12] 
+
+        for fp in allFloorPlans:
+            numNodes = len(fp.nodes)
+            for i in range(numNodes):
+                fp.addTopConnection(str(i+1), i)
+                fp.addBottomConnection(str(i+1), i)
 
         default = Bracing('default')
         default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
@@ -142,24 +148,25 @@ class MainWindow(QMainWindow):
         default.generateMembersfromNodes()
         self.tower.addBracing(default)
 
-        for elev in elevs[:12]:
-            floorPlan11.addElevation(elev)
+        for elev in elevs[:13]:
+            self.tower.floors[elev].addFloorPlan(floorPlan11)
 
         for i, elev in enumerate(elevs[12:]):
-            allFloorPlans[i+1].addElevation(elev)
+            self.tower.floors[elev].addFloorPlan(allFloorPlans[i+1])
         
         for plan in allFloorPlans:
             self.tower.addFloorPlan(plan)
 
-        self.tower.addFloorPlansToFloors()
+        self.tower.generateFaces()
+        self.tower.generateColumnsByFace()
 
         # for plan in allFloorPlans:
         #     self.tower.generateFacesByFloorPlan(plan)
 
-        self.tower.generateFacesByFloorPlans(allFloorPlans)       
-        self.tower.generatePanelsByFace()
-        self.tower.addPanelsToFloors()
-        self.tower.generateColumnsByFace()
+        # self.tower.generateFacesByFloorPlans(allFloorPlans)       
+        # self.tower.generatePanelsByFace()
+        # self.tower.addPanelsToFloors()
+        # self.tower.generateColumnsByFace()
 
         #------------------------------------------------
         # Set project settings data for all views
@@ -306,6 +313,8 @@ class MainWindow(QMainWindow):
         self.runTower_button = QAction(QIcon(':/Icons/Run Tower - 24x24.png'), "Run Tower", self)
         self.runTower_button.setStatusTip("Run Tower")
 
+        self.runTower_button.triggered.connect(self.createSAPModels)
+
         self.functions_toolbar.addAction(self.runTower_button)
 
         # For views controls------------------------------------------
@@ -343,7 +352,7 @@ class MainWindow(QMainWindow):
         # Generate Tower
         self.action_GenerateTowers.triggered.connect(self.generateInputTable)
         # Run Tower
-        self.action_RunTowers.triggered.connect(lambda x: x)
+        self.action_RunTowers.triggered.connect(self.createSAPModels)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
@@ -374,7 +383,6 @@ class MainWindow(QMainWindow):
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
-        
         projectSettings.display()
 
         projectSettings.exec_()
@@ -467,7 +475,7 @@ class MainWindow(QMainWindow):
 
             value = [
                 'P-' + panel.name,
-                'L=' + str(panel.sideLength()), # maybe side length is misleading?
+                'L=' + str(panel.averageSideLength()),
             ]
 
             for i, check in enumerate(checkList):
@@ -486,7 +494,7 @@ class MainWindow(QMainWindow):
 
         limit = len(color_fplan) - 1
 
-        for i, fpName in enumerate(floorPlans):
+        for i, floorPlan in enumerate(floorPlans):
             vMember = ViewMember()
             vNode = ViewNode()
 
@@ -501,9 +509,7 @@ class MainWindow(QMainWindow):
             vNode.setDimX(renderX)
             vNode.setDimY(renderY)
             
-            # Floor plan members and nodes -------------------------------
-            floorPlan = floorPlans[fpName]
-
+            # Floor plan members and nodes ------------------------------
             for member in floorPlan.members:
                 vMember.addMember(member)
                 
@@ -598,5 +604,13 @@ class MainWindow(QMainWindow):
 
     # For Tower Variations --------------------------------------------
     def generateInputTable(self, signal):
+        if self.fileLoc == '':
+            msg = WarningMessage()
+            msg.popUpErrorBox('Please save before generating input table')
+            return
         generateTower = GenerateTower(self)
         generateTower.exec_()
+
+    def createSAPModels(self, signal):
+        runTower = RunTower(self)
+        runTower.exec_()

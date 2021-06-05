@@ -44,13 +44,13 @@ class panelsUI(QDialog):
         # passing in main.tower properties into panel
         self.populate()
 
-        #Save the current floorplan table name and intialize for the first one for later use in changing and saving the name
+        #Save the current panel table name and intialize for the first one for later use in changing and saving the name
         if self.panelTable.item(0,0):
             self.currentPanelName = self.panelTable.item(0,0).text()
         else:
             self.currentPanelName = ''
 
-        #Call update upon ScreenXYElev to update the whole screen upon picking floor plan
+        #Call update upon ScreenXYElev to update the whole screen upon picking panel
         self.panelTable.itemClicked.connect(self.updateScreenXYElev)
 
         #Call cell name change
@@ -87,9 +87,9 @@ class panelsUI(QDialog):
         column = 0
         bottom = 1
         top = 2
-        #Clear the floorplan table
+        #Clear the panel table
         self.panelTable.setRowCount(0)
-        #Iterate through and add the floor plans
+        #Iterate through and add the panels
         for i,panel in enumerate(self.tower.panels):
             Lower = min(self.tower.panels[panel].lowerLeft.z,self.tower.panels[panel].lowerRight.z)
             Upper = max(self.tower.panels[panel].upperLeft.z,self.tower.panels[panel].upperRight.z)
@@ -140,7 +140,6 @@ class panelsUI(QDialog):
         self.selectedPanelName.setText(item.text())
 
 
-
     def nameChange(self):
         '''Change the name according '''
         column = 0
@@ -164,7 +163,7 @@ class panelsUI(QDialog):
         self.delete_2.setIcon(QIcon(':/Icons/minus.png'))
 
     def addPanel(self):
-        '''Adding new floor plans'''
+        '''Adding new panel'''
         newPanel = Panel()
         id = 1
         newPanel.name = str(id)
@@ -175,7 +174,7 @@ class panelsUI(QDialog):
         self.populate()
 
     def deletePanel(self):
-        '''Delete floor plan from tower'''
+        '''Delete panel from tower'''
         indices = self.panelTable.selectionModel().selectedRows()
         for index in sorted(indices):
             item = self.panelTable.item(index.row(),index.column())
@@ -188,8 +187,8 @@ class panelsUI(QDialog):
         TableIndex = {
             'lowerLeft' : 1,
             'upperLeft' : 0,
-            'upperRight' :2,
-            'lowerRight' :3
+            'upperRight' : 2,
+            'lowerRight' : 3
         }
 
         CoordIndex = {
@@ -215,6 +214,13 @@ class panelsUI(QDialog):
     def savePanel(self):
         '''Overwrite the tower linked to the main model'''
         self.towerRef.panels = self.tower.panels
+        
+        # clear all panels in floors if panels are updated
+        for elev in self.towerRef.elevations:
+            floor = self.towerRef.floors[elev]
+            floor.panels.clear()
+
+        self.towerRef.addPanelsToFloors()
 
     def setOkandCancelButtons(self):
         #Constructor

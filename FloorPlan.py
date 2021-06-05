@@ -3,9 +3,11 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *  # extends QtCore with GUI functionality
 from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
-from Model import *
 
+from Model import *
 from View2DEngine import *  # import View2DEngine
+from Message import *
+
 import copy
 
 import resources    # For icons and UIs
@@ -20,7 +22,7 @@ class FloorPlanUI(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QFile(':/UI/autobuilder_floordesign_v1.ui')
+        fileh = QFile(':/UI/autobuilder_floordesign_v2.ui')
         fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
@@ -44,8 +46,8 @@ class FloorPlanUI(QDialog):
         #Call update on the Coordinate table upon change in cell
         self.XYCoordTable.itemSelectionChanged.connect(self.updateCoordinates)
 
-        #Call update in the elevation Table upon the table being clicked
-        self.ElevationTable.itemClicked.connect(self.updateElevations)
+        #Call update in the elevation Table upon upon change in cell
+        self.ElevationTable.itemSelectionChanged.connect(self.updateElevations)
 
         #create a copy of the tower to reassign if user saves.
         self.tower = copy.deepcopy(args[0].tower)
@@ -87,61 +89,81 @@ class FloorPlanUI(QDialog):
             item.setText(self.tower.floorPlans[floorPlan].name)
             self.floorPlanTable.setItem(i, column, item)
 
-    def createElevationRow(self,rows,X,Y,elevation, checked = False):
+        self.populateElevationTable()
+
+    def populateElevationTable(self):
+        '''update the elevations and the associated floor plans'''
+        X = 0
+        Y = 1
+        Z = 2
+
+        self.ElevationTable.setRowCount(0)
+        
+        for rows, elev in enumerate(self.tower.elevations):
+            if elev in self.tower.floors:
+
+                floorPlans = self.tower.floors[elev].floorPlans
+                numFPs = len(floorPlans)
+
+                fpName1 = ''
+                fpName2 = ''
+
+                if numFPs >= 1:
+                    fpName1 = floorPlans[0].name
+                if numFPs == 2:
+                    fpName2 = floorPlans[1].name
+
+                self.createElevationRow(rows, X, Y, Z, elev, fpName1, fpName2)
+
+    def createElevationRow(self,rows,X,Y,Z,elevation, floorPlan1, floorPlan2):
         '''Create elevations row for the UpdateScreenXYElev'''
         self.ElevationTable.insertRow(self.ElevationTable.rowCount())
-        self.ElevationTable.setItem(rows, X, QTableWidgetItem(str(elevation)))
-        checkbox = QTableWidgetItem()
-        checkbox.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
-        if checked == True:
-            checkbox.setCheckState(Qt.Checked)
-        else:
-            checkbox.setCheckState(Qt.Unchecked)  # Uncheck those checkbox
-        self.ElevationTable.setItem(rows, Y, checkbox)
+
+        # To prevent user from editing the elevation column
+        elevItem = QTableWidgetItem(str(elevation))
+        elevItem.setFlags(Qt.ItemIsEnabled)
+
+        self.ElevationTable.setItem(rows, X, elevItem)
+        self.ElevationTable.setItem(rows, Y, QTableWidgetItem(floorPlan1))
+        self.ElevationTable.setItem(rows, Z, QTableWidgetItem(floorPlan2))
 
     def updateScreenXYElev(self):
         '''Update everything on selected item on the right tab'''
         #Update XYCOord Table
         column = 0
         self.XYCoordTable.setRowCount(0)
+
         X = 0
         Y = 1
-        row = self.floorPlanTable.currentRow() #returns -1 when i'm repopulation the table
-        item = self.floorPlanTable.item(row,column)
+        botCol = 2
+        topCol = 3
+
+        fp_row = self.floorPlanTable.currentRow() #returns -1 when i'm repopulation the table
+        item = self.floorPlanTable.item(fp_row,column)
         floorPlan = self.tower.floorPlans[item.text()]
         self.currentFloorPlanName = item.text()
-        for rows, member in enumerate(floorPlan.members):
+
+        # Update X Y coordinates
+        for XY_row, member in enumerate(floorPlan.members):
             node = member.start_node
             self.XYCoordTable.insertRow(self.XYCoordTable.rowCount())
-            self.XYCoordTable.setItem(rows, X, QTableWidgetItem(str(node.x)))
-            self.XYCoordTable.setItem(rows, Y, QTableWidgetItem(str(node.y)))
+            self.XYCoordTable.setItem(XY_row, X, QTableWidgetItem(str(node.x)))
+            self.XYCoordTable.setItem(XY_row, Y, QTableWidgetItem(str(node.y)))
+
+        # Update top connection labels
+        for top in floorPlan.topConnections:
+            list_top_row = floorPlan.topConnections[top]
+            for top_row in list_top_row:
+                self.XYCoordTable.setItem(top_row, topCol, QTableWidgetItem(str(top)))
+
+        # Update bottom connection labels
+        for bot in floorPlan.bottomConnections:
+            list_bot_row = floorPlan.bottomConnections[bot]
+            for bot_row in list_bot_row:
+                self.XYCoordTable.setItem(bot_row, botCol, QTableWidgetItem(str(bot)))
 
         #UpdateElevationTableView based on Selecteditems
-        self.ElevationTable.setRowCount(0)
-        for rows, elevation in enumerate(self.tower.elevations):
-            if elevation in floorPlan.elevations:
-                self.createElevationRow(rows, X, Y, elevation, checked=True)
-            else:
-                self.createElevationRow(rows, X, Y, elevation, checked=False)
-        self.SelectedFloorName.setText(self.floorPlanTable.item(row, column).text())
-
-        #Update the floorplan viewer
-        # elev = floorPlan.elevations[1]
-        # self.floorPlanViewer.elevation = elev
-
-    def updateElevations(self):
-        '''update the elevations associated with the floorplan upon the checkbox'''
-        X= 0
-        Y =1
-        if self.SelectedFloorName.toPlainText() != '':
-            floorPlan = self.tower.floorPlans[self.SelectedFloorName.toPlainText()]
-            floorPlan.elevations.clear()
-            for i in range(self.ElevationTable.rowCount()):
-                elevation = self.ElevationTable.item(i,X).text()
-                Check = self.ElevationTable.item(i,Y)
-                #Check if the check box is ticked off and add the elevation
-                if Check.checkState() == 2:
-                    floorPlan.addElevation(float(elevation))
+        self.SelectedFloorName.setText(self.floorPlanTable.item(fp_row, column).text())
 
     def nameChange(self):
         '''Change the name according '''
@@ -158,9 +180,6 @@ class FloorPlanUI(QDialog):
             floorPlan.name =  item.text()
             self.tower.floorPlans[item.text()]=self.tower.floorPlans.pop(self.currentFloorPlanName)
             self.updateScreenXYElev()
-
-
-
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''
@@ -192,28 +211,60 @@ class FloorPlanUI(QDialog):
     def updateCoordinates(self):
         '''Update the coordinates associated with the floor plan based on current '''
         nodes = []
-        X= 0
-        Y =1
-        #Check if the label associated with it is empty or not ^ occurs upon intialization
+        X = 0
+        Y = 1
+        botCol = 2
+        topCol = 3 
+
+        #Check if the label associated with it is empty or not occurs upon intialization
         if self.SelectedFloorName.toPlainText() != '':
             floorPlan = self.tower.floorPlans[self.SelectedFloorName.toPlainText()]
+
+            # reset floor plan data
+            floorPlan.topConnections.clear()
+            floorPlan.bottomConnections.clear()
+
             for i in range(self.XYCoordTable.rowCount()):
                 Xitem = self.XYCoordTable.item(i,X).text()
                 Yitem = self.XYCoordTable.item(i,Y).text()
-                node = Node(int(Xitem),int(Yitem))
+
+                try:
+                    node = Node(float(Xitem),float(Yitem))
+                except:
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Coordinates must be in numbers')
+
+                    self.XYCoordTable.setItem(i, X, QTableWidgetItem('0'))
+                    self.XYCoordTable.setItem(i, Y, QTableWidgetItem('0'))
+                    return
+                
                 nodes.append(node)
+
+                botItem = self.XYCoordTable.item(i,botCol).text()
+                topItem = self.XYCoordTable.item(i,topCol).text()
+
+                floorPlan.addBottomConnection(botItem, i)
+                floorPlan.addTopConnection(topItem, i)
+
             floorPlan.nodes = nodes
             floorPlan.generateMembersfromNodes()
 
     def addCoordinate(self):
         X = 0
         Y = 1
-        row = self.XYCoordTable.rowCount()
-        self.XYCoordTable.insertRow(self.XYCoordTable.rowCount())
-        self.XYCoordTable.setItem(row, X, QTableWidgetItem(str(0)))
-        self.XYCoordTable.setItem(row, Y, QTableWidgetItem(str(0)))
-        self.updateCoordinates()
+        topCol = 2
+        botCol = 3
 
+        row = self.XYCoordTable.rowCount()
+        self.XYCoordTable.insertRow(row)
+
+        itemX, itemY, itemTop, itemBot = (QTableWidgetItem('0'), QTableWidgetItem('0'), QTableWidgetItem(str(row+1)), QTableWidgetItem(str(row+1)))
+        self.XYCoordTable.setItem(row, X, itemX)
+        self.XYCoordTable.setItem(row, Y, itemY)
+        self.XYCoordTable.setItem(row, topCol, itemTop)
+        self.XYCoordTable.setItem(row, botCol, itemBot)
+
+        self.updateCoordinates()
 
     def deleteCoordinate(self):
         '''delete coordinates and call update coordinates on the table for the floor plan nodes'''
@@ -226,20 +277,42 @@ class FloorPlanUI(QDialog):
         '''do Nothing'''
         self.towerRef = self.towerRef
 
+    def updateElevations(self):
+        ''' Update the floor object on every elevation with the associated floor plans based on current '''
+        X = 0
+        Y = 1
+        Z = 2
+
+        for i in range(self.ElevationTable.rowCount()):
+            elevationItem = self.ElevationTable.item(i,X).text()
+            floorPlan1Item = self.ElevationTable.item(i,Y).text()
+            floorPlan2Item = self.ElevationTable.item(i,Z).text()
+
+            # clear existing floor plans on each floor
+            elevation = float(elevationItem)
+            floor = self.tower.floors[elevation]
+            floor.floorPlans.clear()
+
+            if floorPlan1Item in self.tower.floorPlans:
+                floor.addFloorPlan(self.tower.floorPlans[floorPlan1Item])
+            if floorPlan2Item in self.tower.floorPlans:
+                floor.addFloorPlan(self.tower.floorPlans[floorPlan2Item])
+
     def saveFloorPlan(self):
         '''Overwrite the tower linked to the main model'''
         self.towerRef.floorPlans = self.tower.floorPlans
+        self.towerRef.floors = self.tower.floors
 
         # Maybe need a wrapper function ---------------------
-        # clear all faces and panels if floor plan is updated
-        self.towerRef.clearFloor()
+        # clear all faces, panels, floors and columns if floor plan is updated
         self.towerRef.faces.clear()
         self.towerRef.panels.clear()
-        self.towerRef.columns.clear()
+        for elev in self.towerRef.elevations:
+            floor  = self.towerRef.floors[elev]
+            floor.panels.clear()
+        self.towerRef.columns.clear()       
 
-        self.towerRef.addFloorPlansToFloors()
-        for name in self.towerRef.floorPlans:
-            self.towerRef.generateFacesByFloorPlan(self.towerRef.floorPlans[name])
+        self.towerRef.generateFaces()
         self.towerRef.generateColumnsByFace()     
         
     def setOkandCancelButtons(self):
@@ -269,7 +342,6 @@ class FloorPlanUI(QDialog):
         vMembers = []
         vNodes = []
         vTexts = []
-
 
         # Step 2: Create view object for floor plans
         color_fplan = Color.FloorPlan['MainMenu']
@@ -301,11 +373,10 @@ class FloorPlanUI(QDialog):
             vMembers.append(vMember)
             vNodes.append(vNode)
 
-
-
         return vMembers, vNodes, vTexts
 
     def updateSectionView(self):
+
         if not self.tower.floors:  # update only when floors are provided
             return
 

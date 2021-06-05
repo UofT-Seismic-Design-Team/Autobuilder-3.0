@@ -97,8 +97,7 @@ class View3DGLWidget(QGLWidget):
         for elev in self.tower.floors:
             floor = self.tower.floors[elev]
             # will draw lines between the two points
-            for floorPlan_name in floor.floorPlans:
-                floorPlan = floor.floorPlans[floorPlan_name]
+            for floorPlan in floor.floorPlans:
                 for member in floorPlan.members:
                     start_node = member.start_node
                     end_node = member.end_node
