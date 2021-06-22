@@ -251,9 +251,24 @@ class RunTower(QDialog):
             end_node_x = panel.lowerLeft.x + node2.x * panel_vec_horiz[0] + node2.y * panel_vec_vert[0]
             end_node_y = panel.lowerLeft.y + node2.x * panel_vec_horiz[1] + node2.y * panel_vec_vert[1]
             end_node_z = panel.lowerLeft.z + node2.x * panel_vec_horiz[2] + node2.y * panel_vec_vert[2]
+
+            # TESTING
+            print('start_node_x:', start_node_x)
+            print('start_node_y:', start_node_y)
+            print('start_node_z:',start_node_z)
+            print('end_node_x:',end_node_x)
+            print('end_node_y:',end_node_y)
+            print('end_node_z:',end_node_z)
+
             # Create the member
             [member_name, ret] = SapModel.FrameObj.AddByCoord(start_node_x, start_node_y, start_node_z, end_node_x,
                                                               end_node_y, end_node_z, PropName=section)
+
+            # TESTING
+            print("Member Name:", member_name)
+
             if ret != 0:
                 print('ERROR building member in panel')
-            panel.IDs.append(member_name)
+
+            if member_name is not None:
+                panel.IDs.append(member_name)

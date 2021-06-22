@@ -611,6 +611,13 @@ class MainWindow(QMainWindow):
         generateTower = GenerateTower(self)
         generateTower.exec_()
 
+    # Run towers --------------------------------------------
     def createSAPModels(self, signal):
+
+        if not self.tower.inputTable:
+            msg = WarningMessage()
+            msg.popUpErrorBox('Please generate input table before running SAP2000')
+            return
+
         runTower = RunTower(self)
         runTower.exec_()

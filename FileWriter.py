@@ -87,55 +87,42 @@ class FileWriter:
         with open(sAssignmentsLoc, 'r') as f:
             sAssignments = f.read()
 
+        headers = [
+            MFHeader.projectSettings,
+            MFHeader.displaySettings,
+            MFHeader.floorPlans,
+            MFHeader.floors,
+            MFHeader.panels,
+            MFHeader.bracings,
+            MFHeader.bracingGroups,
+            MFHeader.sectionGroups,
+            MFHeader.bracingAssignments,
+            MFHeader.sectionAssignments,
+        ]
+
+        datasets = [
+            psettings,
+            dsettings,
+            floorPlan,
+            floor,
+            panel,
+            bracings,
+            bGroups,
+            sGroups,
+            bAssignments,
+            sAssignments,
+        ]
+
         with open(self.mainFileLoc, 'w') as mainFile:
-            mainFile.write(MFHeader.projectSettings)
-            mainFile.write('\n')
-            mainFile.write(psettings)
+            for i, header in enumerate(headers):
+                 mainFile.write(header)
+                 mainFile.write('\n')
+                 mainFile.write(datasets[i])
 
-            mainFile.write('\n')
-            mainFile.write(MFHeader.displaySettings)
-            mainFile.write('\n')
-            mainFile.write(dsettings)
+                 if i == len(headers)-1: # avoid the unnecessary new line at the end
+                     break
 
-            mainFile.write('\n')
-            mainFile.write(MFHeader.floorPlans)
-            mainFile.write('\n')
-            mainFile.write(floorPlan)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.floors)
-            mainFile.write('\n')
-            mainFile.write(floor)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.panels)
-            mainFile.write('\n')
-            mainFile.write(panel)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.bracings)
-            mainFile.write('\n')
-            mainFile.write(bracings)
-            
-            mainFile.write('\n')
-            mainFile.write(MFHeader.bracingGroups)
-            mainFile.write('\n')
-            mainFile.write(bGroups)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.sectionGroups)
-            mainFile.write('\n')
-            mainFile.write(sGroups)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.bracingAssignments)
-            mainFile.write('\n')
-            mainFile.write(bAssignments)
-
-            mainFile.write('\n')
-            mainFile.write(MFHeader.sectionAssignments)
-            mainFile.write('\n')
-            mainFile.write(sAssignments)
+                 mainFile.write('\n')
 
     def writeProjectSettings(self):
         ''' Write project settings data to file '''

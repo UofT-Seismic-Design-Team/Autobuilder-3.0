@@ -75,10 +75,10 @@ class BracingScheme(QDialog):
         timer.start()
 
     def setIconsForButtons(self):
-        self.addBracingSchemeButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
-        self.deleteBracingSchemeButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
-        self.addCoordButton.setIcon(QIcon(':/Icons/24x24\plus.png'))
-        self.deleteCoordButton.setIcon(QIcon(':/Icons/24x24\minus.png'))
+        self.addBracingSchemeButton.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteBracingSchemeButton.setIcon(QIcon(':/Icons/minus.png'))
+        self.addCoordButton.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteCoordButton.setIcon(QIcon(':/Icons/minus.png'))
 
     def setOkandCancelButtons(self):
         '''OK and Cancel button both exit dialog but have no save function!'''

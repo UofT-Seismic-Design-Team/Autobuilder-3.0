@@ -46,7 +46,7 @@ class GenerateTower(QDialog):
         # Update views -----------------------------
         timer  = QTimer(self)
         timer.setInterval(10) # period in miliseconds
-        timer.timeout.connect(self.addProgress) # updateGL calls paintGL automatically!!
+        timer.timeout.connect(self.addProgress)
         timer.start()
 
     def addPanelsToBracingGroups(self):
@@ -67,24 +67,6 @@ class GenerateTower(QDialog):
         for member_id in member_ids:
             sgName = member_ids[member_id]
             sectionGroups[sgName].addMemberId(member_id)
-
-    # def GenerateCombo(self):
-    #     bracingGroups = self.tower.bracingGroups
-    #     sectionGroups = self.tower.sectionGroups
-
-    #     # create lists of variables
-    #     bgs = list(bracingGroups.values())
-    #     sgs = list(sectionGroups.values())
-
-    #     # create lists for combinations (MUST BE IN THIS ORDER)
-    #     variables = []
-    #     for bg in bgs:
-    #         variables.append([str(b) for b in bg.bracings])
-    #     for sg in sgs:
-    #         variables.append([str(s) for s in sg.sections])
-
-    #     # create combinations
-    #     self.combos = tuple(product(*variables))
 
     def GenerateInputTable(self):
         self.addPanelsToBracingGroups()
@@ -131,56 +113,6 @@ class GenerateTower(QDialog):
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)
         filewriter.writeInputTable(self.tower.inputTable)
-   
-    # def GenerateInputTable(self):
-    #     self.addPanelsToBracingGroups()
-    #     self.addMemberIdsToSectionGroups()
-    #     self.GenerateCombo()
-
-    #     bracingGroups = self.tower.bracingGroups
-    #     sectionGroups = self.tower.sectionGroups
-
-    #     # create lists of variables
-    #     bgs = list(bracingGroups.values())
-    #     sgs = list(sectionGroups.values())
-
-    #     # create a list of dicts (MUST BE IN THIS ORDER)
-    #     towerVariations = []
-
-    #     for bg in bgs:
-    #         panels = bg.panelAssignments
-    #         var = {}
-    #         for panel in panels:
-    #             var[str(panel)] = []
-    #         towerVariations.append(var)
-
-    #     for sg in sgs:
-    #         member_ids = sg.memberIdAssignments
-    #         var = {}
-    #         for member_id in member_ids:
-    #             var['Member ' + member_id] = []
-    #         towerVariations.append(var)
-
-    #     # Apply combinations
-    #     for combo in self.combos:
-    #         for i, dVar in enumerate(towerVariations):
-    #             param = combo[i]
-    #             for assignName in dVar:
-    #                 dVar[assignName].append(param)
-
-    #     # Convert list of dicts
-    #     tower_enum = [i for i in range(1,len(self.combos)+1)]
-    #     self.inputTable['towerNumber'] = tower_enum
-
-    #     for var in towerVariations:
-    #        self.inputTable.update(var)
-
-    #     # Update inputTable in tower
-    #     self.tower.updateInputTable(self.inputTable)
-
-    #     # Save inputTable
-    #     filewriter = FileWriter(self.fileLoc, self.tower)
-    #     filewriter.writeInputTable(self.inputTable)
 
     def addProgress(self):
         self.counter += 1
