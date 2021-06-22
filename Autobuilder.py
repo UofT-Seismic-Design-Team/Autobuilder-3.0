@@ -2,6 +2,7 @@ import os
 import sys
 import comtypes.client
 import comtypes.gen
+import numpy
 
 
 def build_floor_plan_and_bracing(SapModel, tower, all_floor_plans, all_floor_bracing, floor_num, floor_elev):

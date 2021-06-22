@@ -4,8 +4,8 @@ sect_props,BALSA_0.5x0.5 1
 sect_props,BALSA_0.1875x0.1875 2
 gm,False
 analysis,Time_History
-modelLoc,SAP
-modelName,Existing_Structure_Feb_22.sdb
+modelLoc,C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/SAP/Addition_0303.sdb
+modelName,Addition_0303.sdb
 renderX,12.0
 renderY,12.0
 renderZ,60.0

@@ -7,7 +7,7 @@ from typing import List
 # - Stores classes that define the geometry of the tower and its components
 
 # -------------------------------------------------------------------------
-# Wrapper class for all the data
+# Wrapper class for all data
 class Tower:
 
     def __init__(self, elevations = []):

@@ -1,7 +1,6 @@
 from Model import * # contains tower design components
 import ProjectSettings  # contains data in project settings
 from Definition import MFHeader, StringToEnum
-import pandas as pd  # use data frame to read files
 
 class FileReader:
     def __init__(self, fileLoc, tower, psData):
@@ -43,7 +42,7 @@ class FileReader:
                     comp.append(None)
                     continue
 
-                start = comp[1]+1
+                start = comp[1]+1 # skip header
                 if start < sortedHeaderLoc[-1]:
                     end = sortedHeaderLoc[sortedHeaderLoc.index(comp[1])+1]-1
                     comp.append(lines[start:end])

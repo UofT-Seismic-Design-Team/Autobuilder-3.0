@@ -1,0 +1,9 @@
+towerNumber,Panel 1,Panel 2,Panel 3
+1,default,default,default
+2,default,default,X
+3,default,X,default
+4,default,X,X
+5,X,default,default
+6,X,default,X
+7,X,X,default
+8,X,X,X
