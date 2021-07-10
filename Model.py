@@ -330,9 +330,6 @@ class Tower:
                 self.columns[leftColumn.name] = leftColumn
                 self.columns[rightColumn.name] = rightColumn
 
-    def updateInputTable(self,inputTable):
-        self.inputTable = inputTable
-
 # -------------------------------------------------------------------------
 class Floor:
     def __init__(self, elevation):
