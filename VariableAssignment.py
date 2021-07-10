@@ -118,7 +118,7 @@ class VariableAssignment(QDialog):
             if member_id not in tempS:
                 tempS.append(member_id)
             else:
-                warning.popUpErrorBox('Duplicate or non-existent panels!')
+                warning.popUpErrorBox('Duplicate or non-existent members!')
                 return
 
         # clear all existing assignments
@@ -129,15 +129,13 @@ class VariableAssignment(QDialog):
         for i in range(rowNumB):
             panelItem = self.BracingAssignmentTable.item(i,0)
             bg = self.BracingAssignmentTable.cellWidget(i,1).currentText()
-            '''TEST'''
-            #print(bg)
 
             # Check if the row is filled
             if panelItem == None or bg == None:
                 break
                 # warning here?
             panel = panelItem.text()
-            self.tower.panels[panel].bracingGroup = bg
+            self.tower.panels[panel].addBracingAssignment(bg)
         
         for i in range(rowNumS):
             member_idItem = self.SectionAssignmentTable.item(i,0)

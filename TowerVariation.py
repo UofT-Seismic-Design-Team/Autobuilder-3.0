@@ -34,11 +34,6 @@ class GenerateTower(QDialog):
 
         self.counter = 0
 
-        # redundant; may be useful later
-        # use the inputtable in tower class
-        #self.inputTable = {}    # keys: "tower", panel, member id; values: num, bracing, section
-        #self.combos = () # all combinations of the variables
-
         self.GenerateInputTable()
 
         self.OkButton.clicked.connect(lambda x: self.close())
@@ -53,6 +48,10 @@ class GenerateTower(QDialog):
         panels = self.tower.panels
         bracingGroups = self.tower.bracingGroups
 
+        # clear existing panel assignments
+        for bg in bracingGroups.values():
+            bg.panelAssignments.clear()
+
         for pName in panels:
             panel = panels[pName]
             bgName = panel.bracingGroup
@@ -63,6 +62,10 @@ class GenerateTower(QDialog):
     def addMemberIdsToSectionGroups(self):
         member_ids = self.tower.member_ids
         sectionGroups = self.tower.sectionGroups
+
+        # clearn existing member id assignments
+        for sg in sectionGroups.values():
+            sg.memberIdAssignments.clear()
 
         for member_id in member_ids:
             sgName = member_ids[member_id]
@@ -106,9 +109,6 @@ class GenerateTower(QDialog):
 
         # for var in dict_of_combos:
         self.tower.inputTable.update(dict_of_combos)
-
-        # Update inputTable in tower
-        self.tower.updateInputTable(self.tower.inputTable)
 
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)

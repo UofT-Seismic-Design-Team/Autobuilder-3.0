@@ -15,6 +15,7 @@ class FileExtension:
     bracingAssignments = '/bracingAssignments.csv'
     sectionAssignments = '/sectionAssignments.csv'
     inputTable = '/inputTable.csv'
+    SAPModels = '/SAP Models'
 
 class MFHeader:
     ''' Main file header '''
@@ -67,6 +68,27 @@ class Color:
 
     Text = {
         'MainMenu': 'black',
+    }
+
+class SAP2000Constants:
+    Units = {
+        'kip_in_F': 3,
+        'N_m_C': 10,
+        'N_mm_C': 9,
+    }
+
+    MaxDecimalPlaces = 6
+
+class Constants:
+    g = 9.81 # in m/s^2
+
+class UnitConversion:
+
+    # relative to kg 
+    # from xxx to kg
+    # e.g. 1 lb = 0.453592 kg
+    Mass = {
+        'lb': 0.453592
     }
        
 class View2DConstants:
