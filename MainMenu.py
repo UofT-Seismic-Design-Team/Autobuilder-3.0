@@ -160,14 +160,6 @@ class MainWindow(QMainWindow):
         self.tower.generateFaces()
         self.tower.generateColumnsByFace()
 
-        # for plan in allFloorPlans:
-        #     self.tower.generateFacesByFloorPlan(plan)
-
-        # self.tower.generateFacesByFloorPlans(allFloorPlans)       
-        # self.tower.generatePanelsByFace()
-        # self.tower.addPanelsToFloors()
-        # self.tower.generateColumnsByFace()
-
         #------------------------------------------------
         # Set project settings data for all views
         self.setProjectSettingsDataForViews()
@@ -383,7 +375,7 @@ class MainWindow(QMainWindow):
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
         projectSettings = ProjectSettings.ProjectSettings(self)
-        projectSettings.display()
+        projectSettings.Populate()
 
         projectSettings.exec_()
 
@@ -565,22 +557,9 @@ class MainWindow(QMainWindow):
 
     def generatePanelsFromFloorPlan(self, signal):  
         if self.tower.panels:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
-            msg.setText("Warning")
-            msg.setInformativeText('Do you want to generate panels in addition to the existing ones?')
-            msg.setWindowTitle("Warning")
-
-            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-
-            OkButton = msg.button(QMessageBox.Ok)
-            OkButton.clicked.connect(lambda s: self.tower.generatePanels_addToFloors())
-            OkButton.clicked.connect(lambda s: msg.close())
-
-            CancelButton = msg.button(QMessageBox.Cancel)
-            CancelButton.clicked.connect(lambda s: msg.close())
-
-            msg.exec_()
+            warning = WarningMessage()
+            title = 'Do you want to generate panels in addition to the existing ones?'
+            warning.popUpConfirmation(title, self.tower.generatePanels_addToFloors)
 
         else:
             self.tower.generatePanels_addToFloors()
@@ -608,6 +587,7 @@ class MainWindow(QMainWindow):
             msg = WarningMessage()
             msg.popUpErrorBox('Please save before generating input table')
             return
+
         generateTower = GenerateTower(self)
         generateTower.exec_()
 

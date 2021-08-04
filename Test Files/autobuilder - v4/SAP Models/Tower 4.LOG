@@ -6,15 +6,15 @@
 
 
 
- B E G I N   A N A L Y S I S                                2021/07/03  12:41:45
+ B E G I N   A N A L Y S I S                                2021/08/01  11:48:06
 
 
  RUNNING ANALYSIS WITHIN THE GUI PROCESS
  USING THE ADVANCED SOLVER (PROVIDES LIMITED INSTABILITY INFORMATION)
 
- NUMBER OF JOINTS                          =         933
+ NUMBER OF JOINTS                          =         953
     WITH RESTRAINTS                        =           8
- NUMBER OF FRAME/CABLE/TENDON ELEMENTS     =        1898
+ NUMBER OF FRAME/CABLE/TENDON ELEMENTS     =        2124
  NUMBER OF SHELL ELEMENTS                  =          10
  NUMBER OF LOAD PATTERNS                   =           1
  NUMBER OF ACCELERATION LOADS              =           9
@@ -33,16 +33,16 @@
  NUMBER OF THREADS: FORM (AUTOMATIC)       =           2
 
 
- E L E M E N T   F O R M A T I O N                                      12:41:45
+ E L E M E N T   F O R M A T I O N                                      11:48:06
 
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        12:41:46
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        11:48:06
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
- TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        5550
- NUMBER OF NON-ZERO STIFFNESS TERMS        =       89121
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        5670
+ NUMBER OF NON-ZERO STIFFNESS TERMS        =       90981
 
  ---------------------------------
  BASIC STABILITY CHECK FOR LINEAR LOAD CASES:
@@ -54,7 +54,7 @@
  ---------------------------------
 
 
- L I N E A R   S T A T I C   C A S E S                                  12:41:46
+ L I N E A R   S T A T I C   C A S E S                                  11:48:07
 
  USING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -66,14 +66,14 @@
  CASE: DEAD
 
 
- E I G E N   M O D A L   A N A L Y S I S                                12:41:46
+ E I G E N   M O D A L   A N A L Y S I S                                11:48:07
 
  CASE: MODAL
 
  USING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
- NUMBER OF STIFFNESS DEGREES OF FREEDOM    =        5550
- NUMBER OF MASS DEGREES OF FREEDOM         =        2775
+ NUMBER OF STIFFNESS DEGREES OF FREEDOM    =        5670
+ NUMBER OF MASS DEGREES OF FREEDOM         =        2835
  MAXIMUM NUMBER OF EIGEN MODES SOUGHT      =          12
  MINIMUM NUMBER OF EIGEN MODES SOUGHT      =           1
  NUMBER OF RESIDUAL-MASS MODES SOUGHT      =           0
@@ -87,39 +87,36 @@
 
  Original stiffness at shift : EV= 0.0000000E+00, f=     .000000, T=  -INFINITY-
  Number of eigenvalues below shift =      0
+ Found mode      1 of     12:  EV= 1.5200558E+02, f=    1.962230, T=    0.509624
+ Found mode      2 of     12:  EV= 1.5667753E+03, f=    6.299753, T=    0.158736
+ Found mode      3 of     12:  EV= 5.4465280E+03, f=   11.745730, T=    0.085137
+ Found mode      4 of     12:  EV= 1.2228522E+04, f=   17.599775, T=    0.056819
+ Found mode      5 of     12:  EV= 1.3464066E+04, f=   18.467506, T=    0.054149
+ Found mode      6 of     12:  EV= 1.5063831E+04, f=   19.533850, T=    0.051193
+ Found mode      7 of     12:  EV= 1.6360987E+04, f=   20.357521, T=    0.049122
+ Found mode      8 of     12:  EV= 1.7072402E+04, f=   20.795408, T=    0.048088
 
- Forming stiffness, new shift: EV= 5.1068915E+03, f=   11.373613, T=    0.087923
- Number of eigenvalues below shift =      0
- Found mode      1 of     12:  EV= 5.3751169E+03, f=   11.668475, T=    0.085701
- Found mode      2 of     12:  EV= 8.2045365E+03, f=   14.416079, T=    0.069367
- Found mode      3 of     12:  EV= 8.5122052E+03, f=   14.683892, T=    0.068102
- Found mode      4 of     12:  EV= 9.0366121E+03, f=   15.129443, T=    0.066096
+ Forming stiffness, new shift: EV= 2.2198971E+04, f=   23.713003, T=    0.042171
+ Number of eigenvalues below shift =      8
+ Found mode      9 of     12:  EV= 2.3367328E+04, f=   24.329022, T=    0.041103
+ Found mode     10 of     12:  EV= 2.4949657E+04, f=   25.139256, T=    0.039778
+ Found mode     11 of     12:  EV= 2.7162569E+04, f=   26.230439, T=    0.038124
 
- Forming stiffness, new shift: EV= 1.5353044E+04, f=   19.720476, T=    0.050709
- Number of eigenvalues below shift =      4
-
- Forming stiffness, new shift: EV= 1.5846134E+04, f=   20.034651, T=    0.049914
- Number of eigenvalues below shift =      4
- Found mode      5 of     12:  EV= 1.5872086E+04, f=   20.051050, T=    0.049873
- Found mode      6 of     12:  EV= 1.5974489E+04, f=   20.115629, T=    0.049713
- Found mode      7 of     12:  EV= 1.6141992E+04, f=   20.220817, T=    0.049454
- Found mode      8 of     12:  EV= 1.6326080E+04, f=   20.335792, T=    0.049174
- Found mode      9 of     12:  EV= 1.6492396E+04, f=   20.439111, T=    0.048926
- Found mode     10 of     12:  EV= 1.6626270E+04, f=   20.521899, T=    0.048728
- Found mode     11 of     12:  EV= 1.6725607E+04, f=   20.583114, T=    0.048584
- Found mode     12 of     12:  EV= 1.6793204E+04, f=   20.624666, T=    0.048486
+ Forming stiffness, new shift: EV= 3.0580060E+04, f=   27.831672, T=    0.035930
+ Number of eigenvalues below shift =     11
+ Found mode     12 of     12:  EV= 3.1021170E+04, f=   28.031686, T=    0.035674
 
  NUMBER OF EIGEN MODES FOUND               =          12
- NUMBER OF ITERATIONS PERFORMED            =          26
- NUMBER OF STIFFNESS SHIFTS                =           3
+ NUMBER OF ITERATIONS PERFORMED            =          28
+ NUMBER OF STIFFNESS SHIFTS                =           2
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        12:41:49
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        11:48:09
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
- TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        5550
- NUMBER OF NON-ZERO STIFFNESS TERMS        =       89121
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        5670
+ NUMBER OF NON-ZERO STIFFNESS TERMS        =       90981
 
  ---------------------------------
  BASIC STABILITY CHECK FOR LINEAR LOAD CASES:
@@ -131,7 +128,7 @@
  ---------------------------------
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:41:49
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:10
 
  CASE: GM1-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -146,18 +143,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -1182,7 +1179,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:41:54
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:12
 
  CASE: GM1-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -1197,18 +1194,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -2233,7 +2230,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:41:57
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:15
 
  CASE: GM2-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -2248,18 +2245,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -3270,7 +3267,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:42:00
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:16
 
  CASE: GM2-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -3285,18 +3282,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -4307,7 +4304,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:42:03
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:19
 
  CASE: GM3-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -4322,18 +4319,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -5344,7 +5341,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:42:04
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:20
 
  CASE: GM3-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -5359,18 +5356,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -6381,7 +6378,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:42:06
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:22
 
  CASE: GM4-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -6396,18 +6393,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -8067,7 +8064,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              12:42:06
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              11:48:22
 
  CASE: GM4-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -8082,18 +8079,18 @@
 
 
  EFFECTIVE MODAL DAMPING RATIOS (CROSS-COUPLING TERMS ARE NEGLECTED)
-       1    0.085701    0.025000
-       2    0.069367    0.025000
-       3    0.068102    0.025000
-       4    0.066096    0.025000
-       5    0.049873    0.025000
-       6    0.049713    0.025000
-       7    0.049454    0.025000
-       8    0.049174    0.025000
-       9    0.048926    0.025000
-      10    0.048728    0.025000
-      11    0.048584    0.025000
-      12    0.048486    0.025000
+       1    0.509624    0.025000
+       2    0.158736    0.025000
+       3    0.085137    0.025000
+       4    0.056819    0.025000
+       5    0.054149    0.025000
+       6    0.051193    0.025000
+       7    0.049122    0.025000
+       8    0.048088    0.025000
+       9    0.041103    0.025000
+      10    0.039778    0.025000
+      11    0.038124    0.025000
+      12    0.035674    0.025000
    Time-step    Load-step     Sub-step    Iteration   Sub-steps/  Iterations/
       number       number       number       number    load-step     sub-step
 
@@ -9753,4 +9750,4 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- A N A L Y S I S   C O M P L E T E                          2021/07/03  12:42:13
+ A N A L Y S I S   C O M P L E T E                          2021/08/01  11:48:27

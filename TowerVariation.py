@@ -22,7 +22,7 @@ from itertools import product
 class GenerateTower(QDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-  
+
         # Load the UI Page
         fileh = QFile(':/UI/autobuilder_generatetower.ui')
         fileh.open(QFile.ReadOnly)
@@ -63,7 +63,7 @@ class GenerateTower(QDialog):
         member_ids = self.tower.member_ids
         sectionGroups = self.tower.sectionGroups
 
-        # clearn existing member id assignments
+        # clear existing member id assignments
         for sg in sectionGroups.values():
             sg.memberIdAssignments.clear()
 
@@ -80,18 +80,33 @@ class GenerateTower(QDialog):
 
         dict_of_combos = {}
 
-        for key in bracingGroups:
-            for panel in bracingGroups[key].panelAssignments:
-                dict_of_combos[str(panel)] = []
-                for bracing in bracingGroups[key].bracings:
-                    dict_of_combos[str(panel)].append(str(bracing))
+        # for key in bracingGroups:
+        #     for panel in bracingGroups[key].panelAssignments:
+        #         dict_of_combos[str(panel)] = []
+        #         for bracing in bracingGroups[key].bracings:
+        #             dict_of_combos[str(panel)].append(str(bracing))
 
-        for key in sectionGroups:
-            for member in sectionGroups[key].memberIdAssignments:
-                dict_of_combos['Member '+ member] = []
-                for section in sectionGroups[key].sections:
-                    dict_of_combos['Member '+ member].append(str(section))
+        # for key in sectionGroups:
+        #     for member in sectionGroups[key].memberIdAssignments:
+        #         dict_of_combos['Member '+ member] = []
+        #         for section in sectionGroups[key].sections:
+        #             dict_of_combos['Member '+ member].append(str(section))
 
+        for bgName in bracingGroups:
+            bg = bracingGroups[bgName]
+            if bg.panelAssignments: # only generate combo it's assigned to panel
+                dict_of_combos[bgName] = []
+                for bracing in bg.bracings:
+                    dict_of_combos[bgName].append(str(bracing))
+
+        for sgName in sectionGroups:
+            sg = sectionGroups[sgName]
+            if sg.memberIdAssignments: # only generate combo it's assigned to member
+                dict_of_combos[sgName] = []
+                for section in sg.sections:
+                    dict_of_combos[sgName].append(str(section))
+
+        # list_of_combos contains the variables and the values in each values
         list_of_combos = [dict(zip(dict_of_combos.keys(),v)) for v in product(*dict_of_combos.values())]
 
         # reset dict
@@ -103,12 +118,30 @@ class GenerateTower(QDialog):
             for key in combo:
                 dict_of_combos[key].append(combo[key])
 
+        inputTable = {}
+
+        for varName in dict_of_combos:
+            values = dict_of_combos[varName]
+
+            inputTable['Variable-' + varName] = values
+
+            if varName in bracingGroups:
+                bg = bracingGroups[varName]
+                for panel in bg.panelAssignments:
+                    pName = str(panel)
+                    inputTable[pName] = values
+
+            if varName in sectionGroups:
+                sg = sectionGroups[varName]
+                for memberId in sg.memberIdAssignments:
+                    inputTable['Member '+ memberId] = values
+
         # Convert list of dicts
         tower_enum = [i for i in range(1,len(list_of_combos)+1)]
         self.tower.inputTable['towerNumber'] = tower_enum
 
         # for var in dict_of_combos:
-        self.tower.inputTable.update(dict_of_combos)
+        self.tower.inputTable.update(inputTable)
 
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)

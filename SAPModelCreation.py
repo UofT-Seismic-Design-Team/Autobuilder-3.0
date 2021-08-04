@@ -6,9 +6,11 @@ from PyQt5 import uic
 from Model import * # tower and other design components
 from ProjectSettings import *   # project settings data
 from TowerVariation import * # dict of combinations
+from Performance import * # results
+from FileWriter import *
+from Plot import * # For graphs and plots
 
 from Definition import *    # file extensions, EnumToString conversion
-import pandas as pd  # use data frame to write files
 
 import os
 import sys
@@ -53,10 +55,14 @@ class RunTower(QDialog):
         # Reference to existing tower
         self.tower = args[0].tower
 
+        # TODO: allow user input
+        self.costCalcIdentifier = 'GM1'
+        self.footprint = 144
+        self.totalHeight = [60] # inches
+        self.totalMass = [7.83] # kg
+
         # Tower performances
-        self.allResults = []
-        self.allCosts = []
-        self.allCR = []
+        self.towerPerformances = {}
 
         self.buildTowers()
 
@@ -80,24 +86,16 @@ class RunTower(QDialog):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         # self.roundingModelCoordinates(SapModel)
-
         runGMs = self.projectSettingsData.groundMotion
 
-        # Start scatter plot of FABI
-        plt.ion()
-        fig = plt.figure()
-        ax = plt.subplot(1,1,1)
-        ax.set_xlabel('Tower Number')
+        # Start scatter plot of tower performance
+        xlabel = 'Tower Number'
         if runGMs:
-            ax.set_ylabel('Total Cost')
-        elif not runGMs:
-            ax.set_ylabel('Period')
-        xdata = []
-        ydata = []
-        ax.plot(xdata, ydata, 'ro', markersize=6)
-        plt.grid(True)
-
-        plt.show(block=False)
+            ylabel = 'Total Cost'
+        else:
+            ylabel = 'Period'
+        plotter = Plotter(xlabel, ylabel)
+        plotter.show()
 
         inputTable = self.tower.inputTable
         for i, towerNum in enumerate(inputTable['towerNumber']):
@@ -105,58 +103,71 @@ class RunTower(QDialog):
             SapModel.SetModelIsLocked(False)
             SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
+            # Define tower performance object to store results
+            towerPerformance = TowerPerformance(str(towerNum))
+
             for key in inputTable:
                 if "Panel" in key:
                     bracing = self.tower.bracings[inputTable[key][i]]
                     panel = self.tower.panels[key.strip('Panel ')]
                     self.clearPanel(SapModel, panel)
                     self.buildBracing(SapModel, panel, bracing)
+
+                # TODO: update member later
                 if "Member" in key:
                     memberID = key.strip('Member ')
                     sectionName = inputTable[key][i]
                     # build members
+                    self.changeMemberSection(SapModel, memberID, sectionName)
+
+                if "Variable-" in key:
+                    variableName = key.strip('Variable-')
+                    assignedValue = inputTable[key][i]
+
+                    towerPerformance.addVariable(variableName, assignedValue)
+
+            self.divideMembersAtIntersection(SapModel)
 
             # Save the file
             SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
-            print('panel 1:', inputTable['Panel 1'][i])
             print(SAPFileLoc)
             SapModel.File.Save(SAPFileLoc)
+
             # Analyse tower and print results to spreadsheet
-            
             print('\nAnalyzing tower number ' + str(towerNum))
             print('-------------------------')
 
-            results = self.runAnalysis(SapModel)
-            print(results)
-
-            if runGMs:
-                MaxAcc = results[0][0]
-                MaxDisp = results[0][1]
-                Weight = results[0][2]
-                # Calculate model cost
-                # TODO: allow user input
-                Footprint = 144
-                TotalHeight = [60] # inches
-                TotalMass = [7.83] # kg
-                costs = self.getCosts(MaxAcc, MaxDisp, Footprint, Weight, TotalMass, TotalHeight)
-            else:
-                costs = ['bldg cost not calculated', 'seismic cost not calculated']
+            self.runAnalysis(SapModel, towerPerformance)
                 
-            self.allResults.append(results)
-            self.allCosts.append(costs)
+            self.towerPerformances[str(towerNum)] = towerPerformance
 
             # Add cost to scatter plot
-            xdata.append(towerNum)
-            if runGMs:
-                ydata.append(costs[0] + costs[1])
-            else:
-                ydata.append(results[0][3])
+            plotter.addxData(towerNum)
+            # TODO: Will fix later 
+            avgBuildingCost = 0
+            for bdCost in towerPerformance.buildingCost.values():
+                avgBuildingCost += bdCost
+            avgBuildingCost /= len(towerPerformance.buildingCost)
 
-            ax.lines[0].set_data(xdata,ydata)
-            ax.relim()
-            ax.autoscale_view()
-            plt.xticks(numpy.arange(min(xdata), max(xdata)+1, 1.0))
-            fig.canvas.flush_events()
+            avgSeismicCost = 0
+            for sCost in towerPerformance.seismicCost.values():
+                avgSeismicCost += sCost
+            avgSeismicCost /= len(towerPerformance.seismicCost)
+
+            if runGMs:
+                plotter.addyData(avgBuildingCost + avgSeismicCost)
+            else:
+                plotter.addyData(towerPerformance.period)
+
+            plotter.updatePlot()
+            
+        # Create output table
+        filewriter = FileWriter(self.mainFileLoc)
+        filewriter.writeOutputTable(self.towerPerformances)
+
+        # Save tower performances
+        self.tower.towerPerformances.clear()
+        self.tower.towerPerformances.update(self.towerPerformances)
 
     def startSap2000(self):
         #set the following flag to True to attach to an existing instance of the program
@@ -401,7 +412,24 @@ class RunTower(QDialog):
             if member_name is not None:
                 panel.IDs.append(member_name)
 
-    def runAnalysis(self, SapModel):
+
+    def divideMembersAtIntersection(self, SapModel):
+        numNames, memberNames, ret = SapModel.FrameObj.GetNameList()
+
+        for memberName in memberNames:
+            print(memberName)
+            [num, newName, ret] = SapModel.EditFrame.DivideAtIntersections("154", 0)
+            print('ERROR dividing member ' + str(275))
+
+    def changeMemberSection(self, SapModel, memberID, sectionName):
+        # Change the section properties of specified members
+        print('\nChanging section properties of specified members...')
+        print('Changed section of member ' + str(memberID))
+        ret = SapModel.FrameObj.SetSection(str(memberID), sectionName, 0)
+        if ret != 0 :
+            print('ERROR changing section of member ' + str(memberID))
+
+    def runAnalysis(self, SapModel, towerPerformance):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         run_GMs = self.projectSettingsData.groundMotion
@@ -422,17 +450,16 @@ class RunTower(QDialog):
 
         print('Getting results...')
 
-        results = []
-        SAPAnalysis = SAP2000Analysis(SapModel)
+        analyzer = PerformanceAnalyzer(SapModel)
 
         # Find Roof nodes ---------------------------------------------
-        roofNodeNames = SAPAnalysis.getRoofNodeNames()
+        roofNodeNames = analyzer.getRoofNodeNames()
 
         # Get WEIGHT in lbs ---------------------------------
-        totalWeight = SAPAnalysis.getWeight()
+        totalWeight = analyzer.getWeight()
         
         # Get PERIOD ---------------------------------
-        period = SAPAnalysis.getPeriod()
+        period = analyzer.getPeriod()
         
         [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         for combo in AllCombos:
@@ -447,163 +474,29 @@ class RunTower(QDialog):
                 SapModel.Results.Setup.SetOptionModalHist(1)
 
                 # get max ACCELERATION ---------------------------------------
-                maxAcc = SAPAnalysis.getMaxAcceleration(roofNodeNames)
+                maxAcc = analyzer.getMaxAcceleration(roofNodeNames)
 
                 # get joint DISPLACEMENT ---------------------------------------
-                maxDisp = SAPAnalysis.getMaxDisplacement(roofNodeNames)
+                maxDisp = analyzer.getMaxDisplacement(roofNodeNames)
 
                 # Get BASE SHEAR  ---------------------------------------
-                basesh = SAPAnalysis.getBaseShear()
-                
-                results.append([maxAcc, maxDisp, totalWeight, period, basesh])
+                basesh = analyzer.getBaseShear()
 
+                if self.costCalcIdentifier in combo:
+                    buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.footprint, totalWeight, self.totalMass, self.totalHeight)
+
+                    towerPerformance.buildingCost[combo] = buildingCost
+                    towerPerformance.seismicCost[combo] = seismicCost
             else:
-                results.append(['max acc not calculated', 'max disp not calculated', totalWeight, period, 'base shear not calculated'])
+                maxAcc = 'max acc not calculated'
+                maxDisp = 'max disp not calculated'
+                basesh = 'base shear not calculated'
 
-        return results
-
-    def getCosts(self, maxAcc, maxDisp, footprint, weight, floorMasses, floorHeights):
-        # Subtract weights. Weight is initially in lb, convert to kg
-        print('Calculating costs...')
-        weight = (weight * UnitConversion.Mass['lb'] - sum(floorMasses)) / UnitConversion.Mass['lb']
-        design_life = 100 #years
-        construction_cost = 2000000*(weight**2)+6*(10**6)
-        land_cost = 35000 * footprint
-        annual_building_cost = (land_cost + construction_cost) / design_life
-        equipment_cost = 15000000
-        return_period_1 = 50
-        return_period_2 = 300
-        apeak_1 = maxAcc #g's
-        xpeak_1 = 100*maxDisp/(sum(floorHeights) * 25.4) #% roof drift
-        structural_damage_1 = scipy.stats.norm(1.5, 0.5).cdf(xpeak_1)
-        equipment_damage_1 = scipy.stats.norm(1.75, 0.7).cdf(apeak_1)
-        economic_loss_1 = structural_damage_1*construction_cost + equipment_damage_1*equipment_cost
-        annual_economic_loss_1 = economic_loss_1/return_period_1
-        structural_damage_2 = 0.5
-        equipment_damage_2 = 0.5
-        economic_loss_2 = structural_damage_2*construction_cost + equipment_damage_2*equipment_cost
-        annual_economic_loss_2 = economic_loss_2/return_period_2
-        annual_seismic_cost = annual_economic_loss_1 + annual_economic_loss_2
-
-        return annual_building_cost, annual_seismic_cost
-
-class SAP2000Analysis:
-    def __init__(self, SapModel):
-        self.SapModel = SapModel
-
-    def getWeight(self):
-        ''' None -> float '''
-        SapModel = self.SapModel
-
-        # Set units to metres
-        SapModel.SetPresentUnits(SAP2000Constants.Units['N_m_C'])
-
-        # Get base reactions
-        SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()
-        SapModel.Results.Setup.SetCaseSelectedForOutput('DEAD')
-        ret = SapModel.Results.BaseReact()
-        if ret[-1] != 0:
-            print('ERROR getting weight')
-
-        base_react = ret[6][0]
-        total_weight = abs(base_react / Constants.g)
-
-        # convert to lb
-        total_weight = total_weight / UnitConversion.Mass['lb']
-
-        return total_weight
-
-    def getMaxAcceleration(self, roofNodeNames):
-        SapModel = self.SapModel
-
-        # Set units to metres
-        SapModel.SetPresentUnits(SAP2000Constants.Units['N_m_C'])
-
-        maxAcc = 0
-        for roofNodeName in roofNodeNames:
-            ret = SapModel.Results.JointAccAbs(roofNodeName, 0)
-
-            max_and_min_acc = ret[6]
-            max_pos_acc = max_and_min_acc[0]
-            min_neg_acc = max_and_min_acc[1]
-
-            currentMaxAcc = max(abs(max_pos_acc), abs(min_neg_acc)) / Constants.g
-            maxAcc = max(maxAcc, currentMaxAcc)
-
-        return maxAcc
-
-    def getPeriod(self):
-        SapModel = self.SapModel
-
-        ret = SapModel.Results.ModalPeriod()
-        if ret[-1] != 0:
-            print('ERROR getting modal period')
-        period = ret[4][0]
-
-        return period
-
-    def getMaxDisplacement(self, roofNodeNames):
-        SapModel = self.SapModel
-
-        # Set units to millimetres
-        SapModel.SetPresentUnits(SAP2000Constants.Units['N_mm_C'])
-
-        maxDisp = 0
-        for roofNodeName in roofNodeNames:
-            ret = SapModel.Results.JointDispl(roofNodeName, 0)
-            max_and_min_disp = ret[6]
-            max_pos_disp = max_and_min_disp[0]
-            min_neg_disp = max_and_min_disp[1]
-
-            currentMaxDisp = max(abs(max_pos_disp), abs(min_neg_disp))
-            maxDisp = max(maxDisp, currentMaxDisp)
-
-        return maxDisp
-
-    def getBaseShear(self):
-        SapModel = self.SapModel
-
-        ret = SapModel.Results.BaseReact()
-        if ret[-1] != 0:
-            print('ERROR getting base reaction')
-        basesh = max(abs(ret[4][0]), abs(ret[4][1]))
-        
-        return basesh
-
-    def getRoofNodeNames(self):
-        ''' -> [str] '''
-        SapModel = self.SapModel
-
-        roofNodeNames = []
-        [number_nodes, allNodeNames, ret] = SapModel.PointObj.GetNameList()
-        z_max = 0
-        x_max = 0
-        y_max = 0
-        x_min = 0
-        y_min = 0
-
-        for nodeName in allNodeNames:
-            [x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(nodeName, 0, 0, 0)
-            x = round(x, SAP2000Constants.MaxDecimalPlaces)
-            y = round(y, SAP2000Constants.MaxDecimalPlaces)
-            z = round(z, SAP2000Constants.MaxDecimalPlaces)
-
-            x_max = max(x_max, x)
-            y_max = max(y_max, y)
-            z_max = max(z_max, z)
-
-            x_min = min(x_min, x)
-            y_min = min(y_min, y)
-
-        x_width = abs(x_max - x_min)
-        y_width = abs(y_max - y_min)
-
-        # Make sure we get results from a node that is at the quarter points on the top floor
-        for nodeName in allNodeNames:
-            [x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(nodeName, 0, 0, 0)
-            if z == z_max:
-                roofNodeNames.append(nodeName)
-            if len(roofNodeNames) == 4:
-                break
-
-        return roofNodeNames
+            # Store performance data to struct
+            towerPerformance.maxAcc[combo] = maxAcc
+            towerPerformance.maxDisp[combo] = maxDisp
+            towerPerformance.totalWeight[combo] = totalWeight
+            towerPerformance.period[combo] = period
+            towerPerformance.basesh[combo] = basesh
+            towerPerformance.buildingCost[combo] = buildingCost
+            towerPerformance.seismicCost[combo] = seismicCost

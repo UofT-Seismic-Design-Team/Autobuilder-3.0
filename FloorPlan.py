@@ -300,26 +300,34 @@ class FloorPlanUI(QDialog):
 
     def saveFloorPlan(self):
         '''Overwrite the tower linked to the main model'''
+        if self.towerRef.panels:
+            warning = WarningMessage()
+            title = 'You will overwrite the existing tower configuration. Do you want to proceed?'
+            warning.popUpConfirmation(title, self.updateTowerConfig)
+
+        else:
+            self.updateTowerConfig()
+            self.close()
+
+    def updateTowerConfig(self):
         self.towerRef.floorPlans = self.tower.floorPlans
         self.towerRef.floors = self.tower.floors
 
-        # Maybe need a wrapper function ---------------------
-        # clear all faces, panels, floors and columns if floor plan is updated
+        # Clear and regenerate all tower components that depend on floor plans
         self.towerRef.faces.clear()
         self.towerRef.panels.clear()
         for elev in self.towerRef.elevations:
-            floor  = self.towerRef.floors[elev]
+            floor = self.towerRef.floors[elev]
             floor.panels.clear()
         self.towerRef.columns.clear()       
 
         self.towerRef.generateFaces()
-        self.towerRef.generateColumnsByFace()     
-        
+        self.towerRef.generateColumnsByFace()
+    
     def setOkandCancelButtons(self):
         #Constructor
         self.OkButton = self.FloorPlan_buttonBox.button(QDialogButtonBox.Ok)
         self.OkButton.clicked.connect(self.saveFloorPlan)
-        self.OkButton.clicked.connect(lambda x: self.close())
 
         self.CancelButton = self.FloorPlan_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())

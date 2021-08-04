@@ -3,6 +3,7 @@ import ProjectSettings  # contains data in project settings
 import DisplaySettings  # contains data in display settings
 from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
+from Performance import * # tower performance data
 
 import os   # create new directory
 
@@ -429,3 +430,42 @@ class FileWriter:
 
         df = pd.DataFrame(inputTable)
         df.to_csv(inputTableLoc, index=False)
+
+    def writeOutputTable(self, towerPerformances):
+        ''' Write tower performances to output file '''
+        outputTableLoc = self.folderLoc + FileExtension.outputTable
+
+        outputTable = {
+            'towerNum': [],
+        }
+        towerPerfromanceAttributes = [
+            'maxAcc','maxDisp','totalWeight', 'period', 'basesh', 'buildingCost', 'seismicCost',
+        ]
+
+        for towerNum in towerPerformances:
+            outputTable['towerNum'].append(towerNum)
+            towerPerformance = towerPerformances[towerNum]
+
+            for var in towerPerformance.variables:
+                value = towerPerformance.variables[var]
+                if var in outputTable:
+                    outputTable[var].append(value)
+                else:
+                    outputTable[var] = [value]
+                
+            for attr in towerPerfromanceAttributes:
+                results = getattr(towerPerformance, attr)
+
+                for combo in results:
+                    # column name for this result
+                    resultName = combo + '-' + attr
+                    result = results[combo]
+
+                    if resultName in outputTable:
+                        outputTable[resultName].append(result)
+
+                    else:
+                        outputTable[resultName] = [result]
+
+        df = pd.DataFrame(outputTable)
+        df.to_csv(outputTableLoc, index=False) 

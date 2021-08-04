@@ -15,6 +15,9 @@ class FileExtension:
     bracingAssignments = '/bracingAssignments.csv'
     sectionAssignments = '/sectionAssignments.csv'
     inputTable = '/inputTable.csv'
+    outputTable = '/outputTable.csv'
+    errorLog = '/errorLog.csv'
+
     SAPModels = '/SAP Models'
 
 class MFHeader:
