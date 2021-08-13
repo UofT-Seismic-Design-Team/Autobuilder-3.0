@@ -23,12 +23,13 @@ class RunTowers(QDialog):
         super().__init__(*args, **kwargs)
 
         # Load the UI Page
-        fileh = QFile(':/UI/autobuilder_runtowers.ui', self)
+        fileh = QFile(':/UI/autobuilder_runtowers_v2.ui', self)
         fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
 
-        
+        self.args = args
+
         # Set UI Elements
         self.setOkandCancelButtons()     
         
@@ -48,7 +49,7 @@ class RunTowers(QDialog):
     
     def saveInputs(self):
         # SAP2000 Path
-        args[0].SAPPAth = self.SAP2000Path_input.text()
+        self.args[0].SAPPAth = self.SAP2000Path_input.text()
         
         # Nodes to Analyze (assuming input is string of integers seperated by commas)
         nodesToAnalyze = []
@@ -60,19 +61,19 @@ class RunTowers(QDialog):
                 nodesToAnalyzeMark = i + 2
             elif i == (len(nodesToAnalyzeText) - 1):
                 nodesToAnalyze.append(int(nodesToAnalyzeText[nodesToAnalyzeMark:]))
-        args[0].nodesList = nodesToAnalyze
+        self.args[0].nodesList = nodesToAnalyze
             
         # Footprint
-        args[0].footprint = float(self.footprint_input.text())
+        self.args[0].footprint = float(self.footprint_input.text())
         
         # Total Height
-        args[0].totalHeight = float(self.totalHeight_input.text())
+        self.args[0].totalHeight = float(self.totalHeight_input.text())
         
         # Total Mass
-        args[0].totalMass = float(self.totalMass_input.text())
+        self.args[0].totalMass = float(self.totalMass_input.text())
         
     def runNow(self):
         self.saveInputs
-        args[0].runNow = True
+        self.args[0].runNow = True
         lambda x: self.close()
         

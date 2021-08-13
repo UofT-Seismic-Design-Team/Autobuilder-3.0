@@ -632,13 +632,6 @@ class MainWindow(QMainWindow):
         runTower.exec_()
         
     def openRunTowers(self, signal):
-        pass
-        """
         runTowers = RunTowers(self)
         runTowers.exec_()
-        """
-        '''
-        if self.runNow == True:
-            self.createSAPModels()
-        '''
-        
+
