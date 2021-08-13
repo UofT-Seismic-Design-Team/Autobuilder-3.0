@@ -55,6 +55,9 @@ class RunTower(QDialog):
         # Reference to existing tower
         self.tower = args[0].tower
 
+        # Members to be divided at intersections
+        self.membersToDivide = []
+
         # TODO: allow user input
         self.costCalcIdentifier = 'GM1'
         self.footprint = 144
@@ -85,7 +88,6 @@ class RunTower(QDialog):
         # Delete all members within the plans and build correct bracing scheme
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
-        # self.roundingModelCoordinates(SapModel)
         runGMs = self.projectSettingsData.groundMotion
 
         # Start scatter plot of tower performance
@@ -125,7 +127,9 @@ class RunTower(QDialog):
                     assignedValue = inputTable[key][i]
 
                     towerPerformance.addVariable(variableName, assignedValue)
-
+            
+            print('round coordinates...')
+            self.roundingModelCoordinates(SapModel)
             self.divideMembersAtIntersection(SapModel)
 
             # Save the file
@@ -336,9 +340,13 @@ class RunTower(QDialog):
                         member_shapely = shapely.geometry.LineString(member_coords)
 
                         # Delete member if it is inside the panel
-                        if member_shapely.intersects(panel_shapely) == True and member_shapely.touches(
-                                panel_shapely) == False:
-                            ret = SapModel.FrameObj.Delete(member_name, 0)
+                        if member_shapely.intersects(panel_shapely):
+                            if not member_shapely.touches(panel_shapely):
+                                ret = SapModel.FrameObj.Delete(member_name, 0)
+                                
+                            # Members needed to be divided at intersections (May intersect new bracing members)
+                            else:
+                                self.membersToDivide.append(member_name)
 
     def buildBracing(self, SapModel, panel, bracing):
         # Scale the member start and end points to fit the panel location and dimensions
@@ -414,12 +422,21 @@ class RunTower(QDialog):
 
 
     def divideMembersAtIntersection(self, SapModel):
-        numNames, memberNames, ret = SapModel.FrameObj.GetNameList()
+        # Make sure no duplicates
+        self.membersToDivide = list(dict.fromkeys(self.membersToDivide))
 
-        for memberName in memberNames:
-            print(memberName)
-            [num, newName, ret] = SapModel.EditFrame.DivideAtIntersections("154", 0)
-            print('ERROR dividing member ' + str(275))
+        for memberName in self.membersToDivide:
+            num = 0
+            newNames = []
+            [num, newNames, ret] = SapModel.EditFrame.DivideAtIntersections(memberName, num, newNames)
+            if ret != 0:
+                print('ERROR dividing member ' + memberName)
+
+            else:
+                print('---')
+                print('num:', num)
+                for newName in newNames:
+                    print('New member ' + newName)
 
     def changeMemberSection(self, SapModel, memberID, sectionName):
         # Change the section properties of specified members
