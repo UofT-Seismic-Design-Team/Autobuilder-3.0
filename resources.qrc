@@ -35,6 +35,7 @@
     <file alias="autobuilder_mainwindow_v3.ui">resources/UI/autobuilder_mainwindow_v3.ui</file>
     <file alias="autobuilder_paneldesign_v1.ui">resources/UI/autobuilder_paneldesign_v1.ui</file>
     <file alias="autobuilder_projectsettings_v1.ui">resources/UI/autobuilder_projectsettings_v1.ui</file>
+    <file alias="autobuilder_runtowers.ui">resources/UI/autobuilder_runtowers.ui</file>
     <file alias="autobuilder_variableassignment.ui">resources/UI/autobuilder_variableassignment.ui</file>
   </qresource>
 </RCC>

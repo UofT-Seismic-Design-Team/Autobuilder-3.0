@@ -169,7 +169,7 @@ class RunTower(QDialog):
         SpecifyPath = True
 
         #if the above flag is set to True, specify the path to SAP2000 below
-        ProgramPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
+        ProgramPath = args[0].SAPPAth
 
         if AttachToInstance:
             # attach to a running instance of SAP2000
