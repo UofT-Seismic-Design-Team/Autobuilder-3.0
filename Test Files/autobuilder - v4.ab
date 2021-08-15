@@ -417,7 +417,6 @@ X_double X,double X
 
 #Section_Groups
 sectionGroup,section
-small_big,Beam
 small_big,Column
 
 #Bracing_Assignments

@@ -6,7 +6,7 @@
 
 
 
- B E G I N   A N A L Y S I S                                2021/08/11  01:05:16
+ B E G I N   A N A L Y S I S                                2021/08/13  02:10:15
 
 
  RUNNING ANALYSIS WITHIN THE GUI PROCESS
@@ -33,11 +33,11 @@
  NUMBER OF THREADS: FORM (AUTOMATIC)       =           2
 
 
- E L E M E N T   F O R M A T I O N                                      01:05:17
+ E L E M E N T   F O R M A T I O N                                      02:10:15
 
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        01:05:17
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        02:10:16
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -54,7 +54,7 @@
  ---------------------------------
 
 
- L I N E A R   S T A T I C   C A S E S                                  01:05:17
+ L I N E A R   S T A T I C   C A S E S                                  02:10:16
 
  USING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -66,7 +66,7 @@
  CASE: DEAD
 
 
- E I G E N   M O D A L   A N A L Y S I S                                01:05:17
+ E I G E N   M O D A L   A N A L Y S I S                                02:10:16
 
  CASE: MODAL
 
@@ -105,7 +105,7 @@
  NUMBER OF STIFFNESS SHIFTS                =           0
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:20
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:19
 
  CASE: GM1-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -1156,7 +1156,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:31
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:22
 
  CASE: GM1-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -2207,7 +2207,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:40
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:24
 
  CASE: GM2-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -3244,7 +3244,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:43
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:26
 
  CASE: GM2-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -4281,7 +4281,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:50
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:30
 
  CASE: GM3-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -5318,7 +5318,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:54
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:32
 
  CASE: GM3-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -6355,7 +6355,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:57
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:34
 
  CASE: GM4-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -8041,7 +8041,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              01:05:57
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              02:10:34
 
  CASE: GM4-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -9727,4 +9727,4 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- A N A L Y S I S   C O M P L E T E                          2021/08/11  01:06:07
+ A N A L Y S I S   C O M P L E T E                          2021/08/13  02:10:42

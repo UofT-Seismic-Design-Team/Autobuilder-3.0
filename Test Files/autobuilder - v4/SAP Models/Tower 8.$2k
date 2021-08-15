@@ -1,4 +1,4 @@
-File C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/Test Files/autobuilder - v4/SAP Models\Tower 8.$2k was saved on m/d/yy at h:mm:ss
+File C:\Users\Kaison\Documents\GitHub\Autobuilder-3.0\Test Files\autobuilder - v4\SAP Models\Tower 8.$2k was saved on m/d/yy at h:mm:ss
  
 TABLE:  "ACTIVE DEGREES OF FREEDOM"
    UX=Yes   UY=Yes   UZ=Yes   RX=Yes   RY=Yes   RZ=Yes
@@ -43,11 +43,19 @@ TABLE:  "AREA SECTION PROPERTY - TIME DEPENDENT"
 TABLE:  "AUTO WAVE 3 - WAVE CHARACTERISTICS - GENERAL"
    WaveChar=Default   WaveType="From Theory"   KinFactor=1   SWaterDepth=45   WaveHeight=18   WavePeriod=12   WaveTheory=Linear
  
+TABLE:  "CASE - DIRECT HISTORY 1 - GENERAL"
+   Case=GM1-NS   OutSteps=28411   StepSize=0.01
+ 
+TABLE:  "CASE - DIRECT HISTORY 2 - LOAD ASSIGNMENTS"
+   Case=GM1-NS   LoadType=Accel   LoadName="Accel U2"   Function=GM1   TransAccSF=39.3701   TimeFactor=1   ArrivalTime=0   CoordSys=GLOBAL   Angle=0
+ 
+TABLE:  "CASE - DIRECT HISTORY 4 - INTEGRATION PARAMETERS"
+   Case=GM1-NS   IntMethod=HilberHughesTaylor   Gamma=0.5   Beta=0.25   Alpha=0
+ 
 TABLE:  "CASE - MODAL 1 - GENERAL"
    Case=MODAL   ModeType=Eigen   MaxNumModes=12   MinNumModes=1   EigenShift=0   EigenCutoff=0   EigenTol=1E-09   AutoShift=Yes
  
 TABLE:  "CASE - MODAL HISTORY 1 - GENERAL"
-   Case=GM1-NS   HistoryType=Transient   OutSteps=28411   StepSize=0.01   ConstDamp=0.025
    Case=GM1-EW   HistoryType=Transient   OutSteps=28411   StepSize=0.01   ConstDamp=0.025
    Case=GM2-NS   HistoryType=Transient   OutSteps=20013   StepSize=0.01   ConstDamp=0.025
    Case=GM2-EW   HistoryType=Transient   OutSteps=20013   StepSize=0.01   ConstDamp=0.025
@@ -57,7 +65,6 @@ TABLE:  "CASE - MODAL HISTORY 1 - GENERAL"
    Case=GM4-EW   HistoryType=Transient   OutSteps=1651   StepSize=0.02   ConstDamp=0.025
  
 TABLE:  "CASE - MODAL HISTORY 2 - LOAD ASSIGNMENTS"
-   Case=GM1-NS   LoadType=Accel   LoadName="Accel U2"   Function=GM1   TransAccSF=39.3700787401575   TimeFactor=1   ArrivalTime=0   CoordSys=GLOBAL   Angle=0
    Case=GM1-EW   LoadType=Accel   LoadName="Accel U1"   Function=GM1   TransAccSF=39.3700787401575   TimeFactor=1   ArrivalTime=0   CoordSys=GLOBAL   Angle=0
    Case=GM2-NS   LoadType=Accel   LoadName="Accel U2"   Function=GM2   TransAccSF=39.3700787401575   TimeFactor=1   ArrivalTime=0   CoordSys=GLOBAL   Angle=0
    Case=GM2-EW   LoadType=Accel   LoadName="Accel U1"   Function=GM2   TransAccSF=39.3700787401575   TimeFactor=1   ArrivalTime=0   CoordSys=GLOBAL   Angle=0
@@ -72706,16 +72713,16 @@ TABLE:  "JOINT RESTRAINT ASSIGNMENTS"
    Joint=160   U1=Yes   U2=Yes   U3=Yes   R1=Yes   R2=Yes   R3=Yes
  
 TABLE:  "LOAD CASE DEFINITIONS"
-   Case=DEAD   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes
-   Case=MODAL   Type=LinModal   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Other   DesActOpt="Prog Det"   DesignAct=Other   AutoType=None   RunCase=Yes
-   Case=GM1-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
+   Case=MODAL   Type=LinModal   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Other   DesActOpt="Prog Det"   DesignAct=Other   AutoType=None   RunCase=No
+   Case=GM1-NS   Type=LinDirHist   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=DEAD   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=No
    Case=GM1-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM2-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM2-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM3-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM3-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM4-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM4-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
+   Case=GM2-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM2-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM3-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM3-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM4-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM4-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
  
 TABLE:  "LOAD PATTERN DEFINITIONS"
    LoadPat=DEAD   DesignType=Dead   SelfWtMult=1

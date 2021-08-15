@@ -176,7 +176,7 @@ FrameName3 = ' '
 
 [FrameName2, ret] = SapModel.FrameObj.AddByCoord(0, 0, 10, 8, 0, 16, FrameName2, 'R1', '2', 'Global')
 
-[FrameName3, ret] = SapModel.FrameObj.AddByCoord(-4, 0, 10, 0, 0, 10, FrameName3, 'R1', '3', 'Global')
+[FrameName3, ret] = SapModel.FrameObj.AddByCoord(-4, 0, 10, 1, 0, 5, FrameName3, 'R1', '3', 'Global')
 
  
 
@@ -191,11 +191,6 @@ Restraint = [True, True, True, True, False, False]
 [PointName1, PointName2, ret] = SapModel.FrameObj.GetPoints(FrameName1, PointName1, PointName2)
 
 ret = SapModel.PointObj.SetRestraint(PointName1, Restraint)
-
-num = 0
-newName = []
-
-[num, newName, ret] = SapModel.EditFrame.DivideAtIntersections(FrameName3)
 
 #assign point object restraint at top
 
@@ -281,7 +276,14 @@ ret = SapModel.FrameObj.SetLoadDistributed(FrameName2, '6', 1, 2, 0, 1, -0.3744,
 
 ret = SapModel.FrameObj.SetLoadPoint(FrameName2, '7', 1, 2, 0.5, -15, 'Local')
 
- 
+num = 0
+newNames = []
+num, newNames, ret = SapModel.EditFrame.DivideAtIntersections(FrameName3, num, newNames)
+print('divide num:', num)
+num, newNames, ret = SapModel.EditFrame.DivideAtIntersections(FrameName2, num, newNames)
+print('divide num:', num)
+num, newNames, ret = SapModel.EditFrame.DivideAtIntersections(FrameName1, num, newNames)
+print('divide num:', num)
 
 #switch to k-in units
 
@@ -361,11 +363,11 @@ for i in range(0,7):
 
 #close Sap2000
 
-ret = mySapObject.ApplicationExit(False)
+# ret = mySapObject.ApplicationExit(False)
 
-SapModel = None
+# SapModel = None
 
-mySapObject = None
+# mySapObject = None
 
  
 

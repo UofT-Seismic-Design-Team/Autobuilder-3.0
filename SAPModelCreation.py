@@ -67,7 +67,21 @@ class RunTower(QDialog):
         # Tower performances
         self.towerPerformances = {}
 
-        self.buildTowers()
+        self.runGMs = self.projectSettingsData.groundMotion
+
+        # Start scatter plot of tower performance
+        xlabel = 'Tower Number'
+        if self.runGMs:
+            ylabel = 'Total Cost'
+        else:
+            ylabel = 'Period'
+        self.plotter = Plotter(xlabel, ylabel)
+        self.plotter.show()
+
+        # Establish alternate thread to run SAP2000
+        self.threadpool = QThreadPool()
+        sapRunnable = SAPRunnable(self)
+        self.threadpool.start(sapRunnable)
 
         self.OkButton.clicked.connect(lambda x: self.close())
 
@@ -87,17 +101,6 @@ class RunTower(QDialog):
 
         # Delete all members within the plans and build correct bracing scheme
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
-
-        runGMs = self.projectSettingsData.groundMotion
-
-        # Start scatter plot of tower performance
-        xlabel = 'Tower Number'
-        if runGMs:
-            ylabel = 'Total Cost'
-        else:
-            ylabel = 'Period'
-        plotter = Plotter(xlabel, ylabel)
-        plotter.show()
 
         inputTable = self.tower.inputTable
         for i, towerNum in enumerate(inputTable['towerNumber']):
@@ -130,7 +133,7 @@ class RunTower(QDialog):
             
             print('round coordinates...')
             self.roundingModelCoordinates(SapModel)
-            self.divideMembersAtIntersection(SapModel)
+            #self.divideMembersAtIntersection(SapModel)
 
             # Save the file
             SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
@@ -146,7 +149,7 @@ class RunTower(QDialog):
             self.towerPerformances[str(towerNum)] = towerPerformance
 
             # Add cost to scatter plot
-            plotter.addxData(towerNum)
+            self.plotter.addxData(towerNum)
             # TODO: Will fix later 
             avgBuildingCost = 0
             for bdCost in towerPerformance.buildingCost.values():
@@ -158,13 +161,13 @@ class RunTower(QDialog):
                 avgSeismicCost += sCost
             avgSeismicCost /= len(towerPerformance.seismicCost)
 
-            if runGMs:
-                plotter.addyData(avgBuildingCost + avgSeismicCost)
+            if self.runGMs:
+                self.plotter.addyData(avgBuildingCost + avgSeismicCost)
             else:
-                plotter.addyData(towerPerformance.period)
+                self.plotter.addyData(towerPerformance.period)
 
-            plotter.updatePlot()
-            
+            self.plotter.updatePlot()
+
         # Create output table
         filewriter = FileWriter(self.mainFileLoc)
         filewriter.writeOutputTable(self.towerPerformances)
@@ -172,6 +175,10 @@ class RunTower(QDialog):
         # Save tower performances
         self.tower.towerPerformances.clear()
         self.tower.towerPerformances.update(self.towerPerformances)
+
+        # reset
+        for panel in self.tower.panels.values():
+            panel.IDs = ["UNKNOWN"]
 
     def startSap2000(self):
         #set the following flag to True to attach to an existing instance of the program
@@ -344,7 +351,7 @@ class RunTower(QDialog):
                             if not member_shapely.touches(panel_shapely):
                                 ret = SapModel.FrameObj.Delete(member_name, 0)
                                 
-                            # Members needed to be divided at intersections (May intersect new bracing members)
+                            # Get members needed to be divided at intersections
                             else:
                                 self.membersToDivide.append(member_name)
 
@@ -420,12 +427,16 @@ class RunTower(QDialog):
             if member_name is not None:
                 panel.IDs.append(member_name)
 
-
     def divideMembersAtIntersection(self, SapModel):
         # Make sure no duplicates
         self.membersToDivide = list(dict.fromkeys(self.membersToDivide))
 
         for memberName in self.membersToDivide:
+
+            ret = SapModel.SelectObj.All(False)
+            if ret != 0:
+                print('ERROR selecting all members')
+
             num = 0
             newNames = []
             [num, newNames, ret] = SapModel.EditFrame.DivideAtIntersections(memberName, num, newNames)
@@ -433,10 +444,10 @@ class RunTower(QDialog):
                 print('ERROR dividing member ' + memberName)
 
             else:
-                print('---')
-                print('num:', num)
                 for newName in newNames:
-                    print('New member ' + newName)
+                    self.membersToDivide.append(newName)
+
+        ret = SapModel.SelectObj.All(True)
 
     def changeMemberSection(self, SapModel, memberID, sectionName):
         # Change the section properties of specified members
@@ -517,3 +528,13 @@ class RunTower(QDialog):
             towerPerformance.basesh[combo] = basesh
             towerPerformance.buildingCost[combo] = buildingCost
             towerPerformance.seismicCost[combo] = seismicCost
+
+class SAPRunnable(QRunnable):
+    ''' Worker thread '''
+
+    def __init__(self, runTower):
+        super().__init__()
+        self.runTower = runTower
+
+    def run(self):
+        self.runTower.buildTowers()

@@ -14,6 +14,5 @@
          ( ) = Null DOF
 
   JOINTS              UX  UY  UZ  RX  RY  RZ
-    1322 TO    1173    A   A   A   A   A   A
+    1327 TO    1174    A   A   A   A   A   A
      160 TO       1    -   -   -   -   -   -
-    1183 TO    1174    A   A   A   A   A   A
