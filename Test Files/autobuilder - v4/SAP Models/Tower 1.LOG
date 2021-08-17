@@ -1,12 +1,12 @@
 
 
  SAP2000 v22.0.0 Ultimate 64-bit (Analysis Build 9780/64)
- File: C:/Users/Kaison/Documen...t Files/autobuilder - v4/SAP Models\Tower 1.LOG
+ File: C:/Users/alexv/Document...t Files/autobuilder - v4/SAP Models\Tower 1.LOG
 
 
 
 
- B E G I N   A N A L Y S I S                                2021/08/15  13:55:52
+ B E G I N   A N A L Y S I S                                2021/08/16  21:53:00
 
 
  RUNNING ANALYSIS WITHIN THE GUI PROCESS
@@ -20,7 +20,7 @@
  NUMBER OF ACCELERATION LOADS              =           9
  NUMBER OF LOAD CASES                      =          10
 
- ADDRESSABLE PHYSICAL MEMORY (RAM)         =       7.856 GB
+ ADDRESSABLE PHYSICAL MEMORY (RAM)         =       7.918 GB
 
  PARALLELIZATION OF ANALYSIS OPERATIONS:
  (Env. variable SAPFIRE_NUM_THREADS        =           0)
@@ -33,11 +33,11 @@
  NUMBER OF THREADS: FORM (AUTOMATIC)       =           2
 
 
- E L E M E N T   F O R M A T I O N                                      13:55:52
+ E L E M E N T   F O R M A T I O N                                      21:53:00
 
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        13:55:52
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        21:53:00
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -54,7 +54,7 @@
  ---------------------------------
 
 
- L I N E A R   S T A T I C   C A S E S                                  13:55:53
+ L I N E A R   S T A T I C   C A S E S                                  21:53:01
 
  USING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -66,7 +66,7 @@
  CASE: DEAD
 
 
- E I G E N   M O D A L   A N A L Y S I S                                13:55:53
+ E I G E N   M O D A L   A N A L Y S I S                                21:53:01
 
  CASE: MODAL
 
@@ -114,7 +114,7 @@
  NUMBER OF STIFFNESS SHIFTS                =           3
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        13:55:56
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        21:53:05
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -131,7 +131,7 @@
  ---------------------------------
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:55:57
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:06
 
  CASE: GM1-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -1182,7 +1182,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:00
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:08
 
  CASE: GM1-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -2233,7 +2233,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       28411
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:04
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:11
 
  CASE: GM2-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -3270,7 +3270,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:06
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:13
 
  CASE: GM2-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -4307,7 +4307,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       20013
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:08
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:14
 
  CASE: GM3-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -5344,7 +5344,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:11
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:15
 
  CASE: GM3-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -6381,7 +6381,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =       10001
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:12
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:16
 
  CASE: GM4-NS
  ANALYSIS TYPE                             =      LINEAR
@@ -8067,7 +8067,7 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              13:56:13
+ L I N E A R   M O D A L   H I S T O R Y   A N A L Y S I S              21:53:17
 
  CASE: GM4-EW
  ANALYSIS TYPE                             =      LINEAR
@@ -9753,4 +9753,4 @@
  TOTAL NUMBER OF LOAD-STEPS COMPLETED      =        1651
 
 
- A N A L Y S I S   C O M P L E T E                          2021/08/15  13:56:21
+ A N A L Y S I S   C O M P L E T E                          2021/08/16  21:53:23
