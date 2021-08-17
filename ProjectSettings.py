@@ -66,13 +66,18 @@ class ProjectSettings(QDialog):
 
     def saveSAPModelLoc(self, signal):
         fileInfo = QFileDialog.getOpenFileName(self, 'Open SAP2000 model', '', 'SAP2000 files (*.sdb)') # returns a tuple: ('file_name', 'file_type')
+
+        # Terminate if cancelled
+        if not fileInfo[0]:
+            return
+
         modelLoc = fileInfo[0]
         self.SAPModelLoc = modelLoc
 
         modelName = modelLoc.split('/')[-1]
         self.sapModelLoc_label.setText(modelName)
 
-    def display(self):
+    def Populate(self):
         
         data = self.data
 
@@ -132,22 +137,9 @@ class ProjectSettings(QDialog):
         # Check if floor elevations are modified
         cancelSaving = False
         if tempElevs != prev_floorElevs:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
-            msg.setText("Warning")
-            msg.setInformativeText('Current model data will be deleted as floor elevations are modified')
-            msg.setWindowTitle("Warning")
-
-            msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-
-            OkButton = msg.button(QMessageBox.Ok)
-            OkButton.clicked.connect(self.saveElevations)
-            OkButton.clicked.connect(lambda s: msg.close())
-
-            CancelButton = msg.button(QMessageBox.Cancel)
-            CancelButton.clicked.connect(lambda s: msg.close())
-
-            msg.exec_()
+            warning = WarningMessage()
+            title = 'Current model data will be deleted as floor elevations are modified'
+            warning.popUpConfirmation(title, self.saveElevations)
 
             # if the Ok button is clicked, redefine floors and floor elevations
             if self.saveElevs:

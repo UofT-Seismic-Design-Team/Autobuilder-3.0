@@ -1,7 +1,7 @@
 
 
  SAP2000 v22.0.0 Ultimate 64-bit (Analysis Build 9780/64)                       
- File: C:/Users/alexv/Document...t Files/autobuilder - v4/SAP Models\Tower 1.OUT
+ File: C:/Users/Kaison/Documen...t Files/autobuilder - v4/SAP Models\Tower 1.OUT
                                                                      
                                                                        
 
@@ -29,7 +29,7 @@
      158               -   -   -   -   -   -
      159               A   A   A   A   A   A
      160               -   -   -   -   -   -
-     161 TO     535    A   A   A   A   A   A
+     161 TO     532    A   A   A   A   A   A
 
  D I S P L A C E M E N T   D E G R E E S   O F   F R E E D O M
 
@@ -55,4 +55,4 @@
      158               -   -   -   -   -   -
      159               A   A   A   A   A   A
      160               -   -   -   -   -   -
-     161 TO     535    A   A   A   A   A   A
+     161 TO     532    A   A   A   A   A   A

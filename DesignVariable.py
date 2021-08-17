@@ -150,7 +150,7 @@ class DesignVariable(QDialog):
             for index in sorted(indices):
                 # remove from dictionary
                 SGName = self.sectionGroupTable.item(index.row(),0).text()
-                self.tower.bracingGroups.pop(SGName, None)
+                self.tower.sectionGroups.pop(SGName, None)
                 # remove row from table
                 self.sectionGroupTable.removeRow(index.row())
 
@@ -200,7 +200,7 @@ class DesignVariable(QDialog):
 
     def deleteIteration(self):
         ''' Delete selected rows from iter table'''
-        indices = self.BGIterationTable.selectionModel().selectedRows()
+        indices = self.IterationTable.selectionModel().selectedRows()
         for index in sorted(indices):
             self.IterationTable.removeRow(index.row())
         self.updateIteration()

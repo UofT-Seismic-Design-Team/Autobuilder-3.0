@@ -35,6 +35,9 @@ class Tower:
         self.member_ids = {} # Member id from SAP2000 model (key: member_id; value: sectionGroup)
         self.inputTable = {}
 
+        # analysis results for performance analysis
+        self.towerPerformances = {}
+
     def setElevations(self, elevs):
         self.elevations = elevs
 

@@ -7,3 +7,11 @@ X,0.0,0.0,0.5,0.5,Brace
 X,1.0,0.0,0.5,0.5,Brace
 X,1.0,1.0,0.5,0.5,Brace
 X,0.0,1.0,0.5,0.5,Brace
+double X,0.0,0.0,0.25,0.5,Brace
+double X,0.0,1.0,0.25,0.5,Brace
+double X,0.5,1.0,0.25,0.5,Brace
+double X,0.5,0.0,0.25,0.5,Brace
+double X,0.5,0.0,0.75,0.5,Brace
+double X,0.5,1.0,0.75,0.5,Brace
+double X,1.0,0.0,0.75,0.5,Brace
+double X,1.0,1.0,0.75,0.5,Brace

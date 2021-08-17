@@ -48,6 +48,9 @@ class VariableAssignment(QDialog):
             self.BracingAssignmentTable.setCellWidget(row,1,bCombo)
             bCombo.setCurrentText(list(self.tower.bracingGroups.keys())[0])
 
+            # Default panel name is row number
+            self.BracingAssignmentTable.setItem(row,0, QTableWidgetItem(str(row+1)))
+
         elif self.tabWidget.currentIndex() == 1:
             row = self.SectionAssignmentTable.rowCount()
             self.SectionAssignmentTable.insertRow(row)
