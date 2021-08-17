@@ -46,7 +46,14 @@ class RunTower(QDialog):
         fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
-
+        
+        # Store Variables From Run Towers Dialog
+        self.SAPPath = args[0].SAPPath
+        self.nodesList = args[0].nodesList
+        self.footprint = args[0].footprint
+        self.totalHeight = args[0].totalHeight
+        self.totalMass = args[0].totalMass
+        
         # Project Settings Data
         self.projectSettingsData = args[0].projectSettingsData
 
@@ -135,9 +142,9 @@ class RunTower(QDialog):
                 Weight = results[0][2]
                 # Calculate model cost
                 # TODO: allow user input
-                Footprint = 144
-                TotalHeight = [60] # inches
-                TotalMass = [7.83] # kg
+                Footprint = self.footprint
+                TotalHeight = [self.totalHeight] # inches
+                TotalMass = [self.totalMass] # kg
                 costs = self.getCosts(MaxAcc, MaxDisp, Footprint, Weight, TotalMass, TotalHeight)
             else:
                 costs = ['bldg cost not calculated', 'seismic cost not calculated']
@@ -169,7 +176,7 @@ class RunTower(QDialog):
         SpecifyPath = True
 
         #if the above flag is set to True, specify the path to SAP2000 below
-        ProgramPath = args[0].SAPPAth
+        ProgramPath = self.SAPPath
 
         if AttachToInstance:
             # attach to a running instance of SAP2000
@@ -572,6 +579,7 @@ class SAP2000Analysis:
 
     def getRoofNodeNames(self):
         ''' -> [str] '''
+        '''
         SapModel = self.SapModel
 
         roofNodeNames = []
@@ -605,5 +613,7 @@ class SAP2000Analysis:
                 roofNodeNames.append(nodeName)
             if len(roofNodeNames) == 4:
                 break
-
+        '''
+        roofNodeNames = self.nodesList
+    
         return roofNodeNames

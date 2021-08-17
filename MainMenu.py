@@ -53,11 +53,11 @@ class MainWindow(QMainWindow):
         
         # Run Towers variables
         self.SAPPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
-        self.nodesList = []
+        self.nodesList = [1, 2, 3, 4]
         self.footprint = 144
         self.totalHeight = 60
         self.totalMass = 7.83
-        self.runNow = False        
+        self.toRun = False      
 
         # File location
         self.fileLoc = ''
@@ -621,17 +621,26 @@ class MainWindow(QMainWindow):
         generateTower.exec_()
 
     # Run towers --------------------------------------------
-    def createSAPModels(self, signal):
-
+    def createSAPModels(self):
+        
         if not self.tower.inputTable:
             msg = WarningMessage()
             msg.popUpErrorBox('Please generate input table before running SAP2000')
             return
-
+        
         runTower = RunTower(self)
         runTower.exec_()
         
     def openRunTowers(self, signal):
         runTowers = RunTowers(self)
         runTowers.exec_()
-
+        self.SAPPath = runTowers.SAPPath
+        self.nodesList = runTowers.nodesList
+        self.footprint = runTowers.footprint
+        self.totalHeight = runTowers.totalHeight
+        self.totalMass = runTowers.totalMass
+        self.toRun = runTowers.toRun       
+        
+        if self.toRun == True:
+            self.createSAPModels()        
+        

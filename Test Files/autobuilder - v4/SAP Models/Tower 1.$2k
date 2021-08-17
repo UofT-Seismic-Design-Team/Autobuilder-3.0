@@ -1,4 +1,4 @@
-File C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/Test Files/autobuilder - v4/SAP Models\Tower 1.$2k was saved on m/d/yy at h:mm:ss
+File C:/Users/alexv/Documents/GitHub/Autobuilder-3.0/Test Files/autobuilder - v4/SAP Models\Tower 1.$2k was saved on m/d/yy at h:mm:ss
  
 TABLE:  "ACTIVE DEGREES OF FREEDOM"
    UX=Yes   UY=Yes   UZ=Yes   RX=Yes   RY=Yes   RZ=Yes
@@ -132,165 +132,161 @@ TABLE:  "CONNECTIVITY - AREA"
    Area=10   Joint1=494   Joint2=568   Joint3=565   Joint4=493   GUID=4b52875d-c439-43f2-947e-96e24529bb84
  
 TABLE:  "CONNECTIVITY - FRAME"
-   Frame=2   JointI=11   JointJ=13   IsCurved=No   GUID=dafd0ebd-4cb4-4235-9a1b-590bb719eeaf
-   Frame=3   JointI=17   JointJ=13   IsCurved=No   GUID=f62429b9-fd63-4905-ae66-785229d161ef
-   Frame=4   JointI=18   JointJ=13   IsCurved=No   GUID=32c9478c-1898-4b0c-b35c-8b827e19fd81
-   Frame=5   JointI=12   JointJ=13   IsCurved=No   GUID=6b4014eb-9a0d-4cbf-b1cf-725a89dd8531
-   Frame=6   JointI=17   JointJ=15   IsCurved=No   GUID=eaa966bf-62bf-47ea-904b-cc8a0ca62462
-   Frame=7   JointI=7   JointJ=15   IsCurved=No   GUID=cdef9ab3-ae1d-474b-a336-a2aa1a182516
-   Frame=8   JointI=8   JointJ=15   IsCurved=No   GUID=a6a9fa4d-043a-406b-82cb-73611bb4b569
-   Frame=9   JointI=18   JointJ=15   IsCurved=No   GUID=2cf30c00-71f9-4d1a-ae0d-0f75d19c541f
-   Frame=10   JointI=7   JointJ=20   IsCurved=No   GUID=1fe06633-c74e-42b8-a6a5-e0daba418e9e
-   Frame=11   JointI=1   JointJ=20   IsCurved=No   GUID=621d8fce-eb63-49df-9fb5-a29716c29317
-   Frame=12   JointI=2   JointJ=20   IsCurved=No   GUID=90b74738-da35-47f6-8fac-f2a7bd2a052d
-   Frame=13   JointI=8   JointJ=20   IsCurved=No   GUID=76970c53-1214-4503-a9cd-764c4387c7a7
-   Frame=14   JointI=1   JointJ=24   IsCurved=No   GUID=de8f51b2-3ea6-4c1e-aa65-2ca18d6a3de8
-   Frame=15   JointI=11   JointJ=24   IsCurved=No   GUID=e73e3de3-1ab3-4859-a571-e08280a01372
-   Frame=16   JointI=12   JointJ=24   IsCurved=No   GUID=45421baf-1692-45ba-8f24-2c7112962ea5
-   Frame=17   JointI=2   JointJ=24   IsCurved=No   GUID=631c7828-712d-4bcc-acad-f852302f268d
-   Frame=18   JointI=12   JointJ=26   IsCurved=No   GUID=955c19c6-7ffe-45f6-9a6e-9770286dd44c
-   Frame=19   JointI=18   JointJ=26   IsCurved=No   GUID=7beec0e5-3ffe-4329-adda-d5854249308a
-   Frame=20   JointI=145   JointJ=26   IsCurved=No   GUID=d22b976c-4d5d-4d50-a338-f4d4d02dc0e1
+   Frame=2   JointI=11   JointJ=12   IsCurved=No   GUID=0b3341b3-6e1f-417c-b8e8-2f4c388d65af
+   Frame=3   JointI=12   JointJ=18   IsCurved=No   GUID=366a7a5b-bb9b-46a0-ad47-b20ec8006202
+   Frame=5   JointI=17   JointJ=11   IsCurved=No   GUID=1aa9a463-4f5b-49ca-9e51-74237873c0a3
+   Frame=7   JointI=59   JointJ=145   IsCurved=No   GUID=2e507c08-4610-43bd-ba97-60226f358458
+   Frame=10   JointI=17   JointJ=13   IsCurved=No   GUID=c9e58fee-1075-41b5-89fd-ed82abeed00f
+   Frame=11   JointI=7   JointJ=13   IsCurved=No   GUID=a64c6b72-f416-49fc-b69f-3e4559576bf1
+   Frame=12   JointI=8   JointJ=13   IsCurved=No   GUID=a52a6c74-8ffa-4fbb-b4da-f636def34fd7
+   Frame=13   JointI=18   JointJ=13   IsCurved=No   GUID=80ef7641-512a-4e60-947f-ad6e7eca61e0
+   Frame=14   JointI=7   JointJ=15   IsCurved=No   GUID=6f67f257-5cfd-41f5-9f06-08b0f361c648
+   Frame=15   JointI=1   JointJ=15   IsCurved=No   GUID=2d10e106-c21d-4776-a510-7bcff7891bb4
+   Frame=16   JointI=2   JointJ=15   IsCurved=No   GUID=c6ab5d5f-2155-4e19-bde6-2a0db169458d
+   Frame=17   JointI=8   JointJ=15   IsCurved=No   GUID=d0aa225e-9012-418a-b480-bb9ce1b237d1
+   Frame=18   JointI=1   JointJ=20   IsCurved=No   GUID=e9a585c7-0742-4c5c-9cf8-77ab9c185922
+   Frame=19   JointI=11   JointJ=20   IsCurved=No   GUID=bcca0838-5307-48fc-8fbb-a27dfae68100
+   Frame=20   JointI=12   JointJ=20   IsCurved=No   GUID=6862d7e3-a344-499d-af39-32461265ffea
    Frame=21   JointI=74   JointJ=493   IsCurved=No   GUID=0c5f4397-3222-4533-9d46-d371ba834f06
    Frame=22   JointI=75   JointJ=494   IsCurved=No   GUID=d10d1d44-4310-4304-901d-17057b0196a6
-   Frame=23   JointI=59   JointJ=26   IsCurved=No   GUID=79fc57fa-b0c2-4762-854e-ce9e7c01ffd3
-   Frame=24   JointI=18   JointJ=28   IsCurved=No   GUID=9074743e-1866-42ac-959b-cd2fb7d17f73
-   Frame=25   JointI=8   JointJ=28   IsCurved=No   GUID=4d18625d-0f4e-4f78-a75e-9144754438a1
-   Frame=26   JointI=141   JointJ=28   IsCurved=No   GUID=59c3b751-7ea4-4b7e-b6bf-bcc064aa8813
-   Frame=27   JointI=145   JointJ=28   IsCurved=No   GUID=7dd86332-faed-4b4e-8411-be482952c881
-   Frame=28   JointI=8   JointJ=30   IsCurved=No   GUID=96648312-24c5-4fd2-af26-09f49e0645f4
-   Frame=29   JointI=2   JointJ=30   IsCurved=No   GUID=e33ffabe-eee9-4ac7-b191-7b48678f344e
-   Frame=30   JointI=58   JointJ=30   IsCurved=No   GUID=e9493361-1a1a-4e85-aeda-86bddd33c582
-   Frame=31   JointI=141   JointJ=30   IsCurved=No   GUID=fbc01344-e9c6-48ee-bf1c-57c0dd14a5a1
-   Frame=32   JointI=2   JointJ=269   IsCurved=No   GUID=f5676c18-5f48-415d-8eb5-bbfe88c0ed98
-   Frame=33   JointI=12   JointJ=269   IsCurved=No   GUID=be216ef4-7388-4245-a45e-39a5473ccc37
-   Frame=34   JointI=59   JointJ=269   IsCurved=No   GUID=0af2aa23-a3c2-4c6f-86b4-6e4d0613802b
-   Frame=35   JointI=58   JointJ=269   IsCurved=No   GUID=4b475682-e96e-460e-a656-410d6704313d
-   Frame=36   JointI=59   JointJ=270   IsCurved=No   GUID=a119158c-ecb8-4b0b-900b-2511cd133e0d
-   Frame=37   JointI=145   JointJ=270   IsCurved=No   GUID=41ff9b50-cc01-49a6-86fc-4e94f2fdf7c0
-   Frame=38   JointI=125   JointJ=270   IsCurved=No   GUID=00809dac-6356-4f15-8acf-7457b41bbd92
-   Frame=39   JointI=57   JointJ=270   IsCurved=No   GUID=34f1eb74-ece9-42b1-b6f6-a167adaf08aa
-   Frame=40   JointI=145   JointJ=271   IsCurved=No   GUID=772b8af1-2bca-4aad-9045-2f7990fd0ada
-   Frame=41   JointI=141   JointJ=271   IsCurved=No   GUID=cdcfe3d4-d07d-41bb-bf9c-340513ddc4aa
-   Frame=42   JointI=81   JointJ=271   IsCurved=No   GUID=84b1d5a5-9940-448c-8ed2-56089d6de409
-   Frame=43   JointI=125   JointJ=271   IsCurved=No   GUID=7abc20bf-7d89-415f-b18d-76631ee97d1f
-   Frame=44   JointI=141   JointJ=272   IsCurved=No   GUID=b8075105-d270-48ba-97bc-5253f4a22c60
-   Frame=45   JointI=58   JointJ=272   IsCurved=No   GUID=ac070646-9851-41fb-9183-474d6add1164
-   Frame=46   JointI=56   JointJ=272   IsCurved=No   GUID=1ba9613f-c9fb-4ed8-94bd-a988215d559a
-   Frame=47   JointI=81   JointJ=272   IsCurved=No   GUID=55d08d9d-1606-443d-8b1b-bcd75367bf41
-   Frame=48   JointI=58   JointJ=273   IsCurved=No   GUID=e9a319ab-91cd-4cca-9990-8b0b4c25ee32
-   Frame=49   JointI=59   JointJ=273   IsCurved=No   GUID=a4d95897-6f43-4a1f-88d6-037b555e0d54
-   Frame=50   JointI=57   JointJ=273   IsCurved=No   GUID=25d0b6a0-3a40-4919-8a49-87b70f9cc340
-   Frame=51   JointI=56   JointJ=273   IsCurved=No   GUID=c6000d4c-cfb8-42e1-974c-a2f5ba4a33c2
-   Frame=52   JointI=57   JointJ=274   IsCurved=No   GUID=f91be44d-0297-4fef-9c93-09a176910395
-   Frame=53   JointI=125   JointJ=274   IsCurved=No   GUID=a0862e84-36a0-41a4-b330-9e177389a360
-   Frame=54   JointI=144   JointJ=274   IsCurved=No   GUID=9ab14f91-6c44-49c0-bbf1-9e05c2f6b3e7
-   Frame=55   JointI=65   JointJ=274   IsCurved=No   GUID=1830ee11-32dd-49d9-bb8f-d3bf82984e51
-   Frame=56   JointI=125   JointJ=275   IsCurved=No   GUID=e2f60b72-b646-46a2-a243-e1dd2cab03d2
-   Frame=57   JointI=81   JointJ=275   IsCurved=No   GUID=6901e1a4-ee1f-4d90-9146-3c8b64c153dd
-   Frame=58   JointI=140   JointJ=275   IsCurved=No   GUID=ba064fa3-803f-42f4-b50f-efa3cbb68257
-   Frame=59   JointI=144   JointJ=275   IsCurved=No   GUID=e3b37f15-1a24-48c8-8584-43511f734d76
-   Frame=60   JointI=81   JointJ=469   IsCurved=No   GUID=00a03868-0127-40e2-8bf0-0d509088c219
-   Frame=61   JointI=56   JointJ=469   IsCurved=No   GUID=d8484be3-f9ae-4d99-b85d-cdc83d54313a
-   Frame=62   JointI=64   JointJ=469   IsCurved=No   GUID=1570c519-a564-4f3e-8436-42d1a06d975e
-   Frame=63   JointI=140   JointJ=469   IsCurved=No   GUID=5f772ac5-1595-4dd1-95bd-fa5e66409b49
-   Frame=64   JointI=56   JointJ=470   IsCurved=No   GUID=0c75fbd7-bb76-4f0a-93a8-308165452ebc
-   Frame=65   JointI=57   JointJ=470   IsCurved=No   GUID=c57e3512-941e-469c-9691-9d3378e38f9e
-   Frame=66   JointI=65   JointJ=470   IsCurved=No   GUID=0b95a817-1cf4-441d-90d7-afbcf8abd5b3
-   Frame=67   JointI=64   JointJ=470   IsCurved=No   GUID=2d16b4b9-44e3-46dd-86d7-ba0c54a8be75
-   Frame=68   JointI=65   JointJ=471   IsCurved=No   GUID=77510821-6ec4-466a-97e9-90e8a6c481a0
-   Frame=69   JointI=144   JointJ=471   IsCurved=No   GUID=8cd78d29-96cb-47e8-bc28-786ea4f3c2aa
-   Frame=70   JointI=135   JointJ=471   IsCurved=No   GUID=c417027c-cc89-496d-b5d6-eff0e3487c20
-   Frame=71   JointI=63   JointJ=471   IsCurved=No   GUID=10bf5ccf-3fd7-466c-bf4c-f87fd9ff51e3
-   Frame=72   JointI=144   JointJ=472   IsCurved=No   GUID=1142a9be-a269-4636-85a5-50c852c32648
-   Frame=73   JointI=140   JointJ=472   IsCurved=No   GUID=675376ad-f225-4029-8219-b66ab7ac80ad
-   Frame=74   JointI=85   JointJ=472   IsCurved=No   GUID=2ad10057-44be-4ac1-abad-a5ffa12923de
-   Frame=75   JointI=135   JointJ=472   IsCurved=No   GUID=870bd9e2-1e14-4981-a002-8fe8b9d57067
-   Frame=76   JointI=140   JointJ=473   IsCurved=No   GUID=0082fee7-16f0-446c-9d0b-d95971ec0856
-   Frame=77   JointI=64   JointJ=473   IsCurved=No   GUID=b72eee96-7217-499f-82e4-4a7a8e806c8f
-   Frame=78   JointI=62   JointJ=473   IsCurved=No   GUID=efb1916f-072b-434d-ab87-8c9bd3965c60
-   Frame=79   JointI=85   JointJ=473   IsCurved=No   GUID=ce2fb4b2-ecd0-4a4c-a713-c3150b500c4e
-   Frame=80   JointI=64   JointJ=474   IsCurved=No   GUID=a1c78fdc-5921-47ea-af90-92acfe58205e
-   Frame=81   JointI=65   JointJ=474   IsCurved=No   GUID=b5795801-7cdd-463e-8a0b-233d29642a85
-   Frame=82   JointI=63   JointJ=474   IsCurved=No   GUID=f3204e18-8230-4a63-b045-a2c13667cb9a
-   Frame=83   JointI=62   JointJ=474   IsCurved=No   GUID=4cbb6938-79c0-4b1d-bcb8-bc868235bff8
-   Frame=84   JointI=63   JointJ=475   IsCurved=No   GUID=d881bf19-fa89-4564-8195-9536a8476eb3
-   Frame=85   JointI=135   JointJ=475   IsCurved=No   GUID=54a7a67b-64e5-4c17-ac99-02fb32275e72
-   Frame=86   JointI=143   JointJ=475   IsCurved=No   GUID=65835add-7d1d-49ed-9175-d9bf80fcc604
-   Frame=87   JointI=71   JointJ=475   IsCurved=No   GUID=d8cab954-93a7-460d-8b58-9833b704065f
-   Frame=88   JointI=135   JointJ=476   IsCurved=No   GUID=f2b707b8-9f72-4b23-84a3-3e462ad305bb
-   Frame=89   JointI=85   JointJ=476   IsCurved=No   GUID=120d6c48-9378-4e01-8a51-a4db1a9bfa6e
-   Frame=90   JointI=139   JointJ=476   IsCurved=No   GUID=00a2aa00-1180-41a4-a393-b10848edef2a
-   Frame=91   JointI=143   JointJ=476   IsCurved=No   GUID=f08d0633-8fae-4071-a326-76a04559c767
-   Frame=92   JointI=85   JointJ=477   IsCurved=No   GUID=187ec004-6f68-4ca1-b12e-3850dd782c56
-   Frame=93   JointI=62   JointJ=477   IsCurved=No   GUID=84295ad5-7df6-49a5-a515-0108a6dd2a4f
-   Frame=94   JointI=70   JointJ=477   IsCurved=No   GUID=3265aec8-2c81-4942-afe9-dd4cf20629ef
-   Frame=95   JointI=139   JointJ=477   IsCurved=No   GUID=65a3c5e3-debe-4aeb-bd89-1169fa551f30
-   Frame=96   JointI=62   JointJ=478   IsCurved=No   GUID=3bb14b38-26e1-4975-bdc6-6eafbb7606d2
-   Frame=97   JointI=63   JointJ=478   IsCurved=No   GUID=25f56cf2-bd23-4471-93dc-427da441065d
-   Frame=98   JointI=71   JointJ=478   IsCurved=No   GUID=999d36d8-baf2-490f-a74f-dfc64f140a0f
-   Frame=99   JointI=70   JointJ=478   IsCurved=No   GUID=23525282-1d6e-4430-a110-1fec0b627692
-   Frame=100   JointI=71   JointJ=479   IsCurved=No   GUID=e46fa132-2b09-4e1c-b5a4-2d8efa158233
-   Frame=101   JointI=143   JointJ=479   IsCurved=No   GUID=5e2d82ef-fae2-4ae5-b255-8542ddcd3a87
-   Frame=102   JointI=136   JointJ=479   IsCurved=No   GUID=4943a28a-0bcd-4c7e-a32a-5743cb85f6ef
-   Frame=103   JointI=69   JointJ=479   IsCurved=No   GUID=f7581ba5-b535-4f4b-a641-7403408b3ed9
-   Frame=104   JointI=143   JointJ=480   IsCurved=No   GUID=5c23452a-8d6e-4435-85a6-8cb998ffe12e
-   Frame=105   JointI=139   JointJ=480   IsCurved=No   GUID=dc204b90-2f01-4ddd-8acb-860736854c4c
-   Frame=106   JointI=89   JointJ=480   IsCurved=No   GUID=d37cbcf7-5ba3-4b4d-849d-47ccc492d3e1
-   Frame=107   JointI=136   JointJ=480   IsCurved=No   GUID=fc0a817f-7b9c-45e3-9647-8c28c8dae4a9
-   Frame=108   JointI=139   JointJ=481   IsCurved=No   GUID=1c77be45-a666-4e6d-a5fb-13d77d25c1b9
-   Frame=109   JointI=70   JointJ=481   IsCurved=No   GUID=d17609a1-b77f-40f4-b836-824eefc4d565
-   Frame=110   JointI=68   JointJ=481   IsCurved=No   GUID=31ca15ab-53b8-4b45-9d22-675d6f07fb11
-   Frame=111   JointI=89   JointJ=481   IsCurved=No   GUID=3007dd5c-9ad6-4233-bfef-167a3cfe9b80
-   Frame=112   JointI=70   JointJ=482   IsCurved=No   GUID=bba72820-579f-419c-af56-e2e70a75ff57
-   Frame=113   JointI=71   JointJ=482   IsCurved=No   GUID=64853f25-f437-4aba-932a-d268ae4a768e
-   Frame=114   JointI=69   JointJ=482   IsCurved=No   GUID=006b408d-28f7-442d-ad2c-6698856ac916
-   Frame=115   JointI=68   JointJ=482   IsCurved=No   GUID=60f662d1-d23a-4841-8b95-cb406110cb95
-   Frame=116   JointI=69   JointJ=483   IsCurved=No   GUID=7473c31a-5170-4eb9-be87-f1aa850ccd2d
-   Frame=117   JointI=136   JointJ=483   IsCurved=No   GUID=66e12ed0-1646-46d4-b178-7544313b851f
-   Frame=118   JointI=142   JointJ=483   IsCurved=No   GUID=b1d45f42-57f8-438c-8e28-11433b743cbc
-   Frame=119   JointI=77   JointJ=483   IsCurved=No   GUID=fa1d2ea1-f2cd-40e4-a0c4-25c5987473d3
-   Frame=120   JointI=136   JointJ=484   IsCurved=No   GUID=c69ab772-25e3-43ab-af7a-0a42cda9eea1
-   Frame=121   JointI=89   JointJ=484   IsCurved=No   GUID=41bbc21c-8703-4c40-85bf-9a2c8b710ef9
-   Frame=122   JointI=138   JointJ=484   IsCurved=No   GUID=343396e6-c734-46ff-badf-7aa384955096
-   Frame=123   JointI=142   JointJ=484   IsCurved=No   GUID=1b08a216-1179-44de-82ef-cc775469c851
-   Frame=124   JointI=89   JointJ=485   IsCurved=No   GUID=0130b93b-e1cc-4a05-9cd9-ba4f505dadcf
-   Frame=125   JointI=68   JointJ=485   IsCurved=No   GUID=dac0be69-5eea-4ab3-be67-2734e8460b66
-   Frame=126   JointI=76   JointJ=485   IsCurved=No   GUID=cf311e07-f1ed-4c0b-9d5c-c4affc089044
-   Frame=127   JointI=138   JointJ=485   IsCurved=No   GUID=da19bf77-2922-4c50-9f83-e0c365881fc4
-   Frame=128   JointI=68   JointJ=486   IsCurved=No   GUID=c7b19a5a-7344-46fc-8023-39887ba7ccbf
-   Frame=129   JointI=69   JointJ=486   IsCurved=No   GUID=7996a0ba-3021-4478-8378-e0194d044f9d
-   Frame=130   JointI=77   JointJ=486   IsCurved=No   GUID=7aaf5fb1-4917-4ba7-a9fa-e5efb14a54cd
-   Frame=131   JointI=76   JointJ=486   IsCurved=No   GUID=101b2033-9254-490d-a14a-cf9a00011a72
-   Frame=132   JointI=77   JointJ=487   IsCurved=No   GUID=4ed39ebb-1e16-469f-892d-0857da3edf33
-   Frame=133   JointI=142   JointJ=487   IsCurved=No   GUID=543fe008-2cc4-4706-a858-b12bf2196234
-   Frame=134   JointI=137   JointJ=487   IsCurved=No   GUID=36a20152-c50b-43dd-98a1-c1a5e004b2bb
-   Frame=135   JointI=75   JointJ=487   IsCurved=No   GUID=460cde81-9f68-454e-93df-252d1ff42857
-   Frame=136   JointI=142   JointJ=488   IsCurved=No   GUID=0eec65b3-d757-4ddc-888b-726cca3c7a80
-   Frame=137   JointI=138   JointJ=488   IsCurved=No   GUID=7891e5d4-d146-46b7-bbc9-7dd413fa1216
-   Frame=138   JointI=93   JointJ=488   IsCurved=No   GUID=09bd7173-1a99-4909-a797-3d7ca2fc7632
-   Frame=139   JointI=137   JointJ=488   IsCurved=No   GUID=15597830-632b-4239-8a02-776083f2a2c0
-   Frame=140   JointI=138   JointJ=489   IsCurved=No   GUID=c1a05154-ee4a-4b1d-870a-4b91a6d97e4f
-   Frame=141   JointI=76   JointJ=489   IsCurved=No   GUID=1d01bf2b-0253-43da-9451-5ed11e24662d
-   Frame=142   JointI=74   JointJ=489   IsCurved=No   GUID=6dbf799a-c3fe-4d05-a1f1-ec48c57850f6
-   Frame=143   JointI=93   JointJ=489   IsCurved=No   GUID=a2610784-5def-479f-9686-0b85324cadac
-   Frame=144   JointI=76   JointJ=490   IsCurved=No   GUID=52085455-39d2-4070-8e78-4849b0b0c55c
-   Frame=145   JointI=77   JointJ=490   IsCurved=No   GUID=10b23ea5-8976-4d1d-82c1-3661ad6439be
-   Frame=146   JointI=75   JointJ=490   IsCurved=No   GUID=6fc89140-b418-4c20-9922-bbd13df4378e
-   Frame=147   JointI=74   JointJ=490   IsCurved=No   GUID=6e05421a-908e-4ba9-9d7e-2a1be616aa6b
-   Frame=148   JointI=75   JointJ=491   IsCurved=No   GUID=ab21cb9b-93ef-4419-bfdb-8c8716ed2492
-   Frame=149   JointI=137   JointJ=491   IsCurved=No   GUID=03d5afe2-451c-40ef-b833-a303c6c9418d
-   Frame=150   JointI=568   JointJ=491   IsCurved=No   GUID=e5999e0b-5c95-430b-94d4-956e145509de
-   Frame=151   JointI=494   JointJ=491   IsCurved=No   GUID=f2cc3bc4-143f-4ad0-b765-388517fbb72f
-   Frame=152   JointI=137   JointJ=492   IsCurved=No   GUID=f4d23a60-d595-40be-a7de-bbd15cfa1c84
-   Frame=153   JointI=93   JointJ=492   IsCurved=No   GUID=840acb0e-872e-4147-8781-0f677ba05b82
+   Frame=23   JointI=2   JointJ=20   IsCurved=No   GUID=34444e0b-2f17-4997-accc-b93943212575
+   Frame=24   JointI=18   JointJ=24   IsCurved=No   GUID=11d77f64-c4cb-47a8-a6f2-f06a140db9da
+   Frame=25   JointI=8   JointJ=24   IsCurved=No   GUID=6023079f-2cea-4801-931d-1c9e4cc8d91d
+   Frame=26   JointI=141   JointJ=24   IsCurved=No   GUID=c5af0139-6caa-4346-955e-3a3f4603950e
+   Frame=27   JointI=145   JointJ=24   IsCurved=No   GUID=68ea91bb-c3bb-4432-bfcc-f58d642b72bd
+   Frame=28   JointI=8   JointJ=26   IsCurved=No   GUID=fbda0627-99f0-4da0-a743-5c0885937050
+   Frame=29   JointI=2   JointJ=26   IsCurved=No   GUID=fc8eeb34-3210-47eb-947f-1642f6c2290c
+   Frame=30   JointI=58   JointJ=26   IsCurved=No   GUID=2a242780-32c9-4663-bab2-aa64a041bc0d
+   Frame=31   JointI=141   JointJ=26   IsCurved=No   GUID=34b8ae76-427b-4273-9793-7e8492d520b9
+   Frame=32   JointI=2   JointJ=28   IsCurved=No   GUID=7a2bba89-b41b-4240-84fa-3e2f165c5ff3
+   Frame=33   JointI=12   JointJ=28   IsCurved=No   GUID=1d696009-85d3-4e84-ba3f-a0dc45756333
+   Frame=34   JointI=59   JointJ=28   IsCurved=No   GUID=dbebdc67-b1f9-4866-8bf2-5431b09d16d5
+   Frame=35   JointI=58   JointJ=28   IsCurved=No   GUID=24cb573a-b7b8-4801-8d89-a8392623204b
+   Frame=36   JointI=59   JointJ=30   IsCurved=No   GUID=43b09850-2d2e-4198-bc0a-e4f8318de10d
+   Frame=37   JointI=145   JointJ=30   IsCurved=No   GUID=98071cbf-f6f7-4fa6-8ed1-8d314dab874b
+   Frame=38   JointI=125   JointJ=30   IsCurved=No   GUID=70901ca8-2baf-45b3-ac4a-432394274f69
+   Frame=39   JointI=57   JointJ=30   IsCurved=No   GUID=3137b688-f4c5-4f57-8d2f-d0b03d2ca575
+   Frame=40   JointI=145   JointJ=269   IsCurved=No   GUID=0adbc051-823d-43fb-9004-bee05b24e031
+   Frame=41   JointI=141   JointJ=269   IsCurved=No   GUID=b4879c88-d4dd-42df-9746-81e3a05a430f
+   Frame=42   JointI=81   JointJ=269   IsCurved=No   GUID=fbdc0a65-1a9d-4051-9ee1-299e6d182142
+   Frame=43   JointI=125   JointJ=269   IsCurved=No   GUID=fef5ff3c-274b-4d4b-87f9-616ec062acdb
+   Frame=44   JointI=141   JointJ=270   IsCurved=No   GUID=be9717d0-c9ff-4cdd-8347-e98747ea9b94
+   Frame=45   JointI=58   JointJ=270   IsCurved=No   GUID=f3db2f8b-5a62-4276-9482-a9fc7c911d5d
+   Frame=46   JointI=56   JointJ=270   IsCurved=No   GUID=c1cf1db5-ffd0-44cb-a5fe-f52f387588ee
+   Frame=47   JointI=81   JointJ=270   IsCurved=No   GUID=a54774ce-93d5-4330-a398-26f087d2b02b
+   Frame=48   JointI=58   JointJ=271   IsCurved=No   GUID=aefb9521-fcbc-4c26-8843-c68567921175
+   Frame=49   JointI=59   JointJ=271   IsCurved=No   GUID=30c2f122-a430-43b3-86bf-50fd60f11119
+   Frame=50   JointI=57   JointJ=271   IsCurved=No   GUID=6622e0de-5470-4f22-9dc3-6a186d5b365c
+   Frame=51   JointI=56   JointJ=271   IsCurved=No   GUID=88ebf2ec-3c85-4b7a-8f59-aaa745ed1eb2
+   Frame=52   JointI=57   JointJ=272   IsCurved=No   GUID=39897e96-5bf0-4c75-9418-32ff8f87c4e1
+   Frame=53   JointI=125   JointJ=272   IsCurved=No   GUID=d20da95e-8c81-4e92-af33-c23120318029
+   Frame=54   JointI=144   JointJ=272   IsCurved=No   GUID=4727aa96-9a77-464c-9569-24754a03b172
+   Frame=55   JointI=65   JointJ=272   IsCurved=No   GUID=0197eaba-6715-46f2-bc81-b3beb25c7d6e
+   Frame=56   JointI=125   JointJ=273   IsCurved=No   GUID=c39def89-f521-4a76-b386-5c6e741e7751
+   Frame=57   JointI=81   JointJ=273   IsCurved=No   GUID=43102bdf-5257-4db1-bd5c-c252595fabf7
+   Frame=58   JointI=140   JointJ=273   IsCurved=No   GUID=208da0a9-3bd8-454b-9924-2d2d35b4f1a3
+   Frame=59   JointI=144   JointJ=273   IsCurved=No   GUID=d46eb3f3-01a8-42ea-9714-ca53609b8ac6
+   Frame=60   JointI=81   JointJ=274   IsCurved=No   GUID=a48bfcc9-dd2a-4fcb-bef2-351dcf0e464c
+   Frame=61   JointI=56   JointJ=274   IsCurved=No   GUID=a58505b3-3139-4acf-99a0-fe4b3636b985
+   Frame=62   JointI=64   JointJ=274   IsCurved=No   GUID=49611c01-b0db-440e-8e1a-73d6dd0ac251
+   Frame=63   JointI=140   JointJ=274   IsCurved=No   GUID=7f49e6f9-5af3-4c19-95e6-f76c62782872
+   Frame=64   JointI=56   JointJ=275   IsCurved=No   GUID=1aa6524b-d5fd-4095-8714-1b90f013fbcc
+   Frame=65   JointI=57   JointJ=275   IsCurved=No   GUID=8af9c36f-7b1d-4c42-9ea6-c1ff55166b97
+   Frame=66   JointI=65   JointJ=275   IsCurved=No   GUID=0e0a9fe7-6648-41c1-8ed5-80de056425ff
+   Frame=67   JointI=64   JointJ=275   IsCurved=No   GUID=0d4bb275-2207-4839-8495-eb8e637cb9c4
+   Frame=68   JointI=65   JointJ=469   IsCurved=No   GUID=19b58d5e-f9c7-49c6-ae3c-578a58a282d9
+   Frame=69   JointI=144   JointJ=469   IsCurved=No   GUID=04208525-348d-43a4-b0b9-6cddd3fb0c56
+   Frame=70   JointI=135   JointJ=469   IsCurved=No   GUID=96f9b6a5-ed93-4acb-a36b-06581315c6d2
+   Frame=71   JointI=63   JointJ=469   IsCurved=No   GUID=988a3343-de91-4ee7-bb04-bafdd2dbf9e1
+   Frame=72   JointI=144   JointJ=470   IsCurved=No   GUID=78268136-afbe-4a23-aa29-43aacfa97eda
+   Frame=73   JointI=140   JointJ=470   IsCurved=No   GUID=88e9b8cb-9ade-4d4c-8f4b-5572fb6b5ea0
+   Frame=74   JointI=85   JointJ=470   IsCurved=No   GUID=081d1d46-dfaa-4735-ae27-3a2c8ad8578d
+   Frame=75   JointI=135   JointJ=470   IsCurved=No   GUID=b5cf5e25-1912-4a03-8e6a-cb17237a5cf7
+   Frame=76   JointI=140   JointJ=471   IsCurved=No   GUID=cb0cad4b-9459-4a18-a300-923a7080e5c0
+   Frame=77   JointI=64   JointJ=471   IsCurved=No   GUID=1bc2ac1d-745c-4aca-a99b-eca79460afa1
+   Frame=78   JointI=62   JointJ=471   IsCurved=No   GUID=a1b52d9e-cfc5-4158-9494-af1e6d7e0b5a
+   Frame=79   JointI=85   JointJ=471   IsCurved=No   GUID=a7152458-bdac-496b-b1a4-d1d3518d9642
+   Frame=80   JointI=64   JointJ=472   IsCurved=No   GUID=ff4f2f9e-a24c-402e-bb1d-178a6f5deb93
+   Frame=81   JointI=65   JointJ=472   IsCurved=No   GUID=0c91769e-ea39-4f71-b7eb-7e01daec0749
+   Frame=82   JointI=63   JointJ=472   IsCurved=No   GUID=d92118d0-e58d-4c38-aa98-a78a2499363e
+   Frame=83   JointI=62   JointJ=472   IsCurved=No   GUID=ebecb880-bb5c-4622-abcd-01d2b83bb71b
+   Frame=84   JointI=63   JointJ=473   IsCurved=No   GUID=8db59573-eff6-4dbe-a60f-6eeccb1d7d44
+   Frame=85   JointI=135   JointJ=473   IsCurved=No   GUID=49def881-7ac6-40cc-ab07-8ad3de4279fc
+   Frame=86   JointI=143   JointJ=473   IsCurved=No   GUID=476e0676-0243-40bf-883c-6ff4077eb543
+   Frame=87   JointI=71   JointJ=473   IsCurved=No   GUID=1eb97055-f58d-4844-9f0a-bdd5f7408691
+   Frame=88   JointI=135   JointJ=474   IsCurved=No   GUID=b9f1d812-37c6-42a6-a25e-a6c35bb6819c
+   Frame=89   JointI=85   JointJ=474   IsCurved=No   GUID=e1011c0d-ed36-4bf4-97a3-c5458b8ed82c
+   Frame=90   JointI=139   JointJ=474   IsCurved=No   GUID=468067b1-241d-496e-b645-6586f97683ad
+   Frame=91   JointI=143   JointJ=474   IsCurved=No   GUID=0a2a05db-0a45-492b-9282-2fdeff870c92
+   Frame=92   JointI=85   JointJ=475   IsCurved=No   GUID=661a598b-0169-4813-a789-95a5cb0d85f6
+   Frame=93   JointI=62   JointJ=475   IsCurved=No   GUID=0a71a417-d12e-44e3-96fe-da9c61c0683e
+   Frame=94   JointI=70   JointJ=475   IsCurved=No   GUID=2d9d5448-fa27-4bc5-99c9-10fce1195a72
+   Frame=95   JointI=139   JointJ=475   IsCurved=No   GUID=31db5cf1-1c0e-4cf3-bb84-b236f6aea14b
+   Frame=96   JointI=62   JointJ=476   IsCurved=No   GUID=16f01340-4065-4d86-82f3-c98ba9ce8a4d
+   Frame=97   JointI=63   JointJ=476   IsCurved=No   GUID=8c00dd29-0399-40a4-a2b5-e6b7099f03a9
+   Frame=98   JointI=71   JointJ=476   IsCurved=No   GUID=b419e55c-f062-4238-a3e6-571c0e78cf05
+   Frame=99   JointI=70   JointJ=476   IsCurved=No   GUID=4fac1bfe-c5b8-442a-8113-b4184a9cdce3
+   Frame=100   JointI=71   JointJ=477   IsCurved=No   GUID=8ec46bde-48ae-410b-97d9-8330d0b737b6
+   Frame=101   JointI=143   JointJ=477   IsCurved=No   GUID=b540a1ee-96f8-446e-ac1f-9d13f40c6d6e
+   Frame=102   JointI=136   JointJ=477   IsCurved=No   GUID=63227e7d-a336-4f39-86f4-f5563f7fb9c1
+   Frame=103   JointI=69   JointJ=477   IsCurved=No   GUID=6f1e77b2-3e80-4fce-b4f5-3b2037f9ac97
+   Frame=104   JointI=143   JointJ=478   IsCurved=No   GUID=8b5e016a-1d55-4269-89f9-0254058aa54e
+   Frame=105   JointI=139   JointJ=478   IsCurved=No   GUID=8da102c3-c10e-4050-9d9b-c6f6fcd97a0d
+   Frame=106   JointI=89   JointJ=478   IsCurved=No   GUID=e9c4f48f-849b-48b2-98c4-28feeda0c675
+   Frame=107   JointI=136   JointJ=478   IsCurved=No   GUID=54ec4454-4963-422f-8ccb-de127112553f
+   Frame=108   JointI=139   JointJ=479   IsCurved=No   GUID=4f1d5768-0acf-40ec-a3cc-ab3f587a17d8
+   Frame=109   JointI=70   JointJ=479   IsCurved=No   GUID=434b3971-647d-43eb-9a80-bb027773634e
+   Frame=110   JointI=68   JointJ=479   IsCurved=No   GUID=c45587f8-686b-477d-97e6-98cf976eb722
+   Frame=111   JointI=89   JointJ=479   IsCurved=No   GUID=c2b1917d-6ecb-4c09-95c9-4a75f7b7ca75
+   Frame=112   JointI=70   JointJ=480   IsCurved=No   GUID=fc109d0c-6536-4f79-abb2-b4f4f8d19c92
+   Frame=113   JointI=71   JointJ=480   IsCurved=No   GUID=2b0aaaf6-9b2d-4f03-89c9-39b029a586fc
+   Frame=114   JointI=69   JointJ=480   IsCurved=No   GUID=d1e044d1-6afd-45da-b11b-67605a4823eb
+   Frame=115   JointI=68   JointJ=480   IsCurved=No   GUID=fbc1cd82-320f-4d98-a8db-93d2714468c8
+   Frame=116   JointI=69   JointJ=481   IsCurved=No   GUID=3f20caae-944b-4563-a01e-ca6080b1c240
+   Frame=117   JointI=136   JointJ=481   IsCurved=No   GUID=a13563f4-e29d-4279-b35d-5acc45c0848d
+   Frame=118   JointI=142   JointJ=481   IsCurved=No   GUID=6e29d804-c578-4944-b9e2-dcebc4a99645
+   Frame=119   JointI=77   JointJ=481   IsCurved=No   GUID=0a26c127-018b-40b4-8031-840d7b651256
+   Frame=120   JointI=136   JointJ=482   IsCurved=No   GUID=8cea9397-bfe0-4ccd-9529-abd0125f2e23
+   Frame=121   JointI=89   JointJ=482   IsCurved=No   GUID=a8f4571f-f421-4619-99b2-697f8ee7121c
+   Frame=122   JointI=138   JointJ=482   IsCurved=No   GUID=68c0545e-d933-417a-bde4-b8009110413c
+   Frame=123   JointI=142   JointJ=482   IsCurved=No   GUID=fd871d87-b676-4c3b-ac64-835c49b71b1b
+   Frame=124   JointI=89   JointJ=483   IsCurved=No   GUID=beb49380-c224-4ea4-85f0-3320ee4982ad
+   Frame=125   JointI=68   JointJ=483   IsCurved=No   GUID=1c79fe75-52bd-4ef4-8fef-6ce287d49199
+   Frame=126   JointI=76   JointJ=483   IsCurved=No   GUID=ffd0729b-8d08-45f2-808b-595678ed6287
+   Frame=127   JointI=138   JointJ=483   IsCurved=No   GUID=40961d9f-9070-456e-b2d3-52bb75bbc8ae
+   Frame=128   JointI=68   JointJ=484   IsCurved=No   GUID=52d122a3-62a6-44de-871b-6a754cb13f0c
+   Frame=129   JointI=69   JointJ=484   IsCurved=No   GUID=da2b622b-6676-4703-b535-b3157a64e71b
+   Frame=130   JointI=77   JointJ=484   IsCurved=No   GUID=bb054154-61b7-4679-aebc-3967ba7c3469
+   Frame=131   JointI=76   JointJ=484   IsCurved=No   GUID=db31c855-d93b-4f93-a7eb-dc2ceea7b2a7
+   Frame=132   JointI=77   JointJ=485   IsCurved=No   GUID=e843f048-6ef8-4248-9907-840852e4a458
+   Frame=133   JointI=142   JointJ=485   IsCurved=No   GUID=e21fa5dd-a193-4435-b3fa-2f5ff9ec7e32
+   Frame=134   JointI=137   JointJ=485   IsCurved=No   GUID=f0e79d45-10a7-4b6b-88e1-0271c391fcbf
+   Frame=135   JointI=75   JointJ=485   IsCurved=No   GUID=8482d3a8-6617-4579-8850-ca553288ac92
+   Frame=136   JointI=142   JointJ=486   IsCurved=No   GUID=99544fd2-480b-4a02-bfe3-b7bb63aceb90
+   Frame=137   JointI=138   JointJ=486   IsCurved=No   GUID=b6b2af85-8e82-4563-84cd-6c07d36fa1a8
+   Frame=138   JointI=93   JointJ=486   IsCurved=No   GUID=6ea956ac-363e-4387-9eab-235c32ecaebc
+   Frame=139   JointI=137   JointJ=486   IsCurved=No   GUID=c600a4b1-5ed4-4ea8-8156-c57d1f94e02c
+   Frame=140   JointI=138   JointJ=487   IsCurved=No   GUID=cc819c26-d8ac-44f9-82e4-d3ca0e4eb6a3
+   Frame=141   JointI=76   JointJ=487   IsCurved=No   GUID=daa46813-5dbd-444c-a0b5-5391380d8eca
+   Frame=142   JointI=74   JointJ=487   IsCurved=No   GUID=50745964-f029-47fa-ab2e-6d44ea98c35a
+   Frame=143   JointI=93   JointJ=487   IsCurved=No   GUID=662f249e-883d-443c-a202-05783d1bcceb
+   Frame=144   JointI=76   JointJ=488   IsCurved=No   GUID=6708ec94-5050-412c-aaf8-3f13024abc80
+   Frame=145   JointI=77   JointJ=488   IsCurved=No   GUID=3d5484cb-d7fa-4cc2-91d1-ef3d88593628
+   Frame=146   JointI=75   JointJ=488   IsCurved=No   GUID=727bdb24-17eb-41c0-b56f-97ee3dcb7881
+   Frame=147   JointI=74   JointJ=488   IsCurved=No   GUID=821ee045-50ec-435e-8907-19dd48e35bdf
+   Frame=148   JointI=75   JointJ=489   IsCurved=No   GUID=9019057a-b0d0-4f2f-b4aa-113f275eee80
+   Frame=149   JointI=137   JointJ=489   IsCurved=No   GUID=cb689efb-826f-4f27-b3d4-e3f91986784b
+   Frame=150   JointI=568   JointJ=489   IsCurved=No   GUID=571204ba-9c55-4543-a92f-5ccc690e010a
+   Frame=151   JointI=494   JointJ=489   IsCurved=No   GUID=b53f51ac-b726-42fc-a01f-1624fe41a00c
+   Frame=152   JointI=137   JointJ=490   IsCurved=No   GUID=f734275a-472f-417d-b338-ee86a25ae70e
+   Frame=153   JointI=93   JointJ=490   IsCurved=No   GUID=b498f955-cd81-4cfe-b21a-27edaf45ac3d
    Frame=154   JointI=1   JointJ=9   IsCurved=No   GUID=c32ac8ac-4425-4c0e-b51d-300b9cade4e6
    Frame=155   JointI=9   JointJ=2   IsCurved=No   GUID=ddaaf84b-0efc-4e9e-a2ba-a29d9455035d
    Frame=156   JointI=2   JointJ=58   IsCurved=No   GUID=2f934536-2763-4160-af61-9c46d2e8fec1
-   Frame=157   JointI=565   JointJ=492   IsCurved=No   GUID=2aab1126-39df-4527-a6fa-a374e81646ff
-   Frame=158   JointI=568   JointJ=492   IsCurved=No   GUID=e6d8981f-740f-4fee-8345-ad50628e53ad
-   Frame=159   JointI=93   JointJ=495   IsCurved=No   GUID=0d6e04da-c1d0-4758-8def-3988ce483100
-   Frame=160   JointI=74   JointJ=495   IsCurved=No   GUID=9f6e597c-a3d0-4943-85fc-4a83d1ba62c6
+   Frame=157   JointI=565   JointJ=490   IsCurved=No   GUID=9c0aea70-9166-4e30-96da-726de5ae28fe
+   Frame=158   JointI=568   JointJ=490   IsCurved=No   GUID=d04c84e2-631c-4931-9ebc-21f087d3d59a
+   Frame=159   JointI=93   JointJ=491   IsCurved=No   GUID=7e9e9e05-f428-4891-9b98-0b04bad86150
+   Frame=160   JointI=74   JointJ=491   IsCurved=No   GUID=9e8708ce-f8c6-40d4-b52d-7c3248ea4d87
    Frame=161   JointI=58   JointJ=56   IsCurved=No   GUID=fa2752af-06d9-4e5b-a8ac-d070bea62796
    Frame=162   JointI=56   JointJ=64   IsCurved=No   GUID=f0356024-965d-4d0d-8c78-324d9905f796
    Frame=163   JointI=64   JointJ=62   IsCurved=No   GUID=0e82a859-5360-485c-9d4f-da733d221b1b
@@ -298,25 +294,25 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=165   JointI=70   JointJ=68   IsCurved=No   GUID=2e500875-7d57-41a0-a03e-492a6cab3a2b
    Frame=166   JointI=68   JointJ=76   IsCurved=No   GUID=8b7ca515-8f36-4a50-a958-c42bef1a95c3
    Frame=167   JointI=76   JointJ=74   IsCurved=No   GUID=5df93280-7793-4ddd-94ef-5db203de2d32
-   Frame=168   JointI=493   JointJ=495   IsCurved=No   GUID=22678a6f-afca-46ba-9afb-4265bbfffc13
-   Frame=169   JointI=565   JointJ=495   IsCurved=No   GUID=b9ad2ef2-a660-44ea-ab38-fcd1c2f1507e
-   Frame=170   JointI=74   JointJ=496   IsCurved=No   GUID=ab1b2dfd-5dfd-4185-beff-3c049f788eb4
-   Frame=171   JointI=75   JointJ=496   IsCurved=No   GUID=b320b828-f09f-4fdd-89db-c637ecb6b8a3
-   Frame=172   JointI=494   JointJ=496   IsCurved=No   GUID=5987fcf9-c7ce-4a6e-aa54-98f479f7293a
-   Frame=173   JointI=493   JointJ=496   IsCurved=No   GUID=ed53e610-e9cd-42e3-9854-9c1dfdee5e10
-   Frame=174   JointI=494   JointJ=497   IsCurved=No   GUID=92e26022-3018-4eb2-abf5-0c2e16b6ad57
-   Frame=175   JointI=568   JointJ=497   IsCurved=No   GUID=5d062b28-8cbb-44ad-8a4d-654b26b8c4a9
-   Frame=176   JointI=606   JointJ=497   IsCurved=No   GUID=73a96c92-a7dc-4dc5-968e-ba66d62316d2
-   Frame=177   JointI=706   JointJ=497   IsCurved=No   GUID=82cf14c5-6ba0-421b-b5b6-5fc9af31f375
-   Frame=178   JointI=568   JointJ=498   IsCurved=No   GUID=5f936b2d-5690-4d2b-b3cd-f9fa1620f016
-   Frame=179   JointI=565   JointJ=498   IsCurved=No   GUID=6457e3ee-a1bf-4289-b502-87ff089a194a
-   Frame=180   JointI=605   JointJ=498   IsCurved=No   GUID=13f0aadf-803b-4767-9901-da2f1d08642a
-   Frame=181   JointI=606   JointJ=498   IsCurved=No   GUID=4e7943f3-6a76-49fe-8d1d-d21cc50f8230
-   Frame=182   JointI=565   JointJ=499   IsCurved=No   GUID=7ce96d89-2674-4668-9e06-98a81f9de0ba
-   Frame=183   JointI=493   JointJ=499   IsCurved=No   GUID=e48eb443-ad13-41d8-a7b9-0aa7f6533069
-   Frame=184   JointI=673   JointJ=499   IsCurved=No   GUID=b2b73df8-3d19-49c4-9287-6381dc5bab05
-   Frame=185   JointI=605   JointJ=499   IsCurved=No   GUID=3e295f1b-a899-492c-828d-3ec97ba9373c
-   Frame=186   JointI=493   JointJ=500   IsCurved=No   GUID=db791691-8487-485c-b8b4-375e587c6a57
+   Frame=168   JointI=493   JointJ=491   IsCurved=No   GUID=65809d1e-3d43-4949-b596-df14fb47cd6f
+   Frame=169   JointI=565   JointJ=491   IsCurved=No   GUID=4067f4db-75df-4212-ad44-54f608a657e5
+   Frame=170   JointI=74   JointJ=492   IsCurved=No   GUID=706e4ff0-91b7-404b-9d40-78b8e18f5e9e
+   Frame=171   JointI=75   JointJ=492   IsCurved=No   GUID=358c9622-7bfc-4e25-a3a5-91259d249083
+   Frame=172   JointI=494   JointJ=492   IsCurved=No   GUID=db59ae6e-b746-4a17-a2f9-5189ba4f23df
+   Frame=173   JointI=493   JointJ=492   IsCurved=No   GUID=2747dee2-e6ee-4dba-91c5-74bc0bf06778
+   Frame=174   JointI=494   JointJ=495   IsCurved=No   GUID=4692f480-c9ec-40a6-9f7b-fb8a17db378b
+   Frame=175   JointI=568   JointJ=495   IsCurved=No   GUID=04bc7f37-ff11-4d9a-bce2-f992cfd67997
+   Frame=176   JointI=606   JointJ=495   IsCurved=No   GUID=577dd7eb-c4e2-4af2-828b-7d48b23e6e99
+   Frame=177   JointI=706   JointJ=495   IsCurved=No   GUID=c85e84a3-8966-4d5a-8d15-3c1ecaab0ceb
+   Frame=178   JointI=568   JointJ=496   IsCurved=No   GUID=23564337-59c4-465e-9f3f-3f03d69cb8be
+   Frame=179   JointI=565   JointJ=496   IsCurved=No   GUID=9825feba-6e96-447b-b862-cc23d553eca2
+   Frame=180   JointI=605   JointJ=496   IsCurved=No   GUID=0328123f-b0d9-4087-9088-6ad80d22972b
+   Frame=181   JointI=606   JointJ=496   IsCurved=No   GUID=72a9dbbf-8218-433a-86c0-bfb2208fb24f
+   Frame=182   JointI=565   JointJ=497   IsCurved=No   GUID=6481393f-ac40-4caf-8d52-4f5e4622fd05
+   Frame=183   JointI=493   JointJ=497   IsCurved=No   GUID=c7e4b4c2-963b-4709-9f62-76d9eccd14e9
+   Frame=184   JointI=673   JointJ=497   IsCurved=No   GUID=9809b5a4-6be9-4398-84c7-46c9d6635301
+   Frame=185   JointI=605   JointJ=497   IsCurved=No   GUID=ba43006b-3905-49bf-8e3b-1ad87e704c4f
+   Frame=186   JointI=493   JointJ=498   IsCurved=No   GUID=8c034105-d335-456d-b47d-dd7b9a68e26c
    Frame=187   JointI=7   JointJ=8   IsCurved=No   GUID=eebc0b4e-7af6-4f7b-9d1b-6ebb1e12b10e
    Frame=188   JointI=8   JointJ=141   IsCurved=No   GUID=dbe4a5b1-e1ed-460d-97c1-4235a18f782a
    Frame=189   JointI=141   JointJ=81   IsCurved=No   GUID=286fab4a-f49a-4854-98a4-a66513942157
@@ -326,77 +322,77 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=193   JointI=139   JointJ=89   IsCurved=No   GUID=a3ca6664-1ab0-4b30-b5c6-9081fb295d46
    Frame=194   JointI=89   JointJ=138   IsCurved=No   GUID=7f07ccfb-ca10-4cee-b9ae-8f95f082d3e1
    Frame=195   JointI=138   JointJ=93   IsCurved=No   GUID=47820a51-037e-4ee8-b54d-535db0eff32b
-   Frame=196   JointI=494   JointJ=500   IsCurved=No   GUID=aeee587e-1d5d-4c52-a4be-90d2f7433639
-   Frame=197   JointI=706   JointJ=500   IsCurved=No   GUID=a58e4b89-a6af-44f8-963d-674d8dc40722
-   Frame=198   JointI=673   JointJ=500   IsCurved=No   GUID=a8bb4f7e-b921-4291-8740-ab75d785441a
-   Frame=199   JointI=706   JointJ=501   IsCurved=No   GUID=d85a24fc-b0b8-4c1e-aa95-fae31adaa0c3
+   Frame=196   JointI=494   JointJ=498   IsCurved=No   GUID=234dffc3-0fee-4985-a7a3-196268e1705c
+   Frame=197   JointI=706   JointJ=498   IsCurved=No   GUID=caaf8ac1-8209-4323-a0e9-d37a3e56c03c
+   Frame=198   JointI=673   JointJ=498   IsCurved=No   GUID=791d431c-2769-4f0a-aa2a-d7a30e045dcc
+   Frame=199   JointI=706   JointJ=499   IsCurved=No   GUID=1db6cf3e-9c5c-4985-9cea-fe390096d405
    Frame=200   JointI=2   JointJ=167   IsCurved=No   GUID=584ddd8b-4a2c-46b1-98e9-07ee5a6a000c
    Frame=201   JointI=167   JointJ=4   IsCurved=No   GUID=f7f5b7d5-d73d-43a5-9686-1b5a051b8c9e
    Frame=202   JointI=4   JointJ=169   IsCurved=No   GUID=07c26b85-5267-405e-8bd5-75eeed23280d
    Frame=203   JointI=169   JointJ=171   IsCurved=No   GUID=a15c96c9-e463-4adb-b581-f401e4aef229
-   Frame=204   JointI=606   JointJ=501   IsCurved=No   GUID=f2efc44a-400c-4672-bac1-aab248b024f6
-   Frame=205   JointI=610   JointJ=501   IsCurved=No   GUID=2cd0d3f1-0c3a-4270-8795-29d14b7d164b
-   Frame=206   JointI=707   JointJ=501   IsCurved=No   GUID=ae59d255-b921-4946-86a2-8a32ebd80004
-   Frame=207   JointI=606   JointJ=502   IsCurved=No   GUID=907393aa-f030-44c1-b6a3-f3d1ccf9aaee
+   Frame=204   JointI=606   JointJ=499   IsCurved=No   GUID=0a1ad23a-6473-4e62-a498-e69fe7a105c1
+   Frame=205   JointI=610   JointJ=499   IsCurved=No   GUID=1824bda5-a776-4c72-aec2-3c1168001a70
+   Frame=206   JointI=707   JointJ=499   IsCurved=No   GUID=77c8882e-c6dc-4508-9342-8e6b26a6ce3c
+   Frame=207   JointI=606   JointJ=500   IsCurved=No   GUID=b1988108-2b84-43de-a06d-ede3ffc665ae
    Frame=208   JointI=171   JointJ=173   IsCurved=No   GUID=fda6cb2c-f9d4-477b-8b27-e0d88a8c662d
    Frame=209   JointI=173   JointJ=8   IsCurved=No   GUID=74f0ece4-5adf-479a-ac3a-cdfc9fc83fb8
-   Frame=210   JointI=605   JointJ=502   IsCurved=No   GUID=600c95ee-98ed-4120-aa1a-209850d5db85
-   Frame=211   JointI=609   JointJ=502   IsCurved=No   GUID=ac2b2b9f-bf18-4a69-8072-5ecbda3140a7
-   Frame=212   JointI=610   JointJ=502   IsCurved=No   GUID=58fd2505-7986-4bd2-9ce2-67b1aa4fd67e
-   Frame=213   JointI=605   JointJ=503   IsCurved=No   GUID=7e7f20d5-864a-4157-b64e-f461a8c76bfc
-   Frame=214   JointI=673   JointJ=503   IsCurved=No   GUID=c79a67ce-8ca6-4bf0-a285-4ea0a997e1c1
-   Frame=215   JointI=674   JointJ=503   IsCurved=No   GUID=65fcb8b6-ede6-4962-89f7-2fda69e5cc03
+   Frame=210   JointI=605   JointJ=500   IsCurved=No   GUID=15d89151-a80d-4350-aaa8-e25c935a062a
+   Frame=211   JointI=609   JointJ=500   IsCurved=No   GUID=ccb89282-1ff3-4401-8f7b-ba1e97b58cc2
+   Frame=212   JointI=610   JointJ=500   IsCurved=No   GUID=19fc969a-5c49-4e06-98fa-416d3de1d7eb
+   Frame=213   JointI=605   JointJ=501   IsCurved=No   GUID=94fa181d-e5cb-47a7-9aac-1f1ea58a1859
+   Frame=214   JointI=673   JointJ=501   IsCurved=No   GUID=aaf71452-577c-460e-b0ff-e60396e45511
+   Frame=215   JointI=674   JointJ=501   IsCurved=No   GUID=4ba4dea3-b4be-4848-be65-dc6fcc1ca300
    Frame=216   JointI=11   JointJ=19   IsCurved=No   GUID=9d0345cf-ff64-49e0-b4a8-b9d413307c80
    Frame=217   JointI=19   JointJ=12   IsCurved=No   GUID=5fe774c2-2bd5-4e02-a8b2-64a2e21fa5f0
-   Frame=218   JointI=609   JointJ=503   IsCurved=No   GUID=bfc25129-091f-40bf-a309-c2eb43877660
-   Frame=219   JointI=673   JointJ=504   IsCurved=No   GUID=782e06df-2140-40c2-a049-e9b065febf60
-   Frame=220   JointI=706   JointJ=504   IsCurved=No   GUID=2004c59f-2d19-482b-abd2-d9e53a5963af
-   Frame=221   JointI=707   JointJ=504   IsCurved=No   GUID=a8351412-ac6d-45b7-b98a-93306463318f
+   Frame=218   JointI=609   JointJ=501   IsCurved=No   GUID=6c068e0c-7bb1-4321-9033-8ce764a2b311
+   Frame=219   JointI=673   JointJ=502   IsCurved=No   GUID=46f258cf-5be2-4177-82d4-1447c9f8553c
+   Frame=220   JointI=706   JointJ=502   IsCurved=No   GUID=89bebf4c-28e6-4058-8d81-40ef70c2dfda
+   Frame=221   JointI=707   JointJ=502   IsCurved=No   GUID=ab69cd29-e94d-4b34-9f72-5482b921b7f6
    Frame=222   JointI=12   JointJ=59   IsCurved=No   GUID=5c3a0871-ccb3-429a-902c-5c77bc7f5267
    Frame=223   JointI=59   JointJ=57   IsCurved=No   GUID=a50315e2-4c3b-4a50-904b-eafdacc00319
    Frame=224   JointI=57   JointJ=65   IsCurved=No   GUID=3d198880-8af6-4e7e-b2a2-d926b026290e
-   Frame=225   JointI=674   JointJ=504   IsCurved=No   GUID=bf56151f-053c-48d4-9a59-f6b3a6fb00e3
-   Frame=226   JointI=707   JointJ=505   IsCurved=No   GUID=7f728dd4-fa79-4893-b066-3a05bc79e16c
-   Frame=227   JointI=610   JointJ=505   IsCurved=No   GUID=558064ac-df4a-4ca4-b44a-a5aab4a665da
-   Frame=228   JointI=614   JointJ=505   IsCurved=No   GUID=412d7494-45b7-4b2d-b6f5-bee8156f99e2
+   Frame=225   JointI=674   JointJ=502   IsCurved=No   GUID=6a5a15e1-8663-4d4b-a465-0eab334bb15a
+   Frame=226   JointI=707   JointJ=503   IsCurved=No   GUID=19ff2537-d05e-4029-b466-46bf41ceb876
+   Frame=227   JointI=610   JointJ=503   IsCurved=No   GUID=97d77904-c7f5-4fdd-8986-af7dcde18fa5
+   Frame=228   JointI=614   JointJ=503   IsCurved=No   GUID=b5739acf-23b2-4cf5-a3c4-e4cd91627118
    Frame=229   JointI=65   JointJ=63   IsCurved=No   GUID=53bbe519-6bfc-4fbd-94d7-7c36c201e883
    Frame=230   JointI=63   JointJ=71   IsCurved=No   GUID=651590c3-669e-403d-9207-6337c7fb5a7f
    Frame=231   JointI=71   JointJ=69   IsCurved=No   GUID=2975b2c5-81e3-4aab-a3d1-990661c45ba9
    Frame=232   JointI=69   JointJ=77   IsCurved=No   GUID=462f1532-ef35-4384-a6ab-3b21f6221fc6
    Frame=233   JointI=77   JointJ=75   IsCurved=No   GUID=68039238-001f-4f9b-b3c1-579f8d229c50
-   Frame=234   JointI=708   JointJ=505   IsCurved=No   GUID=887a7c2f-34b3-49d3-839a-e489fb0ad8f8
-   Frame=235   JointI=610   JointJ=506   IsCurved=No   GUID=55a0601d-5693-4f2b-9dd2-7fd636aec5ce
-   Frame=236   JointI=609   JointJ=506   IsCurved=No   GUID=4564ccbd-3dd7-40be-819e-acdab7df33ea
-   Frame=237   JointI=613   JointJ=506   IsCurved=No   GUID=5fa99840-efff-4188-89bc-32137f4957ae
-   Frame=238   JointI=614   JointJ=506   IsCurved=No   GUID=2ea94fdf-f953-4243-a2cb-2e7e2ff71a8e
-   Frame=239   JointI=609   JointJ=507   IsCurved=No   GUID=95331e69-f7cd-4ce8-aafd-79a6d0ba1777
-   Frame=240   JointI=674   JointJ=507   IsCurved=No   GUID=2b01a73f-4cbe-4c4c-8089-a7e549af8b4e
-   Frame=241   JointI=676   JointJ=507   IsCurved=No   GUID=02902d88-6567-4eb1-825b-2544b22c6def
-   Frame=242   JointI=613   JointJ=507   IsCurved=No   GUID=1b1c452d-2911-4208-b6d1-a2d6053fae1a
-   Frame=243   JointI=674   JointJ=508   IsCurved=No   GUID=fced4965-411e-4874-84d9-63c2f95c4113
-   Frame=244   JointI=707   JointJ=508   IsCurved=No   GUID=30add4ad-f5f9-46e2-96d0-3fe3f5cd63d6
-   Frame=245   JointI=708   JointJ=508   IsCurved=No   GUID=92312534-9139-4f00-a5f5-c3637dfd030a
-   Frame=246   JointI=676   JointJ=508   IsCurved=No   GUID=b7311697-a026-438f-9c15-1a147839725e
-   Frame=247   JointI=708   JointJ=509   IsCurved=No   GUID=3d51df3b-c0a8-4b58-9379-21dd0b0fdfc9
-   Frame=254   JointI=614   JointJ=509   IsCurved=No   GUID=48041768-43ab-43d6-9b87-9680b0d33639
-   Frame=255   JointI=618   JointJ=509   IsCurved=No   GUID=f0035130-9785-439c-af4d-277a4c77edee
-   Frame=258   JointI=709   JointJ=509   IsCurved=No   GUID=6b52d1f1-c0f1-46d2-9a5a-115d1f29d59b
-   Frame=259   JointI=614   JointJ=510   IsCurved=No   GUID=ca55fb1c-cd97-4d13-9d85-efdd1ead2051
-   Frame=260   JointI=613   JointJ=510   IsCurved=No   GUID=4fa287a5-bafc-4a70-a058-aee817eebe98
-   Frame=261   JointI=617   JointJ=510   IsCurved=No   GUID=7515ab5d-a378-4e2a-af45-49dde7399b88
-   Frame=262   JointI=618   JointJ=510   IsCurved=No   GUID=69f0de88-aedd-4884-a057-abb5fda6e257
-   Frame=263   JointI=613   JointJ=511   IsCurved=No   GUID=9d8a3d52-a7a2-4f9c-89a9-a5bc3e740b48
-   Frame=264   JointI=676   JointJ=511   IsCurved=No   GUID=3f06a20f-5128-4345-a2ac-1d79045b993b
-   Frame=265   JointI=677   JointJ=511   IsCurved=No   GUID=bf4dd05e-3a5a-466e-8252-149b219b0ea7
-   Frame=266   JointI=617   JointJ=511   IsCurved=No   GUID=f420a81c-9010-456b-87c6-dce4f44989e1
-   Frame=267   JointI=676   JointJ=512   IsCurved=No   GUID=75552b4b-95a9-4c8a-8e8f-6ee9bbef866a
-   Frame=268   JointI=708   JointJ=512   IsCurved=No   GUID=7ab58d21-8548-4146-93f1-58151d2be39e
-   Frame=269   JointI=709   JointJ=512   IsCurved=No   GUID=be9463cb-4070-4670-a6d5-d566fd62e3f4
-   Frame=270   JointI=677   JointJ=512   IsCurved=No   GUID=17ad09a1-d45e-4a31-a5eb-0a1209d96484
-   Frame=271   JointI=709   JointJ=518   IsCurved=No   GUID=8dd798e0-65c2-43e1-9b77-1078b2c3d3fc
-   Frame=272   JointI=618   JointJ=518   IsCurved=No   GUID=79e31d77-aacc-42ee-b356-4f565eea5df3
-   Frame=273   JointI=622   JointJ=518   IsCurved=No   GUID=5d0390c7-0dc5-4ff2-8795-6617d100eab8
-   Frame=274   JointI=701   JointJ=518   IsCurved=No   GUID=4d09d90c-4984-43a1-aedf-2fe5f5f823bb
+   Frame=234   JointI=708   JointJ=503   IsCurved=No   GUID=e3a27cf2-485e-4019-80f9-e6d0a58d72d8
+   Frame=235   JointI=610   JointJ=504   IsCurved=No   GUID=872a0501-e56d-4d68-99c3-b3adb1d04089
+   Frame=236   JointI=609   JointJ=504   IsCurved=No   GUID=0c22751f-b64e-44da-a736-7921025dbf72
+   Frame=237   JointI=613   JointJ=504   IsCurved=No   GUID=587e60d4-da8f-4eab-bbe3-2837ebd7a46c
+   Frame=238   JointI=614   JointJ=504   IsCurved=No   GUID=f8650cbb-f115-4551-82a1-25a7babf3078
+   Frame=239   JointI=609   JointJ=505   IsCurved=No   GUID=ec0e0efa-1e0d-46f4-9d1e-d33c71dbbeec
+   Frame=240   JointI=674   JointJ=505   IsCurved=No   GUID=9b3f6ac2-3c36-4295-824a-13113eadcb39
+   Frame=241   JointI=676   JointJ=505   IsCurved=No   GUID=665f08dd-2181-4a9a-9770-21feb1b7c7cf
+   Frame=242   JointI=613   JointJ=505   IsCurved=No   GUID=ad5dd969-1707-400f-9d3b-cb4828b6a09a
+   Frame=243   JointI=674   JointJ=506   IsCurved=No   GUID=da8d0a70-4b54-4b59-b77e-c0810af5787c
+   Frame=244   JointI=707   JointJ=506   IsCurved=No   GUID=0ecdf48e-54d0-4743-9c4d-e2388c1bc182
+   Frame=245   JointI=708   JointJ=506   IsCurved=No   GUID=526e6fcc-14d1-42ca-a7be-8a2d12979cf5
+   Frame=246   JointI=676   JointJ=506   IsCurved=No   GUID=cd6748f9-4758-4d70-a82a-1c05d6204561
+   Frame=247   JointI=708   JointJ=507   IsCurved=No   GUID=dbd6e1a2-11aa-46c3-9091-5cdbdecf3064
+   Frame=254   JointI=614   JointJ=507   IsCurved=No   GUID=c861506d-3e3c-44ae-b99a-b8b17213e99f
+   Frame=255   JointI=618   JointJ=507   IsCurved=No   GUID=d87ef607-958d-4786-8c07-e8b7dd1276bb
+   Frame=258   JointI=709   JointJ=507   IsCurved=No   GUID=a7bada0a-b2b4-4158-94bf-2a47c7ceff9a
+   Frame=259   JointI=614   JointJ=508   IsCurved=No   GUID=0ea62316-0c35-4496-9cd8-331c8dd93338
+   Frame=260   JointI=613   JointJ=508   IsCurved=No   GUID=64dc702e-1903-4baf-9e35-30b3177e56b6
+   Frame=261   JointI=617   JointJ=508   IsCurved=No   GUID=77d9414b-cb7d-4228-8d4f-b15dfeb700fd
+   Frame=262   JointI=618   JointJ=508   IsCurved=No   GUID=a655be5a-832b-4f3b-a28e-26d5e7ef3fb5
+   Frame=263   JointI=613   JointJ=509   IsCurved=No   GUID=78edf688-a4af-4339-8692-552be7d5a334
+   Frame=264   JointI=676   JointJ=509   IsCurved=No   GUID=b7c0f5a9-39d0-40a0-a066-4417bd435f8f
+   Frame=265   JointI=677   JointJ=509   IsCurved=No   GUID=ddba76d1-0450-4e52-8ddf-2353f979ad72
+   Frame=266   JointI=617   JointJ=509   IsCurved=No   GUID=952465d2-437f-444a-ad1f-44a2b4f5f375
+   Frame=267   JointI=676   JointJ=510   IsCurved=No   GUID=87b36f03-286d-468f-9d92-a23b8871928d
+   Frame=268   JointI=708   JointJ=510   IsCurved=No   GUID=d79e3d32-aef3-424d-8c3f-b4ca3c9fdd24
+   Frame=269   JointI=709   JointJ=510   IsCurved=No   GUID=7a83b83b-275b-4f00-8d6d-3bc8934e9ad4
+   Frame=270   JointI=677   JointJ=510   IsCurved=No   GUID=f86c18cb-4bce-4aea-97d0-57f203d0b771
+   Frame=271   JointI=709   JointJ=511   IsCurved=No   GUID=8c72d2a1-0bd4-4e3a-aff5-feb11cf7bdc0
+   Frame=272   JointI=618   JointJ=511   IsCurved=No   GUID=fc484400-cd44-4323-8ff7-abcabb569b2f
+   Frame=273   JointI=622   JointJ=511   IsCurved=No   GUID=6a00aa31-2796-4327-9655-13fef3670fdd
+   Frame=274   JointI=701   JointJ=511   IsCurved=No   GUID=95dbd180-a162-4765-bec7-ae1e1074815f
    Frame=275   JointI=17   JointJ=18   IsCurved=No   GUID=42c5120b-cff5-454b-94f5-d49ad665e8e4
    Frame=276   JointI=18   JointJ=145   IsCurved=No   GUID=3d95b04e-1591-4a86-82aa-1c0b5741daab
    Frame=277   JointI=145   JointJ=125   IsCurved=No   GUID=accfcde4-113d-41d0-aeec-29271b584f59
@@ -406,104 +402,104 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=281   JointI=143   JointJ=136   IsCurved=No   GUID=914c21d5-a418-4185-836c-2792fa716d8e
    Frame=282   JointI=136   JointJ=142   IsCurved=No   GUID=8023572e-3d85-4b5b-8907-22a5d3f3bb7d
    Frame=283   JointI=142   JointJ=137   IsCurved=No   GUID=20d8da8f-bb10-4396-803e-b126359e5f0e
-   Frame=284   JointI=618   JointJ=519   IsCurved=No   GUID=f027131b-da4a-417b-85a5-0bc3fce18dc1
-   Frame=285   JointI=617   JointJ=519   IsCurved=No   GUID=682f5ad6-f00e-4fd5-9962-f8d50f8eb060
-   Frame=286   JointI=621   JointJ=519   IsCurved=No   GUID=551d180b-b214-4682-a186-1a9308d9f235
-   Frame=287   JointI=622   JointJ=519   IsCurved=No   GUID=8e1f0fdf-f04c-46f6-a4b7-3f153b2a3fd2
+   Frame=284   JointI=618   JointJ=512   IsCurved=No   GUID=e07c5e76-0d6a-4ba2-929d-7865605435c3
+   Frame=285   JointI=617   JointJ=512   IsCurved=No   GUID=8aa8f8ff-f06a-479c-9e9f-5a06bf88084c
+   Frame=286   JointI=621   JointJ=512   IsCurved=No   GUID=7996d45d-1ffa-43e7-8b97-7504f00b8986
+   Frame=287   JointI=622   JointJ=512   IsCurved=No   GUID=53e0e641-5361-4a95-b2c5-71d54c159450
    Frame=288   JointI=12   JointJ=166   IsCurved=No   GUID=d0d51d75-d2ae-4623-b3a2-adac411a93ab
    Frame=289   JointI=166   JointJ=14   IsCurved=No   GUID=9690b71f-a2f6-4838-9fff-f5fce12290d8
    Frame=290   JointI=14   JointJ=168   IsCurved=No   GUID=f8f85d63-06c4-476e-990a-af4a43806173
    Frame=291   JointI=168   JointJ=170   IsCurved=No   GUID=c11da95b-132d-4785-8f30-c694a56ecf87
    Frame=292   JointI=170   JointJ=172   IsCurved=No   GUID=dc79b212-e8c3-4456-9509-79412f1e3e67
    Frame=293   JointI=172   JointJ=18   IsCurved=No   GUID=3f5ac7bb-cd73-4afd-bee2-338a54be7237
-   Frame=294   JointI=617   JointJ=520   IsCurved=No   GUID=0db0b2fa-d6ca-4399-8835-423b0c451a41
-   Frame=295   JointI=677   JointJ=520   IsCurved=No   GUID=6df41020-1212-454b-a149-9a452a03f22b
-   Frame=296   JointI=678   JointJ=520   IsCurved=No   GUID=1f05fd11-0456-45b6-9c36-b26494e92ba7
-   Frame=297   JointI=621   JointJ=520   IsCurved=No   GUID=fc3e5e4c-fd41-484c-bd1f-d14a3ba5c7e7
-   Frame=298   JointI=677   JointJ=521   IsCurved=No   GUID=c83d611c-b5f2-4f0d-afd1-93cf8850c0c5
-   Frame=299   JointI=709   JointJ=521   IsCurved=No   GUID=55b311a2-d0ba-4f90-9e02-aa7a02aefece
-   Frame=300   JointI=701   JointJ=521   IsCurved=No   GUID=2fcccf59-4a2e-48f3-841a-7b685dbb93c8
-   Frame=301   JointI=678   JointJ=521   IsCurved=No   GUID=545bfbac-ab6d-4c86-ab54-649490ea5b7b
-   Frame=302   JointI=701   JointJ=522   IsCurved=No   GUID=712b2a40-d8b9-49f2-98b1-f50570a2961d
-   Frame=303   JointI=622   JointJ=522   IsCurved=No   GUID=c04f65a3-ba1b-4804-b74d-592984c0523e
-   Frame=304   JointI=626   JointJ=522   IsCurved=No   GUID=a64f6084-6ab2-4543-ae4d-5fc1bd64e686
-   Frame=305   JointI=702   JointJ=522   IsCurved=No   GUID=a29d0074-dfbb-41e9-a482-dca7aa0134f3
-   Frame=306   JointI=622   JointJ=523   IsCurved=No   GUID=bf1a9c0d-78d2-4846-b500-c2de06fcc29f
-   Frame=307   JointI=621   JointJ=523   IsCurved=No   GUID=0b891a9b-a847-4a60-84f3-6d7a89bbc4f6
-   Frame=308   JointI=625   JointJ=523   IsCurved=No   GUID=a8f52100-575d-4123-97f1-ba5e7a2e788c
-   Frame=309   JointI=626   JointJ=523   IsCurved=No   GUID=acfd6749-29fa-4816-816f-67e9f55b8353
-   Frame=310   JointI=621   JointJ=524   IsCurved=No   GUID=2a62cc7f-3e19-410d-9d51-a3e00a437c4d
-   Frame=311   JointI=678   JointJ=524   IsCurved=No   GUID=4baa0473-32eb-412e-8558-59b40471cb21
-   Frame=312   JointI=679   JointJ=524   IsCurved=No   GUID=773d83cd-55b6-48cf-b186-99c9e7ba10ef
-   Frame=313   JointI=625   JointJ=524   IsCurved=No   GUID=4329bb25-cbd9-4b93-b525-308c3f18fee0
+   Frame=294   JointI=617   JointJ=518   IsCurved=No   GUID=2cb77e2e-5a55-4f84-9189-2e9263085ce1
+   Frame=295   JointI=677   JointJ=518   IsCurved=No   GUID=eb4857b5-cdf0-40a9-93b1-bd4c15e6bf56
+   Frame=296   JointI=678   JointJ=518   IsCurved=No   GUID=8b973225-a146-4b35-b76d-d5b0251c7a8d
+   Frame=297   JointI=621   JointJ=518   IsCurved=No   GUID=e3efa37a-15e0-411b-b54b-188543070e26
+   Frame=298   JointI=677   JointJ=519   IsCurved=No   GUID=d66961bf-883f-44d6-a704-5ee5025b6eea
+   Frame=299   JointI=709   JointJ=519   IsCurved=No   GUID=5afd443a-d3d1-43cf-b9ec-322e0fd4bb09
+   Frame=300   JointI=701   JointJ=519   IsCurved=No   GUID=ad41311c-8a48-45cc-a796-53e92ae5d498
+   Frame=301   JointI=678   JointJ=519   IsCurved=No   GUID=ca94a2ee-9c34-479f-a33a-5b668c73efb5
+   Frame=302   JointI=701   JointJ=520   IsCurved=No   GUID=5dd5a3d6-2a72-47ed-b153-d713793af559
+   Frame=303   JointI=622   JointJ=520   IsCurved=No   GUID=20a3e2cd-077d-46f3-94b5-9bdf7ea5e70c
+   Frame=304   JointI=626   JointJ=520   IsCurved=No   GUID=7e8731b2-6ecf-40ca-850f-f1717a6c36cd
+   Frame=305   JointI=702   JointJ=520   IsCurved=No   GUID=35f7697e-e927-47a9-bd09-d98873b077b8
+   Frame=306   JointI=622   JointJ=521   IsCurved=No   GUID=c0281933-ad1f-4079-ae36-b5b43b7f6793
+   Frame=307   JointI=621   JointJ=521   IsCurved=No   GUID=11935920-e9fe-4329-96d5-f95614b80145
+   Frame=308   JointI=625   JointJ=521   IsCurved=No   GUID=86006883-a204-4a07-9da5-1364424b9f77
+   Frame=309   JointI=626   JointJ=521   IsCurved=No   GUID=63fe9762-048d-498b-9de8-0bb958d504f1
+   Frame=310   JointI=621   JointJ=522   IsCurved=No   GUID=30f3f55b-c591-4fb1-8f6e-63c3f376a482
+   Frame=311   JointI=678   JointJ=522   IsCurved=No   GUID=701cbc75-89e8-4a04-8404-1e1bf159f271
+   Frame=312   JointI=679   JointJ=522   IsCurved=No   GUID=f9c7615f-7395-4092-a507-48f6bdcd2844
+   Frame=313   JointI=625   JointJ=522   IsCurved=No   GUID=f395b4cd-90ae-446f-b1a0-853b7cb8b623
    Frame=314   JointI=18   JointJ=181   IsCurved=No   GUID=3b772789-c28c-4268-94e3-48ce1959c3b3
    Frame=315   JointI=181   JointJ=179   IsCurved=No   GUID=6a0ba648-8f6e-4a56-8281-55c2258a81b9
    Frame=316   JointI=179   JointJ=178   IsCurved=No   GUID=ad5f748e-401d-463f-84b0-845d5fa9e6f6
    Frame=317   JointI=178   JointJ=176   IsCurved=No   GUID=676c8b5d-d57a-4c3c-aa9e-e6ad67fa5ac6
    Frame=318   JointI=176   JointJ=175   IsCurved=No   GUID=e1c7fa19-7e03-47e4-8f66-6b86e9b08a66
    Frame=319   JointI=175   JointJ=8   IsCurved=No   GUID=1f7ba786-e526-4ecd-af3a-ab45dae5861c
-   Frame=320   JointI=678   JointJ=525   IsCurved=No   GUID=2195f9c7-9ec1-40a9-80d0-cb119b8819ee
-   Frame=321   JointI=701   JointJ=525   IsCurved=No   GUID=75ad3c3c-52dc-44c1-a1a9-bdced0dec20b
-   Frame=322   JointI=702   JointJ=525   IsCurved=No   GUID=72265f08-4a0d-4cff-80e1-994b0f43f110
-   Frame=323   JointI=679   JointJ=525   IsCurved=No   GUID=079a8d16-0f24-4aa0-8284-76bb4894ef23
-   Frame=324   JointI=702   JointJ=526   IsCurved=No   GUID=07867e3b-5098-4739-9e70-fa75163a8173
-   Frame=325   JointI=626   JointJ=526   IsCurved=No   GUID=d9ec7ef9-2ea1-4f22-b28e-0da9c39c769c
-   Frame=326   JointI=630   JointJ=526   IsCurved=No   GUID=7ba04c39-7666-4899-9e37-8cfd4be0f157
-   Frame=327   JointI=703   JointJ=526   IsCurved=No   GUID=f144d74f-0abd-4877-a5cb-3deff23ccfa5
-   Frame=328   JointI=626   JointJ=527   IsCurved=No   GUID=2c142e14-f31c-496a-83ec-60bcad2b9e57
-   Frame=329   JointI=625   JointJ=527   IsCurved=No   GUID=2861f469-a0cf-40f7-9fcd-ea42658bb8ca
-   Frame=330   JointI=629   JointJ=527   IsCurved=No   GUID=0e319173-0d83-4036-abd5-8190923a1bca
-   Frame=331   JointI=630   JointJ=527   IsCurved=No   GUID=20851bc6-01de-4326-84e2-548b4fc8653f
-   Frame=332   JointI=625   JointJ=528   IsCurved=No   GUID=ef577723-526c-4047-bfa8-feb27200f8d4
-   Frame=333   JointI=679   JointJ=528   IsCurved=No   GUID=2d498a75-9cd8-4eeb-a86e-018dcb8f5566
-   Frame=334   JointI=680   JointJ=528   IsCurved=No   GUID=a8021963-93b6-4bcb-a57c-72cdfeede07c
-   Frame=335   JointI=629   JointJ=528   IsCurved=No   GUID=cd00d4fb-58ad-45f7-81e0-b7e2a2de4700
-   Frame=336   JointI=679   JointJ=529   IsCurved=No   GUID=775999ef-aad0-43c0-8dce-dc7e9a6eaade
-   Frame=337   JointI=702   JointJ=529   IsCurved=No   GUID=74d92640-daa2-4dc6-9719-f708d0a39e1f
-   Frame=338   JointI=703   JointJ=529   IsCurved=No   GUID=076ef6b9-8a37-41eb-8b71-63837fe5c7d5
-   Frame=339   JointI=680   JointJ=529   IsCurved=No   GUID=0a34ec99-d64b-4b91-804b-ffac2c7c231e
+   Frame=320   JointI=678   JointJ=523   IsCurved=No   GUID=c43624ad-e589-4fd4-bf33-1e130fdca6be
+   Frame=321   JointI=701   JointJ=523   IsCurved=No   GUID=adabbe8b-be9b-49e4-9cef-8f2f41e4e9a5
+   Frame=322   JointI=702   JointJ=523   IsCurved=No   GUID=18cdfb2e-cf25-40c5-9f9e-b39cc6a14f7f
+   Frame=323   JointI=679   JointJ=523   IsCurved=No   GUID=8d4c8cf5-8fdf-49fb-9242-71fb8d6c770e
+   Frame=324   JointI=702   JointJ=524   IsCurved=No   GUID=1c0fa7cf-c25c-4f1e-946e-759208d99f5c
+   Frame=325   JointI=626   JointJ=524   IsCurved=No   GUID=e18f77bf-ec1f-4550-8e41-dc1335cea026
+   Frame=326   JointI=630   JointJ=524   IsCurved=No   GUID=fec382e6-d8f1-49fa-85ff-78ad1c93a25e
+   Frame=327   JointI=703   JointJ=524   IsCurved=No   GUID=db0b6369-b8a4-4d23-b994-5fcb6ec3348d
+   Frame=328   JointI=626   JointJ=525   IsCurved=No   GUID=2b7d48f6-146e-4197-b527-a1db5beb1bb1
+   Frame=329   JointI=625   JointJ=525   IsCurved=No   GUID=64c75ff9-7e41-47bf-abb7-5959f402d48f
+   Frame=330   JointI=629   JointJ=525   IsCurved=No   GUID=f3e84944-17e3-4f6d-a8d8-70fb4b4a1636
+   Frame=331   JointI=630   JointJ=525   IsCurved=No   GUID=d59ea366-ced5-4f3d-8929-e45817b94534
+   Frame=332   JointI=625   JointJ=526   IsCurved=No   GUID=99e6afdb-da00-4931-8eee-995e9ab702a8
+   Frame=333   JointI=679   JointJ=526   IsCurved=No   GUID=5af19346-d72c-4d6e-a59c-a2a18e686b79
+   Frame=334   JointI=680   JointJ=526   IsCurved=No   GUID=48f103b2-3b22-4606-a33c-06f719658876
+   Frame=335   JointI=629   JointJ=526   IsCurved=No   GUID=586b62f0-4ad3-4b24-a3a6-b67764e2dc2d
+   Frame=336   JointI=679   JointJ=527   IsCurved=No   GUID=0ea99174-fbdd-4f68-ac78-072428e4fe80
+   Frame=337   JointI=702   JointJ=527   IsCurved=No   GUID=b1567131-da68-4814-a1db-0b8318ca36b8
+   Frame=338   JointI=703   JointJ=527   IsCurved=No   GUID=0945daeb-531d-45b9-9bcc-8d808f81f106
+   Frame=339   JointI=680   JointJ=527   IsCurved=No   GUID=96427db1-3e1f-48ca-84e3-5a937b8466a7
    Frame=340   JointI=12   JointJ=180   IsCurved=No   GUID=65e124c0-a3b9-4b9e-895b-dfa22403ebe4
    Frame=341   JointI=180   JointJ=29   IsCurved=No   GUID=c770d3b9-c0e4-4d08-bea2-94f83b2495de
    Frame=342   JointI=29   JointJ=177   IsCurved=No   GUID=51cc0301-b99d-434a-a5ec-cd5bc021ac67
    Frame=343   JointI=177   JointJ=31   IsCurved=No   GUID=5e7047b5-e65b-4d8b-8c92-8780841ac7af
    Frame=344   JointI=31   JointJ=174   IsCurved=No   GUID=fd316474-dd65-42d0-ad94-4dc8072ccc36
    Frame=345   JointI=174   JointJ=2   IsCurved=No   GUID=73e0dcbc-f251-4766-b116-5b28f782561d
-   Frame=346   JointI=703   JointJ=530   IsCurved=No   GUID=da4c15c4-267f-41c0-876a-17f6749c74d2
-   Frame=347   JointI=630   JointJ=530   IsCurved=No   GUID=6728b84b-2e90-4929-a4f1-07f067857cb6
-   Frame=348   JointI=634   JointJ=530   IsCurved=No   GUID=b6188f28-ab04-44b5-8407-8dd6c642270b
-   Frame=349   JointI=704   JointJ=530   IsCurved=No   GUID=3509103a-82f8-4c89-91a3-48fa426e9a11
-   Frame=350   JointI=630   JointJ=531   IsCurved=No   GUID=c6475376-0ced-46c8-9515-ef447eb7a02d
-   Frame=351   JointI=629   JointJ=531   IsCurved=No   GUID=2a097db3-586f-4328-83d4-f3383da574cd
-   Frame=352   JointI=633   JointJ=531   IsCurved=No   GUID=2161a234-7794-4f5d-80ff-37f5fa248be9
-   Frame=353   JointI=634   JointJ=531   IsCurved=No   GUID=7e542a65-1880-43fc-a3d5-bab7d328225d
-   Frame=354   JointI=629   JointJ=532   IsCurved=No   GUID=e28e527b-227e-4a88-ae2e-52a69b59407d
-   Frame=355   JointI=680   JointJ=532   IsCurved=No   GUID=ad2c300f-bf84-461f-9fb9-5807e8d47ddb
-   Frame=356   JointI=681   JointJ=532   IsCurved=No   GUID=adc02508-5225-4cf1-8c56-b7cb37e7a42a
-   Frame=357   JointI=633   JointJ=532   IsCurved=No   GUID=b3b77308-dfa4-483e-90d6-20f43bc17835
-   Frame=358   JointI=680   JointJ=533   IsCurved=No   GUID=ca4b8890-7ba3-4b3e-83b9-bc86f1ce4fd6
-   Frame=359   JointI=703   JointJ=533   IsCurved=No   GUID=7e721a87-2e4f-499b-b9e1-8c852f8fcbd2
-   Frame=360   JointI=704   JointJ=533   IsCurved=No   GUID=729c0f15-e0f2-4115-8c6f-479845e6d9a3
-   Frame=361   JointI=681   JointJ=533   IsCurved=No   GUID=2af954e8-3f7d-416a-bfc5-d42c127674a6
-   Frame=362   JointI=704   JointJ=534   IsCurved=No   GUID=3af1ca92-ee23-48df-9c0a-753bf5681071
-   Frame=363   JointI=634   JointJ=534   IsCurved=No   GUID=ecf18f1b-73f7-443f-b22b-e40902fde431
+   Frame=346   JointI=703   JointJ=528   IsCurved=No   GUID=609f01ec-dd27-4e16-bf8a-ddfcc8ab7a53
+   Frame=347   JointI=630   JointJ=528   IsCurved=No   GUID=a9218fb2-5207-4e36-b4ed-7bafda9d0148
+   Frame=348   JointI=634   JointJ=528   IsCurved=No   GUID=2bc53a28-7067-4f4e-bca2-f87025d918f1
+   Frame=349   JointI=704   JointJ=528   IsCurved=No   GUID=be4e63e0-234f-44f3-a366-8752006644f6
+   Frame=350   JointI=630   JointJ=529   IsCurved=No   GUID=71ae27bb-2c55-45c7-a3c9-e614754775cc
+   Frame=351   JointI=629   JointJ=529   IsCurved=No   GUID=d7516018-fec3-4218-8091-053c30c318bd
+   Frame=352   JointI=633   JointJ=529   IsCurved=No   GUID=fe106f69-a6c6-4288-aeaa-f11b0fccfc76
+   Frame=353   JointI=634   JointJ=529   IsCurved=No   GUID=6c6f9a5d-1205-4dfb-ac7a-c4eab4ab2589
+   Frame=354   JointI=629   JointJ=530   IsCurved=No   GUID=1a899c68-5ebd-424b-b0e5-89275337ed57
+   Frame=355   JointI=680   JointJ=530   IsCurved=No   GUID=ec8d49a8-0bfa-4faa-9723-51982b003414
+   Frame=356   JointI=681   JointJ=530   IsCurved=No   GUID=d0f0d40c-53f0-4dd0-9759-8e9508fc0a35
+   Frame=357   JointI=633   JointJ=530   IsCurved=No   GUID=cefe7243-f37f-4820-9e28-bdc6b717d742
+   Frame=358   JointI=680   JointJ=531   IsCurved=No   GUID=ac9ced51-791f-4b60-9772-2f59297f72fc
+   Frame=359   JointI=703   JointJ=531   IsCurved=No   GUID=fcfa8211-7758-4dd3-9aad-70f379c710f9
+   Frame=360   JointI=704   JointJ=531   IsCurved=No   GUID=a3456fcc-5147-4392-a1d4-3bd31ab96065
+   Frame=361   JointI=681   JointJ=531   IsCurved=No   GUID=e9588461-2caf-4872-b459-f19490b8704e
+   Frame=362   JointI=704   JointJ=532   IsCurved=No   GUID=0bfc558a-e82d-48fd-ae30-d49ccb1241d5
+   Frame=363   JointI=634   JointJ=532   IsCurved=No   GUID=37b389aa-19b8-42dd-8b0a-92e12e56a472
    Frame=364   JointI=57   JointJ=100   IsCurved=No   GUID=6d8571fe-ae93-4954-9027-1e322eeaa8a2
    Frame=365   JointI=100   JointJ=54   IsCurved=No   GUID=a9661a0c-3ea1-4c0b-8f49-71f329444381
    Frame=366   JointI=54   JointJ=97   IsCurved=No   GUID=e3856c25-82b5-4d76-8ad3-c3ec64f21a6c
    Frame=367   JointI=97   JointJ=55   IsCurved=No   GUID=1b7239d0-a016-4bd8-b807-19b639591281
    Frame=368   JointI=55   JointJ=94   IsCurved=No   GUID=4572e7ec-b3e0-4f17-8424-896ea46b7c14
    Frame=369   JointI=94   JointJ=56   IsCurved=No   GUID=a33d3d88-e9e4-4d0b-a383-4c4cbcca999a
-   Frame=370   JointI=638   JointJ=534   IsCurved=No   GUID=abeeeb57-f371-4c90-9302-29d524371b08
-   Frame=371   JointI=705   JointJ=534   IsCurved=No   GUID=7894e84c-c707-41e4-9dcd-e6ed36a586b5
-   Frame=372   JointI=634   JointJ=535   IsCurved=No   GUID=bbba8725-31d6-4366-b633-c2b8c8c08f3e
-   Frame=373   JointI=633   JointJ=535   IsCurved=No   GUID=ad82b42f-21e1-40bf-bbd7-6c24c59123b0
-   Frame=374   JointI=637   JointJ=535   IsCurved=No   GUID=5b5956e7-5010-45f1-85c5-a9a8ea6dd084
-   Frame=375   JointI=638   JointJ=535   IsCurved=No   GUID=ec7222d5-888f-4c42-b88b-9518e725e8c9
-   Frame=376   JointI=633   JointJ=536   IsCurved=No   GUID=60519a96-d8d9-46c7-9092-14d3454f9256
-   Frame=377   JointI=681   JointJ=536   IsCurved=No   GUID=746b3bab-649a-47b5-9386-70f079fcea6e
-   Frame=378   JointI=682   JointJ=536   IsCurved=No   GUID=0a6c2122-8ad7-4166-b993-53d2d757c014
-   Frame=379   JointI=637   JointJ=536   IsCurved=No   GUID=ae09bdef-7075-485f-a68f-592c365aa352
-   Frame=380   JointI=681   JointJ=537   IsCurved=No   GUID=b2538375-5e1a-4fab-aff5-9b987b68c9eb
-   Frame=381   JointI=704   JointJ=537   IsCurved=No   GUID=93891988-c3b0-4180-a54b-0066f7427b48
+   Frame=370   JointI=638   JointJ=532   IsCurved=No   GUID=4c56da98-26eb-46bf-9934-7508beee31d8
+   Frame=371   JointI=705   JointJ=532   IsCurved=No   GUID=5a57a342-303e-4ae0-81fc-43d476e04304
+   Frame=372   JointI=634   JointJ=533   IsCurved=No   GUID=ccf51a71-217e-43db-941b-432c820ae56a
+   Frame=373   JointI=633   JointJ=533   IsCurved=No   GUID=de5e0750-2724-47f6-8e80-8da1a0056cbc
+   Frame=374   JointI=637   JointJ=533   IsCurved=No   GUID=c1a42c6c-52d5-448f-b000-1aadba2d7d89
+   Frame=375   JointI=638   JointJ=533   IsCurved=No   GUID=64224c9c-937b-476b-8f35-3b26c314ec17
+   Frame=376   JointI=633   JointJ=534   IsCurved=No   GUID=0f74247f-95ee-407c-b9b4-d3235ae98081
+   Frame=377   JointI=681   JointJ=534   IsCurved=No   GUID=69c65d1f-df5a-4f23-bac7-b2894f3ea73f
+   Frame=378   JointI=682   JointJ=534   IsCurved=No   GUID=1a46ecee-ed69-4baa-99e3-f534f39121b1
+   Frame=379   JointI=637   JointJ=534   IsCurved=No   GUID=72a47b31-010d-406e-a9f7-71bc6fce294b
+   Frame=380   JointI=681   JointJ=535   IsCurved=No   GUID=13e027a0-13ba-4a2b-83fe-dbbf253d2e68
+   Frame=381   JointI=704   JointJ=535   IsCurved=No   GUID=152a5116-0507-41c2-85fa-0f6b11c39262
    Frame=382   JointI=58   JointJ=39   IsCurved=No   GUID=6c9bee24-ed25-4d47-88b0-f46ecc634b54
    Frame=383   JointI=39   JointJ=41   IsCurved=No   GUID=8e77d27a-5d6a-4c8b-8381-15260888f95b
    Frame=384   JointI=41   JointJ=43   IsCurved=No   GUID=8b9e8f09-2b31-487e-a523-65db72ed0282
@@ -516,8 +512,8 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=391   JointI=184   JointJ=61   IsCurved=No   GUID=7ce01ed7-8b62-493a-af9a-a2a92ab09e87
    Frame=392   JointI=61   JointJ=165   IsCurved=No   GUID=1ae1630c-2432-4ab0-9453-441d70414505
    Frame=393   JointI=165   JointJ=62   IsCurved=No   GUID=218480ec-d98c-49fc-a401-307e5ece0835
-   Frame=394   JointI=705   JointJ=537   IsCurved=No   GUID=c4a839cd-dbba-4def-bdfe-5cee1c0687e0
-   Frame=395   JointI=682   JointJ=537   IsCurved=No   GUID=482499de-d748-47b2-ab7a-4c36634456c5
+   Frame=394   JointI=705   JointJ=535   IsCurved=No   GUID=4318166a-4ee7-489b-b3c5-d578278acdb6
+   Frame=395   JointI=682   JointJ=535   IsCurved=No   GUID=160b42d9-9787-4468-8e7d-01ab9d23a5fa
    Frame=406   JointI=64   JointJ=116   IsCurved=No   GUID=afbd9b4d-cc55-4137-a463-5c3f9ade6396
    Frame=407   JointI=116   JointJ=118   IsCurved=No   GUID=5dfd8187-c97e-437e-9875-885a67586adc
    Frame=408   JointI=118   JointJ=120   IsCurved=No   GUID=8e114993-2f43-433d-887e-16c9d276cedc
@@ -1274,8 +1270,6 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=1246   JointI=578   JointJ=564   IsCurved=No   GUID=2d8508b6-5f12-403c-857b-57da04062e82
    Frame=1247   JointI=564   JointJ=580   IsCurved=No   GUID=48c2f9ee-c841-4275-a1c3-15ecb71e34d1
    Frame=1248   JointI=580   JointJ=565   IsCurved=No   GUID=bb9f57aa-185f-442b-8950-3fb596035e61
-   Frame=1249   JointI=494   JointJ=575   IsCurved=No   GUID=53e206b7-58fc-4e40-9f49-7baacaedebfd
-   Frame=1254   JointI=579   JointJ=568   IsCurved=No   GUID=a7c1e3ed-8ac9-410b-8ccd-02dde6a427ae
    Frame=1255   JointI=565   JointJ=581   IsCurved=No   GUID=cbf4c1cc-1ec8-4591-9803-1142ba32e81f
    Frame=1256   JointI=581   JointJ=570   IsCurved=No   GUID=85f1f9bd-0ca3-47dd-ad14-38fd4d69687c
    Frame=1257   JointI=570   JointJ=582   IsCurved=No   GUID=68d7ff33-9ad5-4851-a134-5557ba5a78fb
@@ -1890,12 +1884,8 @@ TABLE:  "DATABASE FORMAT TYPES"
 TABLE:  "FRAME AUTO MESH ASSIGNMENTS"
    Frame=2   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=3   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=4   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=5   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=6   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=7   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=8   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=9   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=10   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=11   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=12   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
@@ -3030,8 +3020,6 @@ TABLE:  "FRAME AUTO MESH ASSIGNMENTS"
    Frame=1246   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=1247   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=1248   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=1249   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=1254   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=1255   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=1256   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=1257   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
@@ -3635,12 +3623,8 @@ TABLE:  "FRAME AUTO MESH ASSIGNMENTS"
 TABLE:  "FRAME DESIGN PROCEDURES"
    Frame=2   DesignProc="No Design"
    Frame=3   DesignProc="No Design"
-   Frame=4   DesignProc="No Design"
    Frame=5   DesignProc="No Design"
-   Frame=6   DesignProc="No Design"
    Frame=7   DesignProc="No Design"
-   Frame=8   DesignProc="No Design"
-   Frame=9   DesignProc="No Design"
    Frame=10   DesignProc="No Design"
    Frame=11   DesignProc="No Design"
    Frame=12   DesignProc="No Design"
@@ -4775,8 +4759,6 @@ TABLE:  "FRAME DESIGN PROCEDURES"
    Frame=1246   DesignProc="No Design"
    Frame=1247   DesignProc="No Design"
    Frame=1248   DesignProc="No Design"
-   Frame=1249   DesignProc="No Design"
-   Frame=1254   DesignProc="No Design"
    Frame=1255   DesignProc="No Design"
    Frame=1256   DesignProc="No Design"
    Frame=1257   DesignProc="No Design"
@@ -5380,12 +5362,8 @@ TABLE:  "FRAME DESIGN PROCEDURES"
 TABLE:  "FRAME LOAD TRANSFER OPTIONS"
    Frame=2   Transfer=Yes
    Frame=3   Transfer=Yes
-   Frame=4   Transfer=Yes
    Frame=5   Transfer=Yes
-   Frame=6   Transfer=Yes
    Frame=7   Transfer=Yes
-   Frame=8   Transfer=Yes
-   Frame=9   Transfer=Yes
    Frame=10   Transfer=Yes
    Frame=11   Transfer=Yes
    Frame=12   Transfer=Yes
@@ -6520,8 +6498,6 @@ TABLE:  "FRAME LOAD TRANSFER OPTIONS"
    Frame=1246   Transfer=Yes
    Frame=1247   Transfer=Yes
    Frame=1248   Transfer=Yes
-   Frame=1249   Transfer=Yes
-   Frame=1254   Transfer=Yes
    Frame=1255   Transfer=Yes
    Frame=1256   Transfer=Yes
    Frame=1257   Transfer=Yes
@@ -7124,13 +7100,9 @@ TABLE:  "FRAME LOAD TRANSFER OPTIONS"
  
 TABLE:  "FRAME OUTPUT STATION ASSIGNMENTS"
    Frame=2   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=3   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=4   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=5   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=6   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=7   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=8   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=9   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
+   Frame=3   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
+   Frame=5   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
+   Frame=7   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=10   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=11   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=12   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
@@ -8265,8 +8237,6 @@ TABLE:  "FRAME OUTPUT STATION ASSIGNMENTS"
    Frame=1246   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=1247   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=1248   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=1249   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=1254   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=1255   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=1256   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=1257   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
@@ -8870,12 +8840,8 @@ TABLE:  "FRAME OUTPUT STATION ASSIGNMENTS"
 TABLE:  "FRAME SECTION ASSIGNMENTS"
    Frame=2   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=3   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
-   Frame=4   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=5   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
-   Frame=6   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=7   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
-   Frame=8   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
-   Frame=9   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=10   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=11   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
    Frame=12   AutoSelect=N.A.   AnalSect=Brace   MatProp=Default
@@ -10010,8 +9976,6 @@ TABLE:  "FRAME SECTION ASSIGNMENTS"
    Frame=1246   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
    Frame=1247   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
    Frame=1248   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
-   Frame=1249   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
-   Frame=1254   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
    Frame=1255   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
    Frame=1256   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
    Frame=1257   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
@@ -70786,24 +70750,24 @@ TABLE:  "JOINT COORDINATES"
    Joint=9   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=3   SpecialJt=No
    Joint=11   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=0   SpecialJt=No
    Joint=12   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=6   SpecialJt=No
-   Joint=13   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=3   SpecialJt=No   GUID=472bd143-dad3-4199-a441-eecfdea3a178
+   Joint=13   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=3   SpecialJt=No   GUID=68e4fd2a-fd3a-4b63-a5fc-5924b41464b4
    Joint=14   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=6   SpecialJt=No
-   Joint=15   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=3   SpecialJt=No   GUID=00eaed42-851c-4bad-8df3-8a05b4131adb
+   Joint=15   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=3   SpecialJt=No   GUID=bfd5ea86-d0d5-41ac-8b4b-550b51031728
    Joint=16   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=4   Z=9   SpecialJt=Yes
    Joint=17   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=0   Z=0   SpecialJt=No
    Joint=18   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=0   Z=6   SpecialJt=No
    Joint=19   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=3   SpecialJt=No
-   Joint=20   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=3   SpecialJt=No   GUID=2370acad-afad-4158-9a3b-ee548c13862e
+   Joint=20   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=3   SpecialJt=No   GUID=4a155950-9535-474e-9fc4-eae62fd94fae
    Joint=21   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=8   Z=9   SpecialJt=Yes
    Joint=22   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=8   Z=9   SpecialJt=Yes
    Joint=23   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=0   Z=9   SpecialJt=No
-   Joint=24   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=3   SpecialJt=No   GUID=99c2dd89-9caf-4ebd-a2fd-95aeca53bc20
+   Joint=24   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=7.5   SpecialJt=No   GUID=07872f08-acea-4ccc-9bac-e087c2c368c3
    Joint=25   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=12   Z=9   SpecialJt=No
-   Joint=26   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=7.5   SpecialJt=No   GUID=1d34c521-1a7e-44bb-a781-cab85b99d34a
+   Joint=26   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=7.5   SpecialJt=No   GUID=a655591e-b3be-473c-bdcb-9db05392eb88
    Joint=27   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=9   SpecialJt=No
-   Joint=28   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=7.5   SpecialJt=No   GUID=597c3f28-a491-4294-965a-86a3be673aef
+   Joint=28   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=7.5   SpecialJt=No   GUID=c7e6ff57-733c-46df-8988-16bff7e3e856
    Joint=29   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=4   Z=6   SpecialJt=No
-   Joint=30   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=7.5   SpecialJt=No   GUID=4ca67135-ca56-4a24-a544-38971025ff92
+   Joint=30   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=10.5   SpecialJt=No   GUID=4beb88ea-cf81-444f-88b7-fc1303ca4bf8
    Joint=31   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=8   Z=6   SpecialJt=No
    Joint=32   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=12   Z=9   SpecialJt=No
    Joint=33   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=9   SpecialJt=No
@@ -71042,13 +71006,13 @@ TABLE:  "JOINT COORDINATES"
    Joint=266   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=30   SpecialJt=No
    Joint=267   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=2   Z=30   SpecialJt=No
    Joint=268   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=2   Z=30   SpecialJt=No
-   Joint=269   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=7.5   SpecialJt=No   GUID=23a7adb6-b871-4199-af7c-efe130bdff34
-   Joint=270   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.00000000000001   Y=0   Z=10.5   SpecialJt=No   GUID=ef0d7ab1-cea2-4814-be16-d46ca76f07b0
-   Joint=271   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6.00000000000001   Z=10.5   SpecialJt=No   GUID=9cd18d99-1987-41e0-ac4e-3d54c1713a7a
-   Joint=272   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=10.5   SpecialJt=No   GUID=7f2e4706-d647-42e6-9f58-6dcdd0bab0b1
-   Joint=273   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=10.5   SpecialJt=No   GUID=04c69af7-1efb-4045-94bb-f8626f10d240
-   Joint=274   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=13.5   SpecialJt=No   GUID=55078434-3f1d-4d71-97fb-c1b059b3afbb
-   Joint=275   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=13.5   SpecialJt=No   GUID=97626642-3d3d-4d6c-b154-becc43b55401
+   Joint=269   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=10.5   SpecialJt=No   GUID=e1d8f840-f861-4617-a3ef-c4f9721e1e6b
+   Joint=270   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=10.5   SpecialJt=No   GUID=67876ff0-1c9a-4571-8f39-41adb6272d0b
+   Joint=271   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=10.5   SpecialJt=No   GUID=c5be1d80-8025-4229-bd65-f81305652d2e
+   Joint=272   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=13.5   SpecialJt=No   GUID=79ef3cca-cc48-4f4b-975c-de55d1ffb9ae
+   Joint=273   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=13.5   SpecialJt=No   GUID=ca60fddc-85f8-42f1-8a7b-97dc0163761d
+   Joint=274   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=13.5   SpecialJt=No   GUID=fa5f2168-6dfd-4b6d-8993-61a467647961
+   Joint=275   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=13.5   SpecialJt=No   GUID=db3b326a-5110-48d6-a9a5-a39366a69fdf
    Joint=276   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=4   Z=6   SpecialJt=No
    Joint=277   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=4   Z=6   SpecialJt=No
    Joint=278   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=8   Z=6   SpecialJt=No
@@ -71242,75 +71206,73 @@ TABLE:  "JOINT COORDINATES"
    Joint=466   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=6   Z=30   SpecialJt=No
    Joint=467   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=8   Z=30   SpecialJt=No
    Joint=468   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=10   Z=30   SpecialJt=No
-   Joint=469   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=13.5   SpecialJt=No   GUID=bc98727f-c38d-4682-a500-1aadb3faceda
-   Joint=470   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=13.5   SpecialJt=No   GUID=4a15df7a-41cd-48a9-a0b8-9837bb6fb408
-   Joint=471   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=16.5   SpecialJt=No   GUID=de5d7298-586a-49b7-aee4-0723fa49b63b
-   Joint=472   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=16.5   SpecialJt=No   GUID=0ef9c5db-9908-412b-b3be-e3fc6ef92c5b
-   Joint=473   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=16.5   SpecialJt=No   GUID=b783dde7-6229-4dbc-9deb-3527d7020266
-   Joint=474   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=16.5   SpecialJt=No   GUID=922c2f9d-5f79-4377-9963-101d07fe36c8
-   Joint=475   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=19.5   SpecialJt=No   GUID=670e148d-7d0c-4aac-a9aa-c8441830a939
-   Joint=476   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=19.5   SpecialJt=No   GUID=0112be3f-0bac-4ebd-a422-322079156849
-   Joint=477   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=19.5   SpecialJt=No   GUID=b17ca19a-57f7-4f43-9c49-09f0cb21a322
-   Joint=478   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=19.5   SpecialJt=No   GUID=265f35cb-3a2c-4773-a899-df13cc59acab
-   Joint=479   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=22.5   SpecialJt=No   GUID=3efca74c-cf74-49b0-9e19-d098e20feee5
-   Joint=480   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=22.5   SpecialJt=No   GUID=282a616a-5ad3-4f65-8848-d0262ab22fcb
-   Joint=481   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=22.5   SpecialJt=No   GUID=94e6927d-9e17-4a7f-a4b9-078b73d72235
-   Joint=482   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=22.5   SpecialJt=No   GUID=989826da-1f55-430a-8bc8-4f12292b556b
-   Joint=483   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=25.5   SpecialJt=No   GUID=74723bda-d71b-4b71-817c-6b28e49b73e9
-   Joint=484   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=25.5   SpecialJt=No   GUID=f75c0332-aefe-487d-8399-00d3b2afc733
-   Joint=485   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=25.5   SpecialJt=No   GUID=d38344a1-5c24-4169-916b-a372f9dc2e59
-   Joint=486   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=25.5   SpecialJt=No   GUID=86672d89-d47b-421a-b38c-665cdf49cea1
-   Joint=487   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=28.5   SpecialJt=No   GUID=a4f61cf8-c356-4390-9de6-745fa45f258e
-   Joint=488   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=28.5   SpecialJt=No   GUID=af008a18-8f7b-48c1-be44-03abfa1c01a4
-   Joint=489   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=28.5   SpecialJt=No   GUID=b6c0b506-c89d-48d1-b154-bc24406aa0d2
-   Joint=490   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=28.5   SpecialJt=No   GUID=ed4f7f65-e170-4712-91f0-6aca2f4ca16d
-   Joint=491   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=31.5   SpecialJt=No   GUID=32229dbc-f5a7-4bd4-b8bd-40e14692a3c1
-   Joint=492   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=31.5   SpecialJt=No   GUID=3daaf179-4296-4b80-8059-1351d5e16682
+   Joint=469   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=16.5   SpecialJt=No   GUID=4961f5bf-e13a-42ec-bb85-3d03a6103d8c
+   Joint=470   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=16.5   SpecialJt=No   GUID=180455bc-695a-4836-bf82-bc5b606ebd8c
+   Joint=471   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=16.5   SpecialJt=No   GUID=87deccff-545f-4e59-874e-31a82c591feb
+   Joint=472   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=16.5   SpecialJt=No   GUID=fa79a086-1a39-4eb4-86b1-4bb78871c68f
+   Joint=473   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=19.5   SpecialJt=No   GUID=029709f4-a016-465b-a363-fdf53b42d8bb
+   Joint=474   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=19.5   SpecialJt=No   GUID=f230f3e9-99f4-4ff2-b42f-020751361cfc
+   Joint=475   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=19.5   SpecialJt=No   GUID=0af4ee07-eb9a-4d54-b2ec-20111e366d3c
+   Joint=476   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=19.5   SpecialJt=No   GUID=a0920409-0aa9-4a15-a2c4-846c9748d36f
+   Joint=477   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=22.5   SpecialJt=No   GUID=d0c83ec2-fa34-4c55-bd5f-4c732e6d4e68
+   Joint=478   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=22.5   SpecialJt=No   GUID=9f156568-70c0-4ff0-889a-1f3fa3f1dde3
+   Joint=479   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=22.5   SpecialJt=No   GUID=d1d8d329-78cb-4528-9b92-93a0b5b412a9
+   Joint=480   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=22.5   SpecialJt=No   GUID=6a1b0136-19da-4272-9799-f2075871688e
+   Joint=481   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=25.5   SpecialJt=No   GUID=00d2238d-3c29-478a-a234-ac11bd3a19af
+   Joint=482   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=25.5   SpecialJt=No   GUID=65c61622-5589-49b7-86ae-ba0ed28f4f70
+   Joint=483   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=25.5   SpecialJt=No   GUID=092a2b96-b54e-4cd2-849a-b5a3b1328558
+   Joint=484   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=25.5   SpecialJt=No   GUID=db65b9b8-adbc-420b-93c6-5df2f95a7b71
+   Joint=485   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=28.5   SpecialJt=No   GUID=34fbe919-ba44-420f-b1f1-8d50e4fc3260
+   Joint=486   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=28.5   SpecialJt=No   GUID=5ae8c364-c328-4c6f-98c6-5a422ae02432
+   Joint=487   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=28.5   SpecialJt=No   GUID=03576c9b-466c-473e-bb38-6f2cc12f810f
+   Joint=488   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=28.5   SpecialJt=No   GUID=05d36af0-f213-4430-8180-19fe29740480
+   Joint=489   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=31.5   SpecialJt=No   GUID=045310f8-0ab6-4275-b255-77d4b9666dd0
+   Joint=490   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=31.5   SpecialJt=No   GUID=79290a80-63b9-43b0-8ad7-34487afb89fd
+   Joint=491   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.99999999999999   Y=12   Z=31.5   SpecialJt=No   GUID=84030879-19e8-457a-a905-fc03d7cd713f
+   Joint=492   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=5.99999999999999   Z=31.5   SpecialJt=No   GUID=9a94b29a-48bb-48f8-af51-60991934a90b
    Joint=493   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=33   SpecialJt=No   GUID=738dd4b9-e099-45bc-bca7-335a886e1105
    Joint=494   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=33   SpecialJt=No   GUID=c53bfcc5-ca39-4f06-9434-447b4b53c7fd
-   Joint=495   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=31.5   SpecialJt=No   GUID=de6eb7de-d546-4db1-812c-860e0304272d
-   Joint=496   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=31.5   SpecialJt=No   GUID=5d5e1f6f-d590-481b-b35e-9488b467c6ce
-   Joint=497   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.17142857142857   Y=0   Z=34.5428571428571   SpecialJt=No   GUID=98cf831a-bc43-4900-ac88-daca32cb4bd3
-   Joint=498   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=34.5   SpecialJt=No   GUID=1ef1c484-6876-4040-aef3-c3f1a019f1eb
-   Joint=499   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.17142857142857   Y=12   Z=34.5428571428571   SpecialJt=No   GUID=ed133549-e27f-4c25-9092-6271583bb716
-   Joint=500   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.333333333333333   Y=6   Z=34.5   SpecialJt=No   GUID=51a8a34c-134c-490b-942c-c165c8347fb9
-   Joint=501   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.5050505050505   Y=0   Z=37.5454545454545   SpecialJt=No   GUID=c497e0de-3b20-45d9-b3ff-1b1e3ec129f4
-   Joint=502   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=37.5   SpecialJt=No   GUID=ef4a6032-2fb9-4bca-ad10-072404a2c5d6
-   Joint=503   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.50505050505051   Y=12   Z=37.5454545454545   SpecialJt=No   GUID=fd706d4a-9bdd-4a2f-8cd6-7890ea8ce29c
-   Joint=504   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=6   Z=37.5   SpecialJt=No   GUID=26b4c282-eaae-4ae6-a7e4-f68388021b19
-   Joint=505   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83870967741936   Y=0   Z=40.5483870967742   SpecialJt=No   GUID=42201d2b-44d1-4a7f-a3c5-0f62e09f46ac
-   Joint=506   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=40.5   SpecialJt=No   GUID=f0c3f1b5-781f-4362-990c-eb213c31a3f7
-   Joint=507   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83870967741936   Y=12   Z=40.5483870967742   SpecialJt=No   GUID=9c6a9e6a-9f59-4f59-bd76-fc976563f71c
-   Joint=508   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.66666666666667   Y=6   Z=40.5   SpecialJt=No   GUID=c772e64f-d855-42a7-b39c-5fab6d97aa1c
-   Joint=509   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.17241379310345   Y=0   Z=43.551724137931   SpecialJt=No   GUID=d1794777-f387-4004-94c2-9af4d4f3912d
-   Joint=510   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=43.5   SpecialJt=No   GUID=ddb4d8c1-57b3-4bf1-81cb-3261355a8460
-   Joint=511   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.17241379310345   Y=12   Z=43.551724137931   SpecialJt=No   GUID=0ce0fa83-e66c-4a58-a687-4a0a2ed64087
-   Joint=512   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.33333333333333   Y=6   Z=43.5   SpecialJt=No   GUID=c9039afa-7fb5-41e3-80bf-6de5ad7c0201
+   Joint=495   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.17142857142857   Y=0   Z=34.5428571428571   SpecialJt=No   GUID=d4d5504f-baf1-4886-8c09-728ba002d103
+   Joint=496   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6.00000000000001   Z=34.5   SpecialJt=No   GUID=ec2d5ec4-1cd2-4f5e-8289-4e622f5690de
+   Joint=497   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.17142857142857   Y=12   Z=34.5428571428571   SpecialJt=No   GUID=2b2822f6-dbb0-40ab-8fc8-f95121e5269b
+   Joint=498   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.333333333333333   Y=6   Z=34.5   SpecialJt=No   GUID=0bbdfde4-835f-4e67-866b-67816e83a936
+   Joint=499   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.5050505050505   Y=0   Z=37.5454545454545   SpecialJt=No   GUID=86a38938-bda9-4050-81df-3cf900c7b27b
+   Joint=500   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6.00000000000001   Z=37.5   SpecialJt=No   GUID=6ce3cb7e-197a-4467-89c7-3e9efd5b9c58
+   Joint=501   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.50505050505051   Y=12   Z=37.5454545454545   SpecialJt=No   GUID=810c2989-4c67-478f-84b4-0fd1cb2e4684
+   Joint=502   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=6   Z=37.5   SpecialJt=No   GUID=e327088d-4ae9-4a6b-a9b1-3fcb3d19de93
+   Joint=503   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83870967741936   Y=0   Z=40.5483870967742   SpecialJt=No   GUID=1af79897-2bdd-481f-8e98-365ae31055eb
+   Joint=504   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=40.5   SpecialJt=No   GUID=c5ac43d0-7788-4d84-b040-893af796f732
+   Joint=505   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83870967741935   Y=12   Z=40.5483870967742   SpecialJt=No   GUID=a48db72d-7ba8-4bd7-9154-6dedeeced6aa
+   Joint=506   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.66666666666667   Y=6   Z=40.5   SpecialJt=No   GUID=d12c3f7f-e549-4de1-970f-577da305cf78
+   Joint=507   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.17241379310345   Y=0   Z=43.551724137931   SpecialJt=No   GUID=9f29cbb5-cad8-4642-aa97-930bd07c5153
+   Joint=508   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=43.5   SpecialJt=No   GUID=f447a31a-d056-40d7-8cbb-b9687f60b32b
+   Joint=509   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.17241379310345   Y=12   Z=43.551724137931   SpecialJt=No   GUID=a4b830f6-c89f-4a4e-9dd1-4e104e1590a1
+   Joint=510   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.33333333333333   Y=6   Z=43.5   SpecialJt=No   GUID=70d5918d-f435-422e-9fbf-07246c758986
+   Joint=511   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.50617283950617   Y=0   Z=46.5555555555556   SpecialJt=No   GUID=e69da5fa-823f-4721-a16e-6998db9205a3
+   Joint=512   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=46.5   SpecialJt=No   GUID=5b4757d2-f49e-4d78-bcb5-511abf8f5d57
    Joint=513   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=2   Z=33   SpecialJt=No   GUID=e7d8cc37-5117-47a2-99b1-267a7e396fa8
    Joint=514   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=4   Z=33   SpecialJt=No   GUID=3cdf3c08-bac6-441a-bf92-ef325f84d85d
    Joint=515   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=33   SpecialJt=No   GUID=9467a5f7-3255-49ec-aa61-367cfa775dad
    Joint=516   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=8   Z=33   SpecialJt=No   GUID=a717fa8c-9d86-4505-b87f-03f47281f441
    Joint=517   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=10   Z=33   SpecialJt=No   GUID=177391e9-cdde-4282-96f4-1e23c6973ec2
-   Joint=518   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.50617283950617   Y=0   Z=46.5555555555556   SpecialJt=No   GUID=e51baf79-5224-4d40-91aa-45797acc88a6
-   Joint=519   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=46.5   SpecialJt=No   GUID=a4f11ebc-b44c-414b-ba45-05a56bd279a2
-   Joint=520   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.50617283950618   Y=12   Z=46.5555555555556   SpecialJt=No   GUID=582eaa79-cde8-447c-8639-69a021944fdc
-   Joint=521   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=6   Z=46.5   SpecialJt=No   GUID=954ffb05-f83e-4048-b5a3-8a8ad2b595ec
-   Joint=522   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=0   Z=49.56   SpecialJt=No   GUID=7b375c79-7f39-4f5e-b3f4-138b880b90f5
-   Joint=523   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=49.5   SpecialJt=No   GUID=28681a1a-b28d-4ed9-b956-6249d52206e9
-   Joint=524   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=12   Z=49.56   SpecialJt=No   GUID=db98ab00-2f32-41c7-9f0e-3ffe66a8a6da
-   Joint=525   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.66666666666667   Y=6   Z=49.5   SpecialJt=No   GUID=f747c81a-b788-47b0-a4c5-b8b1db17395b
-   Joint=526   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.17391304347826   Y=0   Z=52.5652173913044   SpecialJt=No   GUID=43b8fe6f-7a1d-4d56-876f-108026c165cc
-   Joint=527   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=52.5   SpecialJt=No   GUID=6bafb19b-9ba8-43c9-839a-409fb105a518
-   Joint=528   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.17391304347826   Y=12   Z=52.5652173913043   SpecialJt=No   GUID=997b9516-33b3-45d2-943d-1818279dae6b
-   Joint=529   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4.33333333333333   Y=6   Z=52.5   SpecialJt=No   GUID=1ebf2968-fb64-48ee-bacd-a73fa8650abc
-   Joint=530   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.50793650793651   Y=0   Z=55.5714285714286   SpecialJt=No   GUID=3a63bff2-f627-4ff8-aa7c-d5145ecedfdb
-   Joint=531   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=55.5   SpecialJt=No   GUID=d8fa8586-ffbb-4a94-934b-1cef1529ab17
-   Joint=532   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.50793650793651   Y=12   Z=55.5714285714286   SpecialJt=No   GUID=d89cf07d-9ca6-4aeb-a058-8eb4e3e6496c
-   Joint=533   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5   Y=6   Z=55.5   SpecialJt=No   GUID=4935aec3-2619-4ccf-9832-eb31b9dd6b05
-   Joint=534   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.8421052631579   Y=0   Z=58.5789473684211   SpecialJt=No   GUID=de38dd57-25a2-48c4-89ba-8728775e8039
-   Joint=535   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=58.5   SpecialJt=No   GUID=d7df9f30-d3c8-4190-9c66-f8801c33ad6e
-   Joint=536   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.84210526315789   Y=12   Z=58.5789473684211   SpecialJt=No   GUID=a5b3bc80-18f7-423d-a715-9cdff503652e
-   Joint=537   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.66666666666667   Y=6   Z=58.5   SpecialJt=No   GUID=0148b7e5-4966-4696-96c4-f649b8d57119
+   Joint=518   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.50617283950618   Y=12   Z=46.5555555555556   SpecialJt=No   GUID=ebd503da-209f-46a0-93ad-049d3be732b5
+   Joint=519   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=6.00000000000001   Z=46.5   SpecialJt=No   GUID=c567eeea-6590-456e-85d5-076d2608efed
+   Joint=520   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=0   Z=49.56   SpecialJt=No   GUID=71756c47-a544-4284-913a-6e791202a877
+   Joint=521   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=49.5   SpecialJt=No   GUID=9740eccd-e3a8-4ab2-b0d6-54f52d9afe6f
+   Joint=522   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=12   Z=49.56   SpecialJt=No   GUID=5d189479-c6db-4b1b-9b4d-9ae4fcd073c7
+   Joint=523   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.66666666666667   Y=6   Z=49.5   SpecialJt=No   GUID=800902d7-c5d1-47e2-8517-f06230d12408
+   Joint=524   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.17391304347826   Y=0   Z=52.5652173913044   SpecialJt=No   GUID=9ec762f1-4362-455f-86de-f1ca55bfcc63
+   Joint=525   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=52.5   SpecialJt=No   GUID=584c1852-7a99-4ec9-a5e2-55865f918605
+   Joint=526   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.17391304347826   Y=12   Z=52.5652173913043   SpecialJt=No   GUID=b5b7c9f2-0fcf-45a1-894c-9c297d7e1c17
+   Joint=527   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4.33333333333333   Y=6   Z=52.5   SpecialJt=No   GUID=d16d7bc3-85cd-4732-a036-a163d4a4a693
+   Joint=528   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.50793650793651   Y=0   Z=55.5714285714286   SpecialJt=No   GUID=1f69b785-6a18-4d6a-b2f6-2dabff71c809
+   Joint=529   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6.00000000000001   Z=55.5   SpecialJt=No   GUID=9100bbde-5bea-4bbf-810e-0c1955f32ea4
+   Joint=530   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.50793650793651   Y=12   Z=55.5714285714286   SpecialJt=No   GUID=e03c662d-31b8-4810-9a1b-4ab826c48099
+   Joint=531   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5   Y=6   Z=55.5   SpecialJt=No   GUID=afe68c1b-4e38-46c6-98fc-9317bc9080a0
+   Joint=532   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.8421052631579   Y=0   Z=58.5789473684211   SpecialJt=No   GUID=2c398db1-e33a-43bd-be46-54dfb2cf0346
+   Joint=533   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6.00000000000001   Z=58.5   SpecialJt=No   GUID=4a00b1c5-ec83-43a1-91c2-6e2957e9973d
+   Joint=534   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.84210526315789   Y=12   Z=58.5789473684211   SpecialJt=No   GUID=08eaccd5-b804-4edd-b020-8161c770e794
+   Joint=535   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.66666666666667   Y=6.00000000000001   Z=58.5   SpecialJt=No   GUID=199f0dba-6229-4016-95a4-488ec3476d53
    Joint=563   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=12   Z=33   SpecialJt=No   GUID=c0aab100-9b9b-4841-bf1f-1028b3ef3170
    Joint=564   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=12   Z=33   SpecialJt=No   GUID=d2825a39-87c4-4d49-aea6-a158f5b753be
    Joint=565   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=12   Z=33   SpecialJt=No   GUID=d20b72bb-4b32-4815-a13b-5970bb8acc0c

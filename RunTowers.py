@@ -29,13 +29,33 @@ class RunTowers(QDialog):
         fileh.close()
 
         self.args = args
-
+        
+        self.SAPPath = self.args[0].SAPPath
+        self.nodesList = self.args[0].nodesList
+        self.footprint = self.args[0].footprint
+        self.totalHeight = self.args[0].totalHeight
+        self.totalMass = self.args[0].totalMass
+        self.toRun = False
+        
+        # Set Text
+        self.SAP2000Path_input.setPlainText(self.SAPPath)
+        
+        nodesListString = ''
+        for i in range(len(self.nodesList)):
+            if i < len(self.nodesList)-1:
+                nodesListString = nodesListString + str(self.nodesList[i]) + ', '
+            else:
+                nodesListString = nodesListString + str(self.nodesList[i])
+        self.nodesToAnalyze_input.setPlainText(nodesListString)
+        
+        self.footprint_input.setPlainText(str(self.footprint))
+        self.totalHeight_input.setPlainText(str(self.totalHeight))
+        self.totalMass_input.setPlainText(str(self.totalMass))
+        
         # Set UI Elements
         self.setOkandCancelButtons()     
-        
-        
-        # Run Towers
-        self.runNow_Button.clicked.connect(self.runNow) 
+        self.setRunNowButton()
+        #self.runNow_Button.clicked.connect(self.runNow) 
         
       
     def setOkandCancelButtons(self):
@@ -48,12 +68,13 @@ class RunTowers(QDialog):
     
     
     def saveInputs(self):
+        
         # SAP2000 Path
-        self.args[0].SAPPAth = self.SAP2000Path_input.text()
+        self.SAPPath = self.SAP2000Path_input.toPlainText()
         
         # Nodes to Analyze (assuming input is string of integers seperated by commas)
         nodesToAnalyze = []
-        nodesToAnalyzeText = self.nodesToAnalyze_input.text()
+        nodesToAnalyzeText = self.nodesToAnalyze_input.toPlainText()
         nodesToAnalyzeMark = 0
         for i in range(len(nodesToAnalyzeText)):
             if nodesToAnalyzeText[i] == ",":
@@ -61,19 +82,26 @@ class RunTowers(QDialog):
                 nodesToAnalyzeMark = i + 2
             elif i == (len(nodesToAnalyzeText) - 1):
                 nodesToAnalyze.append(int(nodesToAnalyzeText[nodesToAnalyzeMark:]))
-        self.args[0].nodesList = nodesToAnalyze
+        self.nodesList = nodesToAnalyze
             
         # Footprint
-        self.args[0].footprint = float(self.footprint_input.text())
+        self.footprint = float(self.footprint_input.toPlainText())
         
         # Total Height
-        self.args[0].totalHeight = float(self.totalHeight_input.text())
+        self.totalHeight = float(self.totalHeight_input.toPlainText())
         
         # Total Mass
-        self.args[0].totalMass = float(self.totalMass_input.text())
+        self.totalMass = float(self.totalMass_input.toPlainText())
+        
+        self.toRun = False
+        
+        
+    def setRunNowButton(self):
+        #self.RunNowButton = self.runNow_Button.button(QPushButton)
+        self.runNow_Button.clicked.connect(self.saveInputs)
+        self.runNow_Button.clicked.connect(self.runNow)
+        self.runNow_Button.clicked.connect(lambda x: self.close())    
+        
         
     def runNow(self):
-        self.saveInputs
-        self.args[0].runNow = True
-        lambda x: self.close()
-        
+        self.toRun = True
