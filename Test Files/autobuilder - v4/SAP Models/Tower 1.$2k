@@ -68,6 +68,66 @@ TABLE:  "CASE - MODAL HISTORY 2 - LOAD ASSIGNMENTS"
  
 TABLE:  "CASE - STATIC 1 - LOAD ASSIGNMENTS"
    Case=DEAD   LoadType="Load pattern"   LoadName=DEAD   LoadSF=1
+   Case="Unit X - 0.0"   LoadType="Load pattern"   LoadName="Unit X - 0.0"   LoadSF=1
+   Case="Unit X - 6.0"   LoadType="Load pattern"   LoadName="Unit X - 6.0"   LoadSF=1
+   Case="Unit X - 9.0"   LoadType="Load pattern"   LoadName="Unit X - 9.0"   LoadSF=1
+   Case="Unit X - 12.0"   LoadType="Load pattern"   LoadName="Unit X - 12.0"   LoadSF=1
+   Case="Unit X - 15.0"   LoadType="Load pattern"   LoadName="Unit X - 15.0"   LoadSF=1
+   Case="Unit X - 18.0"   LoadType="Load pattern"   LoadName="Unit X - 18.0"   LoadSF=1
+   Case="Unit X - 21.0"   LoadType="Load pattern"   LoadName="Unit X - 21.0"   LoadSF=1
+   Case="Unit X - 24.0"   LoadType="Load pattern"   LoadName="Unit X - 24.0"   LoadSF=1
+   Case="Unit X - 27.0"   LoadType="Load pattern"   LoadName="Unit X - 27.0"   LoadSF=1
+   Case="Unit X - 30.0"   LoadType="Load pattern"   LoadName="Unit X - 30.0"   LoadSF=1
+   Case="Unit X - 33.0"   LoadType="Load pattern"   LoadName="Unit X - 33.0"   LoadSF=1
+   Case="Unit X - 36.0"   LoadType="Load pattern"   LoadName="Unit X - 36.0"   LoadSF=1
+   Case="Unit X - 39.0"   LoadType="Load pattern"   LoadName="Unit X - 39.0"   LoadSF=1
+   Case="Unit X - 42.0"   LoadType="Load pattern"   LoadName="Unit X - 42.0"   LoadSF=1
+   Case="Unit X - 45.0"   LoadType="Load pattern"   LoadName="Unit X - 45.0"   LoadSF=1
+   Case="Unit X - 48.0"   LoadType="Load pattern"   LoadName="Unit X - 48.0"   LoadSF=1
+   Case="Unit X - 51.0"   LoadType="Load pattern"   LoadName="Unit X - 51.0"   LoadSF=1
+   Case="Unit X - 54.0"   LoadType="Load pattern"   LoadName="Unit X - 54.0"   LoadSF=1
+   Case="Unit X - 57.0"   LoadType="Load pattern"   LoadName="Unit X - 57.0"   LoadSF=1
+   Case="Unit X - 60.0"   LoadType="Load pattern"   LoadName="Unit X - 60.0"   LoadSF=1
+   Case="Unit Y - 0.0"   LoadType="Load pattern"   LoadName="Unit Y - 0.0"   LoadSF=1
+   Case="Unit Y - 6.0"   LoadType="Load pattern"   LoadName="Unit Y - 6.0"   LoadSF=1
+   Case="Unit Y - 9.0"   LoadType="Load pattern"   LoadName="Unit Y - 9.0"   LoadSF=1
+   Case="Unit Y - 12.0"   LoadType="Load pattern"   LoadName="Unit Y - 12.0"   LoadSF=1
+   Case="Unit Y - 15.0"   LoadType="Load pattern"   LoadName="Unit Y - 15.0"   LoadSF=1
+   Case="Unit Y - 18.0"   LoadType="Load pattern"   LoadName="Unit Y - 18.0"   LoadSF=1
+   Case="Unit Y - 21.0"   LoadType="Load pattern"   LoadName="Unit Y - 21.0"   LoadSF=1
+   Case="Unit Y - 24.0"   LoadType="Load pattern"   LoadName="Unit Y - 24.0"   LoadSF=1
+   Case="Unit Y - 27.0"   LoadType="Load pattern"   LoadName="Unit Y - 27.0"   LoadSF=1
+   Case="Unit Y - 30.0"   LoadType="Load pattern"   LoadName="Unit Y - 30.0"   LoadSF=1
+   Case="Unit Y - 33.0"   LoadType="Load pattern"   LoadName="Unit Y - 33.0"   LoadSF=1
+   Case="Unit Y - 36.0"   LoadType="Load pattern"   LoadName="Unit Y - 36.0"   LoadSF=1
+   Case="Unit Y - 39.0"   LoadType="Load pattern"   LoadName="Unit Y - 39.0"   LoadSF=1
+   Case="Unit Y - 42.0"   LoadType="Load pattern"   LoadName="Unit Y - 42.0"   LoadSF=1
+   Case="Unit Y - 45.0"   LoadType="Load pattern"   LoadName="Unit Y - 45.0"   LoadSF=1
+   Case="Unit Y - 48.0"   LoadType="Load pattern"   LoadName="Unit Y - 48.0"   LoadSF=1
+   Case="Unit Y - 51.0"   LoadType="Load pattern"   LoadName="Unit Y - 51.0"   LoadSF=1
+   Case="Unit Y - 54.0"   LoadType="Load pattern"   LoadName="Unit Y - 54.0"   LoadSF=1
+   Case="Unit Y - 57.0"   LoadType="Load pattern"   LoadName="Unit Y - 57.0"   LoadSF=1
+   Case="Unit Y - 60.0"   LoadType="Load pattern"   LoadName="Unit Y - 60.0"   LoadSF=1
+   Case="Unit Moment - 0.0"   LoadType="Load pattern"   LoadName="Unit Moment - 0.0"   LoadSF=1
+   Case="Unit Moment - 6.0"   LoadType="Load pattern"   LoadName="Unit Moment - 6.0"   LoadSF=1
+   Case="Unit Moment - 9.0"   LoadType="Load pattern"   LoadName="Unit Moment - 9.0"   LoadSF=1
+   Case="Unit Moment - 12.0"   LoadType="Load pattern"   LoadName="Unit Moment - 12.0"   LoadSF=1
+   Case="Unit Moment - 15.0"   LoadType="Load pattern"   LoadName="Unit Moment - 15.0"   LoadSF=1
+   Case="Unit Moment - 18.0"   LoadType="Load pattern"   LoadName="Unit Moment - 18.0"   LoadSF=1
+   Case="Unit Moment - 21.0"   LoadType="Load pattern"   LoadName="Unit Moment - 21.0"   LoadSF=1
+   Case="Unit Moment - 24.0"   LoadType="Load pattern"   LoadName="Unit Moment - 24.0"   LoadSF=1
+   Case="Unit Moment - 27.0"   LoadType="Load pattern"   LoadName="Unit Moment - 27.0"   LoadSF=1
+   Case="Unit Moment - 30.0"   LoadType="Load pattern"   LoadName="Unit Moment - 30.0"   LoadSF=1
+   Case="Unit Moment - 33.0"   LoadType="Load pattern"   LoadName="Unit Moment - 33.0"   LoadSF=1
+   Case="Unit Moment - 36.0"   LoadType="Load pattern"   LoadName="Unit Moment - 36.0"   LoadSF=1
+   Case="Unit Moment - 39.0"   LoadType="Load pattern"   LoadName="Unit Moment - 39.0"   LoadSF=1
+   Case="Unit Moment - 42.0"   LoadType="Load pattern"   LoadName="Unit Moment - 42.0"   LoadSF=1
+   Case="Unit Moment - 45.0"   LoadType="Load pattern"   LoadName="Unit Moment - 45.0"   LoadSF=1
+   Case="Unit Moment - 48.0"   LoadType="Load pattern"   LoadName="Unit Moment - 48.0"   LoadSF=1
+   Case="Unit Moment - 51.0"   LoadType="Load pattern"   LoadName="Unit Moment - 51.0"   LoadSF=1
+   Case="Unit Moment - 54.0"   LoadType="Load pattern"   LoadName="Unit Moment - 54.0"   LoadSF=1
+   Case="Unit Moment - 57.0"   LoadType="Load pattern"   LoadName="Unit Moment - 57.0"   LoadSF=1
+   Case="Unit Moment - 60.0"   LoadType="Load pattern"   LoadName="Unit Moment - 60.0"   LoadSF=1
  
 TABLE:  "COMBINATION DEFINITIONS"
    ComboName=D+GM1-NS   ComboType="Linear Add"   AutoDesign=No   CaseName=DEAD   ScaleFactor=1   SteelDesign=None   ConcDesign=None   AlumDesign=None   ColdDesign=None
@@ -132,166 +192,166 @@ TABLE:  "CONNECTIVITY - AREA"
    Area=10   Joint1=494   Joint2=568   Joint3=565   Joint4=493   GUID=4b52875d-c439-43f2-947e-96e24529bb84
  
 TABLE:  "CONNECTIVITY - FRAME"
-   Frame=1   JointI=11   JointJ=3   IsCurved=No   GUID=01b27c3e-f68e-43d4-a904-2a4292021213
-   Frame=2   JointI=17   JointJ=3   IsCurved=No   GUID=cdb45b5f-85fc-4539-a005-442a226f0da4
-   Frame=3   JointI=18   JointJ=3   IsCurved=No   GUID=3cf20627-b852-4563-bbe7-ca2424c69d6a
-   Frame=4   JointI=12   JointJ=3   IsCurved=No   GUID=059451c4-c4aa-4c85-a30a-8ea9b159d18c
-   Frame=5   JointI=17   JointJ=5   IsCurved=No   GUID=0b3747ca-5f4c-4c01-96bf-91bf4327747d
-   Frame=6   JointI=7   JointJ=5   IsCurved=No   GUID=6ea6594c-2711-4467-9b98-e4720e5620bf
-   Frame=7   JointI=8   JointJ=5   IsCurved=No   GUID=3db9f953-2834-41ab-a818-0caa49d59679
-   Frame=8   JointI=18   JointJ=5   IsCurved=No   GUID=691d12c0-f45f-4eea-b8ce-f9d29bd46535
-   Frame=9   JointI=7   JointJ=10   IsCurved=No   GUID=68195c68-0cb1-44fa-b5a4-f06ad9b83ac6
-   Frame=10   JointI=1   JointJ=10   IsCurved=No   GUID=3f18f629-a794-407f-aba5-9f2668f2de40
-   Frame=11   JointI=2   JointJ=10   IsCurved=No   GUID=1ee7df0e-b345-43b8-80a9-e82ee66b9dc1
-   Frame=12   JointI=8   JointJ=10   IsCurved=No   GUID=d00beb91-2cc3-4dbf-9674-97990947416d
-   Frame=13   JointI=1   JointJ=13   IsCurved=No   GUID=e6701e10-d346-4fec-a5d9-9e6fb76b1029
-   Frame=14   JointI=11   JointJ=13   IsCurved=No   GUID=a7e614d8-4539-4dfa-a6af-eab40385da87
-   Frame=15   JointI=12   JointJ=13   IsCurved=No   GUID=15614044-2b4c-491d-8025-e2b7256b4b0e
-   Frame=16   JointI=2   JointJ=13   IsCurved=No   GUID=87a1c891-9fa1-476c-978d-0b13805f21c8
-   Frame=17   JointI=12   JointJ=15   IsCurved=No   GUID=742f1ec8-1f01-4527-941f-d8a3aaa1a748
-   Frame=18   JointI=18   JointJ=15   IsCurved=No   GUID=a7bce0bd-5129-45cf-a251-272f59512f69
-   Frame=19   JointI=145   JointJ=15   IsCurved=No   GUID=e292f8c0-0d8e-44e3-be20-303f77382069
-   Frame=20   JointI=59   JointJ=15   IsCurved=No   GUID=2527b40f-16cd-45d8-a2ed-ae16a74ee90e
+   Frame=1   JointI=11   JointJ=3   IsCurved=No   GUID=4be3f3d1-aae4-4012-b5f2-43c3e2f25781
+   Frame=2   JointI=17   JointJ=3   IsCurved=No   GUID=62f323c4-59cb-4580-a9a4-3ee558a4ac6b
+   Frame=3   JointI=18   JointJ=3   IsCurved=No   GUID=0a3bb516-45ac-45d2-81e0-f6795b78c4cf
+   Frame=4   JointI=12   JointJ=3   IsCurved=No   GUID=b1be0274-adbe-400a-8e4a-ab5d0192a1a4
+   Frame=5   JointI=17   JointJ=5   IsCurved=No   GUID=8d721147-516c-4234-b708-11413223461e
+   Frame=6   JointI=7   JointJ=5   IsCurved=No   GUID=48a9e646-3139-4bbe-ab94-8ceeb2c2b44e
+   Frame=7   JointI=8   JointJ=5   IsCurved=No   GUID=3501f2f4-3db3-4f7a-82c1-905cbb7425cf
+   Frame=8   JointI=18   JointJ=5   IsCurved=No   GUID=22f408b7-638a-4f2c-830d-e7dfd2ecefb4
+   Frame=9   JointI=7   JointJ=10   IsCurved=No   GUID=c4307e5e-f808-47d9-ba31-bef514200cec
+   Frame=10   JointI=1   JointJ=10   IsCurved=No   GUID=19e0b36e-c5fa-4245-87d1-81669c6512fc
+   Frame=11   JointI=2   JointJ=10   IsCurved=No   GUID=eed58cd4-bb1a-4462-93ea-25cf23b72a9d
+   Frame=12   JointI=8   JointJ=10   IsCurved=No   GUID=ae87ad35-bc57-4ade-b77a-3b2b8ece930d
+   Frame=13   JointI=1   JointJ=13   IsCurved=No   GUID=cf1d5b69-4c27-4be5-bbb7-e8606881dfd8
+   Frame=14   JointI=11   JointJ=13   IsCurved=No   GUID=d673a7f7-25ab-48b4-b978-1ebeca67e137
+   Frame=15   JointI=12   JointJ=13   IsCurved=No   GUID=4aebb108-3fe8-4c42-bddb-fca9fe48e776
+   Frame=16   JointI=2   JointJ=13   IsCurved=No   GUID=d59a6365-615a-4802-91d7-6ddf62ca8ce9
+   Frame=17   JointI=12   JointJ=15   IsCurved=No   GUID=e13b7290-0a47-46fb-a3e2-eabd6f10e989
+   Frame=18   JointI=18   JointJ=15   IsCurved=No   GUID=19f16e27-d987-495c-8519-821e6cebc03a
+   Frame=19   JointI=145   JointJ=15   IsCurved=No   GUID=0e844d7e-05c3-4880-9173-6063b48eb5e2
+   Frame=20   JointI=59   JointJ=15   IsCurved=No   GUID=0ca4e785-5669-4e8e-b68e-3fc442a956b0
    Frame=21   JointI=74   JointJ=493   IsCurved=No   GUID=0c5f4397-3222-4533-9d46-d371ba834f06
    Frame=22   JointI=75   JointJ=494   IsCurved=No   GUID=d10d1d44-4310-4304-901d-17057b0196a6
-   Frame=23   JointI=18   JointJ=20   IsCurved=No   GUID=5f1cf7ef-bcc7-488f-baf7-e74ceb03d7bc
-   Frame=24   JointI=8   JointJ=20   IsCurved=No   GUID=16cc25e2-b7d3-41b0-9def-4cfd475a0ccc
-   Frame=25   JointI=141   JointJ=20   IsCurved=No   GUID=5efae340-33c2-4c46-b2be-0f27a27df8da
-   Frame=26   JointI=145   JointJ=20   IsCurved=No   GUID=4274224e-c99e-4a8e-a209-d2bb7adc80f9
-   Frame=27   JointI=8   JointJ=24   IsCurved=No   GUID=718c0821-a2f6-4d20-a704-911b628d5db2
-   Frame=28   JointI=2   JointJ=24   IsCurved=No   GUID=82b5e8a3-c706-419a-92da-7809a8d063ee
-   Frame=29   JointI=58   JointJ=24   IsCurved=No   GUID=5732b97b-9fdb-4735-92db-103406467789
-   Frame=30   JointI=141   JointJ=24   IsCurved=No   GUID=b1414eaf-92e2-41bf-b050-64502e3c1437
-   Frame=31   JointI=2   JointJ=26   IsCurved=No   GUID=04e082a1-6f70-454e-bb53-b32bb1a725f7
-   Frame=32   JointI=12   JointJ=26   IsCurved=No   GUID=717405d1-aae1-43af-91a9-6a46483db4c9
-   Frame=33   JointI=59   JointJ=26   IsCurved=No   GUID=66d1b7e1-bd8d-4fb6-b226-30a1f2af15f8
-   Frame=34   JointI=58   JointJ=26   IsCurved=No   GUID=fe66b375-820d-4f4b-b5d5-3ba072c27f16
-   Frame=35   JointI=59   JointJ=28   IsCurved=No   GUID=1f489680-2408-46ed-86c2-5a5e7e4b8d0a
-   Frame=36   JointI=145   JointJ=28   IsCurved=No   GUID=e78c76fb-e21e-4ac1-9def-4cf1d685c635
-   Frame=37   JointI=125   JointJ=28   IsCurved=No   GUID=03c45afa-a8d4-4d98-ab9a-890249b6cafb
-   Frame=38   JointI=57   JointJ=28   IsCurved=No   GUID=a402395c-e908-46c4-bdf1-8e98415ddc11
-   Frame=39   JointI=145   JointJ=30   IsCurved=No   GUID=5bf15442-f687-492e-895d-aa09b1778bfc
-   Frame=40   JointI=141   JointJ=30   IsCurved=No   GUID=25904a92-c0ad-41dc-859d-f1c3f2ec8dd6
-   Frame=41   JointI=81   JointJ=30   IsCurved=No   GUID=b0f70763-3858-4ac1-83b4-bd2e9ffb5ae5
-   Frame=42   JointI=125   JointJ=30   IsCurved=No   GUID=548883e4-9344-4cd2-9799-3a60eebaffe3
-   Frame=43   JointI=141   JointJ=269   IsCurved=No   GUID=c23818b8-10a7-48a0-8a5a-3809023f5316
-   Frame=44   JointI=58   JointJ=269   IsCurved=No   GUID=584d06fd-5212-4b3f-b410-171b14aa0008
-   Frame=45   JointI=56   JointJ=269   IsCurved=No   GUID=9ec907d2-8a87-48d5-b381-1900c445ba0b
-   Frame=46   JointI=81   JointJ=269   IsCurved=No   GUID=1d674c99-260a-47f2-857a-3b85c4463c7c
-   Frame=47   JointI=58   JointJ=270   IsCurved=No   GUID=f18346a8-5a6b-4927-a31f-6c0111110123
-   Frame=48   JointI=59   JointJ=270   IsCurved=No   GUID=3b6fdacd-bbb3-44af-8a8d-ffecb72ed017
-   Frame=49   JointI=57   JointJ=270   IsCurved=No   GUID=b15ca1c5-11d7-4b59-9d8c-6c9c0af293df
-   Frame=50   JointI=56   JointJ=270   IsCurved=No   GUID=d3d376ad-3950-4d09-829d-aba3f6348ebb
-   Frame=51   JointI=57   JointJ=271   IsCurved=No   GUID=dd90a59a-500d-45ea-996b-b03216461562
-   Frame=52   JointI=125   JointJ=271   IsCurved=No   GUID=87fc0fa5-296a-4e79-8df4-971fdf58bb97
-   Frame=53   JointI=144   JointJ=271   IsCurved=No   GUID=493377f4-4bb1-4c19-8477-3e330d7b42e4
-   Frame=54   JointI=65   JointJ=271   IsCurved=No   GUID=3c1e92a3-81b7-4b41-94c2-faec07f7d8ed
-   Frame=55   JointI=125   JointJ=272   IsCurved=No   GUID=f44e8c5b-fdfd-4c63-8ec3-1bc8c3161a48
-   Frame=56   JointI=81   JointJ=272   IsCurved=No   GUID=aed30d08-bfe1-499c-978d-134c23a6b4c9
-   Frame=57   JointI=140   JointJ=272   IsCurved=No   GUID=5738c4f4-f45a-4653-b94f-fe35c555fbe8
-   Frame=58   JointI=144   JointJ=272   IsCurved=No   GUID=7f747b0e-a028-43da-815f-eee63cf840b7
-   Frame=59   JointI=81   JointJ=273   IsCurved=No   GUID=f5085c20-5fe1-4eb9-bbca-41fae6d8862e
-   Frame=60   JointI=56   JointJ=273   IsCurved=No   GUID=e0fcf3cb-27a3-4788-9bc3-e18d2accd06e
-   Frame=61   JointI=64   JointJ=273   IsCurved=No   GUID=7d99e91e-6640-4336-8eb5-5c2b162d8596
-   Frame=62   JointI=140   JointJ=273   IsCurved=No   GUID=cf75b41b-d86f-4e0f-bae7-3421d89b5afa
-   Frame=63   JointI=56   JointJ=274   IsCurved=No   GUID=2ee21d6a-aa7b-4534-9463-27cc767d77c3
-   Frame=64   JointI=57   JointJ=274   IsCurved=No   GUID=ca8809bf-fb47-4552-93e2-ac9356a2ac55
-   Frame=65   JointI=65   JointJ=274   IsCurved=No   GUID=f5b19fdc-af17-4117-8faa-56f0b8728973
-   Frame=66   JointI=64   JointJ=274   IsCurved=No   GUID=b669ca21-1972-4c98-a2d3-63e888036ca5
-   Frame=67   JointI=65   JointJ=275   IsCurved=No   GUID=ef42480b-d1a5-47af-bbdc-b153c94c17d2
-   Frame=68   JointI=144   JointJ=275   IsCurved=No   GUID=de1a94c4-1b80-4d1c-b901-73a1ba83bdaa
-   Frame=69   JointI=135   JointJ=275   IsCurved=No   GUID=0acb7d4f-3034-4112-b2ee-9a70a9c40b07
-   Frame=70   JointI=63   JointJ=275   IsCurved=No   GUID=d9d976b1-51f1-449b-9bac-675f9935ef3c
-   Frame=71   JointI=144   JointJ=469   IsCurved=No   GUID=604cf6b6-293b-4e10-855a-dc6cd957944a
-   Frame=72   JointI=140   JointJ=469   IsCurved=No   GUID=6f07aeb5-2419-45eb-bfb4-916d27cabda4
-   Frame=73   JointI=85   JointJ=469   IsCurved=No   GUID=8fc978f9-5df1-46d0-8fcb-bb8759b82051
-   Frame=74   JointI=135   JointJ=469   IsCurved=No   GUID=be29f679-b54e-4b86-9b0f-ca772042f08c
-   Frame=75   JointI=140   JointJ=470   IsCurved=No   GUID=71a96a6c-e359-4039-b6d3-e8b0c140b766
-   Frame=76   JointI=64   JointJ=470   IsCurved=No   GUID=2252904e-6f7f-4963-b311-e96acdc712d6
-   Frame=77   JointI=62   JointJ=470   IsCurved=No   GUID=9418cc12-bfdc-48b0-a82e-b8e5544feb78
-   Frame=78   JointI=85   JointJ=470   IsCurved=No   GUID=35f2f11b-07af-41c4-be2b-b9c33a37afd2
-   Frame=79   JointI=64   JointJ=471   IsCurved=No   GUID=96587308-4094-4691-b402-483444af3d43
-   Frame=80   JointI=65   JointJ=471   IsCurved=No   GUID=ed47357c-7c40-487d-8e9e-a9fd5ae09fd6
-   Frame=81   JointI=63   JointJ=471   IsCurved=No   GUID=83b45546-f014-49ac-868c-c8231fa484ae
-   Frame=82   JointI=62   JointJ=471   IsCurved=No   GUID=426dacae-2600-4e41-8fc9-0cfe13c379c8
-   Frame=83   JointI=63   JointJ=472   IsCurved=No   GUID=a68ad952-808a-4428-a523-1bc43d6592df
-   Frame=84   JointI=135   JointJ=472   IsCurved=No   GUID=4aaefab6-7108-422a-886a-b37a2e095de1
-   Frame=85   JointI=143   JointJ=472   IsCurved=No   GUID=71886253-e7b7-4528-b9a2-02b03f3f5f05
-   Frame=86   JointI=71   JointJ=472   IsCurved=No   GUID=ebdb434d-97f8-4d96-8318-21d88de21dbc
-   Frame=87   JointI=135   JointJ=473   IsCurved=No   GUID=6cc2bdd3-532d-42a6-ba98-c82bab8e42b6
-   Frame=88   JointI=85   JointJ=473   IsCurved=No   GUID=dd22fbd0-d035-4b8d-b9eb-ad7a20e86fa5
-   Frame=89   JointI=139   JointJ=473   IsCurved=No   GUID=769818f2-9ffd-4523-b7ec-8b99a2b8a075
-   Frame=90   JointI=143   JointJ=473   IsCurved=No   GUID=66c212b3-ffc3-4b9a-b530-724d525fd38b
-   Frame=91   JointI=85   JointJ=474   IsCurved=No   GUID=ba613b7c-eb67-4b13-9520-2e1eda67a009
-   Frame=92   JointI=62   JointJ=474   IsCurved=No   GUID=39d0a962-0ffa-4810-937f-cbfbf80733bf
-   Frame=93   JointI=70   JointJ=474   IsCurved=No   GUID=6e3f1afb-2c37-43cd-9dd2-0c4411670603
-   Frame=94   JointI=139   JointJ=474   IsCurved=No   GUID=8f19621a-6dfd-4e0b-b018-16fe7ac7d9b0
-   Frame=95   JointI=62   JointJ=475   IsCurved=No   GUID=e45dca86-030c-4383-9120-bab5ffca4ed4
-   Frame=96   JointI=63   JointJ=475   IsCurved=No   GUID=60292054-826f-451d-9f5f-8a943a80b37f
-   Frame=97   JointI=71   JointJ=475   IsCurved=No   GUID=51ead0cd-b798-4971-afc3-5bc0251a7609
-   Frame=98   JointI=70   JointJ=475   IsCurved=No   GUID=b806ae15-ebcc-4425-8baf-5a5a5c25aadf
-   Frame=99   JointI=71   JointJ=476   IsCurved=No   GUID=bc26d18a-b59e-41ca-8341-c3d156b20580
-   Frame=100   JointI=143   JointJ=476   IsCurved=No   GUID=151c686a-ba3e-4147-ad80-68de91ea04fe
-   Frame=101   JointI=136   JointJ=476   IsCurved=No   GUID=0913fac1-18d5-4ddf-b472-06ba332fc4db
-   Frame=102   JointI=69   JointJ=476   IsCurved=No   GUID=3f9cec03-da7f-491d-b919-38b1ef20e9d6
-   Frame=103   JointI=143   JointJ=477   IsCurved=No   GUID=e7734cb8-cb01-423e-8208-80bb47172979
-   Frame=104   JointI=139   JointJ=477   IsCurved=No   GUID=ff26d7d1-5df8-46fc-8db3-45d468753f9b
-   Frame=105   JointI=89   JointJ=477   IsCurved=No   GUID=5b9fa421-7c91-491d-97aa-76602e60c490
-   Frame=106   JointI=136   JointJ=477   IsCurved=No   GUID=320f2d4d-3839-443c-8ecd-bf19d66d9edf
-   Frame=107   JointI=139   JointJ=478   IsCurved=No   GUID=beabb105-2772-40fb-ab5e-93602652a73e
-   Frame=108   JointI=70   JointJ=478   IsCurved=No   GUID=7b9e02e2-a920-4c68-ae97-cd1535646f6b
-   Frame=109   JointI=68   JointJ=478   IsCurved=No   GUID=8c129fc6-9720-4bce-a03f-34d617a1732a
-   Frame=110   JointI=89   JointJ=478   IsCurved=No   GUID=a3118f01-2e71-4bd6-a1a2-4721d381bf70
-   Frame=111   JointI=70   JointJ=479   IsCurved=No   GUID=c23fb206-ae6a-4f21-8677-97a602fa1eb4
-   Frame=112   JointI=71   JointJ=479   IsCurved=No   GUID=2f924cac-6a74-45df-a5d5-ddf78aa7ff99
-   Frame=113   JointI=69   JointJ=479   IsCurved=No   GUID=a8e564c4-2b5a-4ea7-9e2a-4448d6fde8f4
-   Frame=114   JointI=68   JointJ=479   IsCurved=No   GUID=d1a03c2c-4193-43c0-8de9-09511469b713
-   Frame=115   JointI=69   JointJ=480   IsCurved=No   GUID=bf949713-ad1f-45fa-ace1-acc5a772e326
-   Frame=116   JointI=136   JointJ=480   IsCurved=No   GUID=084cd804-deb3-4929-92c8-84f5b89fd715
-   Frame=117   JointI=142   JointJ=480   IsCurved=No   GUID=aa1ceca6-ca24-422c-9fa1-acfefb2e993e
-   Frame=118   JointI=77   JointJ=480   IsCurved=No   GUID=710774d9-42ec-4dee-9ca4-264b0c35e04c
-   Frame=119   JointI=136   JointJ=481   IsCurved=No   GUID=4996ad04-9987-43fc-9700-01e65bb0b005
-   Frame=120   JointI=89   JointJ=481   IsCurved=No   GUID=f13efb14-6ad9-49a7-a8f9-5f837ff55dee
-   Frame=121   JointI=138   JointJ=481   IsCurved=No   GUID=98b77ed6-ea01-474b-b56f-112f2a2ed5fb
-   Frame=122   JointI=142   JointJ=481   IsCurved=No   GUID=ade47738-ab17-413b-865b-49e8eeef7f6d
-   Frame=123   JointI=89   JointJ=482   IsCurved=No   GUID=6b309f5b-a499-45d5-bd52-57944cb2bd1d
-   Frame=124   JointI=68   JointJ=482   IsCurved=No   GUID=6c3bd98a-a071-42af-b9e0-947b765f0448
-   Frame=125   JointI=76   JointJ=482   IsCurved=No   GUID=311765c8-b475-4d26-94bb-24b6fb809a14
-   Frame=126   JointI=138   JointJ=482   IsCurved=No   GUID=f8046ce3-e69f-4671-9f43-e78a207c3655
-   Frame=127   JointI=68   JointJ=483   IsCurved=No   GUID=fb8e75dc-3746-4aad-b1cf-a3b3cd985b07
-   Frame=128   JointI=69   JointJ=483   IsCurved=No   GUID=2eafcae6-aaef-4a7e-83cf-daf5a0c330f7
-   Frame=129   JointI=77   JointJ=483   IsCurved=No   GUID=64e10fe7-17bd-4d1d-bb15-7c266bc9a42d
-   Frame=130   JointI=76   JointJ=483   IsCurved=No   GUID=1bce6648-1781-4baf-8816-038538166f54
-   Frame=131   JointI=77   JointJ=484   IsCurved=No   GUID=d7951c7e-218f-403f-942b-f6a07a11a824
-   Frame=132   JointI=142   JointJ=484   IsCurved=No   GUID=49cde9b9-c7bf-4f24-99a9-21fe779505af
-   Frame=133   JointI=137   JointJ=484   IsCurved=No   GUID=46d32926-b277-44ad-a214-696209a5bb0e
-   Frame=134   JointI=75   JointJ=484   IsCurved=No   GUID=9d98604c-d8d9-4448-88ce-8438aafded16
-   Frame=135   JointI=142   JointJ=485   IsCurved=No   GUID=e536ce11-18c9-4f70-8d00-6921f9eda836
-   Frame=136   JointI=138   JointJ=485   IsCurved=No   GUID=e3964055-0095-4569-b9d0-bc829bd6ec93
-   Frame=137   JointI=93   JointJ=485   IsCurved=No   GUID=33d194b5-5a94-4f44-949a-772adc045673
-   Frame=138   JointI=137   JointJ=485   IsCurved=No   GUID=263342c8-ec95-4cc2-9426-e8e14f9b9f3e
-   Frame=139   JointI=138   JointJ=486   IsCurved=No   GUID=ffb29a0e-a042-4223-bd25-9dee58390659
-   Frame=140   JointI=76   JointJ=486   IsCurved=No   GUID=0bac0749-1d13-486f-8ed5-27195f257a1f
-   Frame=141   JointI=74   JointJ=486   IsCurved=No   GUID=0f0426ba-1616-448d-b9bf-41d42f7dd146
-   Frame=142   JointI=93   JointJ=486   IsCurved=No   GUID=0e91ddf5-2f8c-4cb2-9dd1-1e120e380a7a
-   Frame=143   JointI=76   JointJ=487   IsCurved=No   GUID=c4301390-6e34-4be4-a6dc-87060fc54f67
-   Frame=144   JointI=77   JointJ=487   IsCurved=No   GUID=ea5c320d-32c0-4079-9859-75f9e8e17b3f
-   Frame=145   JointI=75   JointJ=487   IsCurved=No   GUID=fcab2743-8f1e-4041-933f-aeb685c3fe64
-   Frame=146   JointI=74   JointJ=487   IsCurved=No   GUID=22fd1e0b-6064-464e-98d5-5b32cde6df4b
-   Frame=147   JointI=75   JointJ=488   IsCurved=No   GUID=418ed675-d503-429e-a74a-9c27051faa08
-   Frame=148   JointI=137   JointJ=488   IsCurved=No   GUID=7f8f5b37-7245-4207-9f9f-e2b3c808855c
-   Frame=149   JointI=568   JointJ=488   IsCurved=No   GUID=025f19aa-9558-46dd-9e9c-1573d3090b9b
-   Frame=150   JointI=494   JointJ=488   IsCurved=No   GUID=8b249ef3-d16d-4961-8edb-eda896e8d9ee
-   Frame=151   JointI=137   JointJ=489   IsCurved=No   GUID=6c22aace-d447-46fa-9484-b3795d0d2666
-   Frame=152   JointI=93   JointJ=489   IsCurved=No   GUID=8fb25da4-9587-4d4c-b7b4-58d5506ca039
-   Frame=153   JointI=565   JointJ=489   IsCurved=No   GUID=49c5a3e0-be54-4318-a703-a672fa9307ca
+   Frame=23   JointI=18   JointJ=20   IsCurved=No   GUID=bb7ae091-c5c5-41a2-b001-4685767dc7b4
+   Frame=24   JointI=8   JointJ=20   IsCurved=No   GUID=11553b8b-22af-4a3b-a9d1-cf72b5ecc982
+   Frame=25   JointI=141   JointJ=20   IsCurved=No   GUID=15647e48-cfb9-4f3a-aa9a-2adc5e528a97
+   Frame=26   JointI=145   JointJ=20   IsCurved=No   GUID=a3485d95-534d-417b-8d13-c595e93a13bb
+   Frame=27   JointI=8   JointJ=24   IsCurved=No   GUID=76e41916-1199-4e38-8597-3299d8ece826
+   Frame=28   JointI=2   JointJ=24   IsCurved=No   GUID=e855a781-0646-4ff7-9ff1-91c3c44d1281
+   Frame=29   JointI=58   JointJ=24   IsCurved=No   GUID=3bf68a74-2910-45e0-ab76-848d4eba187c
+   Frame=30   JointI=141   JointJ=24   IsCurved=No   GUID=1f07b686-b805-4bda-a88e-b74cdc3054b1
+   Frame=31   JointI=2   JointJ=26   IsCurved=No   GUID=4c1499bf-49b7-4dba-b8c3-029357832269
+   Frame=32   JointI=12   JointJ=26   IsCurved=No   GUID=5f386107-c53c-4120-8e16-de9f56025f9b
+   Frame=33   JointI=59   JointJ=26   IsCurved=No   GUID=b363b7e1-b429-4748-963f-e667d52e66b7
+   Frame=34   JointI=58   JointJ=26   IsCurved=No   GUID=a2ecb0c0-2ed9-4adf-bde0-6d9d3fdccb15
+   Frame=35   JointI=59   JointJ=28   IsCurved=No   GUID=d7c5c613-a382-441b-8ae5-06fdcce03c03
+   Frame=36   JointI=145   JointJ=28   IsCurved=No   GUID=2a2c172a-fa76-449c-92f2-8865bbb55135
+   Frame=37   JointI=125   JointJ=28   IsCurved=No   GUID=b143eeef-f062-4e52-8794-c0e55e96f31b
+   Frame=38   JointI=57   JointJ=28   IsCurved=No   GUID=43e8049b-181a-4c5b-b797-8a1252a0996c
+   Frame=39   JointI=145   JointJ=30   IsCurved=No   GUID=26957ea7-5c92-48b3-bacb-8e82035d0c76
+   Frame=40   JointI=141   JointJ=30   IsCurved=No   GUID=438e2b93-3dbb-47f6-ac89-671dba030b57
+   Frame=41   JointI=81   JointJ=30   IsCurved=No   GUID=afcfde5f-d008-4333-858b-3829d96f1d89
+   Frame=42   JointI=125   JointJ=30   IsCurved=No   GUID=9d7929ed-7033-4a62-816a-070d7440e458
+   Frame=43   JointI=141   JointJ=269   IsCurved=No   GUID=9cc644ed-d724-43ac-8c3b-b777123497dd
+   Frame=44   JointI=58   JointJ=269   IsCurved=No   GUID=60bee858-32a3-48e1-a951-5ff9e72f801d
+   Frame=45   JointI=56   JointJ=269   IsCurved=No   GUID=93a8cefb-a340-470b-b472-e4027c390558
+   Frame=46   JointI=81   JointJ=269   IsCurved=No   GUID=9ba5b6f7-05e5-460c-b071-52022824d8fc
+   Frame=47   JointI=58   JointJ=270   IsCurved=No   GUID=2b354ce0-a30d-477d-ac8b-f25a5f95092c
+   Frame=48   JointI=59   JointJ=270   IsCurved=No   GUID=5ab449da-a2a9-475c-8ddc-b5fe2e79dbfc
+   Frame=49   JointI=57   JointJ=270   IsCurved=No   GUID=91ad9018-fcc6-40ec-ab08-2a5e04e22f7b
+   Frame=50   JointI=56   JointJ=270   IsCurved=No   GUID=b36a0f5a-dbd2-4983-b42c-045e0dbd65ab
+   Frame=51   JointI=57   JointJ=271   IsCurved=No   GUID=3072babf-a72c-4bf6-aa8b-22dfc484bf01
+   Frame=52   JointI=125   JointJ=271   IsCurved=No   GUID=817ad4e7-c421-4031-8945-d38bf17e0246
+   Frame=53   JointI=144   JointJ=271   IsCurved=No   GUID=45e699c7-012e-47c3-b938-c42428efd2e0
+   Frame=54   JointI=65   JointJ=271   IsCurved=No   GUID=5528c1be-1baa-48ad-be60-b9a70c6a6773
+   Frame=55   JointI=125   JointJ=272   IsCurved=No   GUID=de8b531a-110d-4f4f-ac27-0f77dfd73a0b
+   Frame=56   JointI=81   JointJ=272   IsCurved=No   GUID=84f04fb4-297c-429b-a49e-61709aff27a8
+   Frame=57   JointI=140   JointJ=272   IsCurved=No   GUID=03e5e5c5-7ada-4c35-b9f3-08393b6451bd
+   Frame=58   JointI=144   JointJ=272   IsCurved=No   GUID=dcc47a15-f615-4285-882b-46db31da8af9
+   Frame=59   JointI=81   JointJ=273   IsCurved=No   GUID=a25edba0-5610-45c3-8752-a1e261d71ee3
+   Frame=60   JointI=56   JointJ=273   IsCurved=No   GUID=16771d32-4efa-4a35-a9e4-f58c1c22df1b
+   Frame=61   JointI=64   JointJ=273   IsCurved=No   GUID=df3b0da1-391b-476f-98fc-180ac3504533
+   Frame=62   JointI=140   JointJ=273   IsCurved=No   GUID=5cdd4ac2-a7b3-43dd-a5a2-842d1de42669
+   Frame=63   JointI=56   JointJ=274   IsCurved=No   GUID=917478a2-4887-47a5-b2d0-b9c4eafcff6c
+   Frame=64   JointI=57   JointJ=274   IsCurved=No   GUID=6f1607a3-959a-4f4e-8bc2-9b5367f32595
+   Frame=65   JointI=65   JointJ=274   IsCurved=No   GUID=9d02dbae-cc1d-48c6-8274-ea79b42a13cb
+   Frame=66   JointI=64   JointJ=274   IsCurved=No   GUID=42f66f6a-f08f-48bf-9a89-6ded0e4ddf3b
+   Frame=67   JointI=65   JointJ=275   IsCurved=No   GUID=dc1b4024-dd6b-427f-abb4-1d001209b3f8
+   Frame=68   JointI=144   JointJ=275   IsCurved=No   GUID=2755e0ba-0e1c-4b5e-8f69-a1143bab1496
+   Frame=69   JointI=135   JointJ=275   IsCurved=No   GUID=1c64ade3-f759-41ff-87ad-27cfc11040d5
+   Frame=70   JointI=63   JointJ=275   IsCurved=No   GUID=2a65e442-458c-4613-8e4a-472c1df90d29
+   Frame=71   JointI=144   JointJ=469   IsCurved=No   GUID=83554135-4a3d-46e9-abea-af089ef8da3a
+   Frame=72   JointI=140   JointJ=469   IsCurved=No   GUID=e32bc92c-7c0f-4433-a114-84f18e6c609b
+   Frame=73   JointI=85   JointJ=469   IsCurved=No   GUID=fbc9079f-dd3f-40d8-9de6-f5862a0ce626
+   Frame=74   JointI=135   JointJ=469   IsCurved=No   GUID=5adf32a5-5c8f-4b43-a4a9-d58065738f4d
+   Frame=75   JointI=140   JointJ=470   IsCurved=No   GUID=a6ade515-5cfb-4af4-b370-1b5fce2fbe56
+   Frame=76   JointI=64   JointJ=470   IsCurved=No   GUID=5d0da3f4-fc12-4f3a-b897-3c00320bc1a8
+   Frame=77   JointI=62   JointJ=470   IsCurved=No   GUID=b25888db-d4bd-4ad0-a513-f4f932f8c09c
+   Frame=78   JointI=85   JointJ=470   IsCurved=No   GUID=ed0acc80-70ba-47e6-9386-5b084a4e0502
+   Frame=79   JointI=64   JointJ=471   IsCurved=No   GUID=a977fc04-0946-4e4f-97ac-e7bcb3e9d519
+   Frame=80   JointI=65   JointJ=471   IsCurved=No   GUID=4cffe2fa-6cce-424a-8fd6-62dbcd5bc44e
+   Frame=81   JointI=63   JointJ=471   IsCurved=No   GUID=221f522b-3b73-43d8-a613-f579797e5537
+   Frame=82   JointI=62   JointJ=471   IsCurved=No   GUID=db109d4d-de1c-429d-a97a-4a52a5bd3877
+   Frame=83   JointI=63   JointJ=472   IsCurved=No   GUID=7af802f3-8b25-41f3-bc1f-c67ba62bc782
+   Frame=84   JointI=135   JointJ=472   IsCurved=No   GUID=83f21366-cec3-4a85-93db-3abc857df0d8
+   Frame=85   JointI=143   JointJ=472   IsCurved=No   GUID=86dcb7f5-6030-45e6-b7cf-336ca226677d
+   Frame=86   JointI=71   JointJ=472   IsCurved=No   GUID=80261653-ed09-4055-b1e2-aeed4fd72b62
+   Frame=87   JointI=135   JointJ=473   IsCurved=No   GUID=baf504fd-6b04-45c4-86fe-8e8ec505db27
+   Frame=88   JointI=85   JointJ=473   IsCurved=No   GUID=f2256d17-1714-4299-bf5f-109332bbe835
+   Frame=89   JointI=139   JointJ=473   IsCurved=No   GUID=52d73766-1965-4ce5-8849-556fd24537d4
+   Frame=90   JointI=143   JointJ=473   IsCurved=No   GUID=8bd97070-c91e-4e2a-8889-a85aeba30e55
+   Frame=91   JointI=85   JointJ=474   IsCurved=No   GUID=40b35bb0-ade9-402a-ab33-ea5908c78387
+   Frame=92   JointI=62   JointJ=474   IsCurved=No   GUID=2a5b53f9-ee45-4cf9-b09f-471778cabea6
+   Frame=93   JointI=70   JointJ=474   IsCurved=No   GUID=f879398d-5acf-4ce4-8f8a-5e3cf966a3d9
+   Frame=94   JointI=139   JointJ=474   IsCurved=No   GUID=759d7f3f-cded-4630-90c3-8a1177743807
+   Frame=95   JointI=62   JointJ=475   IsCurved=No   GUID=38a3fab3-d648-45d4-aa32-d6a8df35b566
+   Frame=96   JointI=63   JointJ=475   IsCurved=No   GUID=e56d4809-0c33-4f1b-a6a8-cc4ef1ceafbb
+   Frame=97   JointI=71   JointJ=475   IsCurved=No   GUID=a53d4613-05f5-4f0c-9657-b1824b38bdb7
+   Frame=98   JointI=70   JointJ=475   IsCurved=No   GUID=27ed8834-28f4-4ab1-add6-3a41d85c61e5
+   Frame=99   JointI=71   JointJ=476   IsCurved=No   GUID=7bc3d2d0-5ec4-4084-b772-c49822d22379
+   Frame=100   JointI=143   JointJ=476   IsCurved=No   GUID=ca9b813e-0107-44ac-808c-d55aa03bf283
+   Frame=101   JointI=136   JointJ=476   IsCurved=No   GUID=9c5ec57a-ec4f-4684-bfcc-5e057bde177b
+   Frame=102   JointI=69   JointJ=476   IsCurved=No   GUID=7164590b-847f-4f31-b7f1-40468285cf49
+   Frame=103   JointI=143   JointJ=477   IsCurved=No   GUID=1ef54aa0-0038-4187-b4d4-007c98dbe0da
+   Frame=104   JointI=139   JointJ=477   IsCurved=No   GUID=cae00c04-a2ec-4ac8-ae60-c8da8e87b169
+   Frame=105   JointI=89   JointJ=477   IsCurved=No   GUID=e353d84b-ab5a-4cbb-9df9-e83ef481492b
+   Frame=106   JointI=136   JointJ=477   IsCurved=No   GUID=67d1dee6-5031-414a-8e35-e4978dd18366
+   Frame=107   JointI=139   JointJ=478   IsCurved=No   GUID=206d49b1-fd3a-4e7c-9b7f-fcda73a0c883
+   Frame=108   JointI=70   JointJ=478   IsCurved=No   GUID=73edd911-204e-46d0-90dc-b5b8c2135ab0
+   Frame=109   JointI=68   JointJ=478   IsCurved=No   GUID=9d8327bd-8415-48c8-9019-4db4815f2cb1
+   Frame=110   JointI=89   JointJ=478   IsCurved=No   GUID=81e98c44-86ba-4798-bf92-bcb3abf94ce6
+   Frame=111   JointI=70   JointJ=479   IsCurved=No   GUID=f1379918-8beb-4cb8-93aa-2ecea2561960
+   Frame=112   JointI=71   JointJ=479   IsCurved=No   GUID=e1402c75-a0fb-4ce7-b0c1-32139584bc75
+   Frame=113   JointI=69   JointJ=479   IsCurved=No   GUID=875366d5-4ca7-4e0d-96ce-3dbae69f0c5c
+   Frame=114   JointI=68   JointJ=479   IsCurved=No   GUID=57a1a2a8-b192-4350-9082-3865be198d8f
+   Frame=115   JointI=69   JointJ=480   IsCurved=No   GUID=dd92d52e-f6f2-40b0-a0de-980dbbde2700
+   Frame=116   JointI=136   JointJ=480   IsCurved=No   GUID=d525bdba-65d1-4f08-980e-4431f778487c
+   Frame=117   JointI=142   JointJ=480   IsCurved=No   GUID=28f25ac6-e297-42f4-8a0e-eefd17bc8dd2
+   Frame=118   JointI=77   JointJ=480   IsCurved=No   GUID=ea708088-f4f6-4c4e-9017-1e4ff6dae866
+   Frame=119   JointI=136   JointJ=481   IsCurved=No   GUID=60700ec0-ecd7-4dd0-8a83-54fe396350ea
+   Frame=120   JointI=89   JointJ=481   IsCurved=No   GUID=ebb70797-3813-4651-aff6-ac8f80717640
+   Frame=121   JointI=138   JointJ=481   IsCurved=No   GUID=c561fbb4-adf8-418d-9648-a9ff0b979d95
+   Frame=122   JointI=142   JointJ=481   IsCurved=No   GUID=b6723e4b-fd61-4c67-b08a-182a9209052c
+   Frame=123   JointI=89   JointJ=482   IsCurved=No   GUID=b0b7d093-c5c8-40df-9eab-a235dc0f8dcd
+   Frame=124   JointI=68   JointJ=482   IsCurved=No   GUID=941744d6-654d-4f0a-96b2-e4b2d5e2e6ae
+   Frame=125   JointI=76   JointJ=482   IsCurved=No   GUID=f63633a2-9653-4e23-9708-b8182edb1b42
+   Frame=126   JointI=138   JointJ=482   IsCurved=No   GUID=23ed5254-e205-407c-9a52-f92a151198b8
+   Frame=127   JointI=68   JointJ=483   IsCurved=No   GUID=fabc6741-ee6c-4366-8af3-de454759cf3f
+   Frame=128   JointI=69   JointJ=483   IsCurved=No   GUID=51a59b24-4f92-492a-8af7-f0eccef0f6f5
+   Frame=129   JointI=77   JointJ=483   IsCurved=No   GUID=d2641899-aa1b-49b2-bd91-c65d4ac5bb11
+   Frame=130   JointI=76   JointJ=483   IsCurved=No   GUID=6dc9d939-82b4-446b-8a11-4d22282f50f4
+   Frame=131   JointI=77   JointJ=484   IsCurved=No   GUID=62c152d5-ecbe-4922-822e-3fc824942548
+   Frame=132   JointI=142   JointJ=484   IsCurved=No   GUID=bf222d27-fb26-4ada-8ff7-add3dde04b7a
+   Frame=133   JointI=137   JointJ=484   IsCurved=No   GUID=5abe5d23-3f3b-4692-8261-c8c2da4d55ed
+   Frame=134   JointI=75   JointJ=484   IsCurved=No   GUID=26be6a19-aac4-4556-8e9b-0a72661afd79
+   Frame=135   JointI=142   JointJ=485   IsCurved=No   GUID=f74b121f-a8f8-4f55-bd66-d84952d13644
+   Frame=136   JointI=138   JointJ=485   IsCurved=No   GUID=4fe02490-75c6-4ff1-b4f5-f437af6c4907
+   Frame=137   JointI=93   JointJ=485   IsCurved=No   GUID=f4cb5a18-50e0-4c57-9f67-fedf4a0f756c
+   Frame=138   JointI=137   JointJ=485   IsCurved=No   GUID=d17c1ca0-fb9f-4c03-917a-baf645c0fa2b
+   Frame=139   JointI=138   JointJ=486   IsCurved=No   GUID=2317c29a-4e8b-4cac-8a28-409afd3ebd84
+   Frame=140   JointI=76   JointJ=486   IsCurved=No   GUID=32d25ec2-cf33-4d23-8483-59db4a954fa8
+   Frame=141   JointI=74   JointJ=486   IsCurved=No   GUID=c66eab56-3002-45d4-8535-943b26a66c23
+   Frame=142   JointI=93   JointJ=486   IsCurved=No   GUID=c8450001-392a-4b6d-9ad8-0ef50b343019
+   Frame=143   JointI=76   JointJ=487   IsCurved=No   GUID=9ff3d33d-dbf6-4596-800d-54def98073f9
+   Frame=144   JointI=77   JointJ=487   IsCurved=No   GUID=ba801939-5b50-46cd-b259-685dfe08f41c
+   Frame=145   JointI=75   JointJ=487   IsCurved=No   GUID=bf7b27ab-b96a-450f-8396-4b9d5d9a36e1
+   Frame=146   JointI=74   JointJ=487   IsCurved=No   GUID=43840eb1-74cb-4cf4-bc92-e53c7f8a9073
+   Frame=147   JointI=75   JointJ=488   IsCurved=No   GUID=79f9d50d-9564-4041-938a-a19cf3eab2b2
+   Frame=148   JointI=137   JointJ=488   IsCurved=No   GUID=e86b88e2-3b0b-415e-82b1-d8eef79f0c90
+   Frame=149   JointI=568   JointJ=488   IsCurved=No   GUID=23ef3d0d-a4c3-49bb-ba10-5c820c1a91f1
+   Frame=150   JointI=494   JointJ=488   IsCurved=No   GUID=c05abb90-b8f6-409b-bc86-41042be5387f
+   Frame=151   JointI=137   JointJ=489   IsCurved=No   GUID=4c7f6dd7-1ec9-4ef5-9064-bff91488e9be
+   Frame=152   JointI=93   JointJ=489   IsCurved=No   GUID=82b31b1b-aed1-4bae-afd5-22a8ae6ffff3
+   Frame=153   JointI=565   JointJ=489   IsCurved=No   GUID=7952d32c-c018-4770-907d-a3ee999dc550
    Frame=154   JointI=1   JointJ=9   IsCurved=No   GUID=c32ac8ac-4425-4c0e-b51d-300b9cade4e6
    Frame=155   JointI=9   JointJ=2   IsCurved=No   GUID=ddaaf84b-0efc-4e9e-a2ba-a29d9455035d
    Frame=156   JointI=2   JointJ=58   IsCurved=No   GUID=2f934536-2763-4160-af61-9c46d2e8fec1
-   Frame=157   JointI=568   JointJ=489   IsCurved=No   GUID=b3d0e2bc-42d3-4e89-bac6-6912aa819963
-   Frame=158   JointI=93   JointJ=490   IsCurved=No   GUID=08c66073-dc8d-4be0-92ae-b71474b912f5
-   Frame=159   JointI=74   JointJ=490   IsCurved=No   GUID=37f46372-cb1f-47b3-bdc0-fde538feb54b
-   Frame=160   JointI=493   JointJ=490   IsCurved=No   GUID=e7120fbb-4840-48d0-93ab-3de1493343bd
+   Frame=157   JointI=568   JointJ=489   IsCurved=No   GUID=7900ed67-9187-461a-be66-63779f37a79e
+   Frame=158   JointI=93   JointJ=490   IsCurved=No   GUID=e9d8a447-8997-47e6-bb74-dcee3d6dce33
+   Frame=159   JointI=74   JointJ=490   IsCurved=No   GUID=a99202d5-4d83-47f9-800f-9d1e1d6e1217
+   Frame=160   JointI=493   JointJ=490   IsCurved=No   GUID=574be653-f4b9-4d7c-a132-bcf2ccbbcad1
    Frame=161   JointI=58   JointJ=56   IsCurved=No   GUID=fa2752af-06d9-4e5b-a8ac-d070bea62796
    Frame=162   JointI=56   JointJ=64   IsCurved=No   GUID=f0356024-965d-4d0d-8c78-324d9905f796
    Frame=163   JointI=64   JointJ=62   IsCurved=No   GUID=0e82a859-5360-485c-9d4f-da733d221b1b
@@ -299,23 +359,23 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=165   JointI=70   JointJ=68   IsCurved=No   GUID=2e500875-7d57-41a0-a03e-492a6cab3a2b
    Frame=166   JointI=68   JointJ=76   IsCurved=No   GUID=8b7ca515-8f36-4a50-a958-c42bef1a95c3
    Frame=167   JointI=76   JointJ=74   IsCurved=No   GUID=5df93280-7793-4ddd-94ef-5db203de2d32
-   Frame=168   JointI=565   JointJ=490   IsCurved=No   GUID=7a58c548-cd3b-4fed-a48c-c50813c37ea0
-   Frame=169   JointI=74   JointJ=491   IsCurved=No   GUID=fdd0c5af-97e2-4901-b60b-a4be83ac416f
-   Frame=170   JointI=75   JointJ=491   IsCurved=No   GUID=ecfaa220-e0f7-4ddb-858c-f4f4635e4196
-   Frame=171   JointI=494   JointJ=491   IsCurved=No   GUID=580c363c-79d4-4f37-99af-ab0fa8dbaf04
-   Frame=172   JointI=493   JointJ=491   IsCurved=No   GUID=24de387c-ed23-406a-8397-5b0c35de559b
-   Frame=173   JointI=494   JointJ=492   IsCurved=No   GUID=f14d6158-abbf-4c07-9045-9a41d81d9290
-   Frame=174   JointI=568   JointJ=492   IsCurved=No   GUID=642c2fcc-618e-4a7f-b164-f86a87ddb50e
-   Frame=175   JointI=606   JointJ=492   IsCurved=No   GUID=2c6f7adc-371e-4740-9150-31aa46c26897
-   Frame=176   JointI=706   JointJ=492   IsCurved=No   GUID=5540569a-b188-441f-8046-d10b013627aa
-   Frame=177   JointI=568   JointJ=495   IsCurved=No   GUID=d00b9727-5625-4925-bd92-755dd3bdff6a
-   Frame=178   JointI=565   JointJ=495   IsCurved=No   GUID=c3c93f16-86a7-4c86-9afa-cc88a2996104
-   Frame=179   JointI=605   JointJ=495   IsCurved=No   GUID=63faaef2-5afa-4137-a7a4-cce63d67710a
-   Frame=180   JointI=606   JointJ=495   IsCurved=No   GUID=ec64ae04-a99c-4f74-9bd9-ae77460dd6bd
-   Frame=181   JointI=565   JointJ=496   IsCurved=No   GUID=e1f2d6d5-945d-4fb5-aed5-184522dd800c
-   Frame=182   JointI=493   JointJ=496   IsCurved=No   GUID=ab1d5823-899a-47f7-b679-466b5d012907
-   Frame=183   JointI=673   JointJ=496   IsCurved=No   GUID=8ac32099-c4ec-42bf-b411-eb097a920b7a
-   Frame=184   JointI=605   JointJ=496   IsCurved=No   GUID=21e6bdbb-c06d-455e-94c5-8ab762d59970
+   Frame=168   JointI=565   JointJ=490   IsCurved=No   GUID=ddc2cbbb-7eea-4f9f-b519-016082927587
+   Frame=169   JointI=74   JointJ=491   IsCurved=No   GUID=184f5997-239e-486d-8432-f41f5854a0b2
+   Frame=170   JointI=75   JointJ=491   IsCurved=No   GUID=77dbe38d-e8d5-4e27-a995-4c0c54c365a2
+   Frame=171   JointI=494   JointJ=491   IsCurved=No   GUID=74bf80c4-863d-40cb-aa2e-a6ce9e2ca523
+   Frame=172   JointI=493   JointJ=491   IsCurved=No   GUID=eb27c92d-edb9-4f4a-b568-fb423e7c5c1b
+   Frame=173   JointI=494   JointJ=492   IsCurved=No   GUID=a8041cc4-05f2-40a5-bbb7-9f6e57258f52
+   Frame=174   JointI=568   JointJ=492   IsCurved=No   GUID=399a4e59-c15b-417e-a01e-98abe2ff32e0
+   Frame=175   JointI=606   JointJ=492   IsCurved=No   GUID=85f4cb37-27fe-4a0c-bbdf-8e116fe4559e
+   Frame=176   JointI=706   JointJ=492   IsCurved=No   GUID=6b2bb369-40de-40fe-98ce-09209192772b
+   Frame=177   JointI=568   JointJ=495   IsCurved=No   GUID=4f6b71b1-38cb-41a5-b420-fb88cf38b37e
+   Frame=178   JointI=565   JointJ=495   IsCurved=No   GUID=6c346e45-50ef-4b93-8b40-267a9b79c2c0
+   Frame=179   JointI=605   JointJ=495   IsCurved=No   GUID=2eb34298-7df7-4518-a72e-b241c9f997cb
+   Frame=180   JointI=606   JointJ=495   IsCurved=No   GUID=12f16904-b83d-4318-94c5-425c8f90b1b7
+   Frame=181   JointI=565   JointJ=496   IsCurved=No   GUID=0ed7acbd-e124-416b-b976-6a406c758cc6
+   Frame=182   JointI=493   JointJ=496   IsCurved=No   GUID=e638766d-bc70-4eb1-8b49-7415c2e5ab7d
+   Frame=183   JointI=673   JointJ=496   IsCurved=No   GUID=8348c3fa-3238-4d8e-b589-3ad0340dd2e6
+   Frame=184   JointI=605   JointJ=496   IsCurved=No   GUID=be11ccc4-fa91-4292-9a84-f25664745f59
    Frame=186   JointI=493   JointJ=500   IsCurved=No   GUID=fb6a14c2-eb09-4e35-a076-b344559ac6fc
    Frame=187   JointI=7   JointJ=8   IsCurved=No   GUID=eebc0b4e-7af6-4f7b-9d1b-6ebb1e12b10e
    Frame=188   JointI=8   JointJ=141   IsCurved=No   GUID=dbe4a5b1-e1ed-460d-97c1-4235a18f782a
@@ -353,11 +413,11 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=244   JointI=707   JointJ=508   IsCurved=No   GUID=a0d01df1-9b80-42eb-9d64-a2a9db5a057a
    Frame=245   JointI=708   JointJ=508   IsCurved=No   GUID=5cbc709a-e4ea-4db3-9fa9-c85869cac17e
    Frame=246   JointI=676   JointJ=508   IsCurved=No   GUID=f63f79a6-445d-4113-b432-5e22e767f244
-   Frame=251   JointI=706   JointJ=497   IsCurved=No   GUID=a1b63c4b-2516-40b2-babf-b78edac6519a
-   Frame=252   JointI=606   JointJ=497   IsCurved=No   GUID=683f2eca-f2aa-4a1d-a36b-7d2304f653ae
-   Frame=253   JointI=610   JointJ=497   IsCurved=No   GUID=8d96c5cb-3424-4d9c-941e-58e0456d9c53
-   Frame=256   JointI=707   JointJ=497   IsCurved=No   GUID=f6a95a18-f8df-4102-b313-4277878740f7
-   Frame=257   JointI=606   JointJ=498   IsCurved=No   GUID=4e5a6faf-7a82-4562-b25e-67c6b740460a
+   Frame=251   JointI=706   JointJ=497   IsCurved=No   GUID=582fb4e4-26d3-4af4-9545-195bf9ee70d3
+   Frame=252   JointI=606   JointJ=497   IsCurved=No   GUID=5a8fc028-acdc-4267-84bb-4d40290b6a4e
+   Frame=253   JointI=610   JointJ=497   IsCurved=No   GUID=51cfb3e0-9397-48ea-86c0-5f0cd77ca504
+   Frame=256   JointI=707   JointJ=497   IsCurved=No   GUID=6c438d01-00e5-4470-b403-f4de1423d05a
+   Frame=257   JointI=606   JointJ=498   IsCurved=No   GUID=2e7b8028-6eaa-4b10-9bba-66c864a88fd6
    Frame=267   JointI=676   JointJ=512   IsCurved=No   GUID=4ffc9acc-1e35-46b6-bd94-26446155e833
    Frame=268   JointI=708   JointJ=512   IsCurved=No   GUID=4dc52ad7-e96d-4d43-b3f6-528fa7b4a36c
    Frame=269   JointI=709   JointJ=512   IsCurved=No   GUID=2e76aaa0-a905-44a2-afb1-4d7a4874d885
@@ -427,13 +487,13 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=393   JointI=165   JointJ=62   IsCurved=No   GUID=218480ec-d98c-49fc-a401-307e5ece0835
    Frame=394   JointI=705   JointJ=537   IsCurved=No   GUID=de2ea8bc-a1a2-4fac-9841-9508c5e90bb4
    Frame=395   JointI=682   JointJ=537   IsCurved=No   GUID=5bb5b428-d272-499d-8cd6-a63196fa1ae6
-   Frame=396   JointI=605   JointJ=498   IsCurved=No   GUID=9fb5290b-b2a9-4d0d-813e-ce92b26279ee
-   Frame=397   JointI=609   JointJ=498   IsCurved=No   GUID=bf96c747-a3ae-42fb-8584-23ace2083cc4
-   Frame=398   JointI=610   JointJ=498   IsCurved=No   GUID=8e23e96d-9606-4525-831d-61599d8a1833
-   Frame=399   JointI=605   JointJ=499   IsCurved=No   GUID=e25515e8-dcda-47e0-a9f5-f726a202528c
-   Frame=400   JointI=673   JointJ=499   IsCurved=No   GUID=421926da-69b2-4953-8440-ca3e3723c412
-   Frame=401   JointI=674   JointJ=499   IsCurved=No   GUID=d8a62b95-83d5-469a-ad82-cca9966955bf
-   Frame=402   JointI=609   JointJ=499   IsCurved=No   GUID=69b721cb-3b65-4ce2-b68a-ab8a70ad39e9
+   Frame=396   JointI=605   JointJ=498   IsCurved=No   GUID=fe38af67-3e8b-4d8e-9b06-4bc89af17c1b
+   Frame=397   JointI=609   JointJ=498   IsCurved=No   GUID=e320f1bd-24bf-47dc-92a1-79e1cc591d41
+   Frame=398   JointI=610   JointJ=498   IsCurved=No   GUID=d5de7083-f34f-4bb1-8165-2bb2a6f9c7f9
+   Frame=399   JointI=605   JointJ=499   IsCurved=No   GUID=a9ae806c-1c2a-4d73-bef4-3aaf6f55e70f
+   Frame=400   JointI=673   JointJ=499   IsCurved=No   GUID=6a65d98c-4a1f-4fe0-ba2e-0841d5e6852a
+   Frame=401   JointI=674   JointJ=499   IsCurved=No   GUID=ca68e2e3-989b-4448-babd-7c749b7a0452
+   Frame=402   JointI=609   JointJ=499   IsCurved=No   GUID=70550dd3-55d1-48fe-9d89-687226e6afc5
    Frame=406   JointI=64   JointJ=116   IsCurved=No   GUID=afbd9b4d-cc55-4137-a463-5c3f9ade6396
    Frame=407   JointI=116   JointJ=118   IsCurved=No   GUID=5dfd8187-c97e-437e-9875-885a67586adc
    Frame=408   JointI=118   JointJ=120   IsCurved=No   GUID=8e114993-2f43-433d-887e-16c9d276cedc
@@ -446,17 +506,17 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=415   JointI=228   JointJ=67   IsCurved=No   GUID=88c9a881-3f2e-430b-a87c-4e722e27a5a7
    Frame=416   JointI=67   JointJ=225   IsCurved=No   GUID=1e4e9b73-687c-46ca-9882-b955846b0a9d
    Frame=417   JointI=225   JointJ=68   IsCurved=No   GUID=228c45a0-b532-4495-a90b-a12da878fc25
-   Frame=419   JointI=707   JointJ=501   IsCurved=No   GUID=22304ffe-d043-4032-9749-6dbb8148a5a0
-   Frame=420   JointI=610   JointJ=501   IsCurved=No   GUID=e1a86f04-1bbe-45c8-815b-c2c4f2876e1b
-   Frame=421   JointI=614   JointJ=501   IsCurved=No   GUID=35fc8e4c-cd18-42e4-bf28-8ecbc1826e5a
-   Frame=422   JointI=708   JointJ=501   IsCurved=No   GUID=df39e03a-401d-4e71-b098-74f6d815fb80
-   Frame=423   JointI=610   JointJ=502   IsCurved=No   GUID=b6beac4d-e94f-486a-83d4-1aac7e1e9a07
-   Frame=424   JointI=609   JointJ=502   IsCurved=No   GUID=edd2d795-a01d-4034-8f4a-770b20192df7
-   Frame=425   JointI=613   JointJ=502   IsCurved=No   GUID=94e1c772-e472-470e-aeee-2aa810d57bf6
-   Frame=426   JointI=614   JointJ=502   IsCurved=No   GUID=aa586022-9b4d-45f8-8072-01fd129aba87
-   Frame=427   JointI=609   JointJ=503   IsCurved=No   GUID=67b8f9a7-8f8b-4cd0-bdb9-e5cf31319d03
-   Frame=428   JointI=674   JointJ=503   IsCurved=No   GUID=114b0c24-5957-4383-9b27-dc34af6e6d5b
-   Frame=429   JointI=676   JointJ=503   IsCurved=No   GUID=aac1258a-5781-48b7-a251-8d6fd290f020
+   Frame=419   JointI=707   JointJ=501   IsCurved=No   GUID=d917b276-694e-4e46-a5eb-284b76bac13a
+   Frame=420   JointI=610   JointJ=501   IsCurved=No   GUID=373c5078-fdc8-46c9-bb5a-722386661c65
+   Frame=421   JointI=614   JointJ=501   IsCurved=No   GUID=e2260722-1961-4630-8f51-c26e3d27e840
+   Frame=422   JointI=708   JointJ=501   IsCurved=No   GUID=fd577ff4-9111-4313-b789-f35281e672c5
+   Frame=423   JointI=610   JointJ=502   IsCurved=No   GUID=be1f3b4d-d644-46a8-ba7e-be4761ab171c
+   Frame=424   JointI=609   JointJ=502   IsCurved=No   GUID=dbdd4467-0d7b-476d-b756-565eb2fcd17a
+   Frame=425   JointI=613   JointJ=502   IsCurved=No   GUID=e99d1010-888c-4e50-bcc9-3079f7ad5f98
+   Frame=426   JointI=614   JointJ=502   IsCurved=No   GUID=3a673e09-8a86-4ff0-8b75-5aa7cd0314d7
+   Frame=427   JointI=609   JointJ=503   IsCurved=No   GUID=24e65258-f281-4314-bb15-93e890d7132d
+   Frame=428   JointI=674   JointJ=503   IsCurved=No   GUID=294348b7-4d6a-41f4-888e-06804a786fd1
+   Frame=429   JointI=676   JointJ=503   IsCurved=No   GUID=26992bdb-4fd6-45c4-b35c-4b90958eb3fb
    Frame=430   JointI=70   JointJ=203   IsCurved=No   GUID=aba3812f-80c9-43e3-98f6-ed6f5064f5aa
    Frame=431   JointI=203   JointJ=205   IsCurved=No   GUID=1e54ff55-9129-49a0-902d-802a39984500
    Frame=432   JointI=205   JointJ=207   IsCurved=No   GUID=a5e2b57a-47aa-4de0-ab07-fd6f7ad54bad
@@ -469,24 +529,24 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=439   JointI=265   JointJ=73   IsCurved=No   GUID=b1991d6a-92e7-46ad-a4d8-a9634f8a2c1c
    Frame=440   JointI=73   JointJ=263   IsCurved=No   GUID=189e4d7c-002c-41ed-b9a2-3df7d7893b08
    Frame=441   JointI=263   JointJ=74   IsCurved=No   GUID=9ae295fd-67e6-4dc3-b405-2b3c60939027
-   Frame=442   JointI=613   JointJ=503   IsCurved=No   GUID=69205ec6-0fab-4359-b301-a33e9af1b4a2
-   Frame=447   JointI=708   JointJ=505   IsCurved=No   GUID=1ac48535-24f5-4a9a-ae9a-b43325e711b1
-   Frame=448   JointI=614   JointJ=505   IsCurved=No   GUID=7774f7d6-f6da-4942-8a0a-07ab9b209699
-   Frame=449   JointI=618   JointJ=505   IsCurved=No   GUID=cb879dda-151b-4575-b6cd-c9cae42306f0
-   Frame=450   JointI=709   JointJ=505   IsCurved=No   GUID=78dac382-2c05-4ec2-900f-ec9231270209
-   Frame=451   JointI=614   JointJ=506   IsCurved=No   GUID=c593fff4-fdef-43bc-9139-2ebe76ef1e9f
-   Frame=452   JointI=613   JointJ=506   IsCurved=No   GUID=63d4c011-a20b-444f-82d6-87090c837af4
-   Frame=453   JointI=617   JointJ=506   IsCurved=No   GUID=91af372d-5800-42ee-97b5-59ec91955770
+   Frame=442   JointI=613   JointJ=503   IsCurved=No   GUID=48a9e1e9-f482-485a-8a1a-f19c0e2b6ef9
+   Frame=447   JointI=708   JointJ=505   IsCurved=No   GUID=4d243092-7ace-43fb-be3a-10be266840c4
+   Frame=448   JointI=614   JointJ=505   IsCurved=No   GUID=acde8bf7-75a3-4927-a17d-0cbd239fc2dd
+   Frame=449   JointI=618   JointJ=505   IsCurved=No   GUID=decea7c9-cfaf-4b9e-92d5-a1506d32f127
+   Frame=450   JointI=709   JointJ=505   IsCurved=No   GUID=21daf417-3518-441e-8b84-21ca1f579947
+   Frame=451   JointI=614   JointJ=506   IsCurved=No   GUID=affeef53-e409-40c4-a88f-faf161d0a42a
+   Frame=452   JointI=613   JointJ=506   IsCurved=No   GUID=64d09aac-bd67-4fbd-a088-29b50731ec00
+   Frame=453   JointI=617   JointJ=506   IsCurved=No   GUID=723c35b0-de91-424a-b105-ab53247a26b4
    Frame=454   JointI=76   JointJ=247   IsCurved=No   GUID=76dc9e2d-3824-44ae-9ff8-24d16d1024a2
    Frame=455   JointI=247   JointJ=249   IsCurved=No   GUID=a225b9c3-1fb7-4399-9f58-233ea7b1ad99
    Frame=456   JointI=249   JointJ=251   IsCurved=No   GUID=613aee6a-55b3-45b7-85f0-045de2b46a71
    Frame=457   JointI=251   JointJ=253   IsCurved=No   GUID=a70bb099-6b7d-48f9-99dd-47a26db23055
    Frame=458   JointI=253   JointJ=255   IsCurved=No   GUID=b96d8bdc-72a1-41e2-9d10-68069af41c40
    Frame=459   JointI=255   JointJ=77   IsCurved=No   GUID=dbf1189c-cae8-465e-aba9-fdfa0a260feb
-   Frame=460   JointI=618   JointJ=506   IsCurved=No   GUID=5e679ef2-7aff-446a-9399-9032436bedaa
-   Frame=461   JointI=613   JointJ=507   IsCurved=No   GUID=fb45354e-5de6-46ac-a814-526e9721a1fc
-   Frame=462   JointI=676   JointJ=507   IsCurved=No   GUID=47633bde-9391-48c6-9673-590b9b1215d6
-   Frame=463   JointI=677   JointJ=507   IsCurved=No   GUID=f28792ef-5e34-4124-84a9-9d7695f44290
+   Frame=460   JointI=618   JointJ=506   IsCurved=No   GUID=40805530-9da6-4f7f-8199-810a16239151
+   Frame=461   JointI=613   JointJ=507   IsCurved=No   GUID=d0124c9f-b9b5-41a9-bc03-0ca64c34a66e
+   Frame=462   JointI=676   JointJ=507   IsCurved=No   GUID=57a837b4-2949-4c1e-973a-502bf79883ee
+   Frame=463   JointI=677   JointJ=507   IsCurved=No   GUID=a3612178-d434-4e05-86ca-41b404f294d3
    Frame=464   JointI=56   JointJ=79   IsCurved=No   GUID=a93659cc-a6c4-4421-94b7-7e189138b40f
    Frame=465   JointI=79   JointJ=78   IsCurved=No   GUID=af489236-aa1b-49b9-97b8-ecdc1480c327
    Frame=466   JointI=78   JointJ=83   IsCurved=No   GUID=f511d2d8-6125-4ea8-98ec-ec423c13119f
@@ -499,7 +559,7 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=473   JointI=34   JointJ=36   IsCurved=No   GUID=8b9cd0e8-01f4-4cb8-a7e4-15b64bd43a96
    Frame=474   JointI=36   JointJ=38   IsCurved=No   GUID=50409e2b-0191-4ed3-b317-441a6061a1bf
    Frame=475   JointI=38   JointJ=141   IsCurved=No   GUID=8c649a0a-f436-4cb9-91c0-506914446f4c
-   Frame=476   JointI=617   JointJ=507   IsCurved=No   GUID=93bbab47-4144-4f6f-bb67-c61eb975d8d3
+   Frame=476   JointI=617   JointJ=507   IsCurved=No   GUID=26b39261-a952-45db-be6d-fa0d08f7f31e
    Frame=480   JointI=62   JointJ=148   IsCurved=No   GUID=0a0ed67e-e9b5-4490-ab13-8d7f5586e697
    Frame=481   JointI=148   JointJ=82   IsCurved=No   GUID=916d6ca9-6783-4abc-82e5-4187d5e15257
    Frame=482   JointI=82   JointJ=150   IsCurved=No   GUID=f5f72b7f-691f-4fa0-a86b-d9a2f747b7c5
@@ -512,9 +572,9 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=489   JointI=111   JointJ=113   IsCurved=No   GUID=9e198ba2-bbf3-4c90-8a83-7402b3724760
    Frame=490   JointI=113   JointJ=115   IsCurved=No   GUID=a90cdbef-694c-4305-8fde-580552f90a74
    Frame=491   JointI=115   JointJ=140   IsCurved=No   GUID=64c53231-eef4-4adf-8dd8-9f582f5dd6e8
-   Frame=493   JointI=709   JointJ=509   IsCurved=No   GUID=b6077461-14e8-489f-b248-eed1c5bc14ae
-   Frame=494   JointI=618   JointJ=509   IsCurved=No   GUID=7a2f9dca-73ca-4de2-af95-e626a9c7aff5
-   Frame=495   JointI=622   JointJ=509   IsCurved=No   GUID=8578babd-f94a-4f03-9e4b-14d72c87e5f9
+   Frame=493   JointI=709   JointJ=509   IsCurved=No   GUID=73e49022-bb5e-4918-be73-e604e8e363e3
+   Frame=494   JointI=618   JointJ=509   IsCurved=No   GUID=54e3227c-7d33-4a7e-908e-fec70b68d3b3
+   Frame=495   JointI=622   JointJ=509   IsCurved=No   GUID=44f569a0-414d-4f00-85c5-0247a09fffbc
    Frame=496   JointI=68   JointJ=218   IsCurved=No   GUID=558a6751-e463-4ca3-8ab7-f3ed23ba5ae1
    Frame=497   JointI=218   JointJ=86   IsCurved=No   GUID=9b1f8ada-8553-4031-b26f-b0569a5e2f2d
    Frame=498   JointI=86   JointJ=220   IsCurved=No   GUID=9a78b093-78d9-4171-99ab-d2f69fac3ccd
@@ -527,10 +587,10 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=505   JointI=198   JointJ=200   IsCurved=No   GUID=916cd8ca-8b3f-48c8-8072-c6625fd0cbb2
    Frame=506   JointI=200   JointJ=202   IsCurved=No   GUID=ddb36b8a-4339-48a1-b445-5b3feb2d74ba
    Frame=507   JointI=202   JointJ=139   IsCurved=No   GUID=c01ee3d9-3dc2-4867-8879-8d59cd8e3ad4
-   Frame=508   JointI=701   JointJ=509   IsCurved=No   GUID=78f6c188-787a-4a15-a713-58ddeaf08f1d
-   Frame=509   JointI=618   JointJ=510   IsCurved=No   GUID=66d59d4f-e26c-40fa-8cdf-f9bad7130d89
-   Frame=510   JointI=617   JointJ=510   IsCurved=No   GUID=bef07f2a-ef82-434a-b6b6-95d33fbba7b4
-   Frame=511   JointI=621   JointJ=510   IsCurved=No   GUID=46419d9f-7539-4aee-a8ea-2706be8b1af1
+   Frame=508   JointI=701   JointJ=509   IsCurved=No   GUID=5afdc971-aa01-4552-a993-8b4df472eddb
+   Frame=509   JointI=618   JointJ=510   IsCurved=No   GUID=fdb09bbe-d762-4051-88f6-116dd0167e6b
+   Frame=510   JointI=617   JointJ=510   IsCurved=No   GUID=ac92e5be-2a1d-4859-a966-a13bc2303ab2
+   Frame=511   JointI=621   JointJ=510   IsCurved=No   GUID=b48b12d4-1d3c-4dd4-b72f-623faeedad07
    Frame=512   JointI=74   JointJ=258   IsCurved=No   GUID=d1f63452-ec13-424c-9ce7-4f5bba1dd213
    Frame=513   JointI=258   JointJ=90   IsCurved=No   GUID=623d116d-fa4f-4ce6-b800-b2becd67776f
    Frame=514   JointI=90   JointJ=260   IsCurved=No   GUID=4256641d-4b52-4ae0-aa5a-371a8161c4be
@@ -543,10 +603,10 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=521   JointI=242   JointJ=244   IsCurved=No   GUID=654f8f63-478f-4c77-b801-6197f90a48d1
    Frame=522   JointI=244   JointJ=246   IsCurved=No   GUID=f155b33b-889b-46b5-a9fa-70884eed3126
    Frame=523   JointI=246   JointJ=138   IsCurved=No   GUID=1272db9e-a367-49d1-bb5f-dd7a43176bf8
-   Frame=524   JointI=622   JointJ=510   IsCurved=No   GUID=cebee32f-839e-4d50-af5f-8cbd138cc27a
-   Frame=525   JointI=617   JointJ=511   IsCurved=No   GUID=09de509f-b3d0-47f5-af3b-bca66fcd807a
-   Frame=526   JointI=677   JointJ=511   IsCurved=No   GUID=acfd737c-d752-4f5d-bbdf-7bf5447fdd7a
-   Frame=527   JointI=678   JointJ=511   IsCurved=No   GUID=360dba69-fc8c-4267-a0b9-6b9cc5233a7c
+   Frame=524   JointI=622   JointJ=510   IsCurved=No   GUID=223a446d-7ed2-4ccb-b3ff-c7e11b9f45fd
+   Frame=525   JointI=617   JointJ=511   IsCurved=No   GUID=970cbf41-53b8-4936-a296-b20d4d506eaf
+   Frame=526   JointI=677   JointJ=511   IsCurved=No   GUID=aa11f21d-f331-4bb6-ab0a-9cf81237e826
+   Frame=527   JointI=678   JointJ=511   IsCurved=No   GUID=3a37474a-e057-476c-8a00-5889dddc878c
    Frame=528   JointI=57   JointJ=53   IsCurved=No   GUID=12522e1a-91f8-4f50-96f1-ea3c1083936e
    Frame=529   JointI=53   JointJ=122   IsCurved=No   GUID=1cf4f466-d8a6-400c-b427-9b282ad0313e
    Frame=530   JointI=122   JointJ=80   IsCurved=No   GUID=2732d788-34ef-43a9-95a9-ab09ea07e220
@@ -559,7 +619,7 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=537   JointI=33   JointJ=35   IsCurved=No   GUID=04efd194-4163-416a-a6cd-b025774e437f
    Frame=538   JointI=35   JointJ=37   IsCurved=No   GUID=18fda4fd-0eb5-45cc-aa27-2a944a81b941
    Frame=539   JointI=37   JointJ=145   IsCurved=No   GUID=6e02fd70-f581-4a87-a95e-4cf348a3caa6
-   Frame=540   JointI=621   JointJ=511   IsCurved=No   GUID=008970a5-71c7-437d-aa01-9693ed68b07c
+   Frame=540   JointI=621   JointJ=511   IsCurved=No   GUID=9186308b-b029-4c9d-807f-b8cd769b7352
    Frame=544   JointI=63   JointJ=147   IsCurved=No   GUID=f2fbd149-a972-4272-ad4f-50ea2f0d2095
    Frame=545   JointI=147   JointJ=126   IsCurved=No   GUID=3a07ad91-e644-45ce-8928-fff377f58fc9
    Frame=546   JointI=126   JointJ=149   IsCurved=No   GUID=10c55a77-928d-41ee-8e87-1e3d122846c1
@@ -572,9 +632,9 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=553   JointI=110   JointJ=112   IsCurved=No   GUID=335b9b7f-55af-49bf-a1de-f9311de91372
    Frame=554   JointI=112   JointJ=114   IsCurved=No   GUID=a9dea23f-3751-415e-b736-f78734b41ca4
    Frame=555   JointI=114   JointJ=144   IsCurved=No   GUID=d82f0365-e1e9-4033-8e34-0a3c40614330
-   Frame=557   JointI=701   JointJ=518   IsCurved=No   GUID=f2e3c58d-c987-4eea-8b0e-d29c6a2b9ba7
-   Frame=558   JointI=622   JointJ=518   IsCurved=No   GUID=9d573f1b-722a-48cf-a273-88fce57f1df8
-   Frame=559   JointI=626   JointJ=518   IsCurved=No   GUID=fe2c9282-ce76-409a-afff-e6317ab8f1da
+   Frame=557   JointI=701   JointJ=518   IsCurved=No   GUID=0fbc8cd8-682f-4799-8b29-1e602b790fd8
+   Frame=558   JointI=622   JointJ=518   IsCurved=No   GUID=ac556382-0aee-48aa-acc6-142f8c264504
+   Frame=559   JointI=626   JointJ=518   IsCurved=No   GUID=8b303e5c-f1e2-4dac-98a7-730875d758e4
    Frame=560   JointI=69   JointJ=217   IsCurved=No   GUID=4a57703e-d4e8-427d-bee1-2da5c8eb77ba
    Frame=561   JointI=217   JointJ=129   IsCurved=No   GUID=0b95f9b4-5262-4762-9858-68b29e8d2013
    Frame=562   JointI=129   JointJ=219   IsCurved=No   GUID=fc49441a-f1f6-495b-944a-8d6b619a73cc
@@ -587,10 +647,10 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=569   JointI=197   JointJ=199   IsCurved=No   GUID=c8fe8100-6636-4a8a-9fa2-eb0bc4b46dc7
    Frame=570   JointI=199   JointJ=201   IsCurved=No   GUID=245777e0-d420-4fbd-8ab6-e2460c2e6e98
    Frame=571   JointI=201   JointJ=143   IsCurved=No   GUID=52a8c686-813f-450f-87d5-44a5849ad2ae
-   Frame=572   JointI=702   JointJ=518   IsCurved=No   GUID=11d9172e-a0f5-49ab-b6be-eca1017a4901
-   Frame=573   JointI=622   JointJ=519   IsCurved=No   GUID=f9f32149-64a9-456c-87b8-4a7773791396
-   Frame=574   JointI=621   JointJ=519   IsCurved=No   GUID=9f58fdc1-f551-4d10-b81e-542e81a5a2c5
-   Frame=575   JointI=625   JointJ=519   IsCurved=No   GUID=93023e1d-51c7-4ae6-a362-c8080f0a4826
+   Frame=572   JointI=702   JointJ=518   IsCurved=No   GUID=35aabb9e-9db5-4c7c-a4ad-7e3a04d79002
+   Frame=573   JointI=622   JointJ=519   IsCurved=No   GUID=4ca9653a-35d9-4f21-9421-8a55c3f931cd
+   Frame=574   JointI=621   JointJ=519   IsCurved=No   GUID=7e4466fc-3a9f-4bf5-a041-aebbd3cfe16d
+   Frame=575   JointI=625   JointJ=519   IsCurved=No   GUID=1bed10ba-d7ec-4796-9f3a-a95b30662b8b
    Frame=576   JointI=75   JointJ=257   IsCurved=No   GUID=8f9885e5-a245-4a86-8445-6c23b293623e
    Frame=577   JointI=257   JointJ=132   IsCurved=No   GUID=754faaca-c303-4187-bd7e-bbed5997f116
    Frame=578   JointI=132   JointJ=259   IsCurved=No   GUID=17bf8513-f162-49db-a80c-f39558c06fb7
@@ -1227,41 +1287,41 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=1209   JointI=456   JointJ=461   IsCurved=No   GUID=2e9902e5-1d9f-4d48-8b37-a8457ef6cdd6
    Frame=1210   JointI=461   JointJ=464   IsCurved=No   GUID=85ef5d18-86a7-49b2-9e63-3072398650ee
    Frame=1211   JointI=464   JointJ=268   IsCurved=No   GUID=ba166302-f911-46b0-b618-c29bd57aa9bf
-   Frame=1212   JointI=626   JointJ=519   IsCurved=No   GUID=af9dc179-9fa1-46ee-b4a5-1c2a4de6968a
-   Frame=1213   JointI=621   JointJ=520   IsCurved=No   GUID=8da6405e-073e-4bc1-89c4-5ac465b7bd7a
-   Frame=1214   JointI=678   JointJ=520   IsCurved=No   GUID=7ffd890b-0d79-4dd1-9a8f-1154760edd19
-   Frame=1215   JointI=679   JointJ=520   IsCurved=No   GUID=a2427913-9b14-45ac-a4e7-acda531f67a1
-   Frame=1216   JointI=625   JointJ=520   IsCurved=No   GUID=30a27b6f-0606-4ac0-951b-49c9a4c413a7
-   Frame=1221   JointI=702   JointJ=522   IsCurved=No   GUID=f40c298c-c432-4e21-a2a5-8f8dfd94249c
-   Frame=1222   JointI=626   JointJ=522   IsCurved=No   GUID=0b7c9669-b29e-4bf4-9a54-08522117093d
-   Frame=1223   JointI=630   JointJ=522   IsCurved=No   GUID=fbe16e7a-f2f6-4ad8-847d-4fcf3f5c0ebb
-   Frame=1224   JointI=703   JointJ=522   IsCurved=No   GUID=9c6a91a7-59d2-421d-81a2-05bd517abab7
-   Frame=1225   JointI=626   JointJ=523   IsCurved=No   GUID=053e1366-4b9b-4479-bef3-27cf1d50a07a
-   Frame=1226   JointI=625   JointJ=523   IsCurved=No   GUID=82864b6c-3aab-46fd-a77a-a708a3c9e4cf
-   Frame=1227   JointI=629   JointJ=523   IsCurved=No   GUID=fb13629d-7341-44f2-bbc3-25661838cc19
-   Frame=1228   JointI=630   JointJ=523   IsCurved=No   GUID=e784efdf-3d48-4737-a6fe-8050d2ab8e2f
-   Frame=1229   JointI=625   JointJ=524   IsCurved=No   GUID=8f34243a-9f6d-4dae-b03a-db96a6aa7bed
-   Frame=1230   JointI=679   JointJ=524   IsCurved=No   GUID=76c24591-0874-4b1e-b85d-75bf453c10a2
-   Frame=1231   JointI=680   JointJ=524   IsCurved=No   GUID=42d76342-553e-479d-9a38-054c2d7f0f32
-   Frame=1232   JointI=629   JointJ=524   IsCurved=No   GUID=d96c46d6-4f46-4f4d-80d7-591543da4867
-   Frame=1237   JointI=703   JointJ=526   IsCurved=No   GUID=6169e6bf-e712-4b30-a510-9719a7d8e146
-   Frame=1238   JointI=630   JointJ=526   IsCurved=No   GUID=a0624e44-2f26-4dec-ba4f-329ef5aff08d
-   Frame=1239   JointI=634   JointJ=526   IsCurved=No   GUID=1c3ae0b0-3fc4-44ad-9b7f-86ed172e66f4
-   Frame=1240   JointI=704   JointJ=526   IsCurved=No   GUID=4cd6192c-360e-4e46-aad7-54b32945d651
-   Frame=1241   JointI=630   JointJ=527   IsCurved=No   GUID=587d5f3c-0e4b-4687-9452-17c815c7366b
-   Frame=1242   JointI=629   JointJ=527   IsCurved=No   GUID=5f8c9a6a-5bf5-492b-a875-71c82dda40aa
+   Frame=1212   JointI=626   JointJ=519   IsCurved=No   GUID=2a43ba65-8755-4a86-bc72-5f5ae23d732e
+   Frame=1213   JointI=621   JointJ=520   IsCurved=No   GUID=d73f5f06-340b-4797-a657-e22b1a30a8ae
+   Frame=1214   JointI=678   JointJ=520   IsCurved=No   GUID=2a4ce508-73f3-4606-9dce-e118a5233dc6
+   Frame=1215   JointI=679   JointJ=520   IsCurved=No   GUID=519da1a9-cb5e-41eb-aadd-30bc3f66175a
+   Frame=1216   JointI=625   JointJ=520   IsCurved=No   GUID=97a32e97-9a8b-4dbb-a427-409a49bbdc76
+   Frame=1221   JointI=702   JointJ=522   IsCurved=No   GUID=146633a9-23a0-4a13-aca1-05c5f1c026f1
+   Frame=1222   JointI=626   JointJ=522   IsCurved=No   GUID=aa513936-04bc-46a9-b579-93c1d35f3b14
+   Frame=1223   JointI=630   JointJ=522   IsCurved=No   GUID=8271b6e7-3eb4-4a25-b772-61ca50359765
+   Frame=1224   JointI=703   JointJ=522   IsCurved=No   GUID=53d71290-66ae-4ca1-8a8f-9a741d40c818
+   Frame=1225   JointI=626   JointJ=523   IsCurved=No   GUID=6203ed4a-afb1-4c9b-bb25-c921aa466ed1
+   Frame=1226   JointI=625   JointJ=523   IsCurved=No   GUID=6015c5d2-fc87-4e8d-b5ee-e0bf9356706e
+   Frame=1227   JointI=629   JointJ=523   IsCurved=No   GUID=ff0756cd-9fc8-41e0-a170-5d62029722ea
+   Frame=1228   JointI=630   JointJ=523   IsCurved=No   GUID=cd7884aa-3528-489a-9906-783a9d5ff5b5
+   Frame=1229   JointI=625   JointJ=524   IsCurved=No   GUID=e42d9cb0-9a1f-4763-845a-4850b628b9a1
+   Frame=1230   JointI=679   JointJ=524   IsCurved=No   GUID=f0eead51-8a9f-4901-b2a3-935226b6acee
+   Frame=1231   JointI=680   JointJ=524   IsCurved=No   GUID=bf87f81b-2565-41d3-a860-324f21a312b0
+   Frame=1232   JointI=629   JointJ=524   IsCurved=No   GUID=21685eda-b389-4715-bf07-5225825bdc18
+   Frame=1237   JointI=703   JointJ=526   IsCurved=No   GUID=ab54c673-0fce-4230-8e51-5b415e772833
+   Frame=1238   JointI=630   JointJ=526   IsCurved=No   GUID=df04f057-356d-4a24-884b-eeffbe642683
+   Frame=1239   JointI=634   JointJ=526   IsCurved=No   GUID=6bbc9418-fe27-48a0-a0a5-374345113b7c
+   Frame=1240   JointI=704   JointJ=526   IsCurved=No   GUID=e001069d-ea17-4ab8-96f9-ce497439df42
+   Frame=1241   JointI=630   JointJ=527   IsCurved=No   GUID=1b1cb6c1-c349-4366-8ad9-a78268bf39a2
+   Frame=1242   JointI=629   JointJ=527   IsCurved=No   GUID=a928a1af-1258-4b50-a903-ece6e45076ac
    Frame=1243   JointI=493   JointJ=576   IsCurved=No   GUID=4b6167f9-ca9e-450c-848f-a4f7c2df2cbd
    Frame=1244   JointI=576   JointJ=563   IsCurved=No   GUID=e09988ba-e869-4da6-bfdb-0403ecf0347e
    Frame=1245   JointI=563   JointJ=578   IsCurved=No   GUID=42aa33cf-ad0a-4a4d-9a35-7c41ba61e99c
    Frame=1246   JointI=578   JointJ=564   IsCurved=No   GUID=2d8508b6-5f12-403c-857b-57da04062e82
    Frame=1247   JointI=564   JointJ=580   IsCurved=No   GUID=48c2f9ee-c841-4275-a1c3-15ecb71e34d1
    Frame=1248   JointI=580   JointJ=565   IsCurved=No   GUID=bb9f57aa-185f-442b-8950-3fb596035e61
-   Frame=1249   JointI=633   JointJ=527   IsCurved=No   GUID=2d764743-85bf-4e6a-9f0c-ca7fa939017c
-   Frame=1250   JointI=634   JointJ=527   IsCurved=No   GUID=6bb37d66-4eab-42b4-8e43-05ffc2979940
-   Frame=1251   JointI=629   JointJ=528   IsCurved=No   GUID=d3530f4a-fd0a-4b3a-b587-26ce5f515e28
-   Frame=1252   JointI=680   JointJ=528   IsCurved=No   GUID=fc2ff34d-95f2-455a-aafd-4972b3700459
-   Frame=1253   JointI=681   JointJ=528   IsCurved=No   GUID=f4c2e967-56cf-49d9-a9a2-f563227d14c9
-   Frame=1254   JointI=633   JointJ=528   IsCurved=No   GUID=d264637f-a2c3-4cd8-8c00-bb5e8fca0201
+   Frame=1249   JointI=633   JointJ=527   IsCurved=No   GUID=101f72f5-7cd3-4d39-8028-87cbe7636219
+   Frame=1250   JointI=634   JointJ=527   IsCurved=No   GUID=3cef095a-ac8d-43b1-aba2-407ba340b4a7
+   Frame=1251   JointI=629   JointJ=528   IsCurved=No   GUID=eb4903cc-fc7e-4d94-a406-44a52a1ee8ed
+   Frame=1252   JointI=680   JointJ=528   IsCurved=No   GUID=24b245c0-c2b5-40c4-807e-3183b663f04f
+   Frame=1253   JointI=681   JointJ=528   IsCurved=No   GUID=ecea0c42-cd0a-4161-a4ce-8147cb86ae32
+   Frame=1254   JointI=633   JointJ=528   IsCurved=No   GUID=ea8f8429-2216-4245-bf64-d7bfecb6fb93
    Frame=1255   JointI=565   JointJ=581   IsCurved=No   GUID=cbf4c1cc-1ec8-4591-9803-1142ba32e81f
    Frame=1256   JointI=581   JointJ=570   IsCurved=No   GUID=85f1f9bd-0ca3-47dd-ad14-38fd4d69687c
    Frame=1257   JointI=570   JointJ=582   IsCurved=No   GUID=68d7ff33-9ad5-4851-a134-5557ba5a78fb
@@ -1330,28 +1390,28 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=1320   JointI=600   JointJ=583   IsCurved=No   GUID=2ebe328b-7c5d-4aa0-9b1a-4ac5d7ba2352
    Frame=1321   JointI=93   JointJ=565   IsCurved=No   GUID=9fcde7e8-0cb4-4e0a-bad5-2330ec2d3f7b
    Frame=1322   JointI=137   JointJ=568   IsCurved=No   GUID=32bf3c91-6e4b-4bef-ae28-06df2ad7bbe3
-   Frame=1327   JointI=704   JointJ=530   IsCurved=No   GUID=98289883-1d8a-4089-9fcd-42b3920807a4
-   Frame=1328   JointI=634   JointJ=530   IsCurved=No   GUID=1ac554c6-a160-4dc0-8fee-f2e64bb2e2c2
-   Frame=1329   JointI=638   JointJ=530   IsCurved=No   GUID=803a66ee-b418-4c05-8877-ddcea0ffcab2
+   Frame=1327   JointI=704   JointJ=530   IsCurved=No   GUID=e991ff6d-deaa-4040-87c9-87cdcaace8ae
+   Frame=1328   JointI=634   JointJ=530   IsCurved=No   GUID=e59cdc4d-91b6-4f64-9024-420fcedb6b79
+   Frame=1329   JointI=638   JointJ=530   IsCurved=No   GUID=666c9726-e796-4fe0-8ddb-2e3ff104d286
    Frame=1330   JointI=565   JointJ=605   IsCurved=No   GUID=cecf742e-38a9-455c-aa8e-4f248bc585f9
    Frame=1331   JointI=568   JointJ=606   IsCurved=No   GUID=4a7f3334-dd0a-4165-89e7-9d9d8382a49c
-   Frame=1332   JointI=705   JointJ=530   IsCurved=No   GUID=cc643669-cf57-4809-95cd-1b8f661e50cc
-   Frame=1333   JointI=634   JointJ=531   IsCurved=No   GUID=a6322100-21b1-4c19-9dbf-ae362a77917f
+   Frame=1332   JointI=705   JointJ=530   IsCurved=No   GUID=0281f512-62a6-4710-8209-df52bb7f652e
+   Frame=1333   JointI=634   JointJ=531   IsCurved=No   GUID=6d33b837-35a1-4063-b46f-d9a0d4014275
    Frame=1334   JointI=605   JointJ=609   IsCurved=No   GUID=5bdddb37-d971-44b8-8ce9-b28e57eec20c
    Frame=1335   JointI=606   JointJ=610   IsCurved=No   GUID=680f6ff1-c6a0-4674-83d2-f11fcc5b9d4c
-   Frame=1336   JointI=633   JointJ=531   IsCurved=No   GUID=eed9afcc-f92e-4d4d-a1a6-b1e752dadfc7
-   Frame=1337   JointI=637   JointJ=531   IsCurved=No   GUID=bcd74952-9816-440c-80fe-7ba37075dc19
+   Frame=1336   JointI=633   JointJ=531   IsCurved=No   GUID=c2bf54f1-03ab-4839-a492-525b6998a9a7
+   Frame=1337   JointI=637   JointJ=531   IsCurved=No   GUID=3207216a-268e-4876-a496-8c01eb9c1aab
    Frame=1338   JointI=609   JointJ=613   IsCurved=No   GUID=16a50f35-29c9-4b79-82bc-6fcb300de136
    Frame=1339   JointI=610   JointJ=614   IsCurved=No   GUID=fa405be2-b293-406c-8355-780627401817
-   Frame=1340   JointI=638   JointJ=531   IsCurved=No   GUID=804e6172-3c36-4155-93dc-361806fd33ea
-   Frame=1341   JointI=633   JointJ=532   IsCurved=No   GUID=5a2fd2ce-d7c0-418d-9b95-b315c7cd3442
+   Frame=1340   JointI=638   JointJ=531   IsCurved=No   GUID=1e312abd-4856-41df-8f5e-cba4b4f1b091
+   Frame=1341   JointI=633   JointJ=532   IsCurved=No   GUID=eda0a71a-133d-4852-aacb-33a4157d85f0
    Frame=1342   JointI=613   JointJ=617   IsCurved=No   GUID=e966312c-b9ed-4063-9fb2-dfe7114f879b
    Frame=1343   JointI=614   JointJ=618   IsCurved=No   GUID=f0012d6b-3c38-491e-acf5-0748201a7823
-   Frame=1344   JointI=681   JointJ=532   IsCurved=No   GUID=e5e4ca4d-bc2e-4a7f-bbc3-ae404e0ac3ea
-   Frame=1345   JointI=682   JointJ=532   IsCurved=No   GUID=52dc6c86-718a-4579-bc2c-deeb7114abb8
+   Frame=1344   JointI=681   JointJ=532   IsCurved=No   GUID=0bd4d62c-746b-4529-8491-204fb702f355
+   Frame=1345   JointI=682   JointJ=532   IsCurved=No   GUID=6c5ae526-0138-4109-ba54-b97d909ebcb9
    Frame=1346   JointI=617   JointJ=621   IsCurved=No   GUID=38629e32-0f41-4a20-b468-da4cb83120d9
    Frame=1347   JointI=618   JointJ=622   IsCurved=No   GUID=db9dd7ec-4953-414e-a2d0-41da765aa6c3
-   Frame=1348   JointI=637   JointJ=532   IsCurved=No   GUID=537a3c07-0a28-42e6-9714-f7f9b2f18b8d
+   Frame=1348   JointI=637   JointJ=532   IsCurved=No   GUID=1a4a8950-a292-45ec-8f0c-bb722ef4a82f
    Frame=1350   JointI=621   JointJ=625   IsCurved=No   GUID=f709064f-eb8b-41bb-b69d-c627350ff3d2
    Frame=1351   JointI=622   JointJ=626   IsCurved=No   GUID=c394f2ab-d3a7-4557-9fa3-7d2a0d5f9303
    Frame=1354   JointI=625   JointJ=629   IsCurved=No   GUID=62b43411-cb51-46ac-8a48-176a539c39fc
@@ -1876,6 +1936,26 @@ TABLE:  "CONNECTIVITY - FRAME"
  
 TABLE:  "CONSTRAINT DEFINITIONS - DIAPHRAGM"
    Name=DIAPH1   CoordSys=GLOBAL   Axis=Z   MultiLevel=Yes
+   Name=Diaphragm0.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm6.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm9.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm12.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm15.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm18.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm21.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm24.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm27.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm30.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm33.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm36.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm39.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm42.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm45.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm48.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm51.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm54.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm57.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
+   Name=Diaphragm60.0   CoordSys=GLOBAL   Axis=Z   MultiLevel=No
  
 TABLE:  "COORDINATE SYSTEMS"
    Name=GLOBAL   Type=Cartesian   X=0   Y=0   Z=0   AboutZ=0   AboutY=0   AboutX=0
@@ -10601,7 +10681,7 @@ TABLE:  "FRAME SECTION ASSIGNMENTS"
    Frame=2174   AutoSelect=N.A.   AnalSect=Beam   MatProp=Default
  
 TABLE:  "FRAME SECTION PROPERTIES 01 - GENERAL"
-   SectionName=Beam   Material=Balsa   Shape="SD Section"   Area=0.0144   TorsConst=2.92139939466963E-05   I33=1.728E-05   I22=1.728E-05   I23=0   AS2=0.0120000593717937   AS3=0.0120000593717938   S33=0.000288   S22=0.000288   Z33=0.000432 _
+   SectionName=Beam   Material=Balsa   Shape="SD Section"   Area=0.0144   TorsConst=2.92139939466963E-05   I33=1.728E-05   I22=1.728E-05   I23=0   AS2=0.0120000593717937   AS3=0.0120000593717937   S33=0.000288   S22=0.000288   Z33=0.000432 _
         Z22=0.000432   R33=0.0346410161513775   R22=0.0346410161513775   Color=Red   FromFile=No   AMod=1   A2Mod=1   A3Mod=1   JMod=1   I2Mod=1   I3Mod=1   MMod=1   WMod=1   Notes="Added 2/20/2021 11:47:48 AM"
    SectionName=Brace   Material=Balsa   Shape="SD Section"   Area=0.0256   TorsConst=9.23306475352381E-05   I33=5.46133333333333E-05   I22=5.46133333333333E-05   I23=0   AS2=0.0213334388831889   AS3=0.0213334388831889 _
         S33=0.000682666666666667   S22=0.000682666666666667   Z33=0.001024   Z22=0.001024   R33=0.0461880215351701   R22=0.0461880215351701   Color=Green   FromFile=No   AMod=1   A2Mod=1   A3Mod=1   JMod=1   I2Mod=1   I3Mod=1   MMod=1 _
@@ -70764,37 +70844,894 @@ TABLE:  "GRID LINES"
 TABLE:  "GROUPS 1 - DEFINITIONS"
    GroupName=ALL   Selection=Yes   SectionCut=Yes   Steel=Yes   Concrete=Yes   Aluminum=Yes   ColdFormed=Yes   Stage=Yes   Bridge=Yes   AutoSeismic=No   AutoWind=No   SelDesSteel=No   SelDesAlum=No   SelDesCold=No   MassWeight=Yes   Color=Red
  
+TABLE:  "JOINT CONSTRAINT ASSIGNMENTS"
+   Joint=1   Constraint=Diaphragm0.0
+   Joint=2   Constraint=Diaphragm6.0
+   Joint=4   Constraint=Diaphragm6.0
+   Joint=7   Constraint=Diaphragm0.0
+   Joint=8   Constraint=Diaphragm6.0
+   Joint=11   Constraint=Diaphragm0.0
+   Joint=12   Constraint=Diaphragm6.0
+   Joint=14   Constraint=Diaphragm6.0
+   Joint=17   Constraint=Diaphragm0.0
+   Joint=18   Constraint=Diaphragm6.0
+   Joint=29   Constraint=Diaphragm6.0
+   Joint=31   Constraint=Diaphragm6.0
+   Joint=54   Constraint=Diaphragm12.0
+   Joint=55   Constraint=Diaphragm12.0
+   Joint=56   Constraint=Diaphragm12.0
+   Joint=57   Constraint=Diaphragm12.0
+   Joint=58   Constraint=Diaphragm9.0
+   Joint=59   Constraint=Diaphragm9.0
+   Joint=60   Constraint=Diaphragm18.0
+   Joint=61   Constraint=Diaphragm18.0
+   Joint=62   Constraint=Diaphragm18.0
+   Joint=63   Constraint=Diaphragm18.0
+   Joint=64   Constraint=Diaphragm15.0
+   Joint=65   Constraint=Diaphragm15.0
+   Joint=66   Constraint=Diaphragm24.0
+   Joint=67   Constraint=Diaphragm24.0
+   Joint=68   Constraint=Diaphragm24.0
+   Joint=69   Constraint=Diaphragm24.0
+   Joint=70   Constraint=Diaphragm21.0
+   Joint=71   Constraint=Diaphragm21.0
+   Joint=72   Constraint=Diaphragm30.0
+   Joint=73   Constraint=Diaphragm30.0
+   Joint=74   Constraint=Diaphragm30.0
+   Joint=75   Constraint=Diaphragm30.0
+   Joint=76   Constraint=Diaphragm27.0
+   Joint=77   Constraint=Diaphragm27.0
+   Joint=78   Constraint=Diaphragm12.0
+   Joint=81   Constraint=Diaphragm12.0
+   Joint=82   Constraint=Diaphragm18.0
+   Joint=85   Constraint=Diaphragm18.0
+   Joint=86   Constraint=Diaphragm24.0
+   Joint=89   Constraint=Diaphragm24.0
+   Joint=90   Constraint=Diaphragm30.0
+   Joint=91   Constraint=Diaphragm30.0
+   Joint=93   Constraint=Diaphragm30.0
+   Joint=122   Constraint=Diaphragm12.0
+   Joint=125   Constraint=Diaphragm12.0
+   Joint=126   Constraint=Diaphragm18.0
+   Joint=129   Constraint=Diaphragm24.0
+   Joint=132   Constraint=Diaphragm30.0
+   Joint=133   Constraint=Diaphragm30.0
+   Joint=135   Constraint=Diaphragm18.0
+   Joint=136   Constraint=Diaphragm24.0
+   Joint=137   Constraint=Diaphragm30.0
+   Joint=138   Constraint=Diaphragm27.0
+   Joint=139   Constraint=Diaphragm21.0
+   Joint=140   Constraint=Diaphragm15.0
+   Joint=141   Constraint=Diaphragm9.0
+   Joint=142   Constraint=Diaphragm27.0
+   Joint=143   Constraint=Diaphragm21.0
+   Joint=144   Constraint=Diaphragm15.0
+   Joint=145   Constraint=Diaphragm9.0
+   Joint=152   Constraint=Diaphragm30.0
+   Joint=153   Constraint=Diaphragm30.0
+   Joint=154   Constraint=Diaphragm0.0
+   Joint=155   Constraint=Diaphragm30.0
+   Joint=156   Constraint=Diaphragm0.0
+   Joint=157   Constraint=Diaphragm30.0
+   Joint=158   Constraint=Diaphragm0.0
+   Joint=159   Constraint=Diaphragm30.0
+   Joint=160   Constraint=Diaphragm0.0
+   Joint=161   Constraint=Diaphragm30.0
+   Joint=166   Constraint=Diaphragm6.0
+   Joint=167   Constraint=Diaphragm6.0
+   Joint=168   Constraint=Diaphragm6.0
+   Joint=169   Constraint=Diaphragm6.0
+   Joint=170   Constraint=Diaphragm6.0
+   Joint=171   Constraint=Diaphragm6.0
+   Joint=172   Constraint=Diaphragm6.0
+   Joint=173   Constraint=Diaphragm6.0
+   Joint=174   Constraint=Diaphragm6.0
+   Joint=175   Constraint=Diaphragm6.0
+   Joint=176   Constraint=Diaphragm6.0
+   Joint=177   Constraint=Diaphragm6.0
+   Joint=178   Constraint=Diaphragm6.0
+   Joint=179   Constraint=Diaphragm6.0
+   Joint=180   Constraint=Diaphragm6.0
+   Joint=181   Constraint=Diaphragm6.0
+   Joint=6   Constraint=Diaphragm9.0
+   Joint=16   Constraint=Diaphragm9.0
+   Joint=21   Constraint=Diaphragm9.0
+   Joint=22   Constraint=Diaphragm9.0
+   Joint=23   Constraint=Diaphragm9.0
+   Joint=25   Constraint=Diaphragm9.0
+   Joint=27   Constraint=Diaphragm9.0
+   Joint=32   Constraint=Diaphragm9.0
+   Joint=33   Constraint=Diaphragm9.0
+   Joint=34   Constraint=Diaphragm9.0
+   Joint=35   Constraint=Diaphragm9.0
+   Joint=36   Constraint=Diaphragm9.0
+   Joint=37   Constraint=Diaphragm9.0
+   Joint=38   Constraint=Diaphragm9.0
+   Joint=39   Constraint=Diaphragm9.0
+   Joint=40   Constraint=Diaphragm9.0
+   Joint=41   Constraint=Diaphragm9.0
+   Joint=42   Constraint=Diaphragm9.0
+   Joint=43   Constraint=Diaphragm9.0
+   Joint=44   Constraint=Diaphragm9.0
+   Joint=45   Constraint=Diaphragm9.0
+   Joint=46   Constraint=Diaphragm9.0
+   Joint=47   Constraint=Diaphragm9.0
+   Joint=48   Constraint=Diaphragm9.0
+   Joint=49   Constraint=Diaphragm12.0
+   Joint=50   Constraint=Diaphragm12.0
+   Joint=51   Constraint=Diaphragm12.0
+   Joint=52   Constraint=Diaphragm12.0
+   Joint=53   Constraint=Diaphragm12.0
+   Joint=79   Constraint=Diaphragm12.0
+   Joint=80   Constraint=Diaphragm12.0
+   Joint=83   Constraint=Diaphragm12.0
+   Joint=84   Constraint=Diaphragm12.0
+   Joint=87   Constraint=Diaphragm12.0
+   Joint=88   Constraint=Diaphragm12.0
+   Joint=92   Constraint=Diaphragm12.0
+   Joint=94   Constraint=Diaphragm12.0
+   Joint=95   Constraint=Diaphragm12.0
+   Joint=96   Constraint=Diaphragm12.0
+   Joint=97   Constraint=Diaphragm12.0
+   Joint=98   Constraint=Diaphragm12.0
+   Joint=99   Constraint=Diaphragm12.0
+   Joint=100   Constraint=Diaphragm12.0
+   Joint=101   Constraint=Diaphragm12.0
+   Joint=102   Constraint=Diaphragm15.0
+   Joint=103   Constraint=Diaphragm15.0
+   Joint=104   Constraint=Diaphragm15.0
+   Joint=105   Constraint=Diaphragm15.0
+   Joint=106   Constraint=Diaphragm15.0
+   Joint=107   Constraint=Diaphragm15.0
+   Joint=108   Constraint=Diaphragm15.0
+   Joint=109   Constraint=Diaphragm15.0
+   Joint=110   Constraint=Diaphragm15.0
+   Joint=111   Constraint=Diaphragm15.0
+   Joint=112   Constraint=Diaphragm15.0
+   Joint=113   Constraint=Diaphragm15.0
+   Joint=114   Constraint=Diaphragm15.0
+   Joint=115   Constraint=Diaphragm15.0
+   Joint=116   Constraint=Diaphragm15.0
+   Joint=117   Constraint=Diaphragm15.0
+   Joint=118   Constraint=Diaphragm15.0
+   Joint=119   Constraint=Diaphragm15.0
+   Joint=120   Constraint=Diaphragm15.0
+   Joint=121   Constraint=Diaphragm15.0
+   Joint=123   Constraint=Diaphragm15.0
+   Joint=124   Constraint=Diaphragm15.0
+   Joint=127   Constraint=Diaphragm15.0
+   Joint=128   Constraint=Diaphragm15.0
+   Joint=130   Constraint=Diaphragm18.0
+   Joint=131   Constraint=Diaphragm18.0
+   Joint=134   Constraint=Diaphragm18.0
+   Joint=146   Constraint=Diaphragm18.0
+   Joint=147   Constraint=Diaphragm18.0
+   Joint=148   Constraint=Diaphragm18.0
+   Joint=149   Constraint=Diaphragm18.0
+   Joint=150   Constraint=Diaphragm18.0
+   Joint=151   Constraint=Diaphragm18.0
+   Joint=162   Constraint=Diaphragm18.0
+   Joint=163   Constraint=Diaphragm18.0
+   Joint=164   Constraint=Diaphragm18.0
+   Joint=165   Constraint=Diaphragm18.0
+   Joint=182   Constraint=Diaphragm18.0
+   Joint=183   Constraint=Diaphragm18.0
+   Joint=184   Constraint=Diaphragm18.0
+   Joint=185   Constraint=Diaphragm18.0
+   Joint=186   Constraint=Diaphragm18.0
+   Joint=187   Constraint=Diaphragm18.0
+   Joint=188   Constraint=Diaphragm18.0
+   Joint=189   Constraint=Diaphragm21.0
+   Joint=190   Constraint=Diaphragm21.0
+   Joint=191   Constraint=Diaphragm21.0
+   Joint=192   Constraint=Diaphragm21.0
+   Joint=193   Constraint=Diaphragm21.0
+   Joint=194   Constraint=Diaphragm21.0
+   Joint=195   Constraint=Diaphragm21.0
+   Joint=196   Constraint=Diaphragm21.0
+   Joint=197   Constraint=Diaphragm21.0
+   Joint=198   Constraint=Diaphragm21.0
+   Joint=199   Constraint=Diaphragm21.0
+   Joint=200   Constraint=Diaphragm21.0
+   Joint=201   Constraint=Diaphragm21.0
+   Joint=202   Constraint=Diaphragm21.0
+   Joint=203   Constraint=Diaphragm21.0
+   Joint=204   Constraint=Diaphragm21.0
+   Joint=205   Constraint=Diaphragm21.0
+   Joint=206   Constraint=Diaphragm21.0
+   Joint=207   Constraint=Diaphragm21.0
+   Joint=208   Constraint=Diaphragm21.0
+   Joint=209   Constraint=Diaphragm21.0
+   Joint=210   Constraint=Diaphragm21.0
+   Joint=211   Constraint=Diaphragm21.0
+   Joint=212   Constraint=Diaphragm21.0
+   Joint=213   Constraint=Diaphragm24.0
+   Joint=214   Constraint=Diaphragm24.0
+   Joint=215   Constraint=Diaphragm24.0
+   Joint=216   Constraint=Diaphragm24.0
+   Joint=217   Constraint=Diaphragm24.0
+   Joint=218   Constraint=Diaphragm24.0
+   Joint=219   Constraint=Diaphragm24.0
+   Joint=220   Constraint=Diaphragm24.0
+   Joint=221   Constraint=Diaphragm24.0
+   Joint=222   Constraint=Diaphragm24.0
+   Joint=223   Constraint=Diaphragm24.0
+   Joint=224   Constraint=Diaphragm24.0
+   Joint=225   Constraint=Diaphragm24.0
+   Joint=226   Constraint=Diaphragm24.0
+   Joint=227   Constraint=Diaphragm24.0
+   Joint=228   Constraint=Diaphragm24.0
+   Joint=229   Constraint=Diaphragm24.0
+   Joint=230   Constraint=Diaphragm24.0
+   Joint=231   Constraint=Diaphragm24.0
+   Joint=232   Constraint=Diaphragm24.0
+   Joint=233   Constraint=Diaphragm27.0
+   Joint=234   Constraint=Diaphragm27.0
+   Joint=235   Constraint=Diaphragm27.0
+   Joint=236   Constraint=Diaphragm27.0
+   Joint=237   Constraint=Diaphragm27.0
+   Joint=238   Constraint=Diaphragm27.0
+   Joint=239   Constraint=Diaphragm27.0
+   Joint=240   Constraint=Diaphragm27.0
+   Joint=241   Constraint=Diaphragm27.0
+   Joint=242   Constraint=Diaphragm27.0
+   Joint=243   Constraint=Diaphragm27.0
+   Joint=244   Constraint=Diaphragm27.0
+   Joint=245   Constraint=Diaphragm27.0
+   Joint=246   Constraint=Diaphragm27.0
+   Joint=247   Constraint=Diaphragm27.0
+   Joint=248   Constraint=Diaphragm27.0
+   Joint=249   Constraint=Diaphragm27.0
+   Joint=250   Constraint=Diaphragm27.0
+   Joint=251   Constraint=Diaphragm27.0
+   Joint=252   Constraint=Diaphragm27.0
+   Joint=253   Constraint=Diaphragm27.0
+   Joint=254   Constraint=Diaphragm27.0
+   Joint=255   Constraint=Diaphragm27.0
+   Joint=256   Constraint=Diaphragm27.0
+   Joint=257   Constraint=Diaphragm30.0
+   Joint=258   Constraint=Diaphragm30.0
+   Joint=259   Constraint=Diaphragm30.0
+   Joint=260   Constraint=Diaphragm30.0
+   Joint=261   Constraint=Diaphragm30.0
+   Joint=262   Constraint=Diaphragm30.0
+   Joint=263   Constraint=Diaphragm30.0
+   Joint=264   Constraint=Diaphragm30.0
+   Joint=265   Constraint=Diaphragm30.0
+   Joint=266   Constraint=Diaphragm30.0
+   Joint=267   Constraint=Diaphragm30.0
+   Joint=268   Constraint=Diaphragm30.0
+   Joint=276   Constraint=Diaphragm6.0
+   Joint=277   Constraint=Diaphragm6.0
+   Joint=278   Constraint=Diaphragm6.0
+   Joint=279   Constraint=Diaphragm6.0
+   Joint=280   Constraint=Diaphragm6.0
+   Joint=281   Constraint=Diaphragm6.0
+   Joint=282   Constraint=Diaphragm6.0
+   Joint=283   Constraint=Diaphragm6.0
+   Joint=284   Constraint=Diaphragm6.0
+   Joint=285   Constraint=Diaphragm6.0
+   Joint=286   Constraint=Diaphragm6.0
+   Joint=287   Constraint=Diaphragm6.0
+   Joint=288   Constraint=Diaphragm6.0
+   Joint=289   Constraint=Diaphragm6.0
+   Joint=290   Constraint=Diaphragm6.0
+   Joint=291   Constraint=Diaphragm6.0
+   Joint=292   Constraint=Diaphragm6.0
+   Joint=293   Constraint=Diaphragm6.0
+   Joint=294   Constraint=Diaphragm6.0
+   Joint=295   Constraint=Diaphragm6.0
+   Joint=296   Constraint=Diaphragm6.0
+   Joint=297   Constraint=Diaphragm6.0
+   Joint=298   Constraint=Diaphragm6.0
+   Joint=299   Constraint=Diaphragm6.0
+   Joint=300   Constraint=Diaphragm6.0
+   Joint=301   Constraint=Diaphragm9.0
+   Joint=302   Constraint=Diaphragm9.0
+   Joint=303   Constraint=Diaphragm9.0
+   Joint=304   Constraint=Diaphragm9.0
+   Joint=305   Constraint=Diaphragm9.0
+   Joint=306   Constraint=Diaphragm9.0
+   Joint=307   Constraint=Diaphragm9.0
+   Joint=308   Constraint=Diaphragm9.0
+   Joint=309   Constraint=Diaphragm9.0
+   Joint=310   Constraint=Diaphragm9.0
+   Joint=311   Constraint=Diaphragm9.0
+   Joint=312   Constraint=Diaphragm9.0
+   Joint=313   Constraint=Diaphragm9.0
+   Joint=314   Constraint=Diaphragm9.0
+   Joint=315   Constraint=Diaphragm9.0
+   Joint=316   Constraint=Diaphragm9.0
+   Joint=317   Constraint=Diaphragm9.0
+   Joint=318   Constraint=Diaphragm9.0
+   Joint=319   Constraint=Diaphragm9.0
+   Joint=320   Constraint=Diaphragm9.0
+   Joint=321   Constraint=Diaphragm9.0
+   Joint=322   Constraint=Diaphragm12.0
+   Joint=323   Constraint=Diaphragm12.0
+   Joint=324   Constraint=Diaphragm12.0
+   Joint=325   Constraint=Diaphragm12.0
+   Joint=326   Constraint=Diaphragm12.0
+   Joint=327   Constraint=Diaphragm12.0
+   Joint=328   Constraint=Diaphragm12.0
+   Joint=329   Constraint=Diaphragm12.0
+   Joint=330   Constraint=Diaphragm12.0
+   Joint=331   Constraint=Diaphragm12.0
+   Joint=332   Constraint=Diaphragm12.0
+   Joint=333   Constraint=Diaphragm12.0
+   Joint=334   Constraint=Diaphragm12.0
+   Joint=335   Constraint=Diaphragm12.0
+   Joint=336   Constraint=Diaphragm12.0
+   Joint=337   Constraint=Diaphragm12.0
+   Joint=338   Constraint=Diaphragm12.0
+   Joint=339   Constraint=Diaphragm12.0
+   Joint=340   Constraint=Diaphragm12.0
+   Joint=341   Constraint=Diaphragm12.0
+   Joint=342   Constraint=Diaphragm12.0
+   Joint=343   Constraint=Diaphragm15.0
+   Joint=344   Constraint=Diaphragm15.0
+   Joint=345   Constraint=Diaphragm15.0
+   Joint=346   Constraint=Diaphragm15.0
+   Joint=347   Constraint=Diaphragm15.0
+   Joint=348   Constraint=Diaphragm15.0
+   Joint=349   Constraint=Diaphragm15.0
+   Joint=350   Constraint=Diaphragm15.0
+   Joint=351   Constraint=Diaphragm15.0
+   Joint=352   Constraint=Diaphragm15.0
+   Joint=353   Constraint=Diaphragm15.0
+   Joint=354   Constraint=Diaphragm15.0
+   Joint=355   Constraint=Diaphragm15.0
+   Joint=356   Constraint=Diaphragm15.0
+   Joint=357   Constraint=Diaphragm15.0
+   Joint=358   Constraint=Diaphragm15.0
+   Joint=359   Constraint=Diaphragm15.0
+   Joint=360   Constraint=Diaphragm15.0
+   Joint=361   Constraint=Diaphragm15.0
+   Joint=362   Constraint=Diaphragm15.0
+   Joint=363   Constraint=Diaphragm15.0
+   Joint=364   Constraint=Diaphragm18.0
+   Joint=365   Constraint=Diaphragm18.0
+   Joint=366   Constraint=Diaphragm18.0
+   Joint=367   Constraint=Diaphragm18.0
+   Joint=368   Constraint=Diaphragm18.0
+   Joint=369   Constraint=Diaphragm18.0
+   Joint=370   Constraint=Diaphragm18.0
+   Joint=371   Constraint=Diaphragm18.0
+   Joint=372   Constraint=Diaphragm18.0
+   Joint=373   Constraint=Diaphragm18.0
+   Joint=374   Constraint=Diaphragm18.0
+   Joint=375   Constraint=Diaphragm18.0
+   Joint=376   Constraint=Diaphragm18.0
+   Joint=377   Constraint=Diaphragm18.0
+   Joint=378   Constraint=Diaphragm18.0
+   Joint=379   Constraint=Diaphragm18.0
+   Joint=380   Constraint=Diaphragm18.0
+   Joint=381   Constraint=Diaphragm18.0
+   Joint=382   Constraint=Diaphragm18.0
+   Joint=383   Constraint=Diaphragm18.0
+   Joint=384   Constraint=Diaphragm18.0
+   Joint=385   Constraint=Diaphragm21.0
+   Joint=386   Constraint=Diaphragm21.0
+   Joint=387   Constraint=Diaphragm21.0
+   Joint=388   Constraint=Diaphragm21.0
+   Joint=389   Constraint=Diaphragm21.0
+   Joint=390   Constraint=Diaphragm21.0
+   Joint=391   Constraint=Diaphragm21.0
+   Joint=392   Constraint=Diaphragm21.0
+   Joint=393   Constraint=Diaphragm21.0
+   Joint=394   Constraint=Diaphragm21.0
+   Joint=395   Constraint=Diaphragm21.0
+   Joint=396   Constraint=Diaphragm21.0
+   Joint=397   Constraint=Diaphragm21.0
+   Joint=398   Constraint=Diaphragm21.0
+   Joint=399   Constraint=Diaphragm21.0
+   Joint=400   Constraint=Diaphragm21.0
+   Joint=401   Constraint=Diaphragm21.0
+   Joint=402   Constraint=Diaphragm21.0
+   Joint=403   Constraint=Diaphragm21.0
+   Joint=404   Constraint=Diaphragm21.0
+   Joint=405   Constraint=Diaphragm21.0
+   Joint=406   Constraint=Diaphragm24.0
+   Joint=407   Constraint=Diaphragm24.0
+   Joint=408   Constraint=Diaphragm24.0
+   Joint=409   Constraint=Diaphragm24.0
+   Joint=410   Constraint=Diaphragm24.0
+   Joint=411   Constraint=Diaphragm24.0
+   Joint=412   Constraint=Diaphragm24.0
+   Joint=413   Constraint=Diaphragm24.0
+   Joint=414   Constraint=Diaphragm24.0
+   Joint=415   Constraint=Diaphragm24.0
+   Joint=416   Constraint=Diaphragm24.0
+   Joint=417   Constraint=Diaphragm24.0
+   Joint=418   Constraint=Diaphragm24.0
+   Joint=419   Constraint=Diaphragm24.0
+   Joint=420   Constraint=Diaphragm24.0
+   Joint=421   Constraint=Diaphragm24.0
+   Joint=422   Constraint=Diaphragm24.0
+   Joint=423   Constraint=Diaphragm24.0
+   Joint=424   Constraint=Diaphragm24.0
+   Joint=425   Constraint=Diaphragm24.0
+   Joint=426   Constraint=Diaphragm24.0
+   Joint=427   Constraint=Diaphragm27.0
+   Joint=428   Constraint=Diaphragm27.0
+   Joint=429   Constraint=Diaphragm27.0
+   Joint=430   Constraint=Diaphragm27.0
+   Joint=431   Constraint=Diaphragm27.0
+   Joint=432   Constraint=Diaphragm27.0
+   Joint=433   Constraint=Diaphragm27.0
+   Joint=434   Constraint=Diaphragm27.0
+   Joint=435   Constraint=Diaphragm27.0
+   Joint=436   Constraint=Diaphragm27.0
+   Joint=437   Constraint=Diaphragm27.0
+   Joint=438   Constraint=Diaphragm27.0
+   Joint=439   Constraint=Diaphragm27.0
+   Joint=440   Constraint=Diaphragm27.0
+   Joint=441   Constraint=Diaphragm27.0
+   Joint=442   Constraint=Diaphragm27.0
+   Joint=443   Constraint=Diaphragm27.0
+   Joint=444   Constraint=Diaphragm27.0
+   Joint=445   Constraint=Diaphragm27.0
+   Joint=446   Constraint=Diaphragm27.0
+   Joint=447   Constraint=Diaphragm27.0
+   Joint=448   Constraint=Diaphragm30.0
+   Joint=449   Constraint=Diaphragm30.0
+   Joint=450   Constraint=Diaphragm30.0
+   Joint=451   Constraint=Diaphragm30.0
+   Joint=452   Constraint=Diaphragm30.0
+   Joint=453   Constraint=Diaphragm30.0
+   Joint=454   Constraint=Diaphragm30.0
+   Joint=455   Constraint=Diaphragm30.0
+   Joint=456   Constraint=Diaphragm30.0
+   Joint=457   Constraint=Diaphragm30.0
+   Joint=458   Constraint=Diaphragm30.0
+   Joint=459   Constraint=Diaphragm30.0
+   Joint=460   Constraint=Diaphragm30.0
+   Joint=461   Constraint=Diaphragm30.0
+   Joint=462   Constraint=Diaphragm30.0
+   Joint=463   Constraint=Diaphragm30.0
+   Joint=464   Constraint=Diaphragm30.0
+   Joint=465   Constraint=Diaphragm30.0
+   Joint=466   Constraint=Diaphragm30.0
+   Joint=467   Constraint=Diaphragm30.0
+   Joint=468   Constraint=Diaphragm30.0
+   Joint=493   Constraint=Diaphragm33.0
+   Joint=494   Constraint=Diaphragm33.0
+   Joint=513   Constraint=Diaphragm33.0
+   Joint=514   Constraint=Diaphragm33.0
+   Joint=515   Constraint=Diaphragm33.0
+   Joint=516   Constraint=Diaphragm33.0
+   Joint=517   Constraint=Diaphragm33.0
+   Joint=563   Constraint=Diaphragm33.0
+   Joint=564   Constraint=Diaphragm33.0
+   Joint=565   Constraint=Diaphragm33.0
+   Joint=566   Constraint=Diaphragm33.0
+   Joint=567   Constraint=Diaphragm33.0
+   Joint=568   Constraint=Diaphragm33.0
+   Joint=569   Constraint=Diaphragm33.0
+   Joint=570   Constraint=Diaphragm33.0
+   Joint=571   Constraint=Diaphragm33.0
+   Joint=572   Constraint=Diaphragm33.0
+   Joint=573   Constraint=Diaphragm33.0
+   Joint=574   Constraint=Diaphragm33.0
+   Joint=575   Constraint=Diaphragm33.0
+   Joint=576   Constraint=Diaphragm33.0
+   Joint=577   Constraint=Diaphragm33.0
+   Joint=578   Constraint=Diaphragm33.0
+   Joint=579   Constraint=Diaphragm33.0
+   Joint=580   Constraint=Diaphragm33.0
+   Joint=581   Constraint=Diaphragm33.0
+   Joint=582   Constraint=Diaphragm33.0
+   Joint=583   Constraint=Diaphragm33.0
+   Joint=584   Constraint=Diaphragm33.0
+   Joint=585   Constraint=Diaphragm33.0
+   Joint=586   Constraint=Diaphragm33.0
+   Joint=587   Constraint=Diaphragm33.0
+   Joint=588   Constraint=Diaphragm33.0
+   Joint=589   Constraint=Diaphragm33.0
+   Joint=590   Constraint=Diaphragm33.0
+   Joint=591   Constraint=Diaphragm33.0
+   Joint=592   Constraint=Diaphragm33.0
+   Joint=593   Constraint=Diaphragm33.0
+   Joint=594   Constraint=Diaphragm33.0
+   Joint=595   Constraint=Diaphragm33.0
+   Joint=596   Constraint=Diaphragm33.0
+   Joint=597   Constraint=Diaphragm33.0
+   Joint=598   Constraint=Diaphragm33.0
+   Joint=599   Constraint=Diaphragm33.0
+   Joint=600   Constraint=Diaphragm33.0
+   Joint=601   Constraint=Diaphragm33.0
+   Joint=602   Constraint=Diaphragm33.0
+   Joint=603   Constraint=Diaphragm33.0
+   Joint=604   Constraint=Diaphragm33.0
+   Joint=605   Constraint=Diaphragm36.0
+   Joint=606   Constraint=Diaphragm36.0
+   Joint=607   Constraint=Diaphragm36.0
+   Joint=608   Constraint=Diaphragm36.0
+   Joint=609   Constraint=Diaphragm39.0
+   Joint=610   Constraint=Diaphragm39.0
+   Joint=611   Constraint=Diaphragm39.0
+   Joint=612   Constraint=Diaphragm39.0
+   Joint=613   Constraint=Diaphragm42.0
+   Joint=614   Constraint=Diaphragm42.0
+   Joint=615   Constraint=Diaphragm42.0
+   Joint=616   Constraint=Diaphragm42.0
+   Joint=617   Constraint=Diaphragm45.0
+   Joint=618   Constraint=Diaphragm45.0
+   Joint=619   Constraint=Diaphragm45.0
+   Joint=620   Constraint=Diaphragm45.0
+   Joint=621   Constraint=Diaphragm48.0
+   Joint=622   Constraint=Diaphragm48.0
+   Joint=623   Constraint=Diaphragm48.0
+   Joint=624   Constraint=Diaphragm48.0
+   Joint=625   Constraint=Diaphragm51.0
+   Joint=626   Constraint=Diaphragm51.0
+   Joint=627   Constraint=Diaphragm51.0
+   Joint=628   Constraint=Diaphragm51.0
+   Joint=629   Constraint=Diaphragm54.0
+   Joint=630   Constraint=Diaphragm54.0
+   Joint=631   Constraint=Diaphragm54.0
+   Joint=632   Constraint=Diaphragm54.0
+   Joint=633   Constraint=Diaphragm57.0
+   Joint=634   Constraint=Diaphragm57.0
+   Joint=635   Constraint=Diaphragm57.0
+   Joint=636   Constraint=Diaphragm57.0
+   Joint=637   Constraint=Diaphragm60.0
+   Joint=638   Constraint=Diaphragm60.0
+   Joint=639   Constraint=Diaphragm60.0
+   Joint=640   Constraint=Diaphragm60.0
+   Joint=645   Constraint=Diaphragm36.0
+   Joint=646   Constraint=Diaphragm36.0
+   Joint=647   Constraint=Diaphragm39.0
+   Joint=648   Constraint=Diaphragm39.0
+   Joint=649   Constraint=Diaphragm42.0
+   Joint=650   Constraint=Diaphragm42.0
+   Joint=651   Constraint=Diaphragm45.0
+   Joint=652   Constraint=Diaphragm45.0
+   Joint=653   Constraint=Diaphragm48.0
+   Joint=654   Constraint=Diaphragm48.0
+   Joint=655   Constraint=Diaphragm51.0
+   Joint=656   Constraint=Diaphragm51.0
+   Joint=657   Constraint=Diaphragm54.0
+   Joint=658   Constraint=Diaphragm54.0
+   Joint=659   Constraint=Diaphragm57.0
+   Joint=660   Constraint=Diaphragm57.0
+   Joint=661   Constraint=Diaphragm60.0
+   Joint=662   Constraint=Diaphragm60.0
+   Joint=663   Constraint=Diaphragm36.0
+   Joint=664   Constraint=Diaphragm39.0
+   Joint=665   Constraint=Diaphragm42.0
+   Joint=666   Constraint=Diaphragm45.0
+   Joint=667   Constraint=Diaphragm48.0
+   Joint=668   Constraint=Diaphragm51.0
+   Joint=669   Constraint=Diaphragm54.0
+   Joint=670   Constraint=Diaphragm57.0
+   Joint=671   Constraint=Diaphragm60.0
+   Joint=673   Constraint=Diaphragm36.0
+   Joint=674   Constraint=Diaphragm39.0
+   Joint=676   Constraint=Diaphragm42.0
+   Joint=677   Constraint=Diaphragm45.0
+   Joint=678   Constraint=Diaphragm48.0
+   Joint=679   Constraint=Diaphragm51.0
+   Joint=680   Constraint=Diaphragm54.0
+   Joint=681   Constraint=Diaphragm57.0
+   Joint=682   Constraint=Diaphragm60.0
+   Joint=701   Constraint=Diaphragm48.0
+   Joint=702   Constraint=Diaphragm51.0
+   Joint=703   Constraint=Diaphragm54.0
+   Joint=704   Constraint=Diaphragm57.0
+   Joint=705   Constraint=Diaphragm60.0
+   Joint=706   Constraint=Diaphragm36.0
+   Joint=707   Constraint=Diaphragm39.0
+   Joint=708   Constraint=Diaphragm42.0
+   Joint=709   Constraint=Diaphragm45.0
+   Joint=775   Constraint=Diaphragm36.0
+   Joint=776   Constraint=Diaphragm36.0
+   Joint=777   Constraint=Diaphragm36.0
+   Joint=778   Constraint=Diaphragm36.0
+   Joint=779   Constraint=Diaphragm36.0
+   Joint=780   Constraint=Diaphragm36.0
+   Joint=781   Constraint=Diaphragm36.0
+   Joint=782   Constraint=Diaphragm39.0
+   Joint=783   Constraint=Diaphragm39.0
+   Joint=784   Constraint=Diaphragm39.0
+   Joint=785   Constraint=Diaphragm39.0
+   Joint=786   Constraint=Diaphragm39.0
+   Joint=787   Constraint=Diaphragm39.0
+   Joint=788   Constraint=Diaphragm39.0
+   Joint=789   Constraint=Diaphragm42.0
+   Joint=790   Constraint=Diaphragm42.0
+   Joint=791   Constraint=Diaphragm42.0
+   Joint=792   Constraint=Diaphragm42.0
+   Joint=793   Constraint=Diaphragm42.0
+   Joint=794   Constraint=Diaphragm42.0
+   Joint=795   Constraint=Diaphragm42.0
+   Joint=796   Constraint=Diaphragm45.0
+   Joint=797   Constraint=Diaphragm45.0
+   Joint=798   Constraint=Diaphragm45.0
+   Joint=799   Constraint=Diaphragm45.0
+   Joint=800   Constraint=Diaphragm45.0
+   Joint=801   Constraint=Diaphragm45.0
+   Joint=802   Constraint=Diaphragm45.0
+   Joint=803   Constraint=Diaphragm48.0
+   Joint=804   Constraint=Diaphragm48.0
+   Joint=805   Constraint=Diaphragm48.0
+   Joint=806   Constraint=Diaphragm48.0
+   Joint=807   Constraint=Diaphragm48.0
+   Joint=808   Constraint=Diaphragm48.0
+   Joint=809   Constraint=Diaphragm48.0
+   Joint=810   Constraint=Diaphragm51.0
+   Joint=811   Constraint=Diaphragm51.0
+   Joint=812   Constraint=Diaphragm51.0
+   Joint=813   Constraint=Diaphragm51.0
+   Joint=814   Constraint=Diaphragm51.0
+   Joint=815   Constraint=Diaphragm51.0
+   Joint=816   Constraint=Diaphragm51.0
+   Joint=817   Constraint=Diaphragm54.0
+   Joint=818   Constraint=Diaphragm54.0
+   Joint=819   Constraint=Diaphragm54.0
+   Joint=820   Constraint=Diaphragm54.0
+   Joint=821   Constraint=Diaphragm54.0
+   Joint=822   Constraint=Diaphragm54.0
+   Joint=823   Constraint=Diaphragm54.0
+   Joint=824   Constraint=Diaphragm57.0
+   Joint=825   Constraint=Diaphragm57.0
+   Joint=826   Constraint=Diaphragm57.0
+   Joint=827   Constraint=Diaphragm57.0
+   Joint=828   Constraint=Diaphragm57.0
+   Joint=829   Constraint=Diaphragm57.0
+   Joint=830   Constraint=Diaphragm57.0
+   Joint=831   Constraint=Diaphragm60.0
+   Joint=832   Constraint=Diaphragm60.0
+   Joint=833   Constraint=Diaphragm60.0
+   Joint=834   Constraint=Diaphragm60.0
+   Joint=835   Constraint=Diaphragm60.0
+   Joint=836   Constraint=Diaphragm60.0
+   Joint=837   Constraint=Diaphragm60.0
+   Joint=838   Constraint=Diaphragm36.0
+   Joint=839   Constraint=Diaphragm36.0
+   Joint=840   Constraint=Diaphragm36.0
+   Joint=841   Constraint=Diaphragm36.0
+   Joint=842   Constraint=Diaphragm36.0
+   Joint=843   Constraint=Diaphragm36.0
+   Joint=844   Constraint=Diaphragm36.0
+   Joint=845   Constraint=Diaphragm39.0
+   Joint=846   Constraint=Diaphragm39.0
+   Joint=847   Constraint=Diaphragm39.0
+   Joint=848   Constraint=Diaphragm39.0
+   Joint=849   Constraint=Diaphragm39.0
+   Joint=850   Constraint=Diaphragm39.0
+   Joint=851   Constraint=Diaphragm39.0
+   Joint=852   Constraint=Diaphragm42.0
+   Joint=853   Constraint=Diaphragm42.0
+   Joint=854   Constraint=Diaphragm42.0
+   Joint=855   Constraint=Diaphragm42.0
+   Joint=856   Constraint=Diaphragm42.0
+   Joint=857   Constraint=Diaphragm42.0
+   Joint=858   Constraint=Diaphragm42.0
+   Joint=859   Constraint=Diaphragm45.0
+   Joint=860   Constraint=Diaphragm45.0
+   Joint=861   Constraint=Diaphragm45.0
+   Joint=862   Constraint=Diaphragm45.0
+   Joint=863   Constraint=Diaphragm45.0
+   Joint=864   Constraint=Diaphragm45.0
+   Joint=865   Constraint=Diaphragm45.0
+   Joint=866   Constraint=Diaphragm48.0
+   Joint=867   Constraint=Diaphragm48.0
+   Joint=868   Constraint=Diaphragm48.0
+   Joint=869   Constraint=Diaphragm48.0
+   Joint=870   Constraint=Diaphragm48.0
+   Joint=871   Constraint=Diaphragm48.0
+   Joint=872   Constraint=Diaphragm48.0
+   Joint=873   Constraint=Diaphragm51.0
+   Joint=874   Constraint=Diaphragm51.0
+   Joint=875   Constraint=Diaphragm51.0
+   Joint=876   Constraint=Diaphragm51.0
+   Joint=877   Constraint=Diaphragm51.0
+   Joint=878   Constraint=Diaphragm60.0
+   Joint=879   Constraint=Diaphragm60.0
+   Joint=880   Constraint=Diaphragm36.0
+   Joint=881   Constraint=Diaphragm36.0
+   Joint=882   Constraint=Diaphragm36.0
+   Joint=883   Constraint=Diaphragm36.0
+   Joint=884   Constraint=Diaphragm36.0
+   Joint=885   Constraint=Diaphragm36.0
+   Joint=886   Constraint=Diaphragm36.0
+   Joint=887   Constraint=Diaphragm39.0
+   Joint=888   Constraint=Diaphragm39.0
+   Joint=889   Constraint=Diaphragm39.0
+   Joint=890   Constraint=Diaphragm39.0
+   Joint=891   Constraint=Diaphragm39.0
+   Joint=892   Constraint=Diaphragm39.0
+   Joint=893   Constraint=Diaphragm39.0
+   Joint=894   Constraint=Diaphragm42.0
+   Joint=895   Constraint=Diaphragm42.0
+   Joint=896   Constraint=Diaphragm42.0
+   Joint=897   Constraint=Diaphragm42.0
+   Joint=898   Constraint=Diaphragm42.0
+   Joint=899   Constraint=Diaphragm42.0
+   Joint=900   Constraint=Diaphragm42.0
+   Joint=901   Constraint=Diaphragm45.0
+   Joint=902   Constraint=Diaphragm45.0
+   Joint=903   Constraint=Diaphragm45.0
+   Joint=904   Constraint=Diaphragm45.0
+   Joint=905   Constraint=Diaphragm45.0
+   Joint=906   Constraint=Diaphragm45.0
+   Joint=907   Constraint=Diaphragm45.0
+   Joint=908   Constraint=Diaphragm48.0
+   Joint=909   Constraint=Diaphragm48.0
+   Joint=910   Constraint=Diaphragm48.0
+   Joint=911   Constraint=Diaphragm48.0
+   Joint=912   Constraint=Diaphragm48.0
+   Joint=913   Constraint=Diaphragm48.0
+   Joint=914   Constraint=Diaphragm48.0
+   Joint=915   Constraint=Diaphragm51.0
+   Joint=916   Constraint=Diaphragm51.0
+   Joint=917   Constraint=Diaphragm51.0
+   Joint=918   Constraint=Diaphragm51.0
+   Joint=919   Constraint=Diaphragm51.0
+   Joint=920   Constraint=Diaphragm51.0
+   Joint=921   Constraint=Diaphragm51.0
+   Joint=922   Constraint=Diaphragm54.0
+   Joint=923   Constraint=Diaphragm54.0
+   Joint=924   Constraint=Diaphragm54.0
+   Joint=925   Constraint=Diaphragm54.0
+   Joint=926   Constraint=Diaphragm54.0
+   Joint=927   Constraint=Diaphragm54.0
+   Joint=928   Constraint=Diaphragm54.0
+   Joint=929   Constraint=Diaphragm57.0
+   Joint=930   Constraint=Diaphragm57.0
+   Joint=931   Constraint=Diaphragm57.0
+   Joint=932   Constraint=Diaphragm57.0
+   Joint=933   Constraint=Diaphragm57.0
+   Joint=934   Constraint=Diaphragm57.0
+   Joint=935   Constraint=Diaphragm57.0
+   Joint=936   Constraint=Diaphragm60.0
+   Joint=937   Constraint=Diaphragm60.0
+   Joint=938   Constraint=Diaphragm60.0
+   Joint=939   Constraint=Diaphragm60.0
+   Joint=940   Constraint=Diaphragm60.0
+   Joint=941   Constraint=Diaphragm60.0
+   Joint=942   Constraint=Diaphragm60.0
+   Joint=943   Constraint=Diaphragm36.0
+   Joint=944   Constraint=Diaphragm36.0
+   Joint=945   Constraint=Diaphragm36.0
+   Joint=946   Constraint=Diaphragm36.0
+   Joint=947   Constraint=Diaphragm36.0
+   Joint=948   Constraint=Diaphragm36.0
+   Joint=949   Constraint=Diaphragm36.0
+   Joint=950   Constraint=Diaphragm39.0
+   Joint=951   Constraint=Diaphragm39.0
+   Joint=952   Constraint=Diaphragm39.0
+   Joint=953   Constraint=Diaphragm39.0
+   Joint=954   Constraint=Diaphragm39.0
+   Joint=955   Constraint=Diaphragm39.0
+   Joint=956   Constraint=Diaphragm39.0
+   Joint=957   Constraint=Diaphragm42.0
+   Joint=958   Constraint=Diaphragm42.0
+   Joint=959   Constraint=Diaphragm42.0
+   Joint=960   Constraint=Diaphragm42.0
+   Joint=961   Constraint=Diaphragm42.0
+   Joint=962   Constraint=Diaphragm42.0
+   Joint=963   Constraint=Diaphragm42.0
+   Joint=964   Constraint=Diaphragm45.0
+   Joint=965   Constraint=Diaphragm45.0
+   Joint=966   Constraint=Diaphragm45.0
+   Joint=967   Constraint=Diaphragm45.0
+   Joint=968   Constraint=Diaphragm45.0
+   Joint=969   Constraint=Diaphragm45.0
+   Joint=970   Constraint=Diaphragm45.0
+   Joint=971   Constraint=Diaphragm48.0
+   Joint=972   Constraint=Diaphragm48.0
+   Joint=973   Constraint=Diaphragm48.0
+   Joint=974   Constraint=Diaphragm48.0
+   Joint=975   Constraint=Diaphragm48.0
+   Joint=976   Constraint=Diaphragm48.0
+   Joint=977   Constraint=Diaphragm48.0
+   Joint=978   Constraint=Diaphragm51.0
+   Joint=979   Constraint=Diaphragm51.0
+   Joint=980   Constraint=Diaphragm51.0
+   Joint=981   Constraint=Diaphragm51.0
+   Joint=982   Constraint=Diaphragm51.0
+   Joint=983   Constraint=Diaphragm51.0
+   Joint=984   Constraint=Diaphragm51.0
+   Joint=985   Constraint=Diaphragm60.0
+   Joint=986   Constraint=Diaphragm60.0
+   Joint=987   Constraint=Diaphragm60.0
+   Joint=988   Constraint=Diaphragm57.0
+   Joint=989   Constraint=Diaphragm57.0
+   Joint=990   Constraint=Diaphragm57.0
+   Joint=991   Constraint=Diaphragm57.0
+   Joint=992   Constraint=Diaphragm57.0
+   Joint=993   Constraint=Diaphragm57.0
+   Joint=994   Constraint=Diaphragm57.0
+   Joint=995   Constraint=Diaphragm57.0
+   Joint=996   Constraint=Diaphragm57.0
+   Joint=997   Constraint=Diaphragm57.0
+   Joint=998   Constraint=Diaphragm57.0
+   Joint=999   Constraint=Diaphragm57.0
+   Joint=1000   Constraint=Diaphragm54.0
+   Joint=1001   Constraint=Diaphragm54.0
+   Joint=1002   Constraint=Diaphragm54.0
+   Joint=1003   Constraint=Diaphragm54.0
+   Joint=1004   Constraint=Diaphragm54.0
+   Joint=1005   Constraint=Diaphragm54.0
+   Joint=1006   Constraint=Diaphragm54.0
+   Joint=1007   Constraint=Diaphragm54.0
+   Joint=1008   Constraint=Diaphragm54.0
+   Joint=1009   Constraint=Diaphragm54.0
+   Joint=1010   Constraint=Diaphragm54.0
+   Joint=1011   Constraint=Diaphragm54.0
+   Joint=1012   Constraint=Diaphragm36.0
+   Joint=1013   Constraint=Diaphragm36.0
+   Joint=1014   Constraint=Diaphragm36.0
+   Joint=1015   Constraint=Diaphragm36.0
+   Joint=1016   Constraint=Diaphragm36.0
+   Joint=1017   Constraint=Diaphragm39.0
+   Joint=1018   Constraint=Diaphragm39.0
+   Joint=1019   Constraint=Diaphragm39.0
+   Joint=1020   Constraint=Diaphragm39.0
+   Joint=1021   Constraint=Diaphragm39.0
+   Joint=1022   Constraint=Diaphragm42.0
+   Joint=1023   Constraint=Diaphragm42.0
+   Joint=1024   Constraint=Diaphragm42.0
+   Joint=1025   Constraint=Diaphragm42.0
+   Joint=1026   Constraint=Diaphragm42.0
+   Joint=1027   Constraint=Diaphragm48.0
+   Joint=1028   Constraint=Diaphragm48.0
+   Joint=1029   Constraint=Diaphragm48.0
+   Joint=1030   Constraint=Diaphragm48.0
+   Joint=1031   Constraint=Diaphragm48.0
+   Joint=1032   Constraint=Diaphragm45.0
+   Joint=1033   Constraint=Diaphragm45.0
+   Joint=1034   Constraint=Diaphragm45.0
+   Joint=1035   Constraint=Diaphragm45.0
+   Joint=1036   Constraint=Diaphragm45.0
+   Joint=1040   Constraint=Diaphragm36.0
+   Joint=1041   Constraint=Diaphragm36.0
+   Joint=1042   Constraint=Diaphragm36.0
+   Joint=1043   Constraint=Diaphragm36.0
+   Joint=1044   Constraint=Diaphragm36.0
+   Joint=1045   Constraint=Diaphragm36.0
+   Joint=1046   Constraint=Diaphragm36.0
+   Joint=1047   Constraint=Diaphragm39.0
+   Joint=1048   Constraint=Diaphragm39.0
+   Joint=1049   Constraint=Diaphragm39.0
+   Joint=1050   Constraint=Diaphragm39.0
+   Joint=1051   Constraint=Diaphragm39.0
+   Joint=1052   Constraint=Diaphragm39.0
+   Joint=1053   Constraint=Diaphragm39.0
+ 
 TABLE:  "JOINT COORDINATES"
    Joint=1   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=0   SpecialJt=No
    Joint=2   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=6   SpecialJt=No
-   Joint=3   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=3   SpecialJt=No   GUID=d09bbe7b-1406-49d8-812f-8be0f22acdf3
+   Joint=3   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=3   SpecialJt=No   GUID=87288589-3b1b-4351-8bed-38b172ad95d1
    Joint=4   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=12   Z=6   SpecialJt=No
-   Joint=5   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=3   SpecialJt=No   GUID=950d6c5a-6f6a-4a2c-a4a8-8eca768c6453
+   Joint=5   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=3   SpecialJt=No   GUID=e9b63921-dc9f-4dfc-8a6b-9b566a8e3415
    Joint=6   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=4   Z=9   SpecialJt=Yes
    Joint=7   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=12   Z=0   SpecialJt=No
    Joint=8   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=12   Z=6   SpecialJt=No
    Joint=9   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=3   SpecialJt=No
-   Joint=10   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=3   SpecialJt=No   GUID=613a807d-a0a8-4650-8763-767ebeab5777
+   Joint=10   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=3   SpecialJt=No   GUID=ec29f5fd-ce4d-465b-b27c-2d1c5782e9f3
    Joint=11   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=0   SpecialJt=No
    Joint=12   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=6   SpecialJt=No
-   Joint=13   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=3   SpecialJt=No   GUID=26fcf669-8f17-48a7-911e-6cf41cc639ee
+   Joint=13   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=3   SpecialJt=No   GUID=b482bf77-830f-412f-b842-e56bb7feec61
    Joint=14   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=6   SpecialJt=No
-   Joint=15   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=7.5   SpecialJt=No   GUID=aee073cc-b550-4078-9db3-13947114ce39
+   Joint=15   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=7.5   SpecialJt=No   GUID=ad92a50b-2d60-4249-83a5-283f5c0780f0
    Joint=16   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=4   Z=9   SpecialJt=Yes
    Joint=17   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=0   Z=0   SpecialJt=No
    Joint=18   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=0   Z=6   SpecialJt=No
    Joint=19   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=3   SpecialJt=No
-   Joint=20   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=7.5   SpecialJt=No   GUID=a25d055d-d910-452f-bc38-6eecae6d9898
+   Joint=20   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=7.5   SpecialJt=No   GUID=70b1afee-c0e6-481e-9b80-a6390dadbe88
    Joint=21   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=8   Z=9   SpecialJt=Yes
    Joint=22   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=8   Z=9   SpecialJt=Yes
    Joint=23   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=0   Z=9   SpecialJt=No
-   Joint=24   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=7.5   SpecialJt=No   GUID=a5e196ef-cdf4-4dd6-8828-be54bd8b8b91
+   Joint=24   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=7.5   SpecialJt=No   GUID=d1c2087e-fac0-49d6-b9ae-fb6c32fd6845
    Joint=25   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=12   Z=9   SpecialJt=No
-   Joint=26   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=7.5   SpecialJt=No   GUID=9c0af531-df7a-436b-a424-7c56f543a85e
+   Joint=26   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=7.5   SpecialJt=No   GUID=69126421-c28e-478f-a4e0-36f85c15f753
    Joint=27   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=9   SpecialJt=No
-   Joint=28   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=10.5   SpecialJt=No   GUID=19b1e211-6ea0-4713-a834-5b8655952fbc
+   Joint=28   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=10.5   SpecialJt=No   GUID=624cb86c-f0ea-4c78-a5e0-09ab27ec1a2c
    Joint=29   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=4   Z=6   SpecialJt=No
-   Joint=30   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=10.5   SpecialJt=No   GUID=2aa838e2-f543-4c22-9a14-f3099ea5e1e6
+   Joint=30   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=10.5   SpecialJt=No   GUID=002f7c15-823d-4a1f-93c0-ff8309d2a6b3
    Joint=31   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=8   Z=6   SpecialJt=No
    Joint=32   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=12   Z=9   SpecialJt=No
    Joint=33   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=9   SpecialJt=No
@@ -71033,13 +71970,13 @@ TABLE:  "JOINT COORDINATES"
    Joint=266   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=30   SpecialJt=No
    Joint=267   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=2   Z=30   SpecialJt=No
    Joint=268   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=2   Z=30   SpecialJt=No
-   Joint=269   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=10.5   SpecialJt=No   GUID=c885d9c5-d165-4c2a-9c06-58f0361969a1
-   Joint=270   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=10.5   SpecialJt=No   GUID=652c449c-19ae-44d6-83dd-add326c76a58
-   Joint=271   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=13.5   SpecialJt=No   GUID=6523b3b8-5047-42e6-aec1-5ce3179c166c
-   Joint=272   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=13.5   SpecialJt=No   GUID=0e478bf6-29ac-4140-80ee-74b053d30fe9
-   Joint=273   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=13.5   SpecialJt=No   GUID=2e05caeb-4540-427c-b21a-9d666edb1aa3
-   Joint=274   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=13.5   SpecialJt=No   GUID=17740605-89cc-4507-ab99-ffc13d663ae2
-   Joint=275   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=16.5   SpecialJt=No   GUID=cf4e5990-c8f9-434f-92d6-8941eb1ab837
+   Joint=269   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=10.5   SpecialJt=No   GUID=a0664d05-b6a3-4731-b7c2-e12e98136615
+   Joint=270   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=10.5   SpecialJt=No   GUID=0728d8f9-ea02-4e4e-9126-0077681d41d0
+   Joint=271   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=13.5   SpecialJt=No   GUID=d97f67e1-f744-4072-8428-64f3c9d00386
+   Joint=272   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=13.5   SpecialJt=No   GUID=92e7476a-d603-422a-93dd-a9d2b6de8378
+   Joint=273   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=13.5   SpecialJt=No   GUID=9f21f8fb-ffec-49e2-ac4e-e550c9a1df86
+   Joint=274   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=13.5   SpecialJt=No   GUID=0a72376f-b9b8-4fe4-93d2-30c56f13020d
+   Joint=275   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=16.5   SpecialJt=No   GUID=c66b1a01-cf6b-47c8-b973-ffb1500f8fca
    Joint=276   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=4   Z=6   SpecialJt=No
    Joint=277   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8   Y=4   Z=6   SpecialJt=No
    Joint=278   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=8   Z=6   SpecialJt=No
@@ -71233,70 +72170,70 @@ TABLE:  "JOINT COORDINATES"
    Joint=466   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=6   Z=30   SpecialJt=No
    Joint=467   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=8   Z=30   SpecialJt=No
    Joint=468   CoordSys=GLOBAL   CoordType=Cartesian   XorR=10   Y=10   Z=30   SpecialJt=No
-   Joint=469   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=16.5   SpecialJt=No   GUID=e7ca9928-f704-4da4-aae3-e1506542a1e1
-   Joint=470   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=16.5   SpecialJt=No   GUID=592db648-615b-4397-8713-645b71de459c
-   Joint=471   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=16.5   SpecialJt=No   GUID=ef645557-548b-43ea-9ae7-bb163a30ba15
-   Joint=472   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=19.5   SpecialJt=No   GUID=1f9121e3-1117-4d1b-a082-4283b7c5feda
-   Joint=473   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=19.5   SpecialJt=No   GUID=ee6f7a41-02d1-4cf6-809e-31ef043c1518
-   Joint=474   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=19.5   SpecialJt=No   GUID=801aa091-9954-4c39-af82-7b9ab3f23f1e
-   Joint=475   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=19.5   SpecialJt=No   GUID=c56b541a-c810-49ed-842d-eb39a1baf73d
-   Joint=476   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=22.5   SpecialJt=No   GUID=ac5d439c-7cbe-4851-af23-2c580db67a8d
-   Joint=477   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=22.5   SpecialJt=No   GUID=34e93a40-5f0c-4356-9f9d-b2cc5b21025f
-   Joint=478   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=22.5   SpecialJt=No   GUID=047ee759-aa9c-42ae-9dc8-2fc1f8f04bbf
-   Joint=479   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=22.5   SpecialJt=No   GUID=962b895a-ac9e-438a-91de-79941b895d9a
-   Joint=480   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=25.5   SpecialJt=No   GUID=7892ef8a-75f4-4efb-9efc-a41f43356d8c
-   Joint=481   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=25.5   SpecialJt=No   GUID=2c5117b5-7b24-4df9-bb03-2a7ef2be364e
-   Joint=482   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=25.5   SpecialJt=No   GUID=0e294f59-fa59-411f-a53a-3da13b1981d2
-   Joint=483   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=25.5   SpecialJt=No   GUID=d2524d2e-1a19-42f2-9f32-02fa6ab844cd
-   Joint=484   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=28.5   SpecialJt=No   GUID=b766686e-0ecb-41ef-9897-9a2f26ca666f
-   Joint=485   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=28.5   SpecialJt=No   GUID=40020d2c-a0f5-42eb-8ab1-384c689d9bf9
-   Joint=486   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=28.5   SpecialJt=No   GUID=a852fdb1-186d-49c8-a36a-05383a38eb03
-   Joint=487   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=28.5   SpecialJt=No   GUID=53dfc54c-8f83-4766-a89f-7d2d14fa2c0c
-   Joint=488   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=31.5   SpecialJt=No   GUID=15701b8a-290f-44a3-b686-56df68bc92db
-   Joint=489   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=31.5   SpecialJt=No   GUID=a1037946-d37a-46b0-ba1b-c92cc971414b
-   Joint=490   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=31.5   SpecialJt=No   GUID=a9fa637f-78e1-48bb-a4ab-5afe42f1e27f
-   Joint=491   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=31.5   SpecialJt=No   GUID=e8c7608f-639a-4dc8-89f0-3f8aa9d6b24c
-   Joint=492   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.171429   Y=0   Z=34.542857   SpecialJt=No   GUID=d005fd54-6277-4a81-955b-3a3fa7e3c62a
+   Joint=469   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=16.5   SpecialJt=No   GUID=2c10c000-b5cb-4ef9-a388-7afd384ab0cf
+   Joint=470   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=16.5   SpecialJt=No   GUID=16e26b1f-e9bb-4a91-956f-c0f359787257
+   Joint=471   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=16.5   SpecialJt=No   GUID=f5ea6907-9e57-46ad-8e7b-bab788563009
+   Joint=472   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=19.5   SpecialJt=No   GUID=24b44c8a-7200-47cb-aade-438fc1960411
+   Joint=473   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=19.5   SpecialJt=No   GUID=569d74d4-5e9d-4f5b-ba80-e4aac3a436af
+   Joint=474   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=19.5   SpecialJt=No   GUID=50eb863a-076b-4981-a495-7fa621f22e6c
+   Joint=475   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=19.5   SpecialJt=No   GUID=c55dc832-da04-4446-932d-3ab9bfe7916b
+   Joint=476   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=22.5   SpecialJt=No   GUID=b36e364f-58cf-4ec0-8fa9-43aab5d4de06
+   Joint=477   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=22.5   SpecialJt=No   GUID=781c68c3-f002-40e8-8e6e-d04b7e7432c0
+   Joint=478   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=22.5   SpecialJt=No   GUID=32b500ce-c648-45e3-94b4-c59ffff97b62
+   Joint=479   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=22.5   SpecialJt=No   GUID=0928c9c6-7ef8-4728-b08b-2ec36e3fe65c
+   Joint=480   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=25.5   SpecialJt=No   GUID=8c3b8591-a93b-4acc-be45-026314efbd70
+   Joint=481   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=25.5   SpecialJt=No   GUID=a5dc3c94-feb7-4c5e-9c8a-5f38de8c87c3
+   Joint=482   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=25.5   SpecialJt=No   GUID=6944f3c9-d723-46a1-9916-0d46b265b1e1
+   Joint=483   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=25.5   SpecialJt=No   GUID=057db580-1750-4814-a3f1-1cca040c4f45
+   Joint=484   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=28.5   SpecialJt=No   GUID=46b7674a-081a-45f8-a3d1-62c80fe57374
+   Joint=485   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=28.5   SpecialJt=No   GUID=3edc2273-bed6-4347-a2c0-a55d267632f6
+   Joint=486   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=28.5   SpecialJt=No   GUID=36074f05-6bb6-49aa-ae2f-e4893474e0a4
+   Joint=487   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=28.5   SpecialJt=No   GUID=8cd7d079-52b3-49cc-89fa-a9ee28ea41b7
+   Joint=488   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=0   Z=31.5   SpecialJt=No   GUID=412da816-b4a7-4256-8122-113181cbd11b
+   Joint=489   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=31.5   SpecialJt=No   GUID=e44aade0-9e45-4270-8005-bcd11f93f9ac
+   Joint=490   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=31.5   SpecialJt=No   GUID=f833542d-8b0a-4662-996f-a1553ddc302d
+   Joint=491   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=31.5   SpecialJt=No   GUID=737e3627-0541-472a-be1e-c9fc7dabe934
+   Joint=492   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.171429   Y=0   Z=34.542857   SpecialJt=No   GUID=d11d52ef-654a-4fa8-a9da-b621108a2d14
    Joint=493   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=12   Z=33   SpecialJt=No   GUID=738dd4b9-e099-45bc-bca7-335a886e1105
    Joint=494   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=33   SpecialJt=No   GUID=c53bfcc5-ca39-4f06-9434-447b4b53c7fd
-   Joint=495   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=34.5   SpecialJt=No   GUID=1cb8bd94-4a1f-4629-8ded-b9b97d96424d
-   Joint=496   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.171429   Y=12   Z=34.542857   SpecialJt=No   GUID=544c405f-8980-48f2-b683-b5d9f48e0f00
-   Joint=497   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.505051   Y=0   Z=37.545455   SpecialJt=No   GUID=68b7f711-254c-4052-bf78-76411cbed3bd
-   Joint=498   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=37.5   SpecialJt=No   GUID=61bf662d-e646-4126-b873-21fbcc2c92bf
-   Joint=499   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.505051   Y=12   Z=37.545455   SpecialJt=No   GUID=4987e8a1-03dd-4187-a2a0-35d19a593622
+   Joint=495   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=34.5   SpecialJt=No   GUID=29c89e70-3e07-46f1-954b-7c620d53ce6a
+   Joint=496   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.171429   Y=12   Z=34.542857   SpecialJt=No   GUID=99b2a9df-9e9e-40ad-8c90-dc14b2bd0c50
+   Joint=497   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.505051   Y=0   Z=37.545455   SpecialJt=No   GUID=01c7d6bd-72de-4a74-9066-4de10e54223c
+   Joint=498   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=37.5   SpecialJt=No   GUID=0b07f1f4-9de3-4cdf-a9b9-51e9b38b28a1
+   Joint=499   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.505051   Y=12   Z=37.545455   SpecialJt=No   GUID=9d92acad-2ce0-46de-a125-aeeb8b14c2d1
    Joint=500   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.333333   Y=6   Z=34.5   SpecialJt=No   GUID=2a3d43aa-5346-4bff-a14e-fc4ede3612e1
-   Joint=501   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83871   Y=0   Z=40.548387   SpecialJt=No   GUID=d4ea418f-e815-43c3-b879-460000bfc001
-   Joint=502   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=40.5   SpecialJt=No   GUID=fb7a4652-84f9-4ae7-a5ed-ac381aaeaccb
-   Joint=503   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83871   Y=12   Z=40.548387   SpecialJt=No   GUID=f39233df-3856-4fe4-9559-198bc7be0170
+   Joint=501   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83871   Y=0   Z=40.548387   SpecialJt=No   GUID=bde6b6f8-4ca1-4e07-8853-a8052d242010
+   Joint=502   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=40.5   SpecialJt=No   GUID=37d5d0e5-d886-4aa6-90ef-8d204c0bf945
+   Joint=503   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6.83871   Y=12   Z=40.548387   SpecialJt=No   GUID=424c2c36-5f87-4ec8-8b4a-aec87e6cf727
    Joint=504   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=6   Z=37.5   SpecialJt=No   GUID=e255caf3-10ff-45b1-b428-0148d1536499
-   Joint=505   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.172414   Y=0   Z=43.551724   SpecialJt=No   GUID=67643403-cb35-4292-bfa9-0929bd76a801
-   Joint=506   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=43.5   SpecialJt=No   GUID=db654b36-bd9e-4ffe-87e2-1268921184ce
-   Joint=507   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.172414   Y=12   Z=43.551724   SpecialJt=No   GUID=4e270d38-6f3f-4ea5-a95b-7545078a177e
+   Joint=505   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.172414   Y=0   Z=43.551724   SpecialJt=No   GUID=2ee05fc0-a641-486e-b72e-26224f493185
+   Joint=506   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=43.5   SpecialJt=No   GUID=aced01a6-83b0-4140-8654-b3a9e8c9ecfe
+   Joint=507   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.172414   Y=12   Z=43.551724   SpecialJt=No   GUID=c88bf0f6-21b9-439d-80e8-6ce6c48abfa8
    Joint=508   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.666667   Y=6   Z=40.5   SpecialJt=No   GUID=ea3d6920-e71f-4b09-8254-cef6b48637a4
-   Joint=509   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.506173   Y=0   Z=46.555556   SpecialJt=No   GUID=c4dc6602-3256-4618-9816-7ce1e1066f56
-   Joint=510   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=46.5   SpecialJt=No   GUID=f4f7cde9-20f8-4304-9d41-36517c95ed62
-   Joint=511   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.506173   Y=12   Z=46.555556   SpecialJt=No   GUID=8e35e1de-a4f3-430a-82de-c462b927e5fb
+   Joint=509   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.506173   Y=0   Z=46.555556   SpecialJt=No   GUID=85e59c9c-1068-4209-92ac-94ab576cd0d5
+   Joint=510   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=46.5   SpecialJt=No   GUID=dc9b6f37-e2bd-4106-8d9f-caddfb970f6a
+   Joint=511   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.506173   Y=12   Z=46.555556   SpecialJt=No   GUID=5eb9b230-fd0e-4381-867e-5edb9fae2e9a
    Joint=512   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.333333   Y=6   Z=43.5   SpecialJt=No   GUID=a4f09bce-03c4-4730-84fa-fd963f45d1bf
    Joint=513   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=2   Z=33   SpecialJt=No   GUID=e7d8cc37-5117-47a2-99b1-267a7e396fa8
    Joint=514   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=4   Z=33   SpecialJt=No   GUID=3cdf3c08-bac6-441a-bf92-ef325f84d85d
    Joint=515   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=6   Z=33   SpecialJt=No   GUID=9467a5f7-3255-49ec-aa61-367cfa775dad
    Joint=516   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=8   Z=33   SpecialJt=No   GUID=a717fa8c-9d86-4505-b87f-03f47281f441
    Joint=517   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=10   Z=33   SpecialJt=No   GUID=177391e9-cdde-4282-96f4-1e23c6973ec2
-   Joint=518   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=0   Z=49.56   SpecialJt=No   GUID=429a4428-aa10-4646-b72e-a7d81154f8a1
-   Joint=519   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=49.5   SpecialJt=No   GUID=58ae7387-2830-445f-bf95-04c17576fd47
-   Joint=520   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=12   Z=49.56   SpecialJt=No   GUID=847d6937-733a-47c8-978e-750ccd9092b9
+   Joint=518   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=0   Z=49.56   SpecialJt=No   GUID=fa29e959-da28-4acf-95fe-9a060ecd8868
+   Joint=519   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=49.5   SpecialJt=No   GUID=f0c4e2a1-7af1-4612-ab8a-2c63d6a6321a
+   Joint=520   CoordSys=GLOBAL   CoordType=Cartesian   XorR=7.84   Y=12   Z=49.56   SpecialJt=No   GUID=c4e35208-304a-48d5-9824-ea38a4dd7858
    Joint=521   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=6   Z=46.5   SpecialJt=No   GUID=baea4534-574f-40eb-9ab5-11cf6ff329aa
-   Joint=522   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.173913   Y=0   Z=52.565217   SpecialJt=No   GUID=ef9bb06a-f6e6-4c16-85a7-913f1ce94a6c
-   Joint=523   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=52.5   SpecialJt=No   GUID=f222fc59-1a9d-457b-9e73-5a523b296a07
-   Joint=524   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.173913   Y=12   Z=52.565217   SpecialJt=No   GUID=5c224a12-fdad-4baa-a747-7ce30406dcc1
+   Joint=522   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.173913   Y=0   Z=52.565217   SpecialJt=No   GUID=b6a7696c-2a8a-4d30-b5f5-bef3340271b2
+   Joint=523   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=52.5   SpecialJt=No   GUID=7296e1a7-6fa8-495d-a32b-ae903177f644
+   Joint=524   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.173913   Y=12   Z=52.565217   SpecialJt=No   GUID=d7a9c665-9e0a-410a-816b-53b35b05adf3
    Joint=525   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.666667   Y=6   Z=49.5   SpecialJt=No   GUID=f2bcdc87-a723-4930-825b-c3ee1c6fdfc3
-   Joint=526   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.507937   Y=0   Z=55.571429   SpecialJt=No   GUID=3fb1f26d-ba2b-4701-ba6e-15685a6da0a6
-   Joint=527   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=55.5   SpecialJt=No   GUID=d25bf0f1-7802-4f6c-929d-b0b5d9b66baa
-   Joint=528   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.507937   Y=12   Z=55.571429   SpecialJt=No   GUID=18619267-bea3-48c7-8ecd-151e29041817
+   Joint=526   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.507937   Y=0   Z=55.571429   SpecialJt=No   GUID=3b53d0ea-e408-42c6-9aca-46e74ea361fd
+   Joint=527   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=55.5   SpecialJt=No   GUID=e33f3df3-3eb7-47b7-983d-60932ed57337
+   Joint=528   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.507937   Y=12   Z=55.571429   SpecialJt=No   GUID=e1d28a50-0a56-441a-9e84-f74b306dc1c8
    Joint=529   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4.333333   Y=6   Z=52.5   SpecialJt=No   GUID=bc4ad692-c10d-44fa-804d-766757d9cd8c
-   Joint=530   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.842105   Y=0   Z=58.578947   SpecialJt=No   GUID=bcd20dd6-3e11-4081-a318-fa7e65eeae85
-   Joint=531   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=58.5   SpecialJt=No   GUID=45926d20-04ca-4ddc-890d-58d854e7d6be
-   Joint=532   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.842105   Y=12   Z=58.578947   SpecialJt=No   GUID=76c68d91-3c53-4e92-bd39-e544e8a62f1b
+   Joint=530   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.842105   Y=0   Z=58.578947   SpecialJt=No   GUID=5a43bc3d-885a-436c-8d6d-f8744430332e
+   Joint=531   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=58.5   SpecialJt=No   GUID=67c49ff0-9edd-43ea-b710-1d44f272498d
+   Joint=532   CoordSys=GLOBAL   CoordType=Cartesian   XorR=8.842105   Y=12   Z=58.578947   SpecialJt=No   GUID=72155665-b441-4b65-b1e9-559b6162aa28
    Joint=533   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5   Y=6   Z=55.5   SpecialJt=No   GUID=42d6e4cc-1724-418c-873e-28ed2b38921e
    Joint=537   CoordSys=GLOBAL   CoordType=Cartesian   XorR=5.666667   Y=6   Z=58.5   SpecialJt=No   GUID=52df8a7c-c7ec-4669-a9cc-9cb46b964bc9
    Joint=563   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=12   Z=33   SpecialJt=No   GUID=c0aab100-9b9b-4841-bf1f-1028b3ef3170
@@ -71699,6 +72636,68 @@ TABLE:  "JOINT COORDINATES"
    Joint=1052   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=8   Z=39   SpecialJt=No   GUID=d4a1758f-d054-4819-a1bb-393c4368b1d7
    Joint=1053   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=10   Z=39   SpecialJt=No   GUID=5855aa50-63c0-4103-8746-f248c19e137d
  
+TABLE:  "JOINT LOADS - FORCE"
+   Joint=1   LoadPat="Unit X - 0.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=1fca5990-ae05-4504-952a-6b5f6ec79dcd
+   Joint=1   LoadPat="Unit Y - 0.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=b004b9c4-b6ad-4486-87d0-3aedad503e69
+   Joint=1   LoadPat="Unit Moment - 0.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=b520e290-644b-41a7-87f7-a6ba3662b829
+   Joint=2   LoadPat="Unit X - 6.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=6a75dba6-94ce-4b44-a279-9a954645f0f2
+   Joint=2   LoadPat="Unit Y - 6.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=d5c62ba6-2a8f-426f-9419-869360973585
+   Joint=2   LoadPat="Unit Moment - 6.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=7fccdea5-b364-4e02-800b-f521b8ac000b
+   Joint=54   LoadPat="Unit X - 12.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=c3cc166c-321e-427d-b487-4ac1cf447b32
+   Joint=54   LoadPat="Unit Y - 12.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=d5eb162c-1f28-46a4-abab-f6d43ad1e964
+   Joint=54   LoadPat="Unit Moment - 12.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=380b4f7b-ab40-421b-96ad-3d8a6bdf8c35
+   Joint=58   LoadPat="Unit X - 9.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=b6913942-4877-4707-8d55-3ac56670d5c1
+   Joint=58   LoadPat="Unit Y - 9.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=44a90c7e-0b25-4047-af94-63d579214f83
+   Joint=58   LoadPat="Unit Moment - 9.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=d9bd0932-1fcc-441b-8733-e6ad6381f135
+   Joint=60   LoadPat="Unit X - 18.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=b0735a94-3214-47fa-a443-b227b7564836
+   Joint=60   LoadPat="Unit Y - 18.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=21e98574-2d74-463e-8c8b-085a8f52c2c2
+   Joint=60   LoadPat="Unit Moment - 18.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=0fd37590-c2fd-454c-8462-ae52f549e3b0
+   Joint=64   LoadPat="Unit X - 15.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=1962ca89-a160-4c2a-a10d-492d4896bce6
+   Joint=64   LoadPat="Unit Y - 15.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=8799beeb-3042-4b8a-a98f-69c00b577844
+   Joint=64   LoadPat="Unit Moment - 15.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=9e7c2589-647b-4bcc-ab81-c00924cbe2e9
+   Joint=66   LoadPat="Unit X - 24.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=50ea0f97-1daf-48d8-9555-2df42865a25d
+   Joint=66   LoadPat="Unit Y - 24.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=fdeece98-8d2c-4362-9e05-fb7764127d59
+   Joint=66   LoadPat="Unit Moment - 24.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=9f6d53cb-5f13-443c-825d-b28906a0339a
+   Joint=70   LoadPat="Unit X - 21.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=736a450f-63e8-4afe-86bc-5e2243e45b05
+   Joint=70   LoadPat="Unit Y - 21.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=7a69176e-d524-47b9-9e3f-52092e2dcad1
+   Joint=70   LoadPat="Unit Moment - 21.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=1bd1b331-5cb6-4cf9-ab2a-01cb2df7134f
+   Joint=72   LoadPat="Unit X - 30.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=0686aeb8-95f4-43e8-b638-f961eebbc706
+   Joint=72   LoadPat="Unit Y - 30.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=6520aa29-0de4-4519-ab91-782922d6c302
+   Joint=72   LoadPat="Unit Moment - 30.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=b32f4913-911c-4c98-a6cd-506b8ee49cd1
+   Joint=76   LoadPat="Unit X - 27.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=7ab86fb2-7ec8-486f-9cc5-017ac4b7d4ee
+   Joint=76   LoadPat="Unit Y - 27.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=3d23337f-71f7-4989-95a7-08098ab7ae63
+   Joint=76   LoadPat="Unit Moment - 27.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=7b740ca3-a7ba-41d5-916c-0c102cb34693
+   Joint=493   LoadPat="Unit X - 33.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=7697a34e-2529-487e-a059-096ce3b344b5
+   Joint=493   LoadPat="Unit Y - 33.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=0c085f1c-f9b4-4912-bf96-434c717fafc8
+   Joint=493   LoadPat="Unit Moment - 33.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=e09c8fab-9c1a-45af-9f9d-f560372cbb38
+   Joint=605   LoadPat="Unit X - 36.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=b818e18b-0f1e-46e8-8b2b-cca452bd0c55
+   Joint=605   LoadPat="Unit Y - 36.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=2b5f9250-a668-47d0-a24d-b6aaa18e425f
+   Joint=605   LoadPat="Unit Moment - 36.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=02a3eb81-0774-4fdc-889c-9d37bad3b699
+   Joint=609   LoadPat="Unit X - 39.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=946f6ca7-84de-47c5-8367-a021da383ac6
+   Joint=609   LoadPat="Unit Y - 39.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=75a48433-82c9-4a88-aa17-2490faa04f19
+   Joint=609   LoadPat="Unit Moment - 39.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=f1317bf5-a11d-48b8-8d78-8e11d30ffc8e
+   Joint=613   LoadPat="Unit X - 42.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=36b7bc63-07e5-48d4-9b7f-c227d742dc04
+   Joint=613   LoadPat="Unit Y - 42.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=db66148a-da0c-4858-a5f6-4fc0745ca79e
+   Joint=613   LoadPat="Unit Moment - 42.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=2e6cc899-794e-4d1c-8b4b-064a5c5ed74c
+   Joint=617   LoadPat="Unit X - 45.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=14aee8a8-431f-4065-8f78-94f574571679
+   Joint=617   LoadPat="Unit Y - 45.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=42eda19c-e0c0-454e-a3e3-b41c7aa25137
+   Joint=617   LoadPat="Unit Moment - 45.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=ef13cb89-830a-43c8-afe6-4935118aaf65
+   Joint=621   LoadPat="Unit X - 48.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=bc5f97d4-c833-46e6-8f07-bdd75f8318ef
+   Joint=621   LoadPat="Unit Y - 48.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=24b88b5f-8adc-4b90-bc6e-5646b7174e93
+   Joint=621   LoadPat="Unit Moment - 48.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=652864bd-7c46-4c7a-83de-50b9db27dc20
+   Joint=625   LoadPat="Unit X - 51.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=bf12f214-e014-4777-ac22-cf7df4a2cdc3
+   Joint=625   LoadPat="Unit Y - 51.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=84492bcf-8da7-4f96-b305-34e45811a1c7
+   Joint=625   LoadPat="Unit Moment - 51.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=56753368-0b7e-4117-82aa-2541950781be
+   Joint=629   LoadPat="Unit X - 54.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=86dd8e18-06e3-41dc-94a7-0a1208b0fdd6
+   Joint=629   LoadPat="Unit Y - 54.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=1a27c55f-6cab-40cd-835f-248e3683a54d
+   Joint=629   LoadPat="Unit Moment - 54.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=ce07d8ee-797a-4487-a8f6-3606babf23ef
+   Joint=633   LoadPat="Unit X - 57.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=cb7472b9-d7e3-4618-bcb4-492634f00283
+   Joint=633   LoadPat="Unit Y - 57.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=ad23bbe6-d72b-4c94-8be0-82c8e61cfd7e
+   Joint=633   LoadPat="Unit Moment - 57.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=db57e55a-9258-4360-b3f8-7585d322ad85
+   Joint=637   LoadPat="Unit X - 60.0"   CoordSys=GLOBAL   F1=1000   F2=0   F3=0   M1=0   M2=0   M3=0   GUID=59b4cbdb-d7b7-4f5d-a614-423c8bff6e22
+   Joint=637   LoadPat="Unit Y - 60.0"   CoordSys=GLOBAL   F1=0   F2=1000   F3=0   M1=0   M2=0   M3=0   GUID=f85e46db-e91b-4298-b82a-dd57adb5fcea
+   Joint=637   LoadPat="Unit Moment - 60.0"   CoordSys=GLOBAL   F1=0   F2=0   F3=0   M1=0   M2=0   M3=1000   GUID=020ebaee-3eb3-45d4-817f-ee4e764cffdf
+ 
 TABLE:  "JOINT PATTERN DEFINITIONS"
    Pattern=Default
  
@@ -71713,19 +72712,139 @@ TABLE:  "JOINT RESTRAINT ASSIGNMENTS"
    Joint=160   U1=Yes   U2=Yes   U3=Yes   R1=Yes   R2=Yes   R3=Yes
  
 TABLE:  "LOAD CASE DEFINITIONS"
-   Case=DEAD   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes
-   Case=MODAL   Type=LinModal   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Other   DesActOpt="Prog Det"   DesignAct=Other   AutoType=None   RunCase=Yes
-   Case=GM1-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM1-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM2-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM2-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM3-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM3-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM4-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
-   Case=GM4-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=Yes
+   Case=DEAD   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=No
+   Case=MODAL   Type=LinModal   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Other   DesActOpt="Prog Det"   DesignAct=Other   AutoType=None   RunCase=No
+   Case=GM1-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM1-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM2-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM2-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM3-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM3-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM4-NS   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case=GM4-EW   Type=LinModHist   InitialCond=Zero   ModalCase=MODAL   DesTypeOpt="Prog Det"   DesignType=Quake   DesActOpt="Prog Det"   DesignAct="Short-Term Composite"   AutoType=None   RunCase=No
+   Case="Unit X - 0.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=ed6b1cf2-6d51-4e24-948a-a91ceb6fc29a
+   Case="Unit X - 6.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=19a1909c-9f7e-480b-8774-b5f03234eac1
+   Case="Unit X - 9.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=1a53bb38-1cd1-4570-9dad-87f536cba6c4
+   Case="Unit X - 12.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=a05deca9-ab0c-44f7-977f-85189adaa18d
+   Case="Unit X - 15.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=35f7276a-b474-4493-a881-15a2ef421cfc
+   Case="Unit X - 18.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=da7b651e-08ab-41a0-ad0b-07a8fd333413
+   Case="Unit X - 21.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=d3d07c5f-8c39-4213-b954-dec0dd6bdab0
+   Case="Unit X - 24.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=5363ba1e-93eb-45b2-b3d0-15d8f0586a01
+   Case="Unit X - 27.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=418a2937-f816-4877-ac6d-fb705ac02404
+   Case="Unit X - 30.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=7acddff5-1df2-4866-a86c-13f11ac999e6
+   Case="Unit X - 33.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=34ee093f-5b58-471a-be65-279cc59deb6b
+   Case="Unit X - 36.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=0f3daf4b-ef3d-4b52-a184-0dbe6512bde7
+   Case="Unit X - 39.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=1a13f05a-16f9-4c6c-82d1-00691a8947cb
+   Case="Unit X - 42.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=2cd6716a-b644-44f5-8319-d090c0960fcd
+   Case="Unit X - 45.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=72d77f55-81d5-4a64-abc9-e1b27f3165df
+   Case="Unit X - 48.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=b1b94411-7404-4465-bb84-5578885c5c64
+   Case="Unit X - 51.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=7795d26c-8586-4269-92c2-3f469ae6342e
+   Case="Unit X - 54.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=b58e9a03-a677-49bb-9353-32149d65e68e
+   Case="Unit X - 57.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=6ccf2112-c740-4067-b344-0a7dbbc1cb51
+   Case="Unit X - 60.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=4afdd28a-6414-416d-a63e-225f2dd04be3
+   Case="Unit Y - 0.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=b991ef38-3fcd-4615-a0b5-938a4a8e7f19
+   Case="Unit Y - 6.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=530ef880-af64-40f5-9def-9bf7a59bf1cd
+   Case="Unit Y - 9.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=17a69df7-1516-443f-981a-ee159f276a6a
+   Case="Unit Y - 12.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=8dc337d0-b3b8-415e-bd05-f57d6f5a3f98
+   Case="Unit Y - 15.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=f16e01ff-0a13-40c7-80df-1536e39747ec
+   Case="Unit Y - 18.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=437fe940-5241-47eb-8330-011b2c8ed1a3
+   Case="Unit Y - 21.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=2938675b-8c4e-4b01-89e8-5bed9c948d80
+   Case="Unit Y - 24.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=00bcbbd3-0da3-4731-ad0a-1cc0947f7a11
+   Case="Unit Y - 27.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=c48644b5-29b2-47a9-8a00-bb2be0ac1ece
+   Case="Unit Y - 30.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=64e2191f-f007-410f-9952-9c8d1ed07d72
+   Case="Unit Y - 33.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=217a2325-a39e-41ef-8414-36148f8bf04e
+   Case="Unit Y - 36.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=3ccc4b8b-a3f6-4b0c-afc5-c19d93d1dad6
+   Case="Unit Y - 39.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=921e5a7e-67d9-40c4-a77c-86221fe4093c
+   Case="Unit Y - 42.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=24b8da2b-56a5-4837-aac0-e65f99c4bbb1
+   Case="Unit Y - 45.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=49d4d0d2-87f6-4db3-b724-4f0808919a82
+   Case="Unit Y - 48.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=7e9ed416-8e6b-4d8d-9202-26bb24235160
+   Case="Unit Y - 51.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=2c8bd49d-d5a2-489c-8a21-156df43eca4b
+   Case="Unit Y - 54.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=af409f30-6689-4fb7-a4d0-c8b8a67ad03e
+   Case="Unit Y - 57.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=765fcf6f-131e-4dc4-b299-ffc83709f854
+   Case="Unit Y - 60.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=16698424-e2cc-4979-80c3-7cc5677ae00c
+   Case="Unit Moment - 0.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=9a06ad2a-322d-40fa-9106-9f6c5bef0f90
+   Case="Unit Moment - 6.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=30437a53-463d-433b-8430-34dd136a3835
+   Case="Unit Moment - 9.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=09b85674-e572-46c3-8733-ae641189abd1
+   Case="Unit Moment - 12.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=bbcf4fc6-3501-4cd5-a337-f1ba3e2e2654
+   Case="Unit Moment - 15.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=8e99d0d8-30ba-4092-9030-a5ec6ed1b03e
+   Case="Unit Moment - 18.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=1703bc29-826b-42fc-bcd3-5a55a5b86588
+   Case="Unit Moment - 21.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=a1c4aa4e-1dbb-4885-87d2-02809d403543
+   Case="Unit Moment - 24.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=a827ca85-3f41-471f-ba3d-ac8df5a281cb
+   Case="Unit Moment - 27.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=a3abe060-8e7e-4b6f-b57e-1003ff5b23c1
+   Case="Unit Moment - 30.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=919c1473-b48c-4d57-95f7-555e5b001052
+   Case="Unit Moment - 33.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=2d344d12-e633-41df-b3e8-3361b0bf1c0d
+   Case="Unit Moment - 36.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=a41f3e3d-31bd-4341-a01a-443f2907ff74
+   Case="Unit Moment - 39.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=c572d80b-5ddb-4a78-b75b-282a672bd8fb
+   Case="Unit Moment - 42.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=21b794c9-b45d-4a35-8e10-7ae0ea7adb41
+   Case="Unit Moment - 45.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=62f64703-d5ad-4cd4-a265-38be94e5225c
+   Case="Unit Moment - 48.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=e38850f0-5166-46fb-9bae-5d83978498c4
+   Case="Unit Moment - 51.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=263a5ad7-e46b-4843-b054-2fdb01fb7a6d
+   Case="Unit Moment - 54.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=3b64803f-f31d-4427-abbe-1f0b503c7d6c
+   Case="Unit Moment - 57.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=30e05853-99d6-4031-8531-95632b933163
+   Case="Unit Moment - 60.0"   Type=LinStatic   InitialCond=Zero   DesTypeOpt="Prog Det"   DesignType=Dead   DesActOpt="Prog Det"   DesignAct=Non-Composite   AutoType=None   RunCase=Yes   GUID=39916d90-cf04-4f55-a097-8f77283e57fb
  
 TABLE:  "LOAD PATTERN DEFINITIONS"
    LoadPat=DEAD   DesignType=Dead   SelfWtMult=1
+   LoadPat="Unit X - 0.0"   DesignType=Dead   SelfWtMult=0   GUID=b39defc1-6ff9-44ab-a841-e44e739ceaac
+   LoadPat="Unit X - 6.0"   DesignType=Dead   SelfWtMult=0   GUID=b9e3db6d-5b37-4bc3-b2ef-8d0a61888dcf
+   LoadPat="Unit X - 9.0"   DesignType=Dead   SelfWtMult=0   GUID=57286ae8-8d2a-44f6-a718-6fe805172f2d
+   LoadPat="Unit X - 12.0"   DesignType=Dead   SelfWtMult=0   GUID=a80c370e-ed8a-43ab-857a-4158a0bd0d6f
+   LoadPat="Unit X - 15.0"   DesignType=Dead   SelfWtMult=0   GUID=916e33eb-a381-4838-abdc-0235f8beb786
+   LoadPat="Unit X - 18.0"   DesignType=Dead   SelfWtMult=0   GUID=4cb8d301-1297-497e-9b5e-78c4108ee26f
+   LoadPat="Unit X - 21.0"   DesignType=Dead   SelfWtMult=0   GUID=7af0d79a-aac7-40dc-b4b5-56ba3db30879
+   LoadPat="Unit X - 24.0"   DesignType=Dead   SelfWtMult=0   GUID=5f21f91e-f629-41ae-ad57-6f8fc55fc161
+   LoadPat="Unit X - 27.0"   DesignType=Dead   SelfWtMult=0   GUID=502ed24d-fbbd-4359-9a04-2b0b4d2a7f53
+   LoadPat="Unit X - 30.0"   DesignType=Dead   SelfWtMult=0   GUID=e472416f-433e-4c54-ad6b-99420764ce36
+   LoadPat="Unit X - 33.0"   DesignType=Dead   SelfWtMult=0   GUID=81ea47f6-1bf2-43e6-85e1-4cd47419e1b7
+   LoadPat="Unit X - 36.0"   DesignType=Dead   SelfWtMult=0   GUID=99cda209-977d-4788-9d38-8c59f6d0a4f2
+   LoadPat="Unit X - 39.0"   DesignType=Dead   SelfWtMult=0   GUID=b15dd86d-7c45-4eca-a235-9e2a602c987d
+   LoadPat="Unit X - 42.0"   DesignType=Dead   SelfWtMult=0   GUID=e4b7232c-9dbc-40ab-94ab-ec8bd5fe4a46
+   LoadPat="Unit X - 45.0"   DesignType=Dead   SelfWtMult=0   GUID=189b2dae-dee6-4887-8bf3-a51d491248ce
+   LoadPat="Unit X - 48.0"   DesignType=Dead   SelfWtMult=0   GUID=7083e5fe-1bc4-4379-ad58-6ebf455923d7
+   LoadPat="Unit X - 51.0"   DesignType=Dead   SelfWtMult=0   GUID=3f716c33-484e-487e-98b0-07f4fd61397c
+   LoadPat="Unit X - 54.0"   DesignType=Dead   SelfWtMult=0   GUID=386eecd4-4d6f-4f49-aba8-80d598115809
+   LoadPat="Unit X - 57.0"   DesignType=Dead   SelfWtMult=0   GUID=e87384a7-0345-43cc-971e-609cd2a83816
+   LoadPat="Unit X - 60.0"   DesignType=Dead   SelfWtMult=0   GUID=40c3e0c5-b5c8-4327-9488-6ab7717638b5
+   LoadPat="Unit Y - 0.0"   DesignType=Dead   SelfWtMult=0   GUID=833e7290-06ef-4ba2-b415-61e104fda10b
+   LoadPat="Unit Y - 6.0"   DesignType=Dead   SelfWtMult=0   GUID=66c43cc7-26bd-4f56-a2c5-7b2865098594
+   LoadPat="Unit Y - 9.0"   DesignType=Dead   SelfWtMult=0   GUID=5fa656b8-3f93-42eb-b8f0-1593fcaff502
+   LoadPat="Unit Y - 12.0"   DesignType=Dead   SelfWtMult=0   GUID=52457ae2-45e3-4329-9d1c-57003b180469
+   LoadPat="Unit Y - 15.0"   DesignType=Dead   SelfWtMult=0   GUID=962ac945-d41f-491b-bd2b-3f15cba3d227
+   LoadPat="Unit Y - 18.0"   DesignType=Dead   SelfWtMult=0   GUID=4c9ba184-9d07-4bd6-9b62-bd4c1fa86ebe
+   LoadPat="Unit Y - 21.0"   DesignType=Dead   SelfWtMult=0   GUID=9a914c9a-3c16-4f3c-aaa4-64717eaa43f1
+   LoadPat="Unit Y - 24.0"   DesignType=Dead   SelfWtMult=0   GUID=567d0221-e5b6-4e6f-85b2-d85aebfdfd22
+   LoadPat="Unit Y - 27.0"   DesignType=Dead   SelfWtMult=0   GUID=80f07d01-8f4b-40e5-969f-69ef0e3d1836
+   LoadPat="Unit Y - 30.0"   DesignType=Dead   SelfWtMult=0   GUID=6b0d3d79-04f9-4177-a7ed-c2da85af9ec7
+   LoadPat="Unit Y - 33.0"   DesignType=Dead   SelfWtMult=0   GUID=90e80713-7b57-4633-8060-6143a92cbefe
+   LoadPat="Unit Y - 36.0"   DesignType=Dead   SelfWtMult=0   GUID=60c05055-718d-4f16-8590-ce9e7ea44bc0
+   LoadPat="Unit Y - 39.0"   DesignType=Dead   SelfWtMult=0   GUID=8e0c39df-8561-41aa-8324-5101b02329de
+   LoadPat="Unit Y - 42.0"   DesignType=Dead   SelfWtMult=0   GUID=69dc21ea-e571-475b-8d6c-c24f52822f81
+   LoadPat="Unit Y - 45.0"   DesignType=Dead   SelfWtMult=0   GUID=f4fed327-e0ce-4da1-889d-6bcd65a7fe7a
+   LoadPat="Unit Y - 48.0"   DesignType=Dead   SelfWtMult=0   GUID=4f209cbd-6c42-40a7-8124-aea609250715
+   LoadPat="Unit Y - 51.0"   DesignType=Dead   SelfWtMult=0   GUID=6c13e676-3e48-466f-b5c7-126afe4c4524
+   LoadPat="Unit Y - 54.0"   DesignType=Dead   SelfWtMult=0   GUID=69f4a16f-480a-419f-a613-63c9a6ef6ec3
+   LoadPat="Unit Y - 57.0"   DesignType=Dead   SelfWtMult=0   GUID=10d3e651-5edc-4b6f-9d94-8676b7d13f7a
+   LoadPat="Unit Y - 60.0"   DesignType=Dead   SelfWtMult=0   GUID=6a016671-3806-4455-853f-a473793e9a2a
+   LoadPat="Unit Moment - 0.0"   DesignType=Dead   SelfWtMult=0   GUID=b817176e-ca3c-4920-bf86-3610a9aed9ae
+   LoadPat="Unit Moment - 6.0"   DesignType=Dead   SelfWtMult=0   GUID=8b555659-2391-4ebb-b339-504fefc1af18
+   LoadPat="Unit Moment - 9.0"   DesignType=Dead   SelfWtMult=0   GUID=2e50b7db-e265-41a8-84ca-ae8cc7b5fa28
+   LoadPat="Unit Moment - 12.0"   DesignType=Dead   SelfWtMult=0   GUID=a857526c-18a4-475a-96e6-d109a9eb784a
+   LoadPat="Unit Moment - 15.0"   DesignType=Dead   SelfWtMult=0   GUID=4d694e15-ebc8-41e4-996c-3b79d5c20b20
+   LoadPat="Unit Moment - 18.0"   DesignType=Dead   SelfWtMult=0   GUID=bea987ab-ba96-4c63-9530-744cea584013
+   LoadPat="Unit Moment - 21.0"   DesignType=Dead   SelfWtMult=0   GUID=bb79c399-70e9-4769-ade3-056940811cc0
+   LoadPat="Unit Moment - 24.0"   DesignType=Dead   SelfWtMult=0   GUID=3e44fac5-a2f4-4b96-8e26-11608f7664ee
+   LoadPat="Unit Moment - 27.0"   DesignType=Dead   SelfWtMult=0   GUID=4831a1db-e152-499c-9e5d-92ccfc61c4be
+   LoadPat="Unit Moment - 30.0"   DesignType=Dead   SelfWtMult=0   GUID=b70c3ffa-59fe-486f-9a96-c818c52c0166
+   LoadPat="Unit Moment - 33.0"   DesignType=Dead   SelfWtMult=0   GUID=78343cce-c7fc-4cb7-abc7-713d1fcc1fbf
+   LoadPat="Unit Moment - 36.0"   DesignType=Dead   SelfWtMult=0   GUID=4d54cda2-5707-4867-b4e5-a2d76d2f9c70
+   LoadPat="Unit Moment - 39.0"   DesignType=Dead   SelfWtMult=0   GUID=3882e46e-c234-4f58-810a-0fbb6d50cdc3
+   LoadPat="Unit Moment - 42.0"   DesignType=Dead   SelfWtMult=0   GUID=f9630fcf-ab4d-48c1-866d-48f7794a88f7
+   LoadPat="Unit Moment - 45.0"   DesignType=Dead   SelfWtMult=0   GUID=b0174498-4c0b-4826-9172-fcd10d42107b
+   LoadPat="Unit Moment - 48.0"   DesignType=Dead   SelfWtMult=0   GUID=51abc820-a3f7-408a-8471-8c7f40100277
+   LoadPat="Unit Moment - 51.0"   DesignType=Dead   SelfWtMult=0   GUID=9c8502cb-918b-49ec-aa71-4751fcf275a0
+   LoadPat="Unit Moment - 54.0"   DesignType=Dead   SelfWtMult=0   GUID=5258287e-06d3-445b-b9b0-303b34dc360e
+   LoadPat="Unit Moment - 57.0"   DesignType=Dead   SelfWtMult=0   GUID=09c6a3f0-eda3-4f03-88e9-e6da3ec6d763
+   LoadPat="Unit Moment - 60.0"   DesignType=Dead   SelfWtMult=0   GUID=6e1b64ec-e08d-4212-91fd-648292dd6c16
  
 TABLE:  "MASS SOURCE"
    MassSource=MSSSRC1   Elements=No   Masses=No   Loads=Yes   IsDefault=Yes   LoadPat=DEAD   Multiplier=1

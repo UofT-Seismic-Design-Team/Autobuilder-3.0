@@ -182,22 +182,35 @@ class BracingScheme(QDialog):
         '''Update coordinates and material associated with current bracing'''
         # problematic when currname isn't defined?
         currName = self.bracingNameEdit.toPlainText()
-        if  currName != "":
+        if currName != "":
             newBracing = self.tower.bracings[currName]
             # delete all existing definitions
             newBracing.members = []
             newBracing.nodePairs = []
             newBracing.materials = []
             for row in range(self.bracingCoordTable.rowCount()):
-                # changed from 1,2,3,4
-                x1 = float(self.bracingCoordTable.item(row, 0).text())
-                y1 = float(self.bracingCoordTable.item(row, 1).text())
-                x2 = float(self.bracingCoordTable.item(row, 2).text())
-                y2 = float(self.bracingCoordTable.item(row, 3).text())
+
+                try:
+                    # changed from 1,2,3,4
+                    x1 = float(self.bracingCoordTable.item(row, 0).text())
+                    y1 = float(self.bracingCoordTable.item(row, 1).text())
+                    x2 = float(self.bracingCoordTable.item(row, 2).text())
+                    y2 = float(self.bracingCoordTable.item(row, 3).text())
+                except:
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Coordinates must be in numbers')
+
+                    self.bracingCoordTable.setItem(row, 0, QTableWidgetItem('0'))
+                    self.bracingCoordTable.setItem(row, 1, QTableWidgetItem('0'))
+                    self.bracingCoordTable.setItem(row, 2, QTableWidgetItem('0'))
+                    self.bracingCoordTable.setItem(row, 3, QTableWidgetItem('0'))
+                    return
+
                 material = str(self.bracingCoordTable.item(row, 4).text())
 
                 node1 = Node(x1, y1)
                 node2 = Node(x2, y2)
+
                 newBracing.nodePairs.append([node1, node2])
                 newBracing.materials.append(material)
             # generate members

@@ -504,7 +504,7 @@ class Node:
         self.x = x
         self.y = y
         self.z = z
-        
+            
     def __str__(self):
         return str(self.name) + " (" + str(self.x) + "," + str(self.y) + "," + str(self.z) + ")"
 

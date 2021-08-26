@@ -148,20 +148,13 @@ class RunTower(QDialog):
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
 
-            # Add cost to scatter plot
             self.plotter.addxData(towerNum)
-            # TODO: Will fix later 
-            avgBuildingCost = 0
-            for bdCost in towerPerformance.buildingCost.values():
-                avgBuildingCost += bdCost
-            avgBuildingCost /= len(towerPerformance.buildingCost)
 
-            avgSeismicCost = 0
-            for sCost in towerPerformance.seismicCost.values():
-                avgSeismicCost += sCost
-            avgSeismicCost /= len(towerPerformance.seismicCost)
-
+            # TODO: fix below
             if self.runGMs:
+                avgBuildingCost = towerPerformance.avgBuildingCost()
+                avgSeismicCost = towerPerformance.avgSeismicCost()
+
                 self.plotter.addyData(avgBuildingCost + avgSeismicCost)
             else:
                 self.plotter.addyData(towerPerformance.period)
@@ -428,6 +421,7 @@ class RunTower(QDialog):
                 panel.IDs.append(member_name)
 
     def divideMembersAtIntersection(self, SapModel):
+        '''  May not be necessary '''
         # Make sure no duplicates
         self.membersToDivide = list(dict.fromkeys(self.membersToDivide))
 
@@ -515,6 +509,7 @@ class RunTower(QDialog):
 
                     towerPerformance.buildingCost[combo] = buildingCost
                     towerPerformance.seismicCost[combo] = seismicCost
+
             else:
                 maxAcc = 'max acc not calculated'
                 maxDisp = 'max disp not calculated'
@@ -523,14 +518,16 @@ class RunTower(QDialog):
             # Store performance data to struct
             towerPerformance.maxAcc[combo] = maxAcc
             towerPerformance.maxDisp[combo] = maxDisp
-            towerPerformance.totalWeight[combo] = totalWeight
-            towerPerformance.period[combo] = period
             towerPerformance.basesh[combo] = basesh
-            towerPerformance.buildingCost[combo] = buildingCost
-            towerPerformance.seismicCost[combo] = seismicCost
+
+        towerPerformance.totalWeight = totalWeight
+        towerPerformance.period = period    
+        
+        # Get Centre of Rigidity ---------------------------------
+        towerPerformance.CR = analyzer.getCR(self.tower.elevations)
 
 class SAPRunnable(QRunnable):
-    ''' Worker thread '''
+    ''' Worker thread; to avoid freezing GUI '''
 
     def __init__(self, runTower):
         super().__init__()

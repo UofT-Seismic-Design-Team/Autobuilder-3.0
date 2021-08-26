@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Panel</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -181,7 +181,7 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="readOnly">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
             </widget>
            </item>

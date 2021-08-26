@@ -5,7 +5,7 @@ import comtypes.gen
 
 import scipy
 
-from Definition import *    # file extensions, EnumToString conversion
+from Definition import *    # file extensions, EnumToString conversion, 
 
 class PerformanceAnalyzer:
     def __init__(self, SapModel):
@@ -155,6 +155,151 @@ class PerformanceAnalyzer:
 
         return annual_building_cost, annual_seismic_cost
 
+    def getCR(self, towerElevs):
+        ''' Single floor CR '''
+        SapModel = self.SapModel
+        SapModel.SetModelIsLocked(False)
+        SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
+        towerCRs = {}
+
+        # Get names of nodes on each floor
+        [number_nodes, all_node_names, ret] = SapModel.PointObj.GetNameList()
+        floor_nodes = {}
+        for node_name in all_node_names:
+            [x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(node_name, 0, 0, 0)
+            if z in towerElevs:
+                if z not in floor_nodes:
+                    floor_nodes[z] = []
+                floor_nodes[z].append(node_name)
+
+        # remove existing diaphragm constraints
+        for elev in floor_nodes:
+            nodes = floor_nodes[elev]
+            for node in nodes:
+                ret = SapModel.PointObj.DeleteConstraint(node, 0)
+                if ret != 0:
+                    print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
+
+        # Define and set diaphragm constraint if not defined already
+        print('Defining and Setting diaphragm constraint...')
+        for elev in towerElevs:
+            diaphragmType = 'Diaphragm' + str(elev)
+            [axis, csys, ret] = SapModel.ConstraintDef.GetDiaphragm(diaphragmType)
+            if ret != 0:
+                SapModel.ConstraintDef.SetDiaphragm(diaphragmType, 3)
+            
+            nodes = floor_nodes[elev]
+            for node in nodes:
+                SapModel.PointObj.SetConstraint(node, diaphragmType, 0, True)
+                if ret != 0:
+                    print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
+            
+        # Create unit X, unit Y, and unit Z load cases if they haven't already been set
+        print('Defining unit load cases...')
+        [number_patterns, all_load_patterns, ret] = SapModel.LoadPatterns.GetNameList()
+        LTYPE_DEAD = 1
+        unitLoadPatterns = {
+            'Unit X': [1, 0, 0, 0, 0, 0], 
+            'Unit Y': [0, 1, 0, 0, 0, 0], 
+            'Unit Moment': [0, 0, 0, 0, 0, 1]}
+
+        for unitLoadPattern in unitLoadPatterns:
+            for elev in towerElevs:
+                loadCaseName = unitLoadPattern + ' - ' + str(elev)
+                if loadCaseName not in all_load_patterns:
+                    ret = SapModel.LoadPatterns.Add(loadCaseName, LTYPE_DEAD)
+                    if ret != 0:
+                        print('ERROR adding ' + loadCaseName + ' load case')
+                
+        # Only set the unit load cases to run
+        SapModel.Analyze.SetRunCaseFlag('', False, True)
+        for unitLoadPattern in unitLoadPatterns:
+            for elev in towerElevs:
+                SapModel.Analyze.SetRunCaseFlag(unitLoadPattern + ' - ' + str(elev), True, False)
+
+        # Add loads to all floors
+        nodeNum = 0
+        for elev in towerElevs:
+            node = floor_nodes[elev][nodeNum]
+            for unitLoadPattern in unitLoadPatterns:
+                loadCaseName = unitLoadPattern + ' - ' + str(elev)
+                SapModel.PointObj.SetLoadForce(node, loadCaseName, unitLoadPatterns[unitLoadPattern], True, 'GLOBAL', 0)
+
+        # Run analysis -----------------------------------------------------------------------------------------------
+        print()
+        print('Running model in SAP2000...')
+        SapModel.Analyze.RunAnalysis()
+        print('Finished running.')
+        print()
+
+        # For each floor, assign unit loads, run case, find rotations, find Crx and Cry
+        for elev in towerElevs:
+            print('Calculating Cr...')
+
+            node = floor_nodes[elev][nodeNum]
+
+            # Get rotations at joint
+            rotations = []
+            for patternName in unitLoadPatterns:
+                SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()
+                SapModel.Results.Setup.SetCaseSelectedForOutput(patternName + ' - ' + str(elev), True)
+
+                OBJECT_ELEM = 0
+                number_results = 0
+                object_names = []
+                element_names = []
+                load_cases = []
+                step_types = []
+                step_nums = []
+                u1 = []
+                u2 = []
+                u3 = []
+                r1 = []
+                r2 = []
+                r3 = []
+                ret = 0
+
+                [number_results, object_names, element_names, load_cases, step_types, step_nums, u1, u2, u3, r1, r2, r3, ret] = SapModel.Results.JointDisplAbs(node, OBJECT_ELEM, number_results, object_names, element_names, load_cases, step_types, step_nums, u1, u2, u3, r1, r2, r3)
+
+                if ret != 0:
+                    print('ERROR getting rotations from ' + patternName + ' - ' + str(elev) + ' case')
+                rotations.append(r3[0])
+
+            Rzx, Rzy, Rzz = rotations
+            
+            [load_x, load_y, load_z, ret] = SapModel.PointObj.GetCoordCartesian(node, 0, 0, 0)
+            Crx = load_x - Rzy/ (Rzz + Algebra.EPSILON)
+            Cry = load_y + Rzx/ (Rzz + Algebra.EPSILON)
+            floorCR = [Crx, Cry]
+            # Append results
+            towerCRs[elev] = floorCR
+
+        # Unlock model
+        SapModel.SetModelIsLocked(False)
+
+        for elev in towerElevs:
+            print('Deleting unit loads and constraints...')
+            node = floor_nodes[elev][nodeNum]
+            for patternName in unitLoadPatterns:
+                # Delete unit loads
+                ret = SapModel.PointObj.DeleteLoadForce(node, patternName + ' - ' + str(elev), 0)
+                if ret != 0:
+                    print('ERROR deleting' + patternName + ' on floor at elevation ' + str(elev))
+            
+            nodes = floor_nodes[elev]
+            for node in nodes:
+                # Delete diaphragm constraint from floor
+                ret = SapModel.PointObj.DeleteConstraint(node, 0)
+                if ret != 0:
+                    print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
+            
+        # Set all load cases to run again, except for the unit load cases
+        SapModel.Analyze.SetRunCaseFlag('', True, True)
+        for patternName in unitLoadPatterns:
+            SapModel.Analyze.SetRunCaseFlag(patternName, False, False)
+
+        return towerCRs
+
 # struct for tower performance
 class TowerPerformance:
     # static variable for id
@@ -173,9 +318,9 @@ class TowerPerformance:
         # key: load combo; values: index
         self.maxAcc = {}
         self.maxDisp = {}
-        self.totalWeight = {}
-        self.period = {}
         self.basesh = {} # base shear
+        self.totalWeight = 0
+        self.period = 0
 
         # SDC metrics
         # key: load combo; values: index
@@ -188,4 +333,23 @@ class TowerPerformance:
 
     def addVariable(self, variableName, assignedValue):
         self.variables[variableName] = assignedValue
+
+    def avgBuildingCost(self):
+        ''' -> float'''
+        avgBuildingCost = 0
+        for bdCost in self.buildingCost.values():
+            avgBuildingCost += bdCost
+        avgBuildingCost /= len(self.buildingCost)
+
+        return avgBuildingCost
+
+    def avgSeismicCost(self):
+        ''' -> float'''
+        avgSeismicCost = 0
+        for sCost in self.seismicCost.values():
+            avgSeismicCost += sCost
+        avgSeismicCost /= len(self.seismicCost)
+
+        return avgSeismicCost
+    
 
