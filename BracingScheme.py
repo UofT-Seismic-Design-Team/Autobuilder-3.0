@@ -52,8 +52,14 @@ class BracingScheme(QDialog):
         # Passing in main.tower into bracing scheme
         self.towerRef = args[0].tower
 
+        # Passing in main.projectSettingsData into bracing scheme
+        self.projectSettingsData = args[0].projectSettingsData
+
         # Create copy of tower to reassign if user saves
         self.tower = copy.deepcopy(args[0].tower)
+
+        # Defined sections
+        self.sections = list(self.projectSettingsData.sections.keys())
         
         # Fill in bracing scheme table
         self.Populate()
@@ -132,6 +138,9 @@ class BracingScheme(QDialog):
     def updateScreen(self):
         '''Update BracingCoordTable'''
 
+        # clear selections in coord table to avoid error
+        self.bracingCoordTable.clearSelection()
+
         # if switching to an existing bracing
         if self.currentBracingName is not None:
 
@@ -155,7 +164,18 @@ class BracingScheme(QDialog):
                 self.bracingCoordTable.setItem(rows, Y1, QTableWidgetItem(str(sNode.y)))
                 self.bracingCoordTable.setItem(rows, X2, QTableWidgetItem(str(eNode.x)))
                 self.bracingCoordTable.setItem(rows, Y2, QTableWidgetItem(str(eNode.y)))
-                self.bracingCoordTable.setItem(rows, mat, QTableWidgetItem(str(member.material)))
+
+                # make drop-down menu for brace material
+                materialCombo = QComboBox()
+                for m in self.sections:
+                    materialCombo.addItem(m)
+                self.bracingCoordTable.setCellWidget(rows,mat,materialCombo)
+
+                # In case of corrupted file
+                if member.material in self.sections:
+                    materialCombo.setCurrentText(member.material)
+                else:
+                    materialCombo.setCurrentText(self.sections[0])
 
             # match bracing name above coord. table to main table
             self.bracingNameEdit.setText(self.bracingSchemeTable.item(row,0).text())
@@ -168,18 +188,31 @@ class BracingScheme(QDialog):
         self.bracingCoordTable.setItem(row, 1, QTableWidgetItem(str(0)))
         self.bracingCoordTable.setItem(row, 2, QTableWidgetItem(str(0)))
         self.bracingCoordTable.setItem(row, 3, QTableWidgetItem(str(0)))
-        self.bracingCoordTable.setItem(row, 4, QTableWidgetItem(''))
+
+        # make drop-down menu for brace material
+        materialCombo = QComboBox()
+        for m in self.sections:
+            materialCombo.addItem(m)
+        self.bracingCoordTable.setCellWidget(row,4,materialCombo)
+        materialCombo.setCurrentText(self.sections[0])
+
         self.updateCoord()
 
     def deleteBracingCoord(self):
         ''' Delete selected rows from coordinate table'''
         indices = self.bracingCoordTable.selectionModel().selectedRows()
+
+        # clear selections in coord table to avoid error
+        self.bracingCoordTable.clearSelection()
+
         for index in sorted(indices):
             self.bracingCoordTable.removeRow(index.row())
+
         self.updateCoord()
 
     def updateCoord(self):
         '''Update coordinates and material associated with current bracing'''
+
         # problematic when currname isn't defined?
         currName = self.bracingNameEdit.toPlainText()
         if currName != "":
@@ -188,11 +221,11 @@ class BracingScheme(QDialog):
             newBracing.members = []
             newBracing.nodePairs = []
             newBracing.materials = []
-            for row in range(self.bracingCoordTable.rowCount()):
 
+            for row in range(self.bracingCoordTable.rowCount()):
                 try:
                     # changed from 1,2,3,4
-                    x1 = float(self.bracingCoordTable.item(row, 0).text())
+                    x1 = float(self.bracingCoordTable.item(row, 0).text()) 
                     y1 = float(self.bracingCoordTable.item(row, 1).text())
                     x2 = float(self.bracingCoordTable.item(row, 2).text())
                     y2 = float(self.bracingCoordTable.item(row, 3).text())
@@ -205,8 +238,11 @@ class BracingScheme(QDialog):
                     self.bracingCoordTable.setItem(row, 2, QTableWidgetItem('0'))
                     self.bracingCoordTable.setItem(row, 3, QTableWidgetItem('0'))
                     return
-
-                material = str(self.bracingCoordTable.item(row, 4).text())
+                
+                try:
+                    material = str(self.bracingCoordTable.cellWidget(row,4).currentText())
+                except:
+                    material = self.sections[0]
 
                 node1 = Node(x1, y1)
                 node2 = Node(x2, y2)

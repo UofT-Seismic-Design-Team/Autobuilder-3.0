@@ -173,7 +173,6 @@ class Tower:
                 #currentNodes.append(currentFloorPlan.nodes[-1])
                 nextNodes = nextFloorPlan.nodes
                 #nextNodes.append(currentFloorPlan.nodes[-1])
-                print('numNodes:', len(currentMembers))
                 if len(currentMembers) > 1:
                     for j in range(len(currentMembers)):
 
@@ -191,9 +190,6 @@ class Tower:
                         # 2b) Add top member
                         topStartLabel = list_currentTopConnections[j]
                         topEndLabel = list_currentTopConnections[j+1]
-
-                        print('top connections:', currentFloorPlan.bottomConnections)
-                        print('bottom connections:', nextFloorPlan.bottomConnections)
 
                         topStartIndices = [0]
                         if topStartLabel in nextFloorPlan.bottomConnections:
@@ -220,12 +216,6 @@ class Tower:
                                 face.addMember(nextElev, topMember)
 
                                 self.faces.append(face)
-
-                                for elev in face.members:
-                                    member = face.members[elev]
-                                    print(elev)
-                                    print('Start:', member.start_node.x, member.start_node.y)
-                                    print('End:', member.end_node.x, member.end_node.y)
 
     def generateFacesByFloorPlan(self, floorPlan):
         ''' Generate face objects by floor plan '''

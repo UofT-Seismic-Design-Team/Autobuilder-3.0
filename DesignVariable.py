@@ -49,6 +49,8 @@ class DesignVariable(QDialog):
         # Passing in main.tower into bracing scheme
         self.towerRef = args[0].tower
 
+        self.projectSettingsData = args[0].projectSettingsData
+
         # Create copy of tower to reassign if user saves
         self.tower = copy.deepcopy(args[0].tower)
         
@@ -163,6 +165,9 @@ class DesignVariable(QDialog):
     def updateScreen(self):
         '''Update Iteration Table'''
 
+        # to avoid error with drop down
+        self.IterationTable.clearSelection()
+
         if self.tabWidget.currentIndex() == 0:
             if self.currentBracingGroupName is not None:
                 self.IterationTable.setRowCount(0)
@@ -173,7 +178,11 @@ class DesignVariable(QDialog):
 
                 for rows, bracing in enumerate(bg.bracings):
                     self.IterationTable.insertRow(self.IterationTable.rowCount())
-                    self.IterationTable.setItem(rows, 0, QTableWidgetItem(str(bracing)))
+                    optionCombo = QComboBox()
+                    for b in self.tower.bracings:
+                        optionCombo.addItem(b)
+                    self.IterationTable.setCellWidget(rows, 0, optionCombo)
+                    optionCombo.setCurrentText(bracing)
 
                 self.GroupNameEdit.setText(self.bracingGroupTable.item(row,0).text())
 
@@ -187,8 +196,12 @@ class DesignVariable(QDialog):
 
                 for rows, section in enumerate(sg.sections):
                     self.IterationTable.insertRow(self.IterationTable.rowCount())
-                    self.IterationTable.setItem(rows, 0, QTableWidgetItem(str(section)))
-       
+                    optionCombo = QComboBox()
+                    for s in self.projectSettingsData.sections:
+                        optionCombo.addItem(s)
+                    self.IterationTable.setCellWidget(rows, 0, optionCombo)
+                    optionCombo.setCurrentText(section)
+
                 self.GroupNameEdit.setText(self.sectionGroupTable.item(row,0).text())
 
     def addIteration(self):
@@ -201,25 +214,30 @@ class DesignVariable(QDialog):
     def deleteIteration(self):
         ''' Delete selected rows from iter table'''
         indices = self.IterationTable.selectionModel().selectedRows()
+
+        # avoid error with drop down
+        self.IterationTable.clearSelection()
+
         for index in sorted(indices):
             self.IterationTable.removeRow(index.row())
         self.updateIteration()
 
     def updateIteration(self):
         currName = self.GroupNameEdit.toPlainText()
+
         if currName != "":
             if self.tabWidget.currentIndex() == 0:
                 newBG = self.tower.bracingGroups[currName]
                 newBG.bracings = []
                 for row in range(self.IterationTable.rowCount()):
-                    bracing = self.IterationTable.item(row, 0).text()
+                    bracing = self.IterationTable.cellWidget(row, 0).currentText()
                     newBG.bracings.append(bracing)
             
             elif self.tabWidget.currentIndex() == 1:
                 newSG = self.tower.sectionGroups[currName]
                 newSG.sections = []
                 for row in range(self.IterationTable.rowCount()):
-                    section = self.IterationTable.item(row, 0).text()
+                    section = self.IterationTable.cellWidget(row, 0).currentText()
                     newSG.sections.append(section)
     
     def Populate(self):

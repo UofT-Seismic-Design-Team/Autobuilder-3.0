@@ -85,16 +85,15 @@ class RunTower(QDialog):
 
         self.OkButton.clicked.connect(lambda x: self.close())
 
-        # Update views -----------------------------
-        self.counter = 0
-        timer = QTimer(self)
-        timer.setInterval(10) # period in miliseconds
-        timer.timeout.connect(self.addProgress)
-        timer.start()
-
     def addProgress(self):
         self.counter += 1
         self.progressBar.setValue(self.counter)
+
+    def resetProgress(self, max):
+        self.counter = 0
+        self.progressBar.setValue(self.counter)
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(max)
 
     def buildTowers(self):
         SapModel = self.startSap2000()
@@ -103,7 +102,9 @@ class RunTower(QDialog):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         inputTable = self.tower.inputTable
+        self.resetProgress(len(inputTable['towerNumber']))
         for i, towerNum in enumerate(inputTable['towerNumber']):
+            self.addProgress()
 
             SapModel.SetModelIsLocked(False)
             SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
