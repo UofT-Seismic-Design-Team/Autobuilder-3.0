@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>442</width>
+    <width>591</width>
     <height>486</height>
    </rect>
   </property>
@@ -115,6 +115,54 @@
         </layout>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QFrame" name="actionsFrame">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>250</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
+       </property>
+       <widget class="QLabel" name="actionsLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Actions</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="importCSVButton">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>60</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Import .csv</string>
+        </property>
+       </widget>
+      </widget>
      </item>
     </layout>
    </item>

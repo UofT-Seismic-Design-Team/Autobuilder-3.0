@@ -97,6 +97,8 @@ class BracingScheme(QDialog):
 
     def saveBracingSchemes(self):
         '''Overwrite the tower linked to the main model'''
+        # ensure everything is updated before saving
+        self.updateCoord()
         self.towerRef.bracings = self.tower.bracings
     
     def addBracingScheme(self):
@@ -137,6 +139,9 @@ class BracingScheme(QDialog):
 
     def updateScreen(self):
         '''Update BracingCoordTable'''
+
+        # save when switching between bracing schemes
+        self.updateCoord()
 
         # clear selections in coord table to avoid error
         self.bracingCoordTable.clearSelection()

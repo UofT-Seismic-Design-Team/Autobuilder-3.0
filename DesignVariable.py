@@ -76,6 +76,7 @@ class DesignVariable(QDialog):
 
     def changeTab(self):
         '''wipe group name and repopulate dialog'''
+
         self.GroupNameEdit.clear()
         if self.bracingGroupTable.item(0,0) is not None:
             self.currentBracingGroupName = self.bracingGroupTable.item(0,0).text()
@@ -165,6 +166,8 @@ class DesignVariable(QDialog):
     def updateScreen(self):
         '''Update Iteration Table'''
 
+        self.updateIteration()
+
         # to avoid error with drop down
         self.IterationTable.clearSelection()
 
@@ -208,7 +211,20 @@ class DesignVariable(QDialog):
         ''' Add empty row to iteration table '''
         row = self.IterationTable.rowCount()
         self.IterationTable.insertRow(row)
-        self.IterationTable.setItem(row, 0, QTableWidgetItem(str(0)))
+
+        varCombo = QComboBox()
+
+        if self.tabWidget.currentIndex() == 0:
+            variables = list(self.tower.bracings)
+        elif self.tabWidget.currentIndex() == 1:
+            variables = list(self.projectSettingsData.sections)
+
+        for v in variables:
+            varCombo.addItem(v)
+
+        self.IterationTable.setCellWidget(row, 0, varCombo)
+        varCombo.setCurrentText(variables[0])
+        
         self.updateIteration()
 
     def deleteIteration(self):
