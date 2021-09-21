@@ -48,7 +48,14 @@ class RunTower(QDialog):
         fileh.open(QFile.ReadOnly)
         uic.loadUi(fileh, self)
         fileh.close()
-
+        
+        # Store Variables From Run Towers Dialog
+        self.SAPPath = args[0].SAPPath
+        self.nodesList = args[0].nodesList
+        self.footprint = args[0].footprint
+        self.totalHeight = args[0].totalHeight
+        self.totalMass = args[0].totalMass
+        
         # Project Settings Data
         self.projectSettingsData = args[0].projectSettingsData
 
@@ -144,7 +151,6 @@ class RunTower(QDialog):
             # Analyse tower and print results to spreadsheet
             print('\nAnalyzing tower number ' + str(towerNum))
             print('-------------------------')
-
             self.runAnalysis(SapModel, towerPerformance)
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
@@ -185,7 +191,7 @@ class RunTower(QDialog):
         SpecifyPath = True
 
         #if the above flag is set to True, specify the path to SAP2000 below
-        ProgramPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
+        ProgramPath = self.SAPPath
 
         if AttachToInstance:
             # attach to a running instance of SAP2000
@@ -476,7 +482,7 @@ class RunTower(QDialog):
         analyzer = PerformanceAnalyzer(SapModel)
 
         # Find Roof nodes ---------------------------------------------
-        roofNodeNames = analyzer.getRoofNodeNames()
+        roofNodeNames = self.nodesList
 
         # Get WEIGHT in lbs ---------------------------------
         totalWeight = analyzer.getWeight()
@@ -504,10 +510,9 @@ class RunTower(QDialog):
 
                 # Get BASE SHEAR  ---------------------------------------
                 basesh = analyzer.getBaseShear()
-
+                
                 if self.costCalcIdentifier in combo:
                     buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.footprint, totalWeight, self.totalMass, self.totalHeight)
-
                     towerPerformance.buildingCost[combo] = buildingCost
                     towerPerformance.seismicCost[combo] = seismicCost
 

@@ -24,6 +24,7 @@
     <file alias="Run Tower - 24x24.png">resources/Icons/Run Tower - 24x24.png</file>
   </qresource>
   <qresource prefix="UI">
+    <file alias="autobuilder_runtowers_v2.ui">resources/UI/autobuilder_runtowers_v2.ui</file>
     <file alias="autobuilder_buildtower.ui">resources/UI/autobuilder_buildtower.ui</file>
     <file alias="autobuilder_floordesign_v2.ui">resources/UI/autobuilder_floordesign_v2.ui</file>
     <file alias="editdesign.ui">resources/UI/editdesign.ui</file>
@@ -35,6 +36,7 @@
     <file alias="autobuilder_mainwindow_v3.ui">resources/UI/autobuilder_mainwindow_v3.ui</file>
     <file alias="autobuilder_paneldesign_v1.ui">resources/UI/autobuilder_paneldesign_v1.ui</file>
     <file alias="autobuilder_projectsettings_v1.ui">resources/UI/autobuilder_projectsettings_v1.ui</file>
+    <file alias="autobuilder_runtowers.ui">resources/UI/autobuilder_runtowers.ui</file>
     <file alias="autobuilder_variableassignment.ui">resources/UI/autobuilder_variableassignment.ui</file>
   </qresource>
 </RCC>

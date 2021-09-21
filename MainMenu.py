@@ -17,6 +17,7 @@ from DesignVariable import * # open bracing and section group UI
 from TowerVariation import *    # generate tower variations
 from SAPModelCreation import * # create and run towers in SAP2000
 from Panels import *
+from RunTowers import * # open run towers dialog
 
 from View2DEngine import *  # import View2DEngine
 from View3DEngine import * # import View3DEngine
@@ -49,6 +50,14 @@ class MainWindow(QMainWindow):
         elevs = self.projectSettingsData.floorElevs
         self.tower = Tower(elevs)
         self.tower.setSections(self.projectSettingsData.sections)
+        
+        # Run Towers variables
+        self.SAPPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
+        self.nodesList = [1, 2, 3, 4]
+        self.footprint = 144
+        self.totalHeight = 60
+        self.totalMass = 7.83
+        self.toRun = False      
 
         # File location
         self.fileLoc = ''
@@ -305,7 +314,7 @@ class MainWindow(QMainWindow):
         self.runTower_button = QAction(QIcon(':/Icons/Run Tower - 24x24.png'), "Run Tower", self)
         self.runTower_button.setStatusTip("Run Tower")
 
-        self.runTower_button.triggered.connect(self.createSAPModels)
+        self.runTower_button.triggered.connect(self.openRunTowers)
 
         self.functions_toolbar.addAction(self.runTower_button)
 
@@ -344,7 +353,7 @@ class MainWindow(QMainWindow):
         # Generate Tower
         self.action_GenerateTowers.triggered.connect(self.generateInputTable)
         # Run Tower
-        self.action_RunTowers.triggered.connect(self.createSAPModels)
+        self.action_RunTowers.triggered.connect(self.openRunTowers)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
         # Open File
@@ -592,8 +601,8 @@ class MainWindow(QMainWindow):
         generateTower.exec_()
 
     # Run towers --------------------------------------------
-    def createSAPModels(self, signal):
-
+    def createSAPModels(self):
+        
         if not self.tower.inputTable:
             msg = WarningMessage()
             msg.popUpErrorBox('Please generate input table before running SAP2000')
@@ -601,3 +610,16 @@ class MainWindow(QMainWindow):
 
         runTower = RunTower(self)
         runTower.exec_()
+        
+    def openRunTowers(self, signal):
+        runTowers = RunTowers(self)
+        runTowers.exec_()
+        self.SAPPath = runTowers.SAPPath
+        self.nodesList = runTowers.nodesList
+        self.footprint = runTowers.footprint
+        self.totalHeight = runTowers.totalHeight
+        self.totalMass = runTowers.totalMass
+        self.toRun = runTowers.toRun       
+        
+        if self.toRun == True:
+            self.createSAPModels() 
