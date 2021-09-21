@@ -100,6 +100,11 @@ class panelsUI(QDialog):
             itemBot.setText(str(Lower))
             itemTop = QTableWidgetItem()
             itemTop.setText(str(Upper))
+
+            # To prevent user from changing top and bottom elevations
+            itemTop.setFlags(Qt.ItemIsEnabled)
+            itemBot.setFlags(Qt.ItemIsEnabled)
+
             self.panelTable.setItem(i, column, itemName)
             self.panelTable.setItem(i, bottom, itemBot)
             self.panelTable.setItem(i, top, itemTop)
@@ -138,7 +143,6 @@ class panelsUI(QDialog):
         self.Panel3DViewer.nodes = [line_1,line_2,line_3,line_4]
 
         self.selectedPanelName.setText(item.text())
-
 
     def nameChange(self):
         '''Change the name according '''
@@ -201,7 +205,13 @@ class panelsUI(QDialog):
             panel = self.tower.panels[self.selectedPanelName.toPlainText()]
             for key in TableIndex:
                 for index in CoordIndex:
-                    coord = float(self.CoordTable.item(TableIndex[key],CoordIndex[index]).text())
+                    try:
+                        coord = float(self.CoordTable.item(TableIndex[key],CoordIndex[index]).text())
+                    except:
+                        warning = WarningMessage()
+                        warning.popUpErrorBox('Coordinates must be in numbers')
+                        self.CoordTable.setItem(TableIndex[key], CoordIndex[index], QTableWidgetItem('0'))
+
                     node = (getattr(panel,key))
                     setattr(node,index,coord)
                     self.populate()

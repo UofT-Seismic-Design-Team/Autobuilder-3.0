@@ -4,6 +4,7 @@ import DisplaySettings  # contains data in display settings
 from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
 from Performance import * # tower performance data
+from Message import *    # pop up window for illegal entries
 
 import os   # create new directory
 
@@ -176,6 +177,13 @@ class FileWriter:
         df = pd.DataFrame(psData_dict)
         df.to_csv(projectSettingsLoc, index=False)
 
+        try:
+            df.to_csv(projectSettingsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create project settings')
+
     def writeDisplaySettings(self):
         ''' Write display settings to file '''
         displaySettingsLoc = self.folderLoc + FileExtension.displaySettings
@@ -202,6 +210,13 @@ class FileWriter:
 
         df = pd.DataFrame(dSettings_dict)
         df.to_csv(displaySettingsLoc, index=False)
+
+        try:
+            df.to_csv(displaySettingsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create display settings')
 
     def writeFloorPlans(self):
         ''' Write floor plans to file '''
@@ -238,7 +253,13 @@ class FileWriter:
                 floorPlanData['top'].append(str(topConnections[i]))
 
         df = pd.DataFrame(floorPlanData)
-        df.to_csv(floorPlanLoc, index=False)
+
+        try:
+            df.to_csv(floorPlanLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create floor plan')
 
     def writeFloors(self):
         ''' Write floors to file '''
@@ -258,7 +279,13 @@ class FileWriter:
             floorData['floorPlans'].append(fpNames)
 
         df = pd.DataFrame(floorData)
-        df.to_csv(floorLoc, index=False)
+
+        try:
+            df.to_csv(floorLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create floor')
 
     def writePanels(self):
         ''' Write panels to file '''
@@ -302,7 +329,13 @@ class FileWriter:
             panelData['z'].append(str(panel.lowerRight.z))
 
         df = pd.DataFrame(panelData)
-        df.to_csv(panelLoc, index=False)
+
+        try:
+            df.to_csv(panelLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create panels')
 
     def writeBracings(self):
         ''' Write Bracings to file '''
@@ -338,7 +371,13 @@ class FileWriter:
                 bracingsData['material'].append(mat)
 
         df = pd.DataFrame(bracingsData)
-        df.to_csv(bracingsLoc, index=False)
+
+        try:
+            df.to_csv(bracingsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create bracings')
 
     def writeBracingGroups(self):
         ''' Write Bracing Groups to file '''
@@ -359,7 +398,13 @@ class FileWriter:
                 bGroupsData['bracing'].append(bName)
 
         df = pd.DataFrame(bGroupsData)
-        df.to_csv(bGroupsLoc, index=False)
+
+        try:
+            df.to_csv(bGroupsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create bracing groups')
 
     def writeSectionGroups(self):
         ''' Write Section Groups to file '''
@@ -380,7 +425,13 @@ class FileWriter:
                 sGroupsData['section'].append(sName)
 
         df = pd.DataFrame(sGroupsData)
-        df.to_csv(sGroupsLoc, index=False)
+
+        try:
+            df.to_csv(sGroupsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create section groups')
 
     def writeBracingAssignments(self):
         ''' Write Bracing Assignments to file '''
@@ -402,7 +453,13 @@ class FileWriter:
                 bAssignmentsData['bracingGroup'].append(bGroup)
 
         df = pd.DataFrame(bAssignmentsData)
-        df.to_csv(bAssignmentsLoc, index=False)
+
+        try:
+            df.to_csv(bAssignmentsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create bracing assignments')
 
     def writeSectionAssignments(self):
         ''' Write Section Assignments to file '''
@@ -422,14 +479,26 @@ class FileWriter:
             sAssignmentsData['sectionGroup'].append(sGroup)
 
         df = pd.DataFrame(sAssignmentsData)
-        df.to_csv(sAssignmentsLoc, index=False)
+
+        try:
+            df.to_csv(sAssignmentsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create section assignments')
 
     def writeInputTable(self, inputTable):
         ''' Write Input Table to file '''
         inputTableLoc = self.folderLoc + FileExtension.inputTable
 
         df = pd.DataFrame(inputTable)
-        df.to_csv(inputTableLoc, index=False)
+
+        try:
+            df.to_csv(inputTableLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create input table')
 
     def writeOutputTable(self, towerPerformances):
         ''' Write tower performances to output file '''
@@ -438,8 +507,16 @@ class FileWriter:
         outputTable = {
             'towerNum': [],
         }
-        towerPerfromanceAttributes = [
-            'maxAcc','maxDisp','totalWeight', 'period', 'basesh', 'buildingCost', 'seismicCost',
+        towerAttrConst = [
+            'totalWeight', 'period', 
+        ]
+
+        towerAttrVarCombo = [
+            'maxAcc','maxDisp','basesh', 'buildingCost', 'seismicCost',
+        ]
+
+        towerAttrVarFloor = [
+            'CR',
         ]
 
         for towerNum in towerPerformances:
@@ -452,8 +529,17 @@ class FileWriter:
                     outputTable[var].append(value)
                 else:
                     outputTable[var] = [value]
+
+            for attr in towerAttrConst:
+                result = getattr(towerPerformance, attr)
+
+                if attr in outputTable:
+                    # column name for this result
+                    outputTable[attr].append(result)
+                else:
+                    outputTable[attr] = [result]
                 
-            for attr in towerPerfromanceAttributes:
+            for attr in towerAttrVarCombo:
                 results = getattr(towerPerformance, attr)
 
                 for combo in results:
@@ -467,5 +553,32 @@ class FileWriter:
                     else:
                         outputTable[resultName] = [result]
 
+            for attr in towerAttrVarFloor:
+                results = getattr(towerPerformance, attr)
+
+                for floor in results:
+                    crX = str(results[floor][0])
+                    crY = str(results[floor][1])
+                
+                    # column name for this result
+                    crXName = str(floor) + ' - CRx'
+                    crYName = str(floor) + ' - CRy'
+
+                    if crXName in outputTable:
+                        outputTable[crXName].append(crX)
+                    else:
+                        outputTable[crXName] = [crX]
+
+                    if crYName in outputTable:
+                        outputTable[crYName].append(crY)
+                    else:
+                        outputTable[crYName] = [crY]
+
         df = pd.DataFrame(outputTable)
-        df.to_csv(outputTableLoc, index=False) 
+
+        try:
+            df.to_csv(outputTableLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create output table')

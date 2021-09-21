@@ -33,6 +33,8 @@ class VariableAssignment(QDialog):
         self.addAssignmentButton.clicked.connect(self.addAssignment)
         self.deleteAssignmentButton.clicked.connect(self.deleteAssignment)
 
+        self.importCSVButton.clicked.connect(self.readcsv)
+
         # Fill in assignment table
         self.displayAssignmentData()
 
@@ -204,8 +206,49 @@ class VariableAssignment(QDialog):
 
                 j += 1
 
-        
+    def readcsv(self, s):
+        fileInfo = QFileDialog.getOpenFileName(self, "Open File", "variable assignment.csv", "Comma-Separated Values files (*.csv)")
+        fileLoc = fileInfo[0]
 
+        if fileLoc == '': # No action if no file was selected
+            return
+
+        if self.tabWidget.currentIndex() == 0:
+            table = self.BracingAssignmentTable
+            variables = list(self.tower.bracingGroups.keys())
+        elif self.tabWidget.currentIndex() == 1:
+            table = self.SectionAssignmentTable
+            variables = list(self.tower.sectionGroups.keys())
+
+        # reset in table
+        table.setRowCount(0)
+
+        with open(fileLoc, 'r') as file:
+            lines = file.readlines()
+
+            for line in lines:
+                data = line.rstrip('\n').split(',') # remove trailing newline
+
+                if len(data) < 2:
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Imported file is not formatted correctly')
+                    return
+
+                subject = data[0]
+                assignedVariable = data[1]
+                if not (assignedVariable in variables):
+                    assignedVariable = variables[0]
+
+                row = table.rowCount()
+                table.insertRow(row)
+
+                table.setItem(row,0,QTableWidgetItem(subject))
+
+                combo = QComboBox()
+                for v in variables:
+                    combo.addItem(v)
+                table.setCellWidget(row,1,combo)
+                combo.setCurrentText(assignedVariable)
 
     '''
     def setContextMenu(self):

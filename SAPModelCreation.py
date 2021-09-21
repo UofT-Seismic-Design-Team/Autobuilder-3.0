@@ -92,16 +92,15 @@ class RunTower(QDialog):
 
         self.OkButton.clicked.connect(lambda x: self.close())
 
-        # Update views -----------------------------
-        self.counter = 0
-        timer = QTimer(self)
-        timer.setInterval(10) # period in miliseconds
-        timer.timeout.connect(self.addProgress)
-        timer.start()
-
     def addProgress(self):
         self.counter += 1
         self.progressBar.setValue(self.counter)
+
+    def resetProgress(self, max):
+        self.counter = 0
+        self.progressBar.setValue(self.counter)
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(max)
 
     def buildTowers(self):
         SapModel = self.startSap2000()
@@ -110,7 +109,9 @@ class RunTower(QDialog):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         inputTable = self.tower.inputTable
+        self.resetProgress(len(inputTable['towerNumber']))
         for i, towerNum in enumerate(inputTable['towerNumber']):
+            self.addProgress()
 
             SapModel.SetModelIsLocked(False)
             SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
@@ -154,20 +155,13 @@ class RunTower(QDialog):
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
 
-            # Add cost to scatter plot
             self.plotter.addxData(towerNum)
-            # TODO: Will fix later 
-            avgBuildingCost = 0
-            for bdCost in towerPerformance.buildingCost.values():
-                avgBuildingCost += bdCost
-            avgBuildingCost /= len(towerPerformance.buildingCost)
 
-            avgSeismicCost = 0
-            for sCost in towerPerformance.seismicCost.values():
-                avgSeismicCost += sCost
-            avgSeismicCost /= len(towerPerformance.seismicCost)
-
+            # TODO: fix below
             if self.runGMs:
+                avgBuildingCost = towerPerformance.avgBuildingCost()
+                avgSeismicCost = towerPerformance.avgSeismicCost()
+
                 self.plotter.addyData(avgBuildingCost + avgSeismicCost)
             else:
                 self.plotter.addyData(towerPerformance.period)
@@ -434,6 +428,7 @@ class RunTower(QDialog):
                 panel.IDs.append(member_name)
 
     def divideMembersAtIntersection(self, SapModel):
+        '''  May not be necessary '''
         # Make sure no duplicates
         self.membersToDivide = list(dict.fromkeys(self.membersToDivide))
 
@@ -520,6 +515,7 @@ class RunTower(QDialog):
                     buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.footprint, totalWeight, self.totalMass, self.totalHeight)
                     towerPerformance.buildingCost[combo] = buildingCost
                     towerPerformance.seismicCost[combo] = seismicCost
+
             else:
                 maxAcc = 'max acc not calculated'
                 maxDisp = 'max disp not calculated'
@@ -528,14 +524,16 @@ class RunTower(QDialog):
             # Store performance data to struct
             towerPerformance.maxAcc[combo] = maxAcc
             towerPerformance.maxDisp[combo] = maxDisp
-            towerPerformance.totalWeight[combo] = totalWeight
-            towerPerformance.period[combo] = period
             towerPerformance.basesh[combo] = basesh
-            towerPerformance.buildingCost[combo] = buildingCost
-            towerPerformance.seismicCost[combo] = seismicCost
+
+        towerPerformance.totalWeight = totalWeight
+        towerPerformance.period = period    
+        
+        # Get Centre of Rigidity ---------------------------------
+        towerPerformance.CR = analyzer.getCR(self.tower.elevations)
 
 class SAPRunnable(QRunnable):
-    ''' Worker thread '''
+    ''' Worker thread; to avoid freezing GUI '''
 
     def __init__(self, runTower):
         super().__init__()

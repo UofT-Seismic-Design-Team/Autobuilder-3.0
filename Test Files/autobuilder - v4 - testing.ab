@@ -1,0 +1,521 @@
+#Project_Settings
+setting,value
+tower_elevs,0.0 6.0 9.0 12.0 15.0 18.0 21.0 24.0 27.0 30.0 33.0 36.0 39.0 42.0 45.0 48.0 51.0 54.0 57.0 60.0
+sect_props,Column 1
+sect_props,Beam 2
+sect_props,Brace 3
+gm,True
+analysis,Time_History
+modelLoc,C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/SAP/Addition_0303.sdb
+modelName,Addition_0303.sdb
+renderX,12.0
+renderY,12.0
+renderZ,60.0
+
+#Display_Settings
+setting,value
+2D_pName,True
+2D_pLength,True
+
+#Floor_Plans
+floorPlanName,x,y,bot,top
+1,0.0,0.0,1,1
+1,12.0,0.0,2,2
+1,12.0,12.0,3,3
+1,0.0,12.0,4,4
+2,0.6666666666666666,0.0,1,1
+2,12.0,0.0,2,2
+2,12.0,12.0,3,3
+2,0.6666666666666666,12.0,4,4
+3,1.3333333333333333,0.0,1,1
+3,12.0,0.0,2,2
+3,12.0,12.0,3,3
+3,1.3333333333333333,12.0,4,4
+4,2.0,0.0,1,1
+4,12.0,0.0,2,2
+4,12.0,12.0,3,3
+4,2.0,12.0,4,4
+5,2.6666666666666665,0.0,1,1
+5,12.0,0.0,2,2
+5,12.0,12.0,3,3
+5,2.6666666666666665,12.0,4,4
+6,3.3333333333333335,0.0,1,1
+6,12.0,0.0,2,2
+6,12.0,12.0,3,3
+6,3.3333333333333335,12.0,4,4
+7,4.0,0.0,1,1
+7,12.0,0.0,2,2
+7,12.0,12.0,3,3
+7,4.0,12.0,4,4
+8,4.666666666666667,0.0,1,1
+8,12.0,0.0,2,2
+8,12.0,12.0,3,3
+8,4.666666666666667,12.0,4,4
+9,5.333333333333333,0.0,1,1
+9,12.0,0.0,2,2
+9,12.0,12.0,3,3
+9,5.333333333333333,12.0,4,4
+10,6.0,0.0,1,1
+10,12.0,0.0,2,2
+10,12.0,12.0,3,3
+10,6.0,12.0,4,4
+
+#Floors
+elevation,floorPlans
+0.0,1
+6.0,1
+9.0,1
+12.0,1
+15.0,1
+18.0,1
+21.0,1
+24.0,1
+27.0,1
+30.0,1
+33.0,1
+36.0,2
+39.0,3
+42.0,4
+45.0,5
+48.0,6
+51.0,7
+54.0,8
+57.0,9
+60.0,10
+
+#Panels
+panelName,nodeLocation,x,y,z
+153,lowerLeft,0.0,0.0,0.0
+153,upperLeft,0.0,0.0,6.0
+153,upperRight,12.0,0.0,6.0
+153,lowerRight,12.0,0.0,0.0
+154,lowerLeft,12.0,0.0,0.0
+154,upperLeft,12.0,0.0,6.0
+154,upperRight,12.0,12.0,6.0
+154,lowerRight,12.0,12.0,0.0
+155,lowerLeft,12.0,12.0,0.0
+155,upperLeft,12.0,12.0,6.0
+155,upperRight,0.0,12.0,6.0
+155,lowerRight,0.0,12.0,0.0
+156,lowerLeft,0.0,12.0,0.0
+156,upperLeft,0.0,12.0,6.0
+156,upperRight,0.0,0.0,6.0
+156,lowerRight,0.0,0.0,0.0
+157,lowerLeft,0.0,0.0,6.0
+157,upperLeft,0.0,0.0,9.0
+157,upperRight,12.0,0.0,9.0
+157,lowerRight,12.0,0.0,6.0
+158,lowerLeft,12.0,0.0,6.0
+158,upperLeft,12.0,0.0,9.0
+158,upperRight,12.0,12.0,9.0
+158,lowerRight,12.0,12.0,6.0
+159,lowerLeft,12.0,12.0,6.0
+159,upperLeft,12.0,12.0,9.0
+159,upperRight,0.0,12.0,9.0
+159,lowerRight,0.0,12.0,6.0
+160,lowerLeft,0.0,12.0,6.0
+160,upperLeft,0.0,12.0,9.0
+160,upperRight,0.0,0.0,9.0
+160,lowerRight,0.0,0.0,6.0
+161,lowerLeft,0.0,0.0,9.0
+161,upperLeft,0.0,0.0,12.0
+161,upperRight,12.0,0.0,12.0
+161,lowerRight,12.0,0.0,9.0
+162,lowerLeft,12.0,0.0,9.0
+162,upperLeft,12.0,0.0,12.0
+162,upperRight,12.0,12.0,12.0
+162,lowerRight,12.0,12.0,9.0
+163,lowerLeft,12.0,12.0,9.0
+163,upperLeft,12.0,12.0,12.0
+163,upperRight,0.0,12.0,12.0
+163,lowerRight,0.0,12.0,9.0
+164,lowerLeft,0.0,12.0,9.0
+164,upperLeft,0.0,12.0,12.0
+164,upperRight,0.0,0.0,12.0
+164,lowerRight,0.0,0.0,9.0
+165,lowerLeft,0.0,0.0,12.0
+165,upperLeft,0.0,0.0,15.0
+165,upperRight,12.0,0.0,15.0
+165,lowerRight,12.0,0.0,12.0
+166,lowerLeft,12.0,0.0,12.0
+166,upperLeft,12.0,0.0,15.0
+166,upperRight,12.0,12.0,15.0
+166,lowerRight,12.0,12.0,12.0
+167,lowerLeft,12.0,12.0,12.0
+167,upperLeft,12.0,12.0,15.0
+167,upperRight,0.0,12.0,15.0
+167,lowerRight,0.0,12.0,12.0
+168,lowerLeft,0.0,12.0,12.0
+168,upperLeft,0.0,12.0,15.0
+168,upperRight,0.0,0.0,15.0
+168,lowerRight,0.0,0.0,12.0
+169,lowerLeft,0.0,0.0,15.0
+169,upperLeft,0.0,0.0,18.0
+169,upperRight,12.0,0.0,18.0
+169,lowerRight,12.0,0.0,15.0
+170,lowerLeft,12.0,0.0,15.0
+170,upperLeft,12.0,0.0,18.0
+170,upperRight,12.0,12.0,18.0
+170,lowerRight,12.0,12.0,15.0
+171,lowerLeft,12.0,12.0,15.0
+171,upperLeft,12.0,12.0,18.0
+171,upperRight,0.0,12.0,18.0
+171,lowerRight,0.0,12.0,15.0
+172,lowerLeft,0.0,12.0,15.0
+172,upperLeft,0.0,12.0,18.0
+172,upperRight,0.0,0.0,18.0
+172,lowerRight,0.0,0.0,15.0
+173,lowerLeft,0.0,0.0,18.0
+173,upperLeft,0.0,0.0,21.0
+173,upperRight,12.0,0.0,21.0
+173,lowerRight,12.0,0.0,18.0
+174,lowerLeft,12.0,0.0,18.0
+174,upperLeft,12.0,0.0,21.0
+174,upperRight,12.0,12.0,21.0
+174,lowerRight,12.0,12.0,18.0
+175,lowerLeft,12.0,12.0,18.0
+175,upperLeft,12.0,12.0,21.0
+175,upperRight,0.0,12.0,21.0
+175,lowerRight,0.0,12.0,18.0
+176,lowerLeft,0.0,12.0,18.0
+176,upperLeft,0.0,12.0,21.0
+176,upperRight,0.0,0.0,21.0
+176,lowerRight,0.0,0.0,18.0
+177,lowerLeft,0.0,0.0,21.0
+177,upperLeft,0.0,0.0,24.0
+177,upperRight,12.0,0.0,24.0
+177,lowerRight,12.0,0.0,21.0
+178,lowerLeft,12.0,0.0,21.0
+178,upperLeft,12.0,0.0,24.0
+178,upperRight,12.0,12.0,24.0
+178,lowerRight,12.0,12.0,21.0
+179,lowerLeft,12.0,12.0,21.0
+179,upperLeft,12.0,12.0,24.0
+179,upperRight,0.0,12.0,24.0
+179,lowerRight,0.0,12.0,21.0
+180,lowerLeft,0.0,12.0,21.0
+180,upperLeft,0.0,12.0,24.0
+180,upperRight,0.0,0.0,24.0
+180,lowerRight,0.0,0.0,21.0
+181,lowerLeft,0.0,0.0,24.0
+181,upperLeft,0.0,0.0,27.0
+181,upperRight,12.0,0.0,27.0
+181,lowerRight,12.0,0.0,24.0
+182,lowerLeft,12.0,0.0,24.0
+182,upperLeft,12.0,0.0,27.0
+182,upperRight,12.0,12.0,27.0
+182,lowerRight,12.0,12.0,24.0
+183,lowerLeft,12.0,12.0,24.0
+183,upperLeft,12.0,12.0,27.0
+183,upperRight,0.0,12.0,27.0
+183,lowerRight,0.0,12.0,24.0
+184,lowerLeft,0.0,12.0,24.0
+184,upperLeft,0.0,12.0,27.0
+184,upperRight,0.0,0.0,27.0
+184,lowerRight,0.0,0.0,24.0
+185,lowerLeft,0.0,0.0,27.0
+185,upperLeft,0.0,0.0,30.0
+185,upperRight,12.0,0.0,30.0
+185,lowerRight,12.0,0.0,27.0
+186,lowerLeft,12.0,0.0,27.0
+186,upperLeft,12.0,0.0,30.0
+186,upperRight,12.0,12.0,30.0
+186,lowerRight,12.0,12.0,27.0
+187,lowerLeft,12.0,12.0,27.0
+187,upperLeft,12.0,12.0,30.0
+187,upperRight,0.0,12.0,30.0
+187,lowerRight,0.0,12.0,27.0
+188,lowerLeft,0.0,12.0,27.0
+188,upperLeft,0.0,12.0,30.0
+188,upperRight,0.0,0.0,30.0
+188,lowerRight,0.0,0.0,27.0
+189,lowerLeft,0.0,0.0,30.0
+189,upperLeft,0.0,0.0,33.0
+189,upperRight,12.0,0.0,33.0
+189,lowerRight,12.0,0.0,30.0
+190,lowerLeft,12.0,0.0,30.0
+190,upperLeft,12.0,0.0,33.0
+190,upperRight,12.0,12.0,33.0
+190,lowerRight,12.0,12.0,30.0
+191,lowerLeft,12.0,12.0,30.0
+191,upperLeft,12.0,12.0,33.0
+191,upperRight,0.0,12.0,33.0
+191,lowerRight,0.0,12.0,30.0
+192,lowerLeft,0.0,12.0,30.0
+192,upperLeft,0.0,12.0,33.0
+192,upperRight,0.0,0.0,33.0
+192,lowerRight,0.0,0.0,30.0
+193,lowerLeft,0.0,0.0,33.0
+193,upperLeft,0.6666666666666666,0.0,36.0
+193,upperRight,12.0,0.0,36.0
+193,lowerRight,12.0,0.0,33.0
+194,lowerLeft,12.0,0.0,33.0
+194,upperLeft,12.0,0.0,36.0
+194,upperRight,12.0,12.0,36.0
+194,lowerRight,12.0,12.0,33.0
+195,lowerLeft,12.0,12.0,33.0
+195,upperLeft,12.0,12.0,36.0
+195,upperRight,0.6666666666666666,12.0,36.0
+195,lowerRight,0.0,12.0,33.0
+196,lowerLeft,0.0,12.0,33.0
+196,upperLeft,0.6666666666666666,12.0,36.0
+196,upperRight,0.6666666666666666,0.0,36.0
+196,lowerRight,0.0,0.0,33.0
+197,lowerLeft,0.6666666666666666,0.0,36.0
+197,upperLeft,1.3333333333333333,0.0,39.0
+197,upperRight,12.0,0.0,39.0
+197,lowerRight,12.0,0.0,36.0
+198,lowerLeft,12.0,0.0,36.0
+198,upperLeft,12.0,0.0,39.0
+198,upperRight,12.0,12.0,39.0
+198,lowerRight,12.0,12.0,36.0
+199,lowerLeft,12.0,12.0,36.0
+199,upperLeft,12.0,12.0,39.0
+199,upperRight,1.3333333333333333,12.0,39.0
+199,lowerRight,0.6666666666666666,12.0,36.0
+200,lowerLeft,0.6666666666666666,12.0,36.0
+200,upperLeft,1.3333333333333333,12.0,39.0
+200,upperRight,1.3333333333333333,0.0,39.0
+200,lowerRight,0.6666666666666666,0.0,36.0
+201,lowerLeft,1.3333333333333333,0.0,39.0
+201,upperLeft,2.0,0.0,42.0
+201,upperRight,12.0,0.0,42.0
+201,lowerRight,12.0,0.0,39.0
+202,lowerLeft,12.0,0.0,39.0
+202,upperLeft,12.0,0.0,42.0
+202,upperRight,12.0,12.0,42.0
+202,lowerRight,12.0,12.0,39.0
+203,lowerLeft,12.0,12.0,39.0
+203,upperLeft,12.0,12.0,42.0
+203,upperRight,2.0,12.0,42.0
+203,lowerRight,1.3333333333333333,12.0,39.0
+204,lowerLeft,1.3333333333333333,12.0,39.0
+204,upperLeft,2.0,12.0,42.0
+204,upperRight,2.0,0.0,42.0
+204,lowerRight,1.3333333333333333,0.0,39.0
+205,lowerLeft,2.0,0.0,42.0
+205,upperLeft,2.6666666666666665,0.0,45.0
+205,upperRight,12.0,0.0,45.0
+205,lowerRight,12.0,0.0,42.0
+206,lowerLeft,12.0,0.0,42.0
+206,upperLeft,12.0,0.0,45.0
+206,upperRight,12.0,12.0,45.0
+206,lowerRight,12.0,12.0,42.0
+207,lowerLeft,12.0,12.0,42.0
+207,upperLeft,12.0,12.0,45.0
+207,upperRight,2.6666666666666665,12.0,45.0
+207,lowerRight,2.0,12.0,42.0
+208,lowerLeft,2.0,12.0,42.0
+208,upperLeft,2.6666666666666665,12.0,45.0
+208,upperRight,2.6666666666666665,0.0,45.0
+208,lowerRight,2.0,0.0,42.0
+209,lowerLeft,2.6666666666666665,0.0,45.0
+209,upperLeft,3.3333333333333335,0.0,48.0
+209,upperRight,12.0,0.0,48.0
+209,lowerRight,12.0,0.0,45.0
+210,lowerLeft,12.0,0.0,45.0
+210,upperLeft,12.0,0.0,48.0
+210,upperRight,12.0,12.0,48.0
+210,lowerRight,12.0,12.0,45.0
+211,lowerLeft,12.0,12.0,45.0
+211,upperLeft,12.0,12.0,48.0
+211,upperRight,3.3333333333333335,12.0,48.0
+211,lowerRight,2.6666666666666665,12.0,45.0
+212,lowerLeft,2.6666666666666665,12.0,45.0
+212,upperLeft,3.3333333333333335,12.0,48.0
+212,upperRight,3.3333333333333335,0.0,48.0
+212,lowerRight,2.6666666666666665,0.0,45.0
+213,lowerLeft,3.3333333333333335,0.0,48.0
+213,upperLeft,4.0,0.0,51.0
+213,upperRight,12.0,0.0,51.0
+213,lowerRight,12.0,0.0,48.0
+214,lowerLeft,12.0,0.0,48.0
+214,upperLeft,12.0,0.0,51.0
+214,upperRight,12.0,12.0,51.0
+214,lowerRight,12.0,12.0,48.0
+215,lowerLeft,12.0,12.0,48.0
+215,upperLeft,12.0,12.0,51.0
+215,upperRight,4.0,12.0,51.0
+215,lowerRight,3.3333333333333335,12.0,48.0
+216,lowerLeft,3.3333333333333335,12.0,48.0
+216,upperLeft,4.0,12.0,51.0
+216,upperRight,4.0,0.0,51.0
+216,lowerRight,3.3333333333333335,0.0,48.0
+217,lowerLeft,4.0,0.0,51.0
+217,upperLeft,4.666666666666667,0.0,54.0
+217,upperRight,12.0,0.0,54.0
+217,lowerRight,12.0,0.0,51.0
+218,lowerLeft,12.0,0.0,51.0
+218,upperLeft,12.0,0.0,54.0
+218,upperRight,12.0,12.0,54.0
+218,lowerRight,12.0,12.0,51.0
+219,lowerLeft,12.0,12.0,51.0
+219,upperLeft,12.0,12.0,54.0
+219,upperRight,4.666666666666667,12.0,54.0
+219,lowerRight,4.0,12.0,51.0
+220,lowerLeft,4.0,12.0,51.0
+220,upperLeft,4.666666666666667,12.0,54.0
+220,upperRight,4.666666666666667,0.0,54.0
+220,lowerRight,4.0,0.0,51.0
+221,lowerLeft,4.666666666666667,0.0,54.0
+221,upperLeft,5.333333333333333,0.0,57.0
+221,upperRight,12.0,0.0,57.0
+221,lowerRight,12.0,0.0,54.0
+222,lowerLeft,12.0,0.0,54.0
+222,upperLeft,12.0,0.0,57.0
+222,upperRight,12.0,12.0,57.0
+222,lowerRight,12.0,12.0,54.0
+223,lowerLeft,12.0,12.0,54.0
+223,upperLeft,12.0,12.0,57.0
+223,upperRight,5.333333333333333,12.0,57.0
+223,lowerRight,4.666666666666667,12.0,54.0
+224,lowerLeft,4.666666666666667,12.0,54.0
+224,upperLeft,5.333333333333333,12.0,57.0
+224,upperRight,5.333333333333333,0.0,57.0
+224,lowerRight,4.666666666666667,0.0,54.0
+225,lowerLeft,5.333333333333333,0.0,57.0
+225,upperLeft,6.0,0.0,60.0
+225,upperRight,12.0,0.0,60.0
+225,lowerRight,12.0,0.0,57.0
+226,lowerLeft,12.0,0.0,57.0
+226,upperLeft,12.0,0.0,60.0
+226,upperRight,12.0,12.0,60.0
+226,lowerRight,12.0,12.0,57.0
+227,lowerLeft,12.0,12.0,57.0
+227,upperLeft,12.0,12.0,60.0
+227,upperRight,6.0,12.0,60.0
+227,lowerRight,5.333333333333333,12.0,57.0
+228,lowerLeft,5.333333333333333,12.0,57.0
+228,upperLeft,6.0,12.0,60.0
+228,upperRight,6.0,0.0,60.0
+228,lowerRight,5.333333333333333,0.0,57.0
+
+#Bracings
+bracingName,x1,y1,x2,y2,material
+default,0.0,0.0,0.0,1.0,Brace
+default,0.0,1.0,1.0,1.0,Brace
+default,1.0,1.0,1.0,0.0,Brace
+default,1.0,0.0,0.0,0.0,Brace
+X,0.0,0.0,0.5,0.5,Brace
+X,1.0,0.0,0.5,0.5,Brace
+X,1.0,1.0,0.5,0.5,Brace
+X,0.0,1.0,0.5,0.5,Brace
+double X,0.0,0.0,0.25,0.5,Brace
+double X,0.0,1.0,0.25,0.5,Brace
+double X,0.5,1.0,0.25,0.5,Brace
+double X,0.5,0.0,0.25,0.5,Brace
+double X,0.5,0.0,0.75,0.5,Brace
+double X,0.5,1.0,0.75,0.5,Brace
+double X,1.0,0.0,0.75,0.5,Brace
+double X,1.0,1.0,0.75,0.5,Brace
+
+#Bracing_Groups
+bracingGroup,bracing
+default_X,default
+default_X,X
+X_double X,X
+X_double X,double X
+
+#Section_Groups
+sectionGroup,section
+small_big,Column
+
+#Bracing_Assignments
+panelName,bracingGroup
+153,default_X
+154,X_double X
+155,default_X
+156,X_double X
+157,default_X
+158,X_double X
+159,default_X
+160,X_double X
+161,default_X
+162,X_double X
+163,default_X
+164,X_double X
+165,default_X
+166,X_double X
+167,default_X
+168,X_double X
+169,default_X
+170,X_double X
+171,default_X
+172,X_double X
+173,default_X
+174,X_double X
+175,default_X
+176,X_double X
+177,default_X
+178,X_double X
+179,default_X
+180,X_double X
+181,default_X
+182,X_double X
+183,default_X
+184,X_double X
+185,default_X
+186,X_double X
+187,default_X
+188,X_double X
+189,default_X
+190,X_double X
+191,default_X
+192,X_double X
+193,default_X
+194,X_double X
+195,default_X
+196,X_double X
+197,default_X
+198,X_double X
+199,default_X
+200,X_double X
+201,default_X
+202,X_double X
+203,default_X
+204,X_double X
+205,default_X
+206,X_double X
+207,default_X
+208,X_double X
+209,default_X
+210,X_double X
+211,default_X
+212,X_double X
+213,default_X
+214,X_double X
+215,default_X
+216,X_double X
+217,default_X
+218,X_double X
+219,default_X
+220,X_double X
+221,default_X
+222,X_double X
+223,default_X
+224,X_double X
+225,default_X
+226,X_double X
+227,default_X
+228,X_double X
+
+#Section_Assignments
+memberid,sectionGroup
+275,small_big
+276,small_big
+277,small_big
+278,small_big
+279,small_big
+280,small_big
+281,small_big
+282,small_big
+283,small_big
+1322,small_big
+1331,small_big
+1335,small_big
+1339,small_big
+1343,small_big
+1347,small_big
+1351,small_big
+1359,small_big
+1363,small_big
