@@ -158,6 +158,13 @@ class FileWriter:
             'renderX',
             'renderY',
             'renderZ',
+            'SAPPath',
+            'nodesList',
+            'footprint',
+            'totalHeight',
+            'totalMass',
+            'gmIdentifier',
+            'toRun',
         ]
         
         values = [
@@ -168,6 +175,13 @@ class FileWriter:
             psData.renderX,
             psData.renderY,
             psData.renderZ,
+            psData.SAPPath,
+            ' '.join(psData.nodesList),
+            psData.footprint,
+            psData.totalHeight,
+            psData.totalMass,
+            psData.gmIdentifier,
+            psData.toRun,
         ]
 
         for i, psKey in enumerate(psKeys):

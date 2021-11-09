@@ -176,9 +176,22 @@ class FloorPlanUI(QDialog):
         item = self.floorPlanTable.item(row,column)
         #adding new rows also prompt the name change, ergo handle exception
         if add == False:
+            print('currentFloorPlanName', self.currentFloorPlanName)
+
+            warning = WarningMessage()
+            if item.text() == '':
+                warning.popUpErrorBox('Floor plan name is missing.')
+                self.floorPlanTable.item(row,0).setText(self.currentBracingName)
+                return
+
+            if item.text() in self.tower.floorPlans:
+                warning.popUpErrorBox('Floor plan name already exists.')
+                self.floorPlanTable.item(row,0).setText(self.currentBracingName)
+                return
+
             floorPlan = self.tower.floorPlans[self.currentFloorPlanName]
             floorPlan.name =  item.text()
-            self.tower.floorPlans[item.text()]=self.tower.floorPlans.pop(self.currentFloorPlanName)
+            self.tower.floorPlans[item.text()] = self.tower.floorPlans.pop(self.currentFloorPlanName)
             self.updateScreenXYElev()
 
     def setIconsForButtons(self):
@@ -202,11 +215,13 @@ class FloorPlanUI(QDialog):
     def deleteFloorPlan(self):
         '''Delete floor plan from tower'''
         indices = self.floorPlanTable.selectionModel().selectedRows()
-        for index in sorted(indices):
-            item = self.floorPlanTable.item(index.row(),index.column())
-            del self.tower.floorPlans[item.text()]
-        for index in sorted(indices):
-            self.floorPlanTable.removeRow(index.row())
+        for i, index in enumerate(sorted(indices)):
+            # remove from dictionary
+            updatedRow = index.row()-i
+            fpName = self.floorPlanTable.item(updatedRow,index.column()).text()
+            self.tower.floorPlans.pop(fpName, None)
+            # remove row from table
+            self.floorPlanTable.removeRow(updatedRow)
 
     def updateCoordinates(self):
         '''Update the coordinates associated with the floor plan based on current '''
@@ -228,15 +243,19 @@ class FloorPlanUI(QDialog):
                 Xitem = self.XYCoordTable.item(i,X).text()
                 Yitem = self.XYCoordTable.item(i,Y).text()
 
-                try:
-                    node = Node(float(Xitem),float(Yitem))
-                except:
-                    warning = WarningMessage()
-                    warning.popUpErrorBox('Coordinates must be in numbers')
+                coords = Algebra.strToFloat(Xitem, Yitem)
 
+                if not coords:
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Coordinates must only contain numbers or following operators: "+", "-", "*", "/"')
                     self.XYCoordTable.setItem(i, X, QTableWidgetItem('0'))
                     self.XYCoordTable.setItem(i, Y, QTableWidgetItem('0'))
                     return
+
+                self.XYCoordTable.setItem(i, X, QTableWidgetItem(str(coords[0])))
+                self.XYCoordTable.setItem(i, Y, QTableWidgetItem(str(coords[1])))
+
+                node = Node(coords[0], coords[1])
                 
                 nodes.append(node)
 

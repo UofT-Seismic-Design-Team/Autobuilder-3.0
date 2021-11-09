@@ -80,18 +80,6 @@ class GenerateTower(QDialog):
 
         dict_of_combos = {}
 
-        # for key in bracingGroups:
-        #     for panel in bracingGroups[key].panelAssignments:
-        #         dict_of_combos[str(panel)] = []
-        #         for bracing in bracingGroups[key].bracings:
-        #             dict_of_combos[str(panel)].append(str(bracing))
-
-        # for key in sectionGroups:
-        #     for member in sectionGroups[key].memberIdAssignments:
-        #         dict_of_combos['Member '+ member] = []
-        #         for section in sectionGroups[key].sections:
-        #             dict_of_combos['Member '+ member].append(str(section))
-
         for bgName in bracingGroups:
             bg = bracingGroups[bgName]
             if bg.panelAssignments: # only generate combo it's assigned to panel

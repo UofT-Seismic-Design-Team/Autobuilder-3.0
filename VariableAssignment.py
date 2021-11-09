@@ -223,7 +223,7 @@ class VariableAssignment(QDialog):
         # reset in table
         table.setRowCount(0)
 
-        with open(fileLoc, 'r') as file:
+        with open(fileLoc, 'r' , encoding='utf-8-sig') as file:
             lines = file.readlines()
 
             for line in lines:

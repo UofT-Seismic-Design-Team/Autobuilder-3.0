@@ -28,80 +28,75 @@ class RunTowers(QDialog):
         uic.loadUi(fileh, self)
         fileh.close()
 
-        self.args = args
-        
-        self.SAPPath = self.args[0].SAPPath
-        self.nodesList = self.args[0].nodesList
-        self.footprint = self.args[0].footprint
-        self.totalHeight = self.args[0].totalHeight
-        self.totalMass = self.args[0].totalMass
-        self.toRun = False
-        
-        # Set Text
-        self.SAP2000Path_input.setPlainText(self.SAPPath)
-        
-        nodesListString = ''
-        for i in range(len(self.nodesList)):
-            if i < len(self.nodesList)-1:
-                nodesListString = nodesListString + str(self.nodesList[i]) + ', '
-            else:
-                nodesListString = nodesListString + str(self.nodesList[i])
-        self.nodesToAnalyze_input.setPlainText(nodesListString)
-        
-        self.footprint_input.setPlainText(str(self.footprint))
-        self.totalHeight_input.setPlainText(str(self.totalHeight))
-        self.totalMass_input.setPlainText(str(self.totalMass))
+        # Passing in main.projectSettingsData into bracing scheme
+        self.psDataRef = args[0].projectSettingsData
+
+        # Create copy of projectSettingsData to reassign if user saves
+        self.psData = copy.deepcopy(self.psDataRef)
+
+        # SAP2000.exe path
+        self.selectPath_button.clicked.connect(self.selectSAP2000path)
         
         # Set UI Elements
         self.setOkandCancelButtons()     
         self.setRunNowButton()
-        #self.runNow_Button.clicked.connect(self.runNow) 
-        
+
+        self.update()
       
     def setOkandCancelButtons(self):
         self.OkButton = self.runTowers_buttonBox.button(QDialogButtonBox.Ok)
-        self.OkButton.clicked.connect(self.saveInputs)
+        self.OkButton.clicked.connect(self.save)
         self.OkButton.clicked.connect(lambda x: self.close())
 
         self.CancelButton = self.runTowers_buttonBox.button(QDialogButtonBox.Cancel)
         self.CancelButton.clicked.connect(lambda x: self.close())
-    
-    
-    def saveInputs(self):
-        
+
+    def setRunNowButton(self):
+        self.runNow_Button.clicked.connect(self.runNow)
+        self.runNow_Button.clicked.connect(lambda x: self.close())
+
+    def Populate(self):
+        # Set Text
+        self.SAP2000Path_input.setPlainText(self.psData.SAPPath)
+        self.nodesToAnalyze_input.setPlainText(','.join(self.psData.nodesList))
+        self.footprint_input.setPlainText(str(self.psData.SAPPath.footprint))
+        self.totalHeight_input.setPlainText(str(self.psData.totalHeight))
+        self.totalMass_input.setPlainText(str(self.psData.totalMass))
+        self.gmIdentifier_input.setPlainText(str(self.psData.gmIdentifier))
+
+    def update(self):
         # SAP2000 Path
-        self.SAPPath = self.SAP2000Path_input.toPlainText()
+        self.psData.SAPPath = self.SAP2000Path_input.toPlainText()
         
         # Nodes to Analyze (assuming input is string of integers seperated by commas)
-        nodesToAnalyze = []
-        nodesToAnalyzeText = self.nodesToAnalyze_input.toPlainText()
-        nodesToAnalyzeMark = 0
-        for i in range(len(nodesToAnalyzeText)):
-            if nodesToAnalyzeText[i] == ",":
-                nodesToAnalyze.append(int(nodesToAnalyzeText[nodesToAnalyzeMark:i]))
-                nodesToAnalyzeMark = i + 2
-            elif i == (len(nodesToAnalyzeText) - 1):
-                nodesToAnalyze.append(int(nodesToAnalyzeText[nodesToAnalyzeMark:]))
-        self.nodesList = nodesToAnalyze
+        nodesToAnalyze = self.nodesToAnalyze_input.toPlainText()
+        self.psData.nodesList = nodesToAnalyze.split(',')
             
         # Footprint
-        self.footprint = float(self.footprint_input.toPlainText())
+        self.psData.footprint = float(self.footprint_input.toPlainText())
         
         # Total Height
-        self.totalHeight = float(self.totalHeight_input.toPlainText())
+        self.psData.totalHeight = float(self.totalHeight_input.toPlainText())
         
         # Total Mass
-        self.totalMass = float(self.totalMass_input.toPlainText())
-        
-        self.toRun = False
-        
-        
-    def setRunNowButton(self):
-        #self.RunNowButton = self.runNow_Button.button(QPushButton)
-        self.runNow_Button.clicked.connect(self.saveInputs)
-        self.runNow_Button.clicked.connect(self.runNow)
-        self.runNow_Button.clicked.connect(lambda x: self.close())    
-        
-        
+        self.psData.totalMass = float(self.totalMass_input.toPlainText())
+
+        # Ground Motion Identifier
+        self.psData.gmIdentifier = self.gmIdentifier_input.toPlainText()
+    
+    def save(self):
+        self.update()
+        self.psDataRef = self.psData
+
     def runNow(self):
-        self.toRun = True
+        self.psData.toRun = True
+        self.save()
+
+    def selectSAP2000path(self):
+        modelLoc ,_  = QFileDialog.getOpenFileName(self, 'Select SAP2000.exe', '', 'SAP2000 application (*.exe)') # returns a tuple: ('file_name', 'file_type')
+
+        # Terminate if cancelled
+        if not modelLoc:
+            return
+
+        self.SAP2000Path_input.setPlainText(modelLoc)

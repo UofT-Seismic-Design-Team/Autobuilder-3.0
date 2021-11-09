@@ -105,6 +105,15 @@ class FileReader:
             elif var == 'renderZ':
                 self.psData.renderZ = float(val)
 
+            elif var == 'SAPPath':
+                self.psData.SAPPath = val
+
+            elif var == 'nodesList':
+                self.psData.nodesList = val.split()
+
+            elif var == 'renderZ':
+                self.psData.renderZ = float(val)
+
     def readDisplaySettings(self, data):
         if not data:
             return None

@@ -120,22 +120,21 @@ class BracingScheme(QDialog):
 
     def deleteBracingScheme(self):
         '''delete bracing and associated coord properties'''
-
         # remove selected rows from table
         indices = self.bracingSchemeTable.selectionModel().selectedRows()
-        for index in sorted(indices):
+        for i, index in enumerate(sorted(indices)):
             # remove from dictionary
-            bcName = self.bracingSchemeTable.item(index.row(),index.column()).text()
+            updatedRow = index.row()-i
+            bcName = self.bracingSchemeTable.item(updatedRow,index.column()).text()
             self.tower.bracings.pop(bcName, None)
             # remove row from table
-            self.bracingSchemeTable.removeRow(index.row())
+            self.bracingSchemeTable.removeRow(updatedRow)
 
         # empty coord. table
         self.bracingCoordTable.setRowCount(0)
 
         # clear bracing name
         self.bracingNameEdit.clear()
-
 
     def updateScreen(self):
         '''Update BracingCoordTable'''
@@ -228,15 +227,17 @@ class BracingScheme(QDialog):
             newBracing.materials = []
 
             for row in range(self.bracingCoordTable.rowCount()):
-                try:
-                    # changed from 1,2,3,4
-                    x1 = float(self.bracingCoordTable.item(row, 0).text()) 
-                    y1 = float(self.bracingCoordTable.item(row, 1).text())
-                    x2 = float(self.bracingCoordTable.item(row, 2).text())
-                    y2 = float(self.bracingCoordTable.item(row, 3).text())
-                except:
+                # changed from 1,2,3,4
+                x1 = self.bracingCoordTable.item(row, 0).text()
+                y1 = self.bracingCoordTable.item(row, 1).text()
+                x2 = self.bracingCoordTable.item(row, 2).text()
+                y2 = self.bracingCoordTable.item(row, 3).text()
+    
+                coords = Algebra.strToFloat(x1, y1, x2, y2)
+
+                if not coords:
                     warning = WarningMessage()
-                    warning.popUpErrorBox('Coordinates must be in numbers')
+                    warning.popUpErrorBox('Coordinates must only contain numbers or following operators: "+", "-", "*", "/"')
 
                     self.bracingCoordTable.setItem(row, 0, QTableWidgetItem('0'))
                     self.bracingCoordTable.setItem(row, 1, QTableWidgetItem('0'))
@@ -249,8 +250,13 @@ class BracingScheme(QDialog):
                 except:
                     material = self.sections[0]
 
-                node1 = Node(x1, y1)
-                node2 = Node(x2, y2)
+                self.bracingCoordTable.setItem(row, 0, QTableWidgetItem(str(coords[0])))                
+                self.bracingCoordTable.setItem(row, 1, QTableWidgetItem(str(coords[1])))
+                self.bracingCoordTable.setItem(row, 2, QTableWidgetItem(str(coords[2])))
+                self.bracingCoordTable.setItem(row, 3, QTableWidgetItem(str(coords[3])))
+
+                node1 = Node(coords[0], coords[1])
+                node2 = Node(coords[2], coords[3])
 
                 newBracing.nodePairs.append([node1, node2])
                 newBracing.materials.append(material)
@@ -268,16 +274,30 @@ class BracingScheme(QDialog):
 
     def nameChange(self):
         ''' change bracing name after it is defined in main table '''
-        # add exception for defining name with an empty string?
-        # check if second condition is necessary
         row = self.bracingSchemeTable.currentRow() #returns -1 when repopulating empty table
         if row != -1 and self.currentBracingName != None:
-            bcName = self.bracingSchemeTable.item(row,0)
+            bcName = self.bracingSchemeTable.item(row,0).text()
+            
+            warning = WarningMessage()
+            if bcName == '':
+                warning.popUpErrorBox('Bracing name is missing.')
+                self.bracingSchemeTable.item(row,0).setText(self.currentBracingName)
+                return
+
+            if bcName in self.tower.bracings:
+                warning.popUpErrorBox('Bracing name already exists.')
+                self.bracingSchemeTable.item(row,0).setText(self.currentBracingName)
+                return
+
             bracing = self.tower.bracings[self.currentBracingName]
             # update bracing name to match changed cell
-            bracing.name = bcName.text()
+            bracing.name = bcName
             # assign original coordinates to new bracing name
-            self.tower.bracings[bcName.text()] = self.tower.bracings.pop(self.currentBracingName)
+            self.tower.bracings[bcName] = self.tower.bracings.pop(self.currentBracingName)
+
+            # match bracing name above coord. table to main table
+            self.bracingNameEdit.setText(bcName)
+            
             self.updateScreen()
 
     def updateBracingView(self):

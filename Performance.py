@@ -43,6 +43,9 @@ class PerformanceAnalyzer:
         for roofNodeName in roofNodeNames:
             ret = SapModel.Results.JointAccAbs(roofNodeName, 0)
 
+            if ret[-1] != 0:
+                print('ERROR getting acceleration at Node {}'.format(roofNodeName))
+
             max_and_min_acc = ret[6]
             max_pos_acc = max_and_min_acc[0]
             min_neg_acc = max_and_min_acc[1]
@@ -71,6 +74,10 @@ class PerformanceAnalyzer:
         maxDisp = 0
         for roofNodeName in roofNodeNames:
             ret = SapModel.Results.JointDispl(roofNodeName, 0)
+
+            if ret[-1] != 0:
+                print('ERROR getting displacement at Node {}'.format(roofNodeName))
+
             max_and_min_disp = ret[6]
             max_pos_disp = max_and_min_disp[0]
             min_neg_disp = max_and_min_disp[1]
@@ -128,11 +135,11 @@ class PerformanceAnalyzer:
 
         return roofNodeNames
 
-    def getCosts(self, maxAcc, maxDisp, footprint, weight, floorMasses, floorHeights):
+    def getCosts(self, maxAcc, maxDisp, footprint, weight, totalMass, totalHeight):
         # Subtract weights. Weight is initially in lb, convert to kg
         print('Calculating costs...')
 
-        weight = (weight * UnitConversion.Mass['lb'] - sum(floorMasses)) / UnitConversion.Mass['lb']
+        weight = (weight * UnitConversion.Mass['lb'] - totalMass) / UnitConversion.Mass['lb']
         design_life = 100 # years
         construction_cost = 2000000*(weight**2)+6*(10**6)
         land_cost = 35000 * footprint
@@ -142,7 +149,7 @@ class PerformanceAnalyzer:
         return_period_1 = 50
         return_period_2 = 300
         apeak_1 = maxAcc #g's
-        xpeak_1 = 100*maxDisp/(sum(floorHeights) * 25.4) #% roof drift
+        xpeak_1 = 100*maxDisp/(totalHeight * 25.4) #% roof drift
         structural_damage_1 = scipy.stats.norm(1.5, 0.5).cdf(xpeak_1)
         equipment_damage_1 = scipy.stats.norm(1.75, 0.7).cdf(apeak_1)
         economic_loss_1 = structural_damage_1*construction_cost + equipment_damage_1*equipment_cost
@@ -351,5 +358,3 @@ class TowerPerformance:
         avgSeismicCost /= len(self.seismicCost)
 
         return avgSeismicCost
-    
-

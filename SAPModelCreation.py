@@ -17,7 +17,6 @@ import sys
 import comtypes.client
 import comtypes.gen
 
-import win32com.client
 import random
 import re
 import time
@@ -49,15 +48,9 @@ class RunTower(QDialog):
         uic.loadUi(fileh, self)
         fileh.close()
         
-        # Store Variables From Run Towers Dialog
-        self.SAPPath = args[0].SAPPath
-        self.nodesList = args[0].nodesList
-        self.footprint = args[0].footprint
-        self.totalHeight = args[0].totalHeight
-        self.totalMass = args[0].totalMass
-        
         # Project Settings Data
-        self.projectSettingsData = args[0].projectSettingsData
+        self.psData = args[0].projectSettingsData
+        self.runGMs = self.psData.groundMotion
 
         # Reference to existing tower
         self.tower = args[0].tower
@@ -65,16 +58,14 @@ class RunTower(QDialog):
         # Members to be divided at intersections
         self.membersToDivide = []
 
-        # TODO: allow user input
-        self.costCalcIdentifier = 'GM1'
-        self.footprint = 144
-        self.totalHeight = [60] # inches
-        self.totalMass = [7.83] # kg
-
         # Tower performances
         self.towerPerformances = {}
 
-        self.runGMs = self.projectSettingsData.groundMotion
+        # Elasped Time
+        self.timeElapsed = 0 # in seconds
+        self.timer = QTimer(self)
+        self.timer.setInterval(1000) # period in miliseconds
+        self.timer.timeout.connect(self.updateElapsedTime)
 
         # Start scatter plot of tower performance
         xlabel = 'Tower Number'
@@ -85,33 +76,109 @@ class RunTower(QDialog):
         self.plotter = Plotter(xlabel, ylabel)
         self.plotter.show()
 
-        # Establish alternate thread to run SAP2000
-        self.threadpool = QThreadPool()
+        self.setCloseButton()
+
+        # Establish alternate thread to run SAP2000 ----------------------------------------
         sapRunnable = SAPRunnable(self)
-        self.threadpool.start(sapRunnable)
+        QThreadPool.globalInstance().start(sapRunnable) # no need to create a new thread here
 
-        self.OkButton.clicked.connect(lambda x: self.close())
+        # Signals to connect SAP2000 thread and GUI thread
+        sapRunnable.signals.log.connect(self.logText.append)
+        sapRunnable.signals.startTime.connect(self.timer.start)
+        sapRunnable.signals.endTime.connect(self.timer.stop)
+        sapRunnable.signals.resetProgress.connect(self.resetProgress)
+        sapRunnable.signals.plotData.connect(self.updatePlot)
+        sapRunnable.signals.updateProgress.connect(self.updateProgress)
 
-    def addProgress(self):
-        self.counter += 1
-        self.progressBar.setValue(self.counter)
+    def setCloseButton(self):
+        self.closeButton = self.buttonBox.button(QDialogButtonBox.Close)
+        self.closeButton.clicked.connect(self.close)
+
+    def updateProgress(self, current, numTowers):
+        self.progressBar.setValue(current + 1)
+        self.numTowersLabel.setText('{} out of {}'.format(str(current + 1), str(numTowers)))
+
+        avgTime = self.timeElapsed/(current + 1)
+        estTimeRemaining = avgTime * (numTowers - (current+1))
+        self.estTimeLabel.setText(str(datetime.timedelta(seconds=estTimeRemaining)))
 
     def resetProgress(self, max):
-        self.counter = 0
-        self.progressBar.setValue(self.counter)
+        self.progressBar.setValue(0)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(max)
+        self.numTowersLabel.setText('0 out of {}'.format(str(max)))
+
+    def updateElapsedTime(self):
+        self.timeElapsed += 1
+        self.timeElapsedLabel.setText(str(datetime.timedelta(seconds=self.timeElapsed)))
+
+    def updatePlot(self, x, y):
+        self.plotter.addxData(x)
+        self.plotter.addyData(y)
+
+        self.plotter.updatePlot()
+
+class SAPSignals(QObject):
+    '''
+    This is a Struct
+    Defines the signals available from a running worker thread.
+    '''
+
+    log = pyqtSignal(str)
+    resetProgress = pyqtSignal(int)
+    plotData = pyqtSignal(int, int)
+    updateProgress = pyqtSignal(int, int)
+    startTime = pyqtSignal()
+    endTime = pyqtSignal()
+
+class SAPRunnable(QRunnable):
+    ''' Worker thread; to avoid freezing GUI '''
+
+    def __init__(self, runTower):
+        super().__init__()
+
+        self.mainFileLoc = runTower.mainFileLoc
+        self.folderLoc = runTower.folderLoc
+        self.SAPFolderLoc = runTower.SAPFolderLoc
+
+        # Project Settings Data
+        self.psData = runTower.psData
+        self.runGMs = self.psData.groundMotion
+
+        # Reference to existing tower
+        self.tower = runTower.tower
+
+        # Tower performances
+        self.towerPerformances = {}
+
+        self.membersToDivide = []
+
+        self.signals = SAPSignals()
+
+    def run(self):
+        self.buildTowers()
 
     def buildTowers(self):
+        self.signals.log.emit('Starting SAP2000...')
+
         SapModel = self.startSap2000()
+        if SapModel == False:
+            self.signals.log.emit('Fail to start SAP2000')
+            return
 
         # Delete all members within the plans and build correct bracing scheme
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         inputTable = self.tower.inputTable
-        self.resetProgress(len(inputTable['towerNumber']))
+        numTowers = len(inputTable['towerNumber'])
+        self.signals.resetProgress.emit(numTowers)
+
+        # Update time -----------------------------
+        self.signals.startTime.emit()
+
         for i, towerNum in enumerate(inputTable['towerNumber']):
-            self.addProgress()
+
+            self.signals.log.emit('Building Tower {}...'.format(str(towerNum)))
 
             SapModel.SetModelIsLocked(False)
             SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
@@ -136,37 +203,36 @@ class RunTower(QDialog):
                 if "Variable-" in key:
                     variableName = key.strip('Variable-')
                     assignedValue = inputTable[key][i]
-
+  
                     towerPerformance.addVariable(variableName, assignedValue)
             
-            print('round coordinates...')
+            self.signals.log.emit('Rounding coordinates...')
             self.roundingModelCoordinates(SapModel)
             #self.divideMembersAtIntersection(SapModel)
 
             # Save the file
             SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
-            print(SAPFileLoc)
             SapModel.File.Save(SAPFileLoc)
 
             # Analyse tower and print results to spreadsheet
-            print('\nAnalyzing tower number ' + str(towerNum))
-            print('-------------------------')
+            self.signals.log.emit('\nAnalyzing tower number ' + str(towerNum))
+            self.signals.log.emit('-------------------------')
             self.runAnalysis(SapModel, towerPerformance)
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
-
-            self.plotter.addxData(towerNum)
 
             # TODO: fix below
             if self.runGMs:
                 avgBuildingCost = towerPerformance.avgBuildingCost()
                 avgSeismicCost = towerPerformance.avgSeismicCost()
 
-                self.plotter.addyData(avgBuildingCost + avgSeismicCost)
+                self.signals.plotData.emit(towerNum, avgBuildingCost + avgSeismicCost)
             else:
-                self.plotter.addyData(towerPerformance.period)
+                self.signals.plotData.emit(towerNum, towerPerformance.period)
 
-            self.plotter.updatePlot()
+            self.signals.updateProgress.emit(i, numTowers)
+
+        self.signals.endTime.emit()
 
         # Create output table
         filewriter = FileWriter(self.mainFileLoc)
@@ -191,7 +257,7 @@ class RunTower(QDialog):
         SpecifyPath = True
 
         #if the above flag is set to True, specify the path to SAP2000 below
-        ProgramPath = self.SAPPath
+        ProgramPath = self.psData.SAPPath
 
         if AttachToInstance:
             # attach to a running instance of SAP2000
@@ -199,7 +265,7 @@ class RunTower(QDialog):
                 # get the active SapObject
                 mySapObject = comtypes.client.GetActiveObject("CSI.SAP2000.API.SapObject")
             except (OSError, comtypes.COMError):
-                print("No running instance of the program found or failed to attach.")
+                self.signals.log.emit("No running instance of the program found or failed to attach.")
                 sys.exit(-1)
         else:
             # create API helper object
@@ -210,14 +276,14 @@ class RunTower(QDialog):
                     # 'create an instance of the SAPObject from the specified path
                     mySapObject = helper.CreateObject(ProgramPath)
                 except (OSError, comtypes.COMError):
-                    print("Cannot start a new instance of the program from " + ProgramPath)
+                    self.signals.log.emit("Cannot start a new instance of the program from " + ProgramPath)
                     sys.exit(-1)
             else:
                 try:
                     # create an instance of the SAPObject from the latest installed SAP2000
                     mySapObject = helper.CreateObjectProgID("CSI.SAP2000.API.SapObject")
                 except (OSError, comtypes.COMError):
-                    print("Cannot start a new instance of the program.")
+                    self.signals.log.emit("Cannot start a new instance of the program.")
                     sys.exit(-1)
             # start SAP2000 application
             mySapObject.ApplicationStart()
@@ -227,7 +293,11 @@ class RunTower(QDialog):
             SapModel.InitializeNewModel()
 
             # open model at specified file path in project settings
-            ret = SapModel.File.OpenFile(self.projectSettingsData.SAPModelLoc)
+            ret = SapModel.File.OpenFile(self.psData.SAPModelLoc)
+            if ret != 0:
+                self.signals.log.emit('ERROR cannot open SAP2000 model file')
+                return False
+
         return SapModel
 
     def roundingModelCoordinates(self, SapModel):
@@ -241,7 +311,7 @@ class RunTower(QDialog):
             z = round(z, SAP2000Constants.MaxDecimalPlaces)
             ret = SapModel.EditPoint.ChangeCoordinates_1(PointName, x, y, z, True)
             if ret != 0:
-                print('ERROR rounding coordinates of point ' + PointName)
+                self.signals.log.emit('ERROR rounding coordinates of point ' + PointName)
 
     def clearPanel(self, SapModel, panel):
         # Deletes all members that are in the panel
@@ -252,7 +322,7 @@ class RunTower(QDialog):
             for memberID in panel.IDs:
                 ret = SapModel.FrameObj.Delete(memberID)
                 if ret != 0:
-                    print('ERROR deleting member ' + memberID)
+                    self.signals.log.emit('ERROR deleting member ' + memberID)
         panel.IDs.clear()
 
     def clearExistingMembersinPanel(self, SapModel, panel):
@@ -276,13 +346,13 @@ class RunTower(QDialog):
             # Get member coordinates
             [member_pt1_name, member_pt2_name, ret] = SapModel.FrameObj.GetPoints(member_name)
             if ret != 0:
-                print('ERROR checking member ' + member_name)
+                self.signals.log.emit('ERROR checking member ' + member_name)
             [member_pt1_x, member_pt1_y, member_pt1_z, ret] = SapModel.PointObj.GetCoordCartesian(member_pt1_name)
             if ret != 0:
-                print('ERROR getting coordinate of point ' + member_pt1_name)
+                self.signals.log.emit('ERROR getting coordinate of point ' + member_pt1_name)
             [member_pt2_x, member_pt2_y, member_pt2_z, ret] = SapModel.PointObj.GetCoordCartesian(member_pt2_name)
             if ret != 0:
-                print('ERROR getting coordinate of point ' + member_pt2_name)
+                self.signals.log.emit('ERROR getting coordinate of point ' + member_pt2_name)
 
             # Check if the member is within the elevation of the panel
             panel_max_z = max(panel.lowerLeft.z, panel.upperLeft.z, panel.upperRight.z, panel.lowerRight.z)
@@ -422,7 +492,7 @@ class RunTower(QDialog):
                                                               end_node_y, end_node_z, PropName=section)
 
             if ret != 0:
-                print('ERROR building member in panel', panel.name)
+                self.signals.log.emit('ERROR building member in panel '+ panel.name)
 
             if member_name is not None:
                 panel.IDs.append(member_name)
@@ -436,13 +506,13 @@ class RunTower(QDialog):
 
             ret = SapModel.SelectObj.All(False)
             if ret != 0:
-                print('ERROR selecting all members')
+                self.signals.log.emit('ERROR selecting all members')
 
             num = 0
             newNames = []
             [num, newNames, ret] = SapModel.EditFrame.DivideAtIntersections(memberName, num, newNames)
             if ret != 0:
-                print('ERROR dividing member ' + memberName)
+                self.signals.log.emit('ERROR dividing member ' + memberName)
 
             else:
                 for newName in newNames:
@@ -452,18 +522,14 @@ class RunTower(QDialog):
 
     def changeMemberSection(self, SapModel, memberID, sectionName):
         # Change the section properties of specified members
-        print('\nChanging section properties of specified members...')
-        print('Changed section of member ' + str(memberID))
         ret = SapModel.FrameObj.SetSection(str(memberID), sectionName, 0)
         if ret != 0 :
-            print('ERROR changing section of member ' + str(memberID))
+            self.signals.log.emit('ERROR changing section of member ' + str(memberID))
 
     def runAnalysis(self, SapModel, towerPerformance):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
-        run_GMs = self.projectSettingsData.groundMotion
-
-        if run_GMs:
+        if self.runGMs:
             SapModel.Analyze.SetRunCaseFlag('', True, True)
         else:
             SapModel.Analyze.SetRunCaseFlag('', False, True)
@@ -473,16 +539,16 @@ class RunTower(QDialog):
             SapModel.Analyze.SetRunCaseFlag('MODAL', True, False)
 
         #Run Analysis
-        print('Running model in SAP2000...')
+        self.signals.log.emit('Running model in SAP2000...')
         SapModel.Analyze.RunAnalysis()
-        print('Finished running.')
+        self.signals.log.emit('Finished running.')
 
-        print('Getting results...')
+        self.signals.log.emit('Getting results...')
 
         analyzer = PerformanceAnalyzer(SapModel)
 
         # Find Roof nodes ---------------------------------------------
-        roofNodeNames = self.nodesList
+        roofNodeNames = self.psData.nodesList
 
         # Get WEIGHT in lbs ---------------------------------
         totalWeight = analyzer.getWeight()
@@ -492,7 +558,7 @@ class RunTower(QDialog):
         
         [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         for combo in AllCombos:
-            if run_GMs:
+            if self.runGMs:
                 # Only run combo with ground motions
                 if not ('GM' in combo):
                     continue
@@ -511,8 +577,8 @@ class RunTower(QDialog):
                 # Get BASE SHEAR  ---------------------------------------
                 basesh = analyzer.getBaseShear()
                 
-                if self.costCalcIdentifier in combo:
-                    buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.footprint, totalWeight, self.totalMass, self.totalHeight)
+                if self.psData.gmIdentifier in combo:
+                    buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.psData.footprint, totalWeight, self.psData.totalMass, self.psData.totalHeight)
                     towerPerformance.buildingCost[combo] = buildingCost
                     towerPerformance.seismicCost[combo] = seismicCost
 
@@ -532,12 +598,5 @@ class RunTower(QDialog):
         # Get Centre of Rigidity ---------------------------------
         towerPerformance.CR = analyzer.getCR(self.tower.elevations)
 
-class SAPRunnable(QRunnable):
-    ''' Worker thread; to avoid freezing GUI '''
 
-    def __init__(self, runTower):
-        super().__init__()
-        self.runTower = runTower
-
-    def run(self):
-        self.runTower.buildTowers()
+    

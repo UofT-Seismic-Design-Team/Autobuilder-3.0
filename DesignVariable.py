@@ -44,7 +44,6 @@ class DesignVariable(QDialog):
 
         # Update iteration table upon cell change
         self.IterationTable.itemSelectionChanged.connect(self.updateIteration)
-        self.IterationTable.itemSelectionChanged.connect(self.updateIteration)
         
         # Passing in main.tower into bracing scheme
         self.towerRef = args[0].tower
@@ -236,6 +235,9 @@ class DesignVariable(QDialog):
 
         for index in sorted(indices):
             self.IterationTable.removeRow(index.row())
+
+        print('delete iter:', self.IterationTable.rowCount())
+        
         self.updateIteration()
 
     def updateIteration(self):
@@ -246,15 +248,19 @@ class DesignVariable(QDialog):
                 newBG = self.tower.bracingGroups[currName]
                 newBG.bracings = []
                 for row in range(self.IterationTable.rowCount()):
-                    bracing = self.IterationTable.cellWidget(row, 0).currentText()
-                    newBG.bracings.append(bracing)
+                    cell = self.IterationTable.cellWidget(row, 0)
+                    if cell != None:
+                        bracing = cell.currentText()
+                        newBG.bracings.append(bracing)
             
             elif self.tabWidget.currentIndex() == 1:
                 newSG = self.tower.sectionGroups[currName]
                 newSG.sections = []
                 for row in range(self.IterationTable.rowCount()):
-                    section = self.IterationTable.cellWidget(row, 0).currentText()
-                    newSG.sections.append(section)
+                    cell = self.IterationTable.cellWidget(row, 0)
+                    if cell != None:
+                        section = cell.currentText()
+                        newSG.sections.append(section)
     
     def Populate(self):
         ''' Add existing bracing groups to bracingGroupTable '''

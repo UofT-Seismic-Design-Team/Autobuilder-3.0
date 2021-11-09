@@ -3,6 +3,30 @@
 class Algebra:
     EPSILON = 0.00001
 
+    def strToFloat(*args):
+        '''
+        Convert mathematical expression from string to float
+        -> Return [float] or False
+
+        '''
+
+        operators = ['+', '-', '*', '/']
+        floatValues = []
+
+        for strValue in args:
+            try:
+                if any(op in strValue for op in operators):
+                    floatValue = float(eval(strValue))
+                else:
+                    floatValue = float(strValue)
+
+                floatValues.append(floatValue)
+
+            except:
+                return False
+        
+        return floatValues
+
 class FileExtension:
     projectSettings = '/projectSettings.csv'
     displaySettings = '/displaySettings.csv'

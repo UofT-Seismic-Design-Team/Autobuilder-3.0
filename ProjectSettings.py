@@ -65,13 +65,12 @@ class ProjectSettings(QDialog):
         self.CancelButton.clicked.connect(lambda signal: self.close())
 
     def saveSAPModelLoc(self, signal):
-        fileInfo = QFileDialog.getOpenFileName(self, 'Open SAP2000 model', '', 'SAP2000 files (*.sdb)') # returns a tuple: ('file_name', 'file_type')
+        modelLoc, modelType = QFileDialog.getOpenFileName(self, 'Open SAP2000 model', '', 'SAP2000 files (*.sdb)') # returns a tuple: ('file_name', 'file_type')
 
         # Terminate if cancelled
-        if not fileInfo[0]:
+        if not modelLoc:
             return
-
-        modelLoc = fileInfo[0]
+    
         self.SAPModelLoc = modelLoc
 
         modelName = modelLoc.split('/')[-1]
@@ -217,17 +216,31 @@ class ProjectSettingsData:
 
     def __init__(self):
         self.floorElevs = [0.0,6.0,9.0,12.0,15.0,18.0,21.0,24.0,27.0,30.0,33.0,36.0,39.0,42.0,45.0,48.0,51.0,54.0,57.0,60.0]
-        self.sections = {'BALSA_0.5x0.5': Section('BALSA_0.5x0.5',1)
-        ,'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)}
+        self.sections = {
+            'BALSA_0.5x0.5': Section('BALSA_0.5x0.5',1), 
+            'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)
+            }
 
         # Analysis options
         self.groundMotion = False
         self.analysisType = ATYPE.TIME_HISTORY
         # folder name for SAP2000 model (must be in working directory of Python script)
         self.SAPModelLoc = 'SAP'
-        self.modelName = 'Existing_Structure_Feb_22.sdb'
+        self.modelName = '.sdb'
 
         # Render Settings
         self.renderX = 12
         self.renderY = 12
         self.renderZ = 60
+
+        # Run Towers variables
+        self.SAPPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
+        if not os.path.exists('C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'):
+            self.SAPPath = '*SAP2000 22 may not be installed*'
+
+        self.nodesList = ['1', '2', '3', '4']
+        self.footprint = 144
+        self.totalHeight = 60
+        self.totalMass = 7.83
+        self.gmIdentifier = 'GM1'
+        self.toRun = False
