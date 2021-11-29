@@ -209,8 +209,9 @@ class BracingScheme(QDialog):
         # clear selections in coord table to avoid error
         self.bracingCoordTable.clearSelection()
 
-        for index in sorted(indices):
-            self.bracingCoordTable.removeRow(index.row())
+        for i, index in enumerate(sorted(indices)):
+            updatedRow = index.row()-i
+            self.bracingCoordTable.removeRow(updatedRow)
 
         self.updateCoord()
 

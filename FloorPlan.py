@@ -32,22 +32,34 @@ class FloorPlanUI(QDialog):
         self.setOkandCancelButtons()
 
         # Add Empty Row to List of Floor Plan Schemes
-        self.add.clicked.connect(self.addFloorPlan)
+        self.addFloorPlan_button.clicked.connect(self.addFloorPlan)
 
         #set up add coordinates button
         self.addCoord.clicked.connect(self.addCoordinate)
 
+        #set up add member button
+        self.addMember_button.clicked.connect(self.addMember)
+
         # Delete Selected Row from List of Floor Plan Schemes
-        self.delete_2.clicked.connect(self.deleteFloorPlan)
+        self.deleteFloorPlan_button.clicked.connect(self.deleteFloorPlan)
 
         #Set up delete coordinates button
         self.deleteCoord.clicked.connect(self.deleteCoordinate)
 
+        #set up delete member button
+        self.deleteMember_button.clicked.connect(self.deleteMember)
+
         #Call update on the Coordinate table upon change in cell
         self.XYCoordTable.itemSelectionChanged.connect(self.updateCoordinates)
 
+        #Call update on the member table upon change in cell
+        self.memberTable.itemSelectionChanged.connect(self.updateCoordinates)
+
         #Call update in the elevation Table upon upon change in cell
         self.ElevationTable.itemSelectionChanged.connect(self.updateElevations)
+
+        #Call update in the centre of mass Table upon upon change in cell
+        self.COMTable.itemSelectionChanged.connect(self.updateCOMs)
 
         #create a copy of the tower to reassign if user saves.
         self.tower = copy.deepcopy(args[0].tower)
@@ -69,6 +81,8 @@ class FloorPlanUI(QDialog):
         #reference to existing tower for cache
         self.towerRef = args[0].tower
 
+        # Flags
+        self.stopUpdateCoordinates = False
 
         timer = QTimer(self)
         timer.timeout.connect(self.set2DViewDimension)
@@ -90,13 +104,10 @@ class FloorPlanUI(QDialog):
             self.floorPlanTable.setItem(i, column, item)
 
         self.populateElevationTable()
+        self.populateCOMTable()
 
     def populateElevationTable(self):
         '''update the elevations and the associated floor plans'''
-        X = 0
-        Y = 1
-        Z = 2
-
         self.ElevationTable.setRowCount(0)
         
         for rows, elev in enumerate(self.tower.elevations):
@@ -113,26 +124,57 @@ class FloorPlanUI(QDialog):
                 if numFPs == 2:
                     fpName2 = floorPlans[1].name
 
-                self.createElevationRow(rows, X, Y, Z, elev, fpName1, fpName2)
+                self.createElevationRow(rows, elev, fpName1, fpName2)
 
-    def createElevationRow(self,rows,X,Y,Z,elevation, floorPlan1, floorPlan2):
+    def createElevationRow(self,rows,elevation, floorPlan1, floorPlan2):
         '''Create elevations row for the UpdateScreenXYElev'''
+
         self.ElevationTable.insertRow(self.ElevationTable.rowCount())
 
         # To prevent user from editing the elevation column
         elevItem = QTableWidgetItem(str(elevation))
         elevItem.setFlags(Qt.ItemIsEnabled)
 
-        self.ElevationTable.setItem(rows, X, elevItem)
-        self.ElevationTable.setItem(rows, Y, QTableWidgetItem(floorPlan1))
-        self.ElevationTable.setItem(rows, Z, QTableWidgetItem(floorPlan2))
+        self.ElevationTable.setItem(rows, 0, elevItem)
+        self.ElevationTable.setItem(rows, 1, QTableWidgetItem(floorPlan1))
+        self.ElevationTable.setItem(rows, 2, QTableWidgetItem(floorPlan2))
+
+    def populateCOMTable(self):
+        '''update the elevations and the associated COMs'''
+        self.COMTable.setRowCount(0)
+        
+        for rows, elev in enumerate(self.tower.elevations):
+            if elev in self.tower.floors:
+
+                comX = str(self.tower.floors[elev].comX)
+                comY = str(self.tower.floors[elev].comY)
+
+                self.createCOMRow(rows, elev, comX, comY)
+
+    def createCOMRow(self, rows, elevation, comX, comY):
+        '''Create rows for Centre of Mass Table'''
+
+        self.COMTable.insertRow(self.COMTable.rowCount())
+
+        # To prevent user from editing the elevation column
+        elevItem = QTableWidgetItem(str(elevation))
+        elevItem.setFlags(Qt.ItemIsEnabled)
+
+        self.COMTable.setItem(rows, 0, elevItem)
+        self.COMTable.setItem(rows, 1, QTableWidgetItem(comX))
+        self.COMTable.setItem(rows, 2, QTableWidgetItem(comY))
 
     def updateScreenXYElev(self):
         '''Update everything on selected item on the right tab'''
-        #Update XYCOord Table
-        column = 0
-        self.XYCoordTable.setRowCount(0)
 
+        # Disable updateCoords when resetting tables -----------------------------
+        self.stopUpdateCoordinates = True
+        self.memberTable.setRowCount(0)
+        self.XYCoordTable.setRowCount(0)
+        self.stopUpdateCoordinates = False
+
+        column = 0
+        #Update XYCOord Table
         X = 0
         Y = 1
         botCol = 2
@@ -144,8 +186,7 @@ class FloorPlanUI(QDialog):
         self.currentFloorPlanName = item.text()
 
         # Update X Y coordinates
-        for XY_row, member in enumerate(floorPlan.members):
-            node = member.start_node
+        for XY_row, node in enumerate(floorPlan.nodes):
             self.XYCoordTable.insertRow(self.XYCoordTable.rowCount())
             self.XYCoordTable.setItem(XY_row, X, QTableWidgetItem(str(node.x)))
             self.XYCoordTable.setItem(XY_row, Y, QTableWidgetItem(str(node.y)))
@@ -162,6 +203,13 @@ class FloorPlanUI(QDialog):
             for bot_row in list_bot_row:
                 self.XYCoordTable.setItem(bot_row, botCol, QTableWidgetItem(str(bot)))
 
+        # Update member table
+        # NOTE: add 1 to start and end in member table to reflect row numbers in XYCoordTable (e.g starts from 1)
+        for row, [start, end] in enumerate(floorPlan.nodePairs):
+            self.memberTable.insertRow(self.memberTable.rowCount())
+            self.memberTable.setItem(row, 0, QTableWidgetItem(str(start+1)))
+            self.memberTable.setItem(row, 1, QTableWidgetItem(str(end+1)))
+
         #UpdateElevationTableView based on Selecteditems
         self.SelectedFloorName.setText(self.floorPlanTable.item(fp_row, column).text())
 
@@ -176,7 +224,6 @@ class FloorPlanUI(QDialog):
         item = self.floorPlanTable.item(row,column)
         #adding new rows also prompt the name change, ergo handle exception
         if add == False:
-            print('currentFloorPlanName', self.currentFloorPlanName)
 
             warning = WarningMessage()
             if item.text() == '':
@@ -196,10 +243,12 @@ class FloorPlanUI(QDialog):
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''
-        self.add.setIcon(QIcon(':/Icons/plus.png'))
-        self.delete_2.setIcon(QIcon(':/Icons/minus.png'))
+        self.addFloorPlan_button.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteFloorPlan_button.setIcon(QIcon(':/Icons/minus.png'))
         self.addCoord.setIcon(QIcon(':/Icons/plus.png'))
         self.deleteCoord.setIcon(QIcon(':/Icons/minus.png'))
+        self.addMember_button.setIcon(QIcon(':/Icons/plus.png'))
+        self.deleteMember_button.setIcon(QIcon(':/Icons/minus.png'))
 
     def addFloorPlan(self):
         '''Adding new floor plans'''
@@ -225,7 +274,9 @@ class FloorPlanUI(QDialog):
 
     def updateCoordinates(self):
         '''Update the coordinates associated with the floor plan based on current '''
-        nodes = []
+        if self.stopUpdateCoordinates:
+            return
+
         X = 0
         Y = 1
         botCol = 2
@@ -238,7 +289,11 @@ class FloorPlanUI(QDialog):
             # reset floor plan data
             floorPlan.topConnections.clear()
             floorPlan.bottomConnections.clear()
-
+            floorPlan.nodePairs.clear()
+            floorPlan.nodes.clear()
+            floorPlan.members.clear()
+            
+            # Iterate through XYCoordTable
             for i in range(self.XYCoordTable.rowCount()):
                 Xitem = self.XYCoordTable.item(i,X).text()
                 Yitem = self.XYCoordTable.item(i,Y).text()
@@ -248,8 +303,8 @@ class FloorPlanUI(QDialog):
                 if not coords:
                     warning = WarningMessage()
                     warning.popUpErrorBox('Coordinates must only contain numbers or following operators: "+", "-", "*", "/"')
-                    self.XYCoordTable.setItem(i, X, QTableWidgetItem('0'))
-                    self.XYCoordTable.setItem(i, Y, QTableWidgetItem('0'))
+                    self.XYCoordTable.setItem(i, X, QTableWidgetItem('1'))
+                    self.XYCoordTable.setItem(i, Y, QTableWidgetItem('1'))
                     return
 
                 self.XYCoordTable.setItem(i, X, QTableWidgetItem(str(coords[0])))
@@ -257,7 +312,7 @@ class FloorPlanUI(QDialog):
 
                 node = Node(coords[0], coords[1])
                 
-                nodes.append(node)
+                floorPlan.nodes.append(node)
 
                 botItem = self.XYCoordTable.item(i,botCol).text()
                 topItem = self.XYCoordTable.item(i,topCol).text()
@@ -265,8 +320,33 @@ class FloorPlanUI(QDialog):
                 floorPlan.addBottomConnection(botItem, i)
                 floorPlan.addTopConnection(topItem, i)
 
-            floorPlan.nodes = nodes
-            floorPlan.generateMembersfromNodes()
+            # Iterate through member table
+            for i in range(self.memberTable.rowCount()):
+                startItem = self.memberTable.item(i,0).text()
+                endItem = self.memberTable.item(i,1).text()
+
+                try:
+                    start = int(startItem) - 1
+                    end = int(endItem) - 1
+
+                except:
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Node index must be an integer')
+                    self.memberTable.setItem(i, 0, QTableWidgetItem('1'))
+                    self.memberTable.setItem(i, 1, QTableWidgetItem('1'))
+                    return
+
+                outOfRange = False
+                for j, index in enumerate((start, end)):
+                    if not (index in range(len(floorPlan.nodes))):
+                        warning = WarningMessage()
+                        warning.popUpErrorBox('Node index is out of range')
+                        self.memberTable.setItem(i, j, QTableWidgetItem('1'))
+                        outOfRange = True
+
+                if not outOfRange:
+                    floorPlan.nodePairs.append([start, end])
+                    floorPlan.generateMemberFromNodePair(-1)
 
     def addCoordinate(self):
         X = 0
@@ -286,10 +366,33 @@ class FloorPlanUI(QDialog):
         self.updateCoordinates()
 
     def deleteCoordinate(self):
-        '''delete coordinates and call update coordinates on the table for the floor plan nodes'''
+        '''delete coordinates and call update coordinates on the table for the floor plan nodes and members'''
         indices = self.XYCoordTable.selectionModel().selectedRows()
-        for index in sorted(indices):
-            self.XYCoordTable.removeRow(index.row())
+        for i, index in enumerate(sorted(indices)):
+            updatedRow = index.row()-i
+            self.XYCoordTable.removeRow(updatedRow)
+
+        self.updateCoordinates()
+
+    def addMember(self):
+        startIndex = 0
+        endIndex = 1
+
+        row = self.memberTable.rowCount()
+        self.memberTable.insertRow(row)
+
+        itemStart, itemEnd = (QTableWidgetItem('1'), QTableWidgetItem('1'))
+        self.memberTable.setItem(row, startIndex, itemStart)
+        self.memberTable.setItem(row, endIndex, itemEnd)
+
+        self.updateCoordinates()
+
+    def deleteMember(self):
+        '''delete members and call update coordinates on the table for the floor plan nodes and members'''
+        indices = self.memberTable.selectionModel().selectedRows()
+        for i, index in enumerate(sorted(indices)):
+            updatedRow = index.row()-i
+            self.memberTable.removeRow(updatedRow)
         self.updateCoordinates()
 
     def cancelFloorPlan(self):
@@ -298,14 +401,11 @@ class FloorPlanUI(QDialog):
 
     def updateElevations(self):
         ''' Update the floor object on every elevation with the associated floor plans based on current '''
-        X = 0
-        Y = 1
-        Z = 2
 
         for i in range(self.ElevationTable.rowCount()):
-            elevationItem = self.ElevationTable.item(i,X).text()
-            floorPlan1Item = self.ElevationTable.item(i,Y).text()
-            floorPlan2Item = self.ElevationTable.item(i,Z).text()
+            elevationItem = self.ElevationTable.item(i,0).text()
+            floorPlan1Item = self.ElevationTable.item(i,1).text()
+            floorPlan2Item = self.ElevationTable.item(i,2).text()
 
             # clear existing floor plans on each floor
             elevation = float(elevationItem)
@@ -316,6 +416,31 @@ class FloorPlanUI(QDialog):
                 floor.addFloorPlan(self.tower.floorPlans[floorPlan1Item])
             if floorPlan2Item in self.tower.floorPlans:
                 floor.addFloorPlan(self.tower.floorPlans[floorPlan2Item])
+
+    def updateCOMs(self):
+        ''' Update the floor object on every elevation with the associated COM locations based on current '''
+
+        for i in range(self.COMTable.rowCount()):
+            elevationItem = self.COMTable.item(i,0).text()
+            comXStr = self.COMTable.item(i,1).text()
+            comYStr = self.COMTable.item(i,2).text()
+
+            # clear existing floor plans on each floor
+            elevation = float(elevationItem)
+
+            com = Algebra.strToFloat(comXStr, comYStr)
+
+            if not com:
+                warning = WarningMessage()
+                warning.popUpErrorBox('Centre of Mass Coordinates must only contain numbers or following operators: "+", "-", "*", "/"')
+                self.COMTable.setItem(i, 1, QTableWidgetItem('0.0'))
+                self.COMTable.setItem(i, 2, QTableWidgetItem('0.0'))
+                return
+            
+            comX, comY = com
+
+            self.tower.floors[elevation].comX = comX
+            self.tower.floors[elevation].comY = comY
 
     def saveFloorPlan(self):
         '''Overwrite the tower linked to the main model'''
@@ -373,9 +498,11 @@ class FloorPlanUI(QDialog):
         # Step 2: Create view object for floor plans
         color_fplan = Color.FloorPlan['MainMenu']
         color_node = Color.Node['MainMenu']
+        color_text = Color.Text['MainMenu']
 
         vMember = ViewMember()
         vNode = ViewNode()
+        vText = ViewText()
 
         # Set View Objects attributes --------------------------------
         vMember.setColor(color_fplan[0])
@@ -388,17 +515,36 @@ class FloorPlanUI(QDialog):
         vNode.setDimX(renderX)
         vNode.setDimY(renderY)
 
+        vText.setColor(color_text)
+        vText.setSize(View2DConstants.TEXT_SIZE)
+        vText.setDimX(renderX)
+        vText.setDimY(renderY)
+
         # Floor plan members and nodes -------------------------------
         if self.SelectedFloorName.toPlainText() in self.tower.floorPlans.keys():
             floorPlan= self.tower.floorPlans[self.SelectedFloorName.toPlainText()]
+            
+            # Floor plan members ------------------------
             for member in floorPlan.members:
                 vMember.addMember(member)
 
-                vNode.addNode(member.start_node)
-                vNode.addNode(member.end_node)  # redundant but just in case
+            # Floor plan nodes ------------------------
+            for i, node in enumerate(floorPlan.nodes):
+                vNode.addNode(node)
+
+                # label ------------------------
+                label = str(i+1)
+
+                nodeShifted = copy.deepcopy(node)
+                nodeShifted.x = node.x - 1
+
+                vText.addMember(Member(node, nodeShifted))
+                vText.addText(label)
+                vText.setLocation(Node(1, 0.5)) # midpoint
 
             vMembers.append(vMember)
             vNodes.append(vNode)
+            vTexts.append(vText)
 
         return vMembers, vNodes, vTexts
 

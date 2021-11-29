@@ -197,9 +197,10 @@ class PerformanceAnalyzer:
             
             nodes = floor_nodes[elev]
             for node in nodes:
-                SapModel.PointObj.SetConstraint(node, diaphragmType, 0, True)
+                ret = SapModel.PointObj.SetConstraint(node, diaphragmType, 0, True)
                 if ret != 0:
-                    print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
+                    print('ERROR setting diaphragm constraint from floor at elevation ' + str(elev))
+                
             
         # Create unit X, unit Y, and unit Z load cases if they haven't already been set
         print('Defining unit load cases...')
@@ -241,6 +242,10 @@ class PerformanceAnalyzer:
 
         # For each floor, assign unit loads, run case, find rotations, find Crx and Cry
         for elev in towerElevs:
+            # skip elevation 0
+            if elev <= 0:
+                continue
+
             print('Calculating Cr...')
 
             node = floor_nodes[elev][nodeNum]
@@ -294,11 +299,11 @@ class PerformanceAnalyzer:
                     print('ERROR deleting' + patternName + ' on floor at elevation ' + str(elev))
             
             nodes = floor_nodes[elev]
-            for node in nodes:
+            # for node in nodes:
                 # Delete diaphragm constraint from floor
-                ret = SapModel.PointObj.DeleteConstraint(node, 0)
-                if ret != 0:
-                    print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
+                # ret = SapModel.PointObj.DeleteConstraint(node, 0)
+                # if ret != 0:
+                #     print('ERROR deleting diaphragm constraint from floor at elevation ' + str(elev))
             
         # Set all load cases to run again, except for the unit load cases
         SapModel.Analyze.SetRunCaseFlag('', True, True)
@@ -306,6 +311,26 @@ class PerformanceAnalyzer:
             SapModel.Analyze.SetRunCaseFlag(patternName, False, False)
 
         return towerCRs
+
+    def getEccentricity(self, towerCRs, tower):
+        ''' Maximum and Average eccentricity '''
+        eccs = []
+
+        for elev in towerCRs:
+            crX, crY = towerCRs[elev]
+            comX = tower.floors[elev].comX
+            comY = tower.floors[elev].comY
+
+            xEcc = abs(crX - comX)
+            yEcc = abs(crY - comY)
+
+            eccs.append(xEcc)
+            eccs.append(yEcc)
+
+        maxEcc = max(eccs)
+        avgEcc = sum(eccs)/len(eccs)
+
+        return maxEcc, avgEcc
 
 # struct for tower performance
 class TowerPerformance:
@@ -337,6 +362,8 @@ class TowerPerformance:
         # For asymmetrical tower
         # key: floor; values: CRx, CRy
         self.CR = {}
+        self.maxEcc = 0
+        self.avgEcc = 0
 
     def addVariable(self, variableName, assignedValue):
         self.variables[variableName] = assignedValue

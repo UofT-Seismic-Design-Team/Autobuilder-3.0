@@ -171,36 +171,42 @@ class FileReader:
             line = line.rstrip('\n').split(',') # remove trailing newline 
 
             fpName = line[0]
-            x = float(line[1])
-            y = float(line[2])
-            bot = line[3]
-            top = line[4]
 
             if not (fpName in floorPlans):
                 newFloorPlan = FloorPlan(fpName)
                 self.tower.addFloorPlan(newFloorPlan)
 
             floorPlan = floorPlans[fpName]
-            floorPlan.addNode(Node(x,y))
 
-            nodeIndex = len(floorPlan.nodes) - 1
+            isNode = line[1] != Constants.filler
+            if isNode:
+                x = float(line[1])
+                y = float(line[2])
+                bot = line[3]
+                top = line[4]
+                floorPlan.addNode(Node(x,y))
 
-            if bot in floorPlan.bottomConnections:
-                floorPlan.bottomConnections[bot].append(nodeIndex)
+                nodeIndex = len(floorPlan.nodes) - 1
+
+                if bot in floorPlan.bottomConnections:
+                    floorPlan.bottomConnections[bot].append(nodeIndex)
+                else:
+                    floorPlan.bottomConnections[bot] = [nodeIndex]
+
+                if top in floorPlan.topConnections:
+                    floorPlan.topConnections[top].append(nodeIndex)
+                else:
+                    floorPlan.topConnections[top] = [nodeIndex]
+
+            # for floor plan members
             else:
-                floorPlan.bottomConnections[bot] = [nodeIndex]
+                start = int(line[5])
+                end = int(line[6])
 
-            if top in floorPlan.topConnections:
-                floorPlan.topConnections[top].append(nodeIndex)
-            else:
-                floorPlan.topConnections[top] = [nodeIndex]
+                floorPlan.nodePairs.append([start, end])
+                floorPlan.generateMemberFromNodePair(-1)
 
             self.tower.addFloorPlan(floorPlan)
-
-        # Make sure members are generated
-        for fpName in floorPlans:
-            floorPlan = floorPlans[fpName]
-            floorPlan.generateMembersfromNodes()
 
     def readFloors(self, data):
         if not data:
@@ -215,11 +221,16 @@ class FileReader:
 
             elev = float(line[0])
             fpNames = line[1]
+            comX = float(line[2])
+            comY = float(line[3])
 
             floor = floors[elev]
             fpNames = fpNames.split()
             for fpName in fpNames:
                 floor.addFloorPlan(floorPlans[fpName])
+
+            floor.comX = comX
+            floor.comY = comY
 
     def readBracings(self, data):
         if not data:

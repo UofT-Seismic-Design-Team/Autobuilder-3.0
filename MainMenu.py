@@ -96,43 +96,53 @@ class MainWindow(QMainWindow):
         self.tower.defineFloors()
 
         floorPlan11 = FloorPlan()
-        floorPlan11.nodes = [Node(0,0), Node(12,0), Node(12,12), Node(0,12)]
+        floorPlan11.nodes = [Node(0,0), Node(12,0), Node(12,12), Node(0,12), Node(3,3), Node(9,3), Node(9,9), Node(3,9)]
+        floorPlan11.nodePairs = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4]]
         floorPlan11.generateMembersfromNodes()
 
         floorPlan12 = FloorPlan()
         floorPlan12.nodes = [Node(2/3,0), Node(12,0), Node(12,12), Node(2/3,12)]
+        floorPlan12.generateNodePairs()
         floorPlan12.generateMembersfromNodes()
 
         floorPlan13 = FloorPlan()
         floorPlan13.nodes = [Node(1+1/3,0), Node(12,0), Node(12,12), Node(1+1/3,12)]
+        floorPlan13.generateNodePairs()
         floorPlan13.generateMembersfromNodes()
 
         floorPlan14 = FloorPlan()
         floorPlan14.nodes = [Node(2,0), Node(12,0), Node(12,12), Node(2,12)]
+        floorPlan14.generateNodePairs()
         floorPlan14.generateMembersfromNodes()
 
         floorPlan15 = FloorPlan()
         floorPlan15.nodes = [Node(2+2/3,0), Node(12,0), Node(12,12), Node(2+2/3,12)]
+        floorPlan15.generateNodePairs()
         floorPlan15.generateMembersfromNodes()
 
         floorPlan16 = FloorPlan()
         floorPlan16.nodes = [Node(3+1/3,0), Node(12,0), Node(12,12), Node(3+1/3,12)]
+        floorPlan16.generateNodePairs()
         floorPlan16.generateMembersfromNodes()        
 
         floorPlan17 = FloorPlan()
         floorPlan17.nodes = [Node(4,0), Node(12,0), Node(12,12), Node(4,12)]
+        floorPlan17.generateNodePairs()
         floorPlan17.generateMembersfromNodes()
 
         floorPlan18 = FloorPlan()
         floorPlan18.nodes = [Node(4+2/3,0), Node(12,0), Node(12,12), Node(4+2/3,12)]
+        floorPlan18.generateNodePairs()
         floorPlan18.generateMembersfromNodes()
 
         floorPlan19 = FloorPlan()
         floorPlan19.nodes = [Node(5+1/3,0), Node(12,0), Node(12,12), Node(5+1/3,12)]
+        floorPlan19.generateNodePairs()
         floorPlan19.generateMembersfromNodes()
 
         floorPlan20 = FloorPlan()
         floorPlan20.nodes = [Node(6,0), Node(12,0),Node(12,12), Node(6,12)]
+        floorPlan20.generateNodePairs()
         floorPlan20.generateMembersfromNodes()   
 
         allFloorPlans = [floorPlan11, floorPlan12, floorPlan13, floorPlan14, floorPlan15, floorPlan16, floorPlan17, floorPlan18, floorPlan19, floorPlan20] 
@@ -608,6 +618,8 @@ class MainWindow(QMainWindow):
         runTowers.exec_()
         
         print(self.projectSettingsData.toRun)
+        print('id in MainMenu', id(self.projectSettingsData))
         if self.projectSettingsData.toRun:
             self.createSAPModels()
             self.projectSettingsData.toRun = False
+        print('in MainMenu', self.projectSettingsData.nodesList)

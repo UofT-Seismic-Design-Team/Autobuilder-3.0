@@ -23,7 +23,7 @@ class Algebra:
                 floatValues.append(floatValue)
 
             except:
-                return False
+                return []
         
         return floatValues
 
@@ -108,6 +108,7 @@ class SAP2000Constants:
 
 class Constants:
     g = 9.81 # in m/s^2
+    filler = '_' # filler character for files
 
 class UnitConversion:
 

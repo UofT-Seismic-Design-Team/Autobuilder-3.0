@@ -13,7 +13,7 @@ renderX,12.0
 renderY,12.0
 renderZ,60.0
 SAPPath,C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe
-nodesList,1 2 3 4
+nodesList,261 262 263 264
 footprint,144
 totalHeight,60
 totalMass,7.83

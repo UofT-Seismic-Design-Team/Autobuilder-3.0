@@ -2,6 +2,7 @@ from Definition import *    # for constants
 import math as m
 from DisplaySettings import DisplaySettings
 from typing import List
+import copy
 
 # Module description: 
 # - Stores classes that define the geometry of the tower and its components
@@ -150,46 +151,38 @@ class Tower:
 
             if numCurrentFloorPlans > 0 and numNextFloorPlans > 0: # check if floor plan is assigned to floor
 
-                currentFloorPlan = currentFloor.floorPlans[0]
-                if numCurrentFloorPlans == 2:
-                    currentFloorPlan = currentFloor.floorPlans[1]
-
+                currentFloorPlan = currentFloor.floorPlans[-1]
                 nextFloorPlan = nextFloor.floorPlans[0]
 
                 # 1: Convert top connections to list (in order)
                 dict_currentTopConnections = currentFloorPlan.topConnections
-                list_currentTopConnections = ['' for i in range(len(currentFloorPlan.nodes))]
+                list_currentTopConnections = ['' for i in range(len(currentFloorPlan.nodes))] # index: node index; value: label
 
                 for label in dict_currentTopConnections:
                     indices = dict_currentTopConnections[label]
                     for index in indices:
                         list_currentTopConnections[index] = label
 
-                # make sure the last node is the first node
-                list_currentTopConnections.append(list_currentTopConnections[0])
-
                 # 2: Construct Face object
                 currentMembers = currentFloorPlan.members 
-                #currentNodes.append(currentFloorPlan.nodes[-1])
                 nextNodes = nextFloorPlan.nodes
-                #nextNodes.append(currentFloorPlan.nodes[-1])
+                currentNodePairs = currentFloorPlan.nodePairs
+
                 if len(currentMembers) > 1:
                     for j in range(len(currentMembers)):
 
                         # 2a) Add bottom member
                         currentMember = currentMembers[j]
+                        bottomMember = copy.deepcopy(currentMember)
 
-                        bottomStart = currentMember.start_node
-                        bottomStart = Node(bottomStart.x, bottomStart.y, currentElev)
-                        bottomEnd = currentMember.end_node
-                        bottomEnd = Node(bottomEnd.x, bottomEnd.y, currentElev)
-
-                        bottomMember = Member()
-                        bottomMember.setNodes(bottomStart, bottomEnd)
+                        bottomMember.start_node.z = currentElev
+                        bottomMember.end_node.z = currentElev
 
                         # 2b) Add top member
-                        topStartLabel = list_currentTopConnections[j]
-                        topEndLabel = list_currentTopConnections[j+1]
+                        i_start, i_end = currentNodePairs[j]
+
+                        topStartLabel = list_currentTopConnections[i_start]
+                        topEndLabel = list_currentTopConnections[i_end]
 
                         topStartIndices = [0]
                         if topStartLabel in nextFloorPlan.bottomConnections:
@@ -330,6 +323,8 @@ class Floor:
         self.nodes = []
         self.floorPlans = []
         self.panels = []
+        self.comX = 0.0 # centre of mass in X direction
+        self.comY = 0.0 # centre of mass in Y direction
     
     def addPanel(self, panel):
         self.panels.append(panel)
@@ -341,7 +336,7 @@ class Floor:
         self.floorPlans.append(floorPlan)
 
     def __str__(self):
-        return "Floor elevation: " + str(self.elevation)
+        return 'Floor elevation {}'.format(self.elevation)
 
 # -------------------------------------------------------------------------
 class FloorPlan:
@@ -366,6 +361,11 @@ class FloorPlan:
         self.topConnections = {}
         self.bottomConnections = {}
 
+        # node pairs: [[int, int]]
+        # indicates the index of nodes in self.nodes
+        # starts from 0
+        self.nodePairs = []
+
     def addNode(self, node):
         self.nodes.append(node)
 
@@ -374,12 +374,20 @@ class FloorPlan:
 
     def generateMembersfromNodes(self):
         self.members.clear()
-        numNodes = len(self.nodes)
-        for i in range(numNodes-1):
-            member = Member(self.nodes[i], self.nodes[i+1])
+        for i_start, i_end in self.nodePairs:
+            member = Member(self.nodes[i_start], self.nodes[i_end])
             self.addMember(member)
-        member = Member(self.nodes[numNodes-1], self.nodes[0])
+
+    def generateMemberFromNodePair(self, i_nodePair):
+        ''' indice of node pairs list: int '''
+        i_start, i_end = self.nodePairs[i_nodePair]
+        member = Member(self.nodes[i_start], self.nodes[i_end])
         self.addMember(member)
+
+    def generateNodePairs(self):
+        ''' Generate node pairs in sequence of nodes; only for testing purposes '''
+        numNodes = len(self.nodes)
+        self.nodePairs =  [[i, i+1] for i in range(numNodes-1)] + [[numNodes-1, 0]]
 
     def addElevation(self, elevation: float):
         self.elevations.append(elevation)
@@ -397,7 +405,7 @@ class FloorPlan:
             self.bottomConnections[label] = [index]
 
     def __str__(self):
-        return "Floor Plan " + str(self.name)
+        return 'Floor Plan {}'.format(self.name)
 
 # -------------------------------------------------------------------------
 class Face:
@@ -470,7 +478,7 @@ class Panel:
         return (leftMember.length() + rightMember.length())/2
 
     def __str__(self):
-        return "Panel " + str(self.name)
+        return "Panel {}".format(self.name)
 
 # -------------------------------------------------------------------------
 class Node:
@@ -496,7 +504,7 @@ class Node:
         self.z = z
             
     def __str__(self):
-        return str(self.name) + " (" + str(self.x) + "," + str(self.y) + "," + str(self.z) + ")"
+        return '{} ({},{},{})'.format(self.name, self.x, self.y, self.z)
 
 # -------------------------------------------------------------------------
 class Member:
@@ -593,7 +601,7 @@ class Bracing:
             self.addMember(member)
 
     def __str__(self):
-        return "Bracing " + str(self.name)
+        return "Bracing {}".format(self.name)
 
 # --------------------------------------------------------------------------     
 
@@ -653,7 +661,7 @@ class Assignment:
         self.bracingGroup = group
 
     def __str__(self):
-        return "Assignment" + str(self.name)
+        return "Assignment {}".format(self.name)
 
 
 '''ADD function to go back to bottom floor once top is reached'''

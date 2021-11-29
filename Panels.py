@@ -180,11 +180,11 @@ class panelsUI(QDialog):
     def deletePanel(self):
         '''Delete panel from tower'''
         indices = self.panelTable.selectionModel().selectedRows()
-        for index in sorted(indices):
-            item = self.panelTable.item(index.row(),index.column())
+        for i, index in enumerate(sorted(indices)):
+            updatedRow = index.row()-i
+            item = self.panelTable.item(updatedRow,index.column())
             del self.tower.panels[item.text()]
-        for index in sorted(indices):
-            self.panelTable.removeRow(index.row())
+            self.panelTable.removeRow(updatedRow)
 
     def updateCoordinates(self):
         '''Update the coordinates associated with the floor plan based on current '''

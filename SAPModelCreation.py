@@ -21,6 +21,7 @@ import random
 import re
 import time
 import scipy
+import copy
 import numpy
 from scipy.stats import norm
 import datetime
@@ -549,6 +550,17 @@ class SAPRunnable(QRunnable):
 
         # Find Roof nodes ---------------------------------------------
         roofNodeNames = self.psData.nodesList
+        # Check if nodes exist in model
+        [NumberPoints, AllPointNames, ret] = SapModel.PointObj.GetNameList()
+        tempRoofNodeNames = copy.deepcopy(roofNodeNames)
+        # remove non-existent nodes
+        counter = 0
+        for i, name in enumerate(roofNodeNames):
+            if not (name in AllPointNames):
+                self.signals.log.emit('ERROR {} does not exist in model provided.'.format(name))
+                tempRoofNodeNames.pop(i-counter)
+                counter += 1
+        roofNodeNames = tempRoofNodeNames
 
         # Get WEIGHT in lbs ---------------------------------
         totalWeight = analyzer.getWeight()
@@ -598,5 +610,5 @@ class SAPRunnable(QRunnable):
         # Get Centre of Rigidity ---------------------------------
         towerPerformance.CR = analyzer.getCR(self.tower.elevations)
 
-
-    
+        # Get Eccentricity ---------------------------------
+        towerPerformance.maxEcc, towerPerformance.avgEcc = analyzer.getEccentricity(towerPerformance.CR, self.tower)

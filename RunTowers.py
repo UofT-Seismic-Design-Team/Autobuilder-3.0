@@ -28,11 +28,11 @@ class RunTowers(QDialog):
         uic.loadUi(fileh, self)
         fileh.close()
 
-        # Passing in main.projectSettingsData into bracing scheme
-        self.psDataRef = args[0].projectSettingsData
+        # Passing in mainmenu into bracing scheme
+        self.mainmenuRef = args[0]
 
         # Create copy of projectSettingsData to reassign if user saves
-        self.psData = copy.deepcopy(self.psDataRef)
+        self.psData = copy.deepcopy(args[0].projectSettingsData)
 
         # SAP2000.exe path
         self.selectPath_button.clicked.connect(self.selectSAP2000path)
@@ -41,7 +41,7 @@ class RunTowers(QDialog):
         self.setOkandCancelButtons()     
         self.setRunNowButton()
 
-        self.update()
+        self.Populate()
       
     def setOkandCancelButtons(self):
         self.OkButton = self.runTowers_buttonBox.button(QDialogButtonBox.Ok)
@@ -59,7 +59,7 @@ class RunTowers(QDialog):
         # Set Text
         self.SAP2000Path_input.setPlainText(self.psData.SAPPath)
         self.nodesToAnalyze_input.setPlainText(','.join(self.psData.nodesList))
-        self.footprint_input.setPlainText(str(self.psData.SAPPath.footprint))
+        self.footprint_input.setPlainText(str(self.psData.footprint))
         self.totalHeight_input.setPlainText(str(self.psData.totalHeight))
         self.totalMass_input.setPlainText(str(self.psData.totalMass))
         self.gmIdentifier_input.setPlainText(str(self.psData.gmIdentifier))
@@ -86,7 +86,7 @@ class RunTowers(QDialog):
     
     def save(self):
         self.update()
-        self.psDataRef = self.psData
+        self.mainmenuRef.projectSettingsData = self.psData
 
     def runNow(self):
         self.psData.toRun = True

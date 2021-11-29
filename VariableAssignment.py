@@ -65,16 +65,16 @@ class VariableAssignment(QDialog):
 
     def deleteAssignment(self):
         if self.tabWidget.currentIndex() == 0:
-            #indices = self.BracingAssignmentTable.selectionModel().selectedRows()
-            indices = self.BracingAssignmentTable.selectionModel().selectedIndexes()
-            for index in sorted(indices):
-                self.BracingAssignmentTable.removeRow(index.row())
+            indices = self.BracingAssignmentTable.selectionModel().selectedRows()
+            for i, index in enumerate(sorted(indices)):
+                updatedRow = index.row()-i
+                self.BracingAssignmentTable.removeRow(updatedRow)
 
         elif self.tabWidget.currentIndex() == 1:
-            #indices = self.SectionAssignmentTable.selectionModel().selectedRows()
-            indices = self.SectionAssignmentTable.selectionModel().selectedIndexes()
-            for index in sorted(indices):
-                self.SectionAssignmentTable.removeRow(index.row())
+            indices = self.SectionAssignmentTable.selectionModel().selectedRows()
+            for i, index in enumerate(sorted(indices)):
+                updatedRow = index.row()-i
+                self.SectionAssignmentTable.removeRow(updatedRow)
     
     def setIconsForButtons(self):
         self.addAssignmentButton.setIcon(QIcon(':/Icons/plus.png'))
@@ -126,11 +126,13 @@ class VariableAssignment(QDialog):
                 warning.popUpErrorBox('Duplicate or non-existent members!')
                 return
 
-        # clear all existing assignments
+        # clear all existing assignments ---------------------------
         for panel in self.tower.panels:
             self.tower.panels[panel].bracingGroup = ''
-            self.tower.panels[panel].sectionGroup = ''
 
+        self.tower.member_ids.clear()
+
+        # update panels and member ids --------------------------------
         for i in range(rowNumB):
             panelItem = self.BracingAssignmentTable.item(i,0)
             bg = self.BracingAssignmentTable.cellWidget(i,1).currentText()
@@ -145,12 +147,15 @@ class VariableAssignment(QDialog):
         for i in range(rowNumS):
             member_idItem = self.SectionAssignmentTable.item(i,0)
             sg = self.SectionAssignmentTable.cellWidget(i,1).currentText()
+
             # Check if the row is filled
-            if panelItem == None or sg == None:
+            if member_idItem == None or sg == None:
                 break
             member_id = member_idItem.text()
             '''TEST'''
             self.tower.member_ids[member_id] = sg
+
+        print('member_ids:', self.tower.member_ids)
 
         self.close()    # close only if the saving process is completed successfully
 

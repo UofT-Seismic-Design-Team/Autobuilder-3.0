@@ -131,6 +131,8 @@ class GenerateTower(QDialog):
         # for var in dict_of_combos:
         self.tower.inputTable.update(inputTable)
 
+        print(inputTable)
+
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)
         filewriter.writeInputTable(self.tower.inputTable)

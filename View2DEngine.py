@@ -74,7 +74,7 @@ class ViewText(ViewObject):
 
         self.texts = []
         self.members = []
-        self.location = Node() # x and y range from 0 to 1
+        self.location = Node() # x must range from 0 to 1
         # Note: make sure the text correpsonds to the right member
     
     def addText(self, text):
@@ -171,8 +171,8 @@ class View2DWidget(QWidget):
             end = member.end_node
 
             # translate text parallel to the member
-            x = (start.x + end.x) * location.x
-            y = (start.y + end.y) * location.x
+            x = start.x + (end.x - start.x) * location.x
+            y = start.y + (end.y - start.y) * location.x
 
             # translate text perpendicular to the member
             angle = member.angle()

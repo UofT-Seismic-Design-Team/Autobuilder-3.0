@@ -244,6 +244,8 @@ class FileWriter:
             'y':[],
             'bot':[],
             'top':[],
+            'start':[],
+            'end':[],
         }
 
         for fpName in floorPlans:
@@ -265,6 +267,17 @@ class FileWriter:
                 floorPlanData['y'].append(str(node.y))
                 floorPlanData['bot'].append(str(botConnections[i]))
                 floorPlanData['top'].append(str(topConnections[i]))
+                floorPlanData['start'].append(Constants.filler)
+                floorPlanData['end'].append(Constants.filler)
+
+            for start, end in floorPlan.nodePairs:
+                floorPlanData['floorPlanName'].append(str(fpName))
+                floorPlanData['x'].append(Constants.filler)
+                floorPlanData['y'].append(Constants.filler)
+                floorPlanData['bot'].append(Constants.filler)
+                floorPlanData['top'].append(Constants.filler)
+                floorPlanData['start'].append(str(start))
+                floorPlanData['end'].append(str(end))
 
         df = pd.DataFrame(floorPlanData)
 
@@ -283,14 +296,20 @@ class FileWriter:
         floorData = {
             'elevation':[],
             'floorPlans':[],
+            'comX':[],
+            'comY':[],
         }
 
         for elev in floors:
             floor = floors[elev]
             fpNames = ' '.join([str(fp.name) for fp in floor.floorPlans])
+            comX = floor.comX
+            comY = floor.comY
 
             floorData['elevation'].append(str(elev))
             floorData['floorPlans'].append(fpNames)
+            floorData['comX'].append(str(comX))
+            floorData['comY'].append(str(comY))
 
         df = pd.DataFrame(floorData)
 
@@ -398,6 +417,7 @@ class FileWriter:
         bGroupsLoc = self.folderLoc + FileExtension.bracingGroups
         tower = self.tower
         bGroups = tower.bracingGroups
+        print('bgroups', bGroups)
 
         bGroupsData = {
             'bracingGroup':[],
@@ -514,7 +534,7 @@ class FileWriter:
             warning = WarningMessage()
             warning.popUpErrorBox('Unable to create input table')
 
-    def writeOutputTable(self, towerPerformances):
+    def writeOutputTable(self, towerPerformances, logSignal=None):
         ''' Write tower performances to output file '''
         outputTableLoc = self.folderLoc + FileExtension.outputTable
 
@@ -522,7 +542,7 @@ class FileWriter:
             'towerNum': [],
         }
         towerAttrConst = [
-            'totalWeight', 'period', 
+            'totalWeight', 'period', 'maxEcc', 'avgEcc'
         ]
 
         towerAttrVarCombo = [
@@ -587,6 +607,7 @@ class FileWriter:
                         outputTable[crYName].append(crY)
                     else:
                         outputTable[crYName] = [crY]
+                
 
         df = pd.DataFrame(outputTable)
 
@@ -594,5 +615,11 @@ class FileWriter:
             df.to_csv(outputTableLoc, index=False)
 
         except:
-            warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create output table')
+            if logSignal:
+                logSignal.emit('Fail to start SAP2000')
+            else:
+                # NOTE: no warning message for SAPModelCreation due to thread safety issues
+                warning = WarningMessage()
+                warning.popUpErrorBox('Unable to create output table')
+
+                logSignal.emit('Fail to start SAP2000')

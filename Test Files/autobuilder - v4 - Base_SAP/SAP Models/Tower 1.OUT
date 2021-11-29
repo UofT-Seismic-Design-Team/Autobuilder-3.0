@@ -1,0 +1,160 @@
+
+
+ SAP2000 v22.0.0 Ultimate 64-bit (Analysis Build 9780/64)                       
+ File: C:/Users/Kaison/Documen...obuilder - v4 - Base_SAP/SAP Models\Tower 1.OUT
+                                                                     
+                                                                       
+
+ Diaphragm39.0, CONSTR = RIGID, DOF = U1 U2 R3
+
+                     LOCAL COORDINATE SYSTEM FOR CONSTRAINT MASTER
+  GLOBAL          U1          U2          U3          R1          R2          R3
+     X       .000000    1.000000     .000000     .000000    1.000000     .000000
+     Y     -1.000000     .000000     .000000   -1.000000     .000000     .000000
+     Z       .000000     .000000    1.000000     .000000     .000000    1.000000
+
+                     TRANSLATIONAL MASS AND MASS MOMENTS OF INERTIA
+                  U1          U2          U3          R1          R2          R3
+            2.41E-07    5.32E-06     .000000     .000000     .000000    0.000193
+
+                     CENTER OF MASS
+  GLOBAL          U1          U2          U3
+     X      5.230624    5.965136    5.706522
+     Y      6.800621    6.036280    6.684783
+     Z     39.000000   39.000000   39.000000
+
+ Diaphragm45.0, CONSTR = RIGID, DOF = U1 U2 R3
+
+                     LOCAL COORDINATE SYSTEM FOR CONSTRAINT MASTER
+  GLOBAL          U1          U2          U3          R1          R2          R3
+     X       .000000    1.000000     .000000     .000000    1.000000     .000000
+     Y     -1.000000     .000000     .000000   -1.000000     .000000     .000000
+     Z       .000000     .000000    1.000000     .000000     .000000    1.000000
+
+                     TRANSLATIONAL MASS AND MASS MOMENTS OF INERTIA
+                  U1          U2          U3          R1          R2          R3
+            2.41E-07    5.32E-06     .000000     .000000     .000000    0.000193
+
+                     CENTER OF MASS
+  GLOBAL          U1          U2          U3
+     X      5.230624    5.965136    5.706522
+     Y      6.800621    6.036280    6.684783
+     Z     45.000000   45.000000   45.000000
+
+ Diaphragm51.0, CONSTR = RIGID, DOF = U1 U2 R3
+
+                     LOCAL COORDINATE SYSTEM FOR CONSTRAINT MASTER
+  GLOBAL          U1          U2          U3          R1          R2          R3
+     X       .000000    1.000000     .000000     .000000    1.000000     .000000
+     Y     -1.000000     .000000     .000000   -1.000000     .000000     .000000
+     Z       .000000     .000000    1.000000     .000000     .000000    1.000000
+
+                     TRANSLATIONAL MASS AND MASS MOMENTS OF INERTIA
+                  U1          U2          U3          R1          R2          R3
+            2.41E-07    5.32E-06     .000000     .000000     .000000    0.000193
+
+                     CENTER OF MASS
+  GLOBAL          U1          U2          U3
+     X      5.230624    5.965136    5.706522
+     Y      6.800621    6.036280    6.684783
+     Z     51.000000   51.000000   51.000000
+
+ Diaphragm57.0, CONSTR = RIGID, DOF = U1 U2 R3
+
+                     LOCAL COORDINATE SYSTEM FOR CONSTRAINT MASTER
+  GLOBAL          U1          U2          U3          R1          R2          R3
+     X       .000000    1.000000     .000000     .000000    1.000000     .000000
+     Y     -1.000000     .000000     .000000   -1.000000     .000000     .000000
+     Z       .000000     .000000    1.000000     .000000     .000000    1.000000
+
+                     TRANSLATIONAL MASS AND MASS MOMENTS OF INERTIA
+                  U1          U2          U3          R1          R2          R3
+            2.34E-07    7.20E-06     .000000     .000000     .000000    0.000261
+
+                     CENTER OF MASS
+  GLOBAL          U1          U2          U3
+     X      5.313350    5.977658    5.706522
+     Y      6.821550    6.026731    6.684783
+     Z     57.000000   57.000000   57.000000
+
+ Diaphragm60.0, CONSTR = RIGID, DOF = U1 U2 R3
+
+                     LOCAL COORDINATE SYSTEM FOR CONSTRAINT MASTER
+  GLOBAL          U1          U2          U3          R1          R2          R3
+     X       .000000    1.000000     .000000     .000000    1.000000     .000000
+     Y     -1.000000     .000000     .000000   -1.000000     .000000     .000000
+     Z       .000000     .000000    1.000000     .000000     .000000    1.000000
+
+                     TRANSLATIONAL MASS AND MASS MOMENTS OF INERTIA
+                  U1          U2          U3          R1          R2          R3
+            1.73E-07    2.37E-06     .000000     .000000     .000000    2.59E-05
+
+                     CENTER OF MASS
+  GLOBAL          U1          U2          U3
+     X      5.169944    5.244182    5.420455
+     Y      6.830056    6.755818    6.579545
+     Z     60.000000   60.000000   60.000000
+
+ D I S P L A C E M E N T   D E G R E E S   O F   F R E E D O M
+
+         (A) = Active DOF, equilibrium equation
+         (-) = Restrained DOF, reaction computed
+         (+) = Constrained DOF
+         (>) = External substructure DOF
+         ( ) = Null DOF
+
+  JOINTS              UX  UY  UZ  RX  RY  RZ
+       7               -   -   -   -   -   -
+       8 TO       9    A   A   A   A   A   A
+      10               -   -   -   -   -   -
+      11 TO      18    A   A   A   A   A   A
+      19               -   -   -   -   -   -
+      20 TO      30    A   A   A   A   A   A
+      31               -   -   -   -   -   -
+      32 TO      33    A   A   A   A   A   A
+      34               -   -   -   -   -   -
+      35 TO     100    A   A   A   A   A   A
+      52 TO      67    +   +   A   A   A   +
+      71 TO      78    A   A   A   A   A   A
+      79 TO      90    +   +   A   A   A   +
+     104               A   A   A   A   A   A
+     105 TO     110    +   +   A   A   A   +
+     111 TO     210    A   A   A   A   A   A
+     411               -   -   -   -   -   -
+     414               A   A   A   A   A   A
+     417 TO     419    +   +   A   A   A   +
+     420 TO     423    A   A   A   A   A   A
+     424 TO     431    +   +   A   A   A   +
+     432               A   A   A   A   A   A
+     433 TO     436    +   +   A   A   A   +
+     437 TO     465    A   A   A   A   A   A
+     466 TO     481    +   +   A   A   A   +
+     482               A   A   A   A   A   A
+     483 TO     493    +   +   A   A   A   +
+      22 TO      42    A   A   A   A   A   A
+      47 TO      50    +   +   A   A   A   +
+      57 TO      25    A   A   A   A   A   A
+       1 TO       2    +   +   A   A   A   +
+      26               A   A   A   A   A   A
+      56 TO      72    +   +   A   A   A   +
+      94               A   A   A   A   A   A
+      96 TO      97    +   +   A   A   A   +
+      99 TO     124    A   A   A   A   A   A
+     125 TO     136    +   +   A   A   A   +
+     115 TO     143    A   A   A   A   A   A
+      53 TO     147    +   +   A   A   A   +
+     148 TO     150    A   A   A   A   A   A
+     151 TO     153    +   +   A   A   A   +
+     154 TO     155    A   A   A   A   A   A
+     156 TO     158    +   +   A   A   A   +
+     159 TO     164    A   A   A   A   A   A
+     165 TO     179    +   +   A   A   A   +
+     180 TO     242    A   A   A   A   A   A
+     243 TO     254    +   +   A   A   A   +
+     255 TO     273    A   A   A   A   A   A
+     274 TO     280    +   +   A   A   A   +
+     281 TO     262    A   A   A   A   A   A
+    NULL                                    
+
+  CONSTRAINTS         U1  U2  U3  R1  R2  R3
+ Diaphra               A   A               A
