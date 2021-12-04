@@ -61,6 +61,7 @@ class FileReader:
             self.readSectionAssignments(comps['s_assignments'][2])
             
     def readProjectSettings(self, data):
+        print('read project setting')
         if not data:
             return None
         
@@ -73,7 +74,8 @@ class FileReader:
             if var == 'tower_elevs':
                 elevs = val.split()
                 for elev in elevs:
-                    self.psData.floorElevs.append(float(elev)) # will update floor elevations in tower object simultaneously (pointer)
+                    self.psData.floorElevs.append(float(elev))
+                self.tower.elevations = self.psData.floorElevs
 
             elif var == 'sect_props':
                 temp = val.split()
@@ -115,6 +117,7 @@ class FileReader:
                 self.psData.renderZ = float(val)
 
     def readDisplaySettings(self, data):
+        print('read display setting')
         if not data:
             return None
 
@@ -213,6 +216,8 @@ class FileReader:
             return None
 
         self.tower.defineFloors()
+
+        print(self.tower.floors.keys())
 
         floors = self.tower.floors
         floorPlans = self.tower.floorPlans

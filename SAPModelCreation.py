@@ -164,7 +164,7 @@ class SAPRunnable(QRunnable):
 
         SapModel = self.startSap2000()
         if SapModel == False:
-            self.signals.log.emit('Fail to start SAP2000')
+            self.signals.log.emit('Fail to start SAP2000 - Check if SAP2000 model is correctly selected or if SAP2000 v22 is available')
             return
 
         # Delete all members within the plans and build correct bracing scheme
@@ -496,6 +496,7 @@ class SAPRunnable(QRunnable):
                 self.signals.log.emit('ERROR building member in panel '+ panel.name)
 
             if member_name is not None:
+                print('member name:', member_name)
                 panel.IDs.append(member_name)
 
     def divideMembersAtIntersection(self, SapModel):
@@ -568,7 +569,12 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
         
-        [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
+        try:
+            [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
+        except:
+            self.signals.log.emit('ERROR no load combinations found')
+            AllCombos = []
+
         for combo in AllCombos:
             if self.runGMs:
                 # Only run combo with ground motions

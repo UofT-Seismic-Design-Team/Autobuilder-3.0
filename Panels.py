@@ -155,11 +155,30 @@ class panelsUI(QDialog):
         item = self.panelTable.item(row,column)
         #adding new rows also prompt the name change, ergo handle exception
         if add == False:
-            panel = self.tower.panels[self.currentPanelName]
-            panel.name =  item.text()
-            self.tower.panels[item.text()]=self.tower.panels.pop(self.currentPanelName)
-            self.updateScreenXYElev
+            pName = item.text()
 
+            # Error handling -----------------------------------------
+            warning = WarningMessage()
+            if pName == '':
+                warning.popUpErrorBox('Panel name is missing.')
+                self.panelTable.item(row,column).setText(self.currentPanelName)
+                return
+
+            if pName in self.tower.panels:
+                warning.popUpErrorBox('Panel name already exists.')
+                self.panelTable.item(row,column).setText(self.currentPanelName)
+                return
+
+            panel = self.tower.panels[self.currentPanelName]
+            # update panel name to match changed cell
+            panel.name =  pName
+            # assign original coordinates to new bracing name
+            self.tower.panels[pName] = self.tower.panels.pop(self.currentPanelName)
+
+            # match bracing name above coord. table to main table
+            self.selectedPanelName.setText(item.text())
+
+            self.updateScreenXYElev
 
     def setIconsForButtons(self):
         '''Set icons associated with the add/delete buttons'''

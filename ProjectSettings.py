@@ -244,3 +244,8 @@ class ProjectSettingsData:
         self.totalMass = 7.83
         self.gmIdentifier = 'GM1'
         self.toRun = False
+
+    def reset(self):
+        self.floorElevs.clear()
+        self.sections.clear()
+        self.nodesList.clear()

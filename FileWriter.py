@@ -616,10 +616,10 @@ class FileWriter:
 
         except:
             if logSignal:
-                logSignal.emit('Fail to start SAP2000')
+                logSignal.emit('Fail to generate output table')
             else:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
                 warning.popUpErrorBox('Unable to create output table')
 
-                logSignal.emit('Fail to start SAP2000')
+                logSignal.emit('Fail to generate output table')
