@@ -6,7 +6,7 @@
 
 
 
- B E G I N   A N A L Y S I S                                2021/12/04  02:49:13
+ B E G I N   A N A L Y S I S                                2022/01/02  18:41:13
 
 
  RUNNING ANALYSIS WITHIN THE GUI PROCESS
@@ -32,13 +32,13 @@
  NUMBER OF THREADS: FORM (AUTOMATIC)       =           2
 
 
- E L E M E N T   F O R M A T I O N                                      02:49:13
+ E L E M E N T   F O R M A T I O N                                      18:41:14
 
 
  NUMBER OF COUPLED CONSTRAINT EQUATIONS    =           0
 
 
- L I N E A R   E Q U A T I O N   S O L U T I O N                        02:49:13
+ L I N E A R   E Q U A T I O N   S O L U T I O N                        18:41:14
 
  FORMING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -65,7 +65,7 @@
 
 
 
- L I N E A R   S T A T I C   C A S E S                                  02:49:14
+ L I N E A R   S T A T I C   C A S E S                                  18:41:15
 
  USING STIFFNESS AT ZERO (UNSTRESSED) INITIAL CONDITIONS
 
@@ -136,4 +136,4 @@
  CASE: UNIT MOMENT - 60.0
 
 
- A N A L Y S I S   C O M P L E T E                          2021/12/04  02:49:16
+ A N A L Y S I S   C O M P L E T E                          2022/01/02  18:41:18

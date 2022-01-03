@@ -17,6 +17,8 @@ class Plotter:
 
         self.ax.set_xlabel(self.xlabel)
         self.ax.set_ylabel(self.ylabel)
+        
+        plt.title('Tower Performances')
 
         self.ax.plot(self.xdata, self.ydata, 'ro', markersize=6)
         plt.grid(True)

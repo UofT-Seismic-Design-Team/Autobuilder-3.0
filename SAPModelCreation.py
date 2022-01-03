@@ -157,7 +157,10 @@ class SAPRunnable(QRunnable):
         self.signals = SAPSignals()
 
     def run(self):
-        self.buildTowers()
+        try:
+            self.buildTowers()
+        except:
+            self.signals.log.emit('ERROR while building towers')
 
     def buildTowers(self):
         self.signals.log.emit('Starting SAP2000...')
@@ -218,7 +221,11 @@ class SAPRunnable(QRunnable):
             # Analyse tower and print results to spreadsheet
             self.signals.log.emit('\nAnalyzing tower number ' + str(towerNum))
             self.signals.log.emit('-------------------------')
-            self.runAnalysis(SapModel, towerPerformance)
+
+            try:
+                self.runAnalysis(SapModel, towerPerformance)
+            except:
+                self.signals.log.emit('ERROR running analysis')
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
 
@@ -237,7 +244,7 @@ class SAPRunnable(QRunnable):
 
         # Create output table
         filewriter = FileWriter(self.mainFileLoc)
-        filewriter.writeOutputTable(self.towerPerformances)
+        filewriter.writeOutputTable(self.towerPerformances, self.signals.log)
 
         # Save tower performances
         self.tower.towerPerformances.clear()

@@ -368,7 +368,11 @@ class MainWindow(QMainWindow):
 
         if self.fileLoc:  # No action if no file was selected
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
-            filewriter.writeFiles()
+            try:
+                filewriter.writeFiles()
+            except:
+                warning = WarningMessage()
+                warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
 
     # Open file ------------------------------------------------------------------------------
     def openFile(self, signal=None):
@@ -380,8 +384,12 @@ class MainWindow(QMainWindow):
             self.projectSettingsData.reset()
             self.tower.reset() # clean all data in tower
 
-            filereader = FileReader(self.fileLoc, self.tower, self.projectSettingsData)
-            filereader.readMainFile()
+            try:
+                filereader = FileReader(self.fileLoc, self.tower, self.projectSettingsData)
+                filereader.readMainFile()
+            except:
+                warning = WarningMessage()
+                warning.popUpErrorBox('Fail to open file. Please check if the selected file is corrupted.')
 
             self.tower.build()
 
@@ -619,9 +627,6 @@ class MainWindow(QMainWindow):
         runTowers = RunTowers(self)
         runTowers.exec_()
         
-        print(self.projectSettingsData.toRun)
-        print('id in MainMenu', id(self.projectSettingsData))
         if self.projectSettingsData.toRun:
             self.createSAPModels()
             self.projectSettingsData.toRun = False
-        print('in MainMenu', self.projectSettingsData.nodesList)

@@ -1,5 +1,5 @@
 from MainMenu import *
-from Model import *
+import time 
 
 try:
     # Include in try/except block if you're also targeting Mac/Linux
@@ -13,8 +13,14 @@ except ImportError:
 def main():
     app = QApplication(sys.argv)
 
-    main = MainWindow()
+    pixmap = QPixmap(':/Icons/letter_A_blue-512.png')
+    splash = QSplashScreen(pixmap)
+    splash.show()
+    app.processEvents()
 
+    main = MainWindow()
+    time.sleep(1)
+    splash.close()
     main.show()
 
     sys.exit(app.exec_())

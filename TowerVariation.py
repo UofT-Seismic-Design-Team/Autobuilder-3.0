@@ -33,8 +33,7 @@ class GenerateTower(QDialog):
         self.fileLoc = args[0].fileLoc
 
         self.counter = 0
-
-        self.GenerateInputTable()
+        self.run = False
 
         self.OkButton.clicked.connect(lambda x: self.close())
 
@@ -42,6 +41,7 @@ class GenerateTower(QDialog):
         timer  = QTimer(self)
         timer.setInterval(10) # period in miliseconds
         timer.timeout.connect(self.addProgress)
+        timer.timeout.connect(self.GenerateInputTable)
         timer.start()
 
     def addPanelsToBracingGroups(self):
@@ -72,6 +72,9 @@ class GenerateTower(QDialog):
             sectionGroups[sgName].addMemberId(member_id)
 
     def GenerateInputTable(self):
+        if not self.run:
+            return
+
         self.addPanelsToBracingGroups()
         self.addMemberIdsToSectionGroups()
 
@@ -131,12 +134,26 @@ class GenerateTower(QDialog):
         # for var in dict_of_combos:
         self.tower.inputTable.update(inputTable)
 
-        print(inputTable)
+        # testing: print(inputTable)
 
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)
-        filewriter.writeInputTable(self.tower.inputTable)
+        try:
+            filewriter.writeInputTable(self.tower.inputTable)
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to create input table')
+            self.close()
+
+        self.run = False
 
     def addProgress(self):
-        self.counter += 1
+        if self.counter <= 100: # counter's max = 101
+            self.counter += 1
+
+        if self.counter == 100:
+            self.run = True
+
         self.progressBar.setValue(self.counter)
+
+        

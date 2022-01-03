@@ -526,13 +526,7 @@ class FileWriter:
         inputTableLoc = self.folderLoc + FileExtension.inputTable
 
         df = pd.DataFrame(inputTable)
-
-        try:
-            df.to_csv(inputTableLoc, index=False)
-
-        except:
-            warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create input table')
+        df.to_csv(inputTableLoc, index=False)
 
     def writeOutputTable(self, towerPerformances, logSignal=None):
         ''' Write tower performances to output file '''
@@ -621,5 +615,3 @@ class FileWriter:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
                 warning.popUpErrorBox('Unable to create output table')
-
-                logSignal.emit('Fail to generate output table')
