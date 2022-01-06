@@ -36,10 +36,16 @@ def find_tower(results, variable_dict, header_dict):
                     if not (row[header_dict[var]] == variable_dict[var]):
                         match = False
                 if match == True:
+                    '''
                     number = (row[header_dict['Tower #']])
                     period = float(row[header_dict['Period']])
                     error = float(row[header_dict['Error']])
                     cost = float(row[header_dict['Cost']])
+                    '''
+                    number = (row[header_dict['towerNum']])
+                    period = float(row[header_dict['period']])
+                    error = float(row[header_dict['avgEcc']])
+                    cost = float(row[header_dict['totalWeight']])                    
                     return [number, period, error, cost]
             return [None, 0.15, 1.0, 1000.0]
 
