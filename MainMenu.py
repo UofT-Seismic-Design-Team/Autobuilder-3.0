@@ -53,6 +53,7 @@ class MainWindow(QMainWindow):
 
         # File location
         self.fileLoc = ''
+        self.fileName = ''
 
         # TESTING ----------------------------------------------
 
@@ -358,15 +359,30 @@ class MainWindow(QMainWindow):
         self.action_RunTowers.triggered.connect(self.openRunTowers)
         # Save File
         self.action_Save.triggered.connect(self.saveFile)
+        # Save File As
+        self.action_SaveFileAs.triggered.connect(self.saveAsFile)
         # Open File
         self.action_Open.triggered.connect(self.openFile)
 
     # Save file ------------------------------------------------------------------------------
     def saveFile(self, signal=None):
-        fileInfo = QFileDialog.getSaveFileName(self, "Save File", "autobuilder.ab", "Autobuilder files (*.ab)")
-        self.fileLoc = fileInfo[0]
+        if self.fileLoc != '':
+            filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
+            try:
+                filewriter.writeFiles()
+            except:
+                warning = WarningMessage()
+                warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
+        else:
+            self.saveAsFile()
 
-        if self.fileLoc:  # No action if no file was selected
+    def saveAsFile(self, signal=None):
+        fileInfo = QFileDialog.getSaveFileName(self, "Save As", "untitled.ab", "Autobuilder files (*.ab)")
+
+        if fileInfo[0]:  # No action if no file was selected
+            self.fileLoc = fileInfo[0]
+            self.fileName = fileInfo[0].split("/")[-1]
+            self.setWindowTitle("Autobuilder 3.0 - {}".format(self.fileName))
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             try:
                 filewriter.writeFiles()
@@ -377,9 +393,12 @@ class MainWindow(QMainWindow):
     # Open file ------------------------------------------------------------------------------
     def openFile(self, signal=None):
         fileInfo = QFileDialog.getOpenFileName(self, "Open File", "autobuilder.ab", "Autobuilder files (*.ab)")
-        self.fileLoc = fileInfo[0]
 
-        if self.fileLoc: # No action if no file was selected
+        if fileInfo[0]: # No action if no file was selected
+            self.fileLoc = fileInfo[0]
+            self.fileName = fileInfo[0].split("/")[-1]
+            self.setWindowTitle("Autobuilder 3.0 - {}".format(self.fileName))
+
             #NOTE: reset psData as well!!
             self.projectSettingsData.reset()
             self.tower.reset() # clean all data in tower
