@@ -1,0 +1,18 @@
+setting,value
+tower_elevs,0.0 6.0 9.0 12.0 15.0 18.0 21.0 24.0 27.0 30.0 33.0 36.0 39.0 42.0 45.0 48.0 51.0 54.0 57.0 60.0
+sect_props,FSEC1 1
+sect_props,BALSA_0.1875x0.1875 2
+gm,False
+analysis,Time_History
+modelLoc,C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/Test Files/Example_beta/SAP Model/2022.sdb
+modelName,2022.sdb
+renderX,12.0
+renderY,12.0
+renderZ,60.0
+SAPPath,C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe
+nodesList,9 10 709 100
+footprint,144.0
+totalHeight,60.0
+totalMass,7.83
+gmIdentifier,GM1
+toRun,False

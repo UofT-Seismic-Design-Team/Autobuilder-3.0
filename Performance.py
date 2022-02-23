@@ -47,8 +47,13 @@ class PerformanceAnalyzer:
                 print('ERROR getting acceleration at Node {}'.format(roofNodeName))
 
             max_and_min_acc = ret[6]
+            
             max_pos_acc = max_and_min_acc[0]
-            min_neg_acc = max_and_min_acc[1]
+            min_neg_acc = max_pos_acc
+
+            # Error handling: in case no acceleration is available
+            if len(max_and_min_acc) > 1:
+                min_neg_acc = max_and_min_acc[1]
 
             currentMaxAcc = max(abs(max_pos_acc), abs(min_neg_acc)) / Constants.g
             maxAcc = max(maxAcc, currentMaxAcc)
@@ -79,8 +84,13 @@ class PerformanceAnalyzer:
                 print('ERROR getting displacement at Node {}'.format(roofNodeName))
 
             max_and_min_disp = ret[6]
+
             max_pos_disp = max_and_min_disp[0]
-            min_neg_disp = max_and_min_disp[1]
+            min_neg_disp = max_pos_disp
+
+            # Error handling: in case displacements are not available
+            if len(max_and_min_disp) > 1:
+                min_neg_disp = max_and_min_disp[1]
 
             currentMaxDisp = max(abs(max_pos_disp), abs(min_neg_disp))
             maxDisp = max(maxDisp, currentMaxDisp)
@@ -93,7 +103,11 @@ class PerformanceAnalyzer:
         ret = SapModel.Results.BaseReact()
         if ret[-1] != 0:
             print('ERROR getting base reaction')
-        basesh = max(abs(ret[4][0]), abs(ret[4][1]))
+
+        if len(ret[4]) > 1:
+            basesh = max(abs(ret[4][0]), abs(ret[4][1]))
+        else:
+            basesh = abs(ret[4][0])
         
         return basesh
 
@@ -328,7 +342,7 @@ class PerformanceAnalyzer:
             eccs.append(yEcc)
 
         maxEcc = max(eccs)
-        avgEcc = sum(eccs)/len(eccs)
+        avgEcc = sum(eccs)/max(len(eccs),1)
 
         return maxEcc, avgEcc
 
@@ -373,7 +387,8 @@ class TowerPerformance:
         avgBuildingCost = 0
         for bdCost in self.buildingCost.values():
             avgBuildingCost += bdCost
-        avgBuildingCost /= len(self.buildingCost)
+        if len(self.buildingCost) > 0:
+            avgBuildingCost /= min(len(self.buildingCost),1)
 
         return avgBuildingCost
 
@@ -382,6 +397,6 @@ class TowerPerformance:
         avgSeismicCost = 0
         for sCost in self.seismicCost.values():
             avgSeismicCost += sCost
-        avgSeismicCost /= len(self.seismicCost)
+            avgSeismicCost /= min(len(self.seismicCost),1)
 
         return avgSeismicCost

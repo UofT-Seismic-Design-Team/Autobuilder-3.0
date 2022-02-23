@@ -100,7 +100,7 @@ class RunTower(QDialog):
         self.numTowersLabel.setText('{} out of {}'.format(str(current + 1), str(numTowers)))
 
         avgTime = self.timeElapsed/(current + 1)
-        estTimeRemaining = avgTime * (numTowers - (current+1))
+        estTimeRemaining = round(avgTime * (numTowers - (current+1)))
         self.estTimeLabel.setText(str(datetime.timedelta(seconds=estTimeRemaining)))
 
     def resetProgress(self, max):
@@ -157,10 +157,10 @@ class SAPRunnable(QRunnable):
         self.signals = SAPSignals()
 
     def run(self):
-        try:
-            self.buildTowers()
-        except:
-            self.signals.log.emit('ERROR while building towers')
+        # try:
+        self.buildTowers()
+        # except:
+        #     self.signals.log.emit('ERROR while building towers')
 
     def buildTowers(self):
         self.signals.log.emit('Starting SAP2000...')
@@ -174,6 +174,7 @@ class SAPRunnable(QRunnable):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         inputTable = self.tower.inputTable
+        print(inputTable)
         numTowers = len(inputTable['towerNumber'])
         self.signals.resetProgress.emit(numTowers)
 
@@ -222,10 +223,10 @@ class SAPRunnable(QRunnable):
             self.signals.log.emit('\nAnalyzing tower number ' + str(towerNum))
             self.signals.log.emit('-------------------------')
 
-            try:
-                self.runAnalysis(SapModel, towerPerformance)
-            except:
-                self.signals.log.emit('ERROR running analysis')
+            # try:
+            self.runAnalysis(SapModel, towerPerformance)
+            # except:
+            # self.signals.log.emit('ERROR running analysis')
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
 
@@ -583,9 +584,12 @@ class SAPRunnable(QRunnable):
             AllCombos = []
 
         for combo in AllCombos:
+            self.signals.log.emit(str(self.runGMs))
             if self.runGMs:
                 # Only run combo with ground motions
-                if not ('GM' in combo):
+                self.signals.log.emit('GM id '+ self.psData.gmIdentifier)
+                self.signals.log.emit('combo '+combo)
+                if not(self.psData.gmIdentifier in combo):
                     continue
 
                 SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()
@@ -602,10 +606,9 @@ class SAPRunnable(QRunnable):
                 # Get BASE SHEAR  ---------------------------------------
                 basesh = analyzer.getBaseShear()
                 
-                if self.psData.gmIdentifier in combo:
-                    buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.psData.footprint, totalWeight, self.psData.totalMass, self.psData.totalHeight)
-                    towerPerformance.buildingCost[combo] = buildingCost
-                    towerPerformance.seismicCost[combo] = seismicCost
+                buildingCost, seismicCost = analyzer.getCosts(maxAcc, maxDisp, self.psData.footprint, totalWeight, self.psData.totalMass, self.psData.totalHeight)
+                towerPerformance.buildingCost[combo] = buildingCost
+                towerPerformance.seismicCost[combo] = seismicCost
 
             else:
                 maxAcc = 'max acc not calculated'

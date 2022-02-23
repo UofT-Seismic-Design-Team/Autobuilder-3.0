@@ -297,7 +297,7 @@ class MainWindow(QMainWindow):
         
         self.functions_toolbar.addAction(self.assignDesignVariable_button)
 
-        # Add button for Constraint
+        # Add button for Constraintset
         self.constraint_button = QAction(QIcon(':/Icons/filter - 24x24.png'), "Modify Constraint", self)
         self.constraint_button.setStatusTip("Modify Constraint")
 
@@ -570,7 +570,7 @@ class MainWindow(QMainWindow):
         for vText in vTexts:
             self.view_2D_painter.addText(vText)
 
-        self.view_2D_elevation.setText("Z = " + str(self.elevation))
+        self.view_2D_elevation.setText('Z = ' + str(self.elevation))
 
     def translate_z_up_2DView(self, signal):
         # prevent list to go out of range
@@ -585,7 +585,7 @@ class MainWindow(QMainWindow):
     def change_panel_orientation(self, signal):
         self.panel_direction *= -1
 
-    # For FloorDesign--------------------------------------------
+    # For FloorDesign----------------------cd----------------------
     def openFloorDesign(self, signal):
         floorPlan = FloorPlanUI(self)
         floorPlan.exec_()

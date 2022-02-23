@@ -1,0 +1,42 @@
+<RCC>
+  <qresource prefix="Icons">
+    <file alias="autobuilder.ico">resources/Icons/autobuilder.ico</file>
+    <file alias="application-sidebar.png">resources/Icons/application-sidebar.png</file>
+    <file alias="arrow-090.png">resources/Icons/arrow-090.png</file>
+    <file alias="arrow-270.png">resources/Icons/arrow-270.png</file>
+    <file alias="arrow-circle-double.png">resources/Icons/arrow-circle-double.png</file>
+    <file alias="blue-folder-import.png">resources/Icons/blue-folder-import.png</file>
+    <file alias="Bracing - 24x24.png">resources/Icons/Bracing - 24x24.png</file>
+    <file alias="disk.png">resources/Icons/disk.png</file>
+    <file alias="filter - 24x24.png">resources/Icons/filter - 24x24.png</file>
+    <file alias="flip.png">resources/Icons/flip.png</file>
+    <file alias="Floor Plan - 24x24.png">resources/Icons/Floor Plan - 24x24.png</file>
+    <file alias="folder-horizontal-open.png">resources/Icons/folder-horizontal-open.png</file>
+    <file alias="gear.png">resources/Icons/gear.png</file>
+    <file alias="Generate Tower - 24x24.png">resources/Icons/Generate Tower - 24x24.png</file>
+    <file alias="hand.png">resources/Icons/hand.png</file>
+    <file alias="letter_A_blue-512.png">resources/Icons/letter_A_blue-512.png</file>
+    <file alias="minus.png">resources/Icons/minus.png</file>
+    <file alias="Panel - 24x24.png">resources/Icons/Panel - 24x24.png</file>
+    <file alias="pencil.png">resources/Icons/pencil.png</file>
+    <file alias="pencil_plus.png">resources/Icons/pencil_plus.png</file>
+    <file alias="plus.png">resources/Icons/plus.png</file>
+    <file alias="Run Tower - 24x24.png">resources/Icons/Run Tower - 24x24.png</file>
+  </qresource>
+  <qresource prefix="UI">
+    <file alias="autobuilder_runtowers_v2.ui">resources/UI/autobuilder_runtowers_v2.ui</file>
+    <file alias="autobuilder_buildtower.ui">resources/UI/autobuilder_buildtower.ui</file>
+    <file alias="autobuilder_floordesign_v2.ui">resources/UI/autobuilder_floordesign_v2.ui</file>
+    <file alias="editdesign.ui">resources/UI/editdesign.ui</file>
+    <file alias="autobuilder_bracingscheme_v1.ui">resources/UI/autobuilder_bracingscheme_v1.ui</file>
+    <file alias="autobuilder_designvariable_v1.ui">resources/UI/autobuilder_designvariable_v1.ui</file>
+    <file alias="autobuilder_displaysettings_v1.ui">resources/UI/autobuilder_displaysettings_v1.ui</file>
+    <file alias="autobuilder_floordesign_v1.ui">resources/UI/autobuilder_floordesign_v1.ui</file>
+    <file alias="autobuilder_generatetower.ui">resources/UI/autobuilder_generatetower.ui</file>
+    <file alias="autobuilder_mainwindow_v3.ui">resources/UI/autobuilder_mainwindow_v3.ui</file>
+    <file alias="autobuilder_paneldesign_v1.ui">resources/UI/autobuilder_paneldesign_v1.ui</file>
+    <file alias="autobuilder_projectsettings_v1.ui">resources/UI/autobuilder_projectsettings_v1.ui</file>
+    <file alias="autobuilder_runtowers.ui">resources/UI/autobuilder_runtowers.ui</file>
+    <file alias="autobuilder_variableassignment.ui">resources/UI/autobuilder_variableassignment.ui</file>
+  </qresource>
+</RCC>
