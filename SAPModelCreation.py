@@ -500,6 +500,17 @@ class SAPRunnable(QRunnable):
             [member_name, ret] = SapModel.FrameObj.AddByCoord(start_node_x, start_node_y, start_node_z, end_node_x,
                                                               end_node_y, end_node_z, PropName=section)
 
+            # Get points of member
+            [point_1, point_2, ret] = SapModel.FrameObj.GetPoints(member_name)
+            points = (point_1, point_2)
+            
+            # Set point to fixed support if at ground level
+            for point in points:
+                [x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(point)
+                if z <= 0:
+                    values = [True for i in range(6)] # Set restraint in all 6 degree of freedom
+                    ret = SapModel.PointObj.setRestraint(point, values)
+
             if ret != 0:
                 self.signals.log.emit('ERROR building member in panel '+ panel.name)
 
@@ -576,6 +587,19 @@ class SAPRunnable(QRunnable):
         
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
+
+        # Get MEMBER STRESS ---------------------------------
+        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress()
+        TENSILE_STRESS = 7
+        COMPRESSIVE_STRESS = 4.5
+        SHEAR_STRESS = 1.5
+        maxT_DCR = max(maxTwBs) / TENSILE_STRESS
+        maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
+        maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
+
+        print('maxT_DCR:', maxT_DCR)
+        print('maxC_DCR:', maxC_DCR)
+        print('maxV_DCR:', maxV_DCR)
         
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
@@ -621,7 +645,10 @@ class SAPRunnable(QRunnable):
             towerPerformance.basesh[combo] = basesh
 
         towerPerformance.totalWeight = totalWeight
-        towerPerformance.period = period    
+        towerPerformance.period = period
+        towerPerformance.tensionPCR = maxT_DCR
+        towerPerformance.compDCR = maxC_DCR
+        towerPerformance.shearDCR = maxV_DCR
         
         # Get Centre of Rigidity ---------------------------------
         towerPerformance.CR = analyzer.getCR(self.tower.elevations)

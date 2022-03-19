@@ -6,16 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>373</width>
-    <height>600</height>
+    <width>675</width>
+    <height>388</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Project Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_6">
+   <property name="spacing">
+    <number>15</number>
+   </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -24,7 +27,6 @@
           <widget class="QLabel" name="floorElev_title">
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -81,11 +83,11 @@
          <attribute name="verticalHeaderVisible">
           <bool>true</bool>
          </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>27</number>
-         </attribute>
          <attribute name="verticalHeaderMinimumSectionSize">
           <number>20</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>27</number>
          </attribute>
          <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
@@ -132,12 +134,11 @@
           <widget class="QLabel" name="sectionProp_title">
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
            <property name="text">
-            <string>Section properties</string>
+            <string>Section Properties</string>
            </property>
           </widget>
          </item>
@@ -186,11 +187,11 @@
          <attribute name="verticalHeaderVisible">
           <bool>false</bool>
          </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>27</number>
-         </attribute>
          <attribute name="verticalHeaderMinimumSectionSize">
           <number>20</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>27</number>
          </attribute>
          <attribute name="verticalHeaderStretchLastSection">
           <bool>false</bool>
@@ -234,18 +235,104 @@
        </item>
       </layout>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="materialprops_title">
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Material Properties</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QFormLayout" name="formLayout_3">
+         <item row="0" column="0">
+          <widget class="QLabel" name="tensileStrength_title">
+           <property name="text">
+            <string>Tensile Strength (MPa)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="tensileStrength_input">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="compressiveStrength_title">
+           <property name="text">
+            <string>Compressive Strength (MPa)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="compressiveStrength_input">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="shearStrength_title">
+           <property name="text">
+            <string>Shear Strength (MPa)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="shearStrength_input">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QLabel" name="analysis_title">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Analysis options</string>
+          <string>Analysis Options</string>
          </property>
         </widget>
        </item>
@@ -319,14 +406,19 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="render_title">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Render settings</string>
+          <string>Render Settings</string>
          </property>
         </widget>
        </item>
@@ -347,6 +439,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="text">
+            <string>12</string>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -363,6 +458,9 @@
              <width>100</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="text">
+            <string>12</string>
            </property>
           </widget>
          </item>
@@ -381,20 +479,23 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="text">
+            <string>60</string>
+           </property>
           </widget>
          </item>
         </layout>
        </item>
       </layout>
      </item>
-     <item>
-      <widget class="QDialogButtonBox" name="projectSettings_buttonBox">
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="projectSettings_buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

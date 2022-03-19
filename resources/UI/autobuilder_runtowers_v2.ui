@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>648</width>
-    <height>551</height>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -124,38 +124,6 @@ p, li { white-space: pre-wrap; }
             <number>5</number>
            </property>
           </widget>
-         </item>
-         <item row="2" column="1">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_5">
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item>
-                <widget class="QPushButton" name="pushButton_2">
-                 <property name="text">
-                  <string>PushButton</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton">
-                 <property name="text">
-                  <string>PushButton</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QTextEdit" name="textEdit"/>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QListWidget" name="listWidget"/>
-           </item>
-          </layout>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="footprint_title">
@@ -310,6 +278,19 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="placeholderText">
             <string>7.83</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QTextEdit" name="nodesToAnalyze_input">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>50</height>
+            </size>
            </property>
           </widget>
          </item>

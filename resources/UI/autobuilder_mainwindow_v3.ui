@@ -76,6 +76,15 @@
                  <height>24</height>
                 </size>
                </property>
+               <property name="mouseTracking">
+                <bool>false</bool>
+               </property>
+               <property name="acceptDrops">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border : none;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -84,6 +93,9 @@
                  <width>24</width>
                  <height>24</height>
                 </size>
+               </property>
+               <property name="checkable">
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -94,6 +106,15 @@
                  <width>24</width>
                  <height>24</height>
                 </size>
+               </property>
+               <property name="mouseTracking">
+                <bool>false</bool>
+               </property>
+               <property name="acceptDrops">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border : none;</string>
                </property>
                <property name="text">
                 <string/>
@@ -113,6 +134,12 @@
                  <width>24</width>
                  <height>24</height>
                 </size>
+               </property>
+               <property name="mouseTracking">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border : none;</string>
                </property>
                <property name="text">
                 <string/>

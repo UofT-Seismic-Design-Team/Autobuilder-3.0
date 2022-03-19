@@ -318,7 +318,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create floor')
+            warning.popUpErrorBox('Unable to save floor')
 
     def writePanels(self):
         ''' Write panels to file '''
@@ -368,7 +368,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create panels')
+            warning.popUpErrorBox('Unable to save panels')
 
     def writeBracings(self):
         ''' Write Bracings to file '''
@@ -410,7 +410,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create bracings')
+            warning.popUpErrorBox('Unable to save bracings')
 
     def writeBracingGroups(self):
         ''' Write Bracing Groups to file '''
@@ -438,7 +438,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create bracing groups')
+            warning.popUpErrorBox('Unable to save bracing groups')
 
     def writeSectionGroups(self):
         ''' Write Section Groups to file '''
@@ -465,7 +465,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create section groups')
+            warning.popUpErrorBox('Unable to save section groups')
 
     def writeBracingAssignments(self):
         ''' Write Bracing Assignments to file '''
@@ -493,7 +493,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create bracing assignments')
+            warning.popUpErrorBox('Unable to save bracing assignments')
 
     def writeSectionAssignments(self):
         ''' Write Section Assignments to file '''
@@ -519,7 +519,7 @@ class FileWriter:
 
         except:
             warning = WarningMessage()
-            warning.popUpErrorBox('Unable to create section assignments')
+            warning.popUpErrorBox('Unable to save section assignments')
 
     def writeInputTable(self, inputTable):
         ''' Write Input Table to file '''
@@ -536,7 +536,7 @@ class FileWriter:
             'towerNum': [],
         }
         towerAttrConst = [
-            'totalWeight', 'period', 'maxEcc', 'avgEcc'
+            'totalWeight', 'period', 'maxEcc', 'avgEcc',
         ]
 
         towerAttrVarCombo = [
@@ -614,4 +614,4 @@ class FileWriter:
             else:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
-                warning.popUpErrorBox('Unable to create output table')
+                warning.popUpErrorBox('Unable to save output table')

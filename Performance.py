@@ -2,6 +2,7 @@ import os
 import sys
 import comtypes.client
 import comtypes.gen
+import pandas as pd  # Dataframe
 
 import scipy
 
@@ -34,6 +35,7 @@ class PerformanceAnalyzer:
         return total_weight
 
     def getMaxAcceleration(self, roofNodeNames):
+        ''' return max acceleration in g '''
         SapModel = self.SapModel
 
         # Set units to metres
@@ -148,6 +150,160 @@ class PerformanceAnalyzer:
                 break
 
         return roofNodeNames
+
+    def getMemberStress(self, selectedFrameMembers=[], selectedWallMembers=[]):
+        ''' -> 4 dataframes: Tensile, Compressive, Bending, Shear '''
+        # Steps
+        # 1. Get all or selected frame/wall members
+        # 2. Get section props of individual memebers
+        # 3. Get forces in members (i.e. tension, compression and bendings)
+        # 4. convert forces to stress, including bending stress
+        # 5. Output "max stress, member type, member name"
+
+        SapModel = self.SapModel
+
+        # Set units to millimetres
+        SapModel.SetPresentUnits(SAP2000Constants.Units['N_mm_C'])
+
+        # Frame members
+        if selectedFrameMembers == []:
+            [numberNames, allNames, ret] = SapModel.FrameObj.GetNameList()
+            selectedFrameMembers = allNames
+
+        maxTs = {
+            'Stress': [],
+            'Type': [], # 'F': Frame; 'W': Wall
+            'LC': [],
+            'Name': [],
+        }
+
+        maxCs = {
+            'Stress': [],
+            'Type': [], # 'F': Frame; 'W': Wall
+            'LC': [],
+            'Name': [],
+        }
+
+        maxMs = {
+            'Stress': [],
+            'Type': [], # 'F': Frame; 'W': Wall
+            'LC': [],
+            'Name': [],
+        }
+
+        maxVs = {
+            'Stress': [],
+            'Type': [], # 'F': Frame; 'W': Wall
+            'LC': [],
+            'Name': [],
+        }
+
+        maxTwBs = []
+        maxCwBs = []
+
+        for member in selectedFrameMembers:
+            # Get section props of memebers
+            [sectName, sAuto , ret] = SapModel.FrameObj.GetSection(member)
+            [Area, As2, As3, Torsion, I22, I33, S22, S33, Z22, Z33, R22, R33, ret] = SapModel.PropFrame.GetSectProps(sectName)
+            # Note: As2 and As3 refer to the reduced effective shear areas. This to reflect the parabolic distribution of shear stress in the section. Assume SAP2000 is correct
+
+            # Get forces in members (i.e. tension, compression and bendings)
+            OBJECT_ELEM = 0
+            [NumberResults, Obj, ObjSta, Elm, ElmSta, LoadCase, StepType, StepNum, P, V2, V3, T, M2, M3, ret] = SapModel.Results.FrameForce(member, OBJECT_ELEM)
+
+            print('Load Case:', LoadCase)
+
+            # Max Tensile Stress
+            maxT = max(P)
+            maxTLoadCase = LoadCase[P.index(maxT)]
+            maxTStress = maxT / Area
+
+            maxTs['Stress'].append(maxTStress)
+            maxTs['Type'].append('F')
+            maxTs['LC'].append(maxTLoadCase)
+            maxTs['Name'].append(member)
+            
+            # Max Compressive Stress
+            maxC = min(P)
+            maxCLoadCase = LoadCase[P.index(maxC)]
+            maxCStress = abs(maxC) / Area
+
+            maxCs['Stress'].append(maxCStress)
+            maxCs['Type'].append('F')
+            maxCs['LC'].append(maxCLoadCase)
+            maxCs['Name'].append(member)
+
+            # Max Bending Stress - major and minor bending axes
+            maxM2pos = max(M2)
+            maxM2neg = min(M2)
+            if abs(maxM2pos) >= abs(maxM2neg):
+                maxM2Index = M2.index(maxM2pos)
+                maxM2Stress = abs(maxM2pos) / S22
+            else:
+                maxM2Index = M2.index(maxM2neg)
+                maxM2Stress = abs(maxM2neg) / S22
+            
+            maxM3pos = max(M3)
+            maxM3neg = min(M3)
+            if abs(maxM3pos) >= abs(maxM3neg):
+                maxM3Index = M3.index(maxM3pos)
+                maxM3Stress = abs(maxM3pos) / S33
+            else:
+                maxM3Index = M3.index(maxM3neg)
+                maxM3Stress = abs(maxM3neg) / S33
+
+            if maxM2Stress >= maxM3Stress:
+                maxMLoadCase = LoadCase[maxM2Index]
+                maxMStress = maxM2Stress
+            else:
+                maxMLoadCase = LoadCase[maxM3Index]
+                maxMStress = maxM3Stress
+
+            maxMs['Stress'].append(maxMStress)
+            maxMs['Type'].append('F')
+            maxMs['LC'].append(maxMLoadCase)
+            maxMs['Name'].append(member)
+
+            # Max shear stress - major and minor local axes
+            maxV2pos = max(V2)
+            maxV2neg = min(V2)
+            if abs(maxV2pos) >= abs(maxV2neg):
+                maxV2index = V2.index(maxV2pos)
+                maxV2stress = abs(maxV2pos) / As2
+            else:
+                maxV2index = V2.index(maxV2neg)
+                maxV2stress = abs(maxV2neg) / As2
+            
+            maxV3pos = max(V3)
+            maxV3neg = min(V3)
+            if abs(maxV3pos) >= abs(maxV3neg):
+                maxV3index = V3.index(maxV3pos)
+                maxV3stress = abs(maxV3pos) / As3
+            else:
+                maxV3index = V3.index(maxV3neg)
+                maxV3stress = abs(maxV3neg) / As3
+
+            if maxV2stress >= maxV3stress:
+                maxVLoadCase = LoadCase[maxV2index]
+                maxVStress = maxV2stress
+            else:
+                maxVLoadCase = LoadCase[maxV3index]
+                maxVStress = maxV3stress
+
+            maxVs['Stress'].append(maxVStress)
+            maxVs['Type'].append('F')
+            maxVs['LC'].append(maxVLoadCase)
+            maxVs['Name'].append(member)
+
+            maxTwBs.append(maxTStress + maxMStress)
+            maxCwBs.append(maxCStress + maxMStress)
+
+        maxTs_df = pd.DataFrame(data=maxTs)
+        maxCs_df = pd.DataFrame(data=maxCs)
+        maxMs_df = pd.DataFrame(data=maxMs)
+        maxVs_df = pd.DataFrame(data=maxVs)
+
+        return maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs
 
     def getCosts(self, maxAcc, maxDisp, footprint, weight, totalMass, totalHeight):
         # Subtract weights. Weight is initially in lb, convert to kg
@@ -361,15 +517,26 @@ class TowerPerformance:
         self.variables = {}
 
         # results from SAP2000
-        # key: load combo; values: index
+        # key: load combo; values
         self.maxAcc = {}
         self.maxDisp = {}
         self.basesh = {} # base shear
         self.totalWeight = 0
         self.period = 0
 
+        # Member Stress
+        self.tensileStress = pd.DataFrame()
+        self.compressiveStress = pd.DataFrame()
+        self.bendingStress = pd.DataFrame()
+        self.shearStress = pd.DataFrame()
+
+        # Demand-capacity ratios
+        self.tensionDCR = 0
+        self.compDCR = 0
+        self.shearDCR = 0
+
         # SDC metrics
-        # key: load combo; values: index
+        # key: load combo; values
         self.buildingCost = {}
         self.seismicCost = {}
 
