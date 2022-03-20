@@ -228,12 +228,12 @@ class FloorPlanUI(QDialog):
             warning = WarningMessage()
             if item.text() == '':
                 warning.popUpErrorBox('Floor plan name is missing.')
-                self.floorPlanTable.item(row,0).setText(self.currentBracingName)
+                self.floorPlanTable.item(row,0).setText(self.currentFloorPlanName)
                 return
 
             if item.text() in self.tower.floorPlans:
                 warning.popUpErrorBox('Floor plan name already exists.')
-                self.floorPlanTable.item(row,0).setText(self.currentBracingName)
+                self.floorPlanTable.item(row,0).setText(self.currentFloorPlanName)
                 return
 
             floorPlan = self.tower.floorPlans[self.currentFloorPlanName]
