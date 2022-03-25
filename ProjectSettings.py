@@ -243,6 +243,7 @@ class ProjectSettingsData:
         self.totalHeight = 60
         self.totalMass = 7.83
         self.gmIdentifier = 'GM1'
+        self.keepExistingMembers = False
         self.toRun = False
 
     def reset(self):

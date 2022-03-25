@@ -14,8 +14,6 @@ import os
 import resources    # For icons and UIs
 
 class panelsUI(QDialog):
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

@@ -164,6 +164,7 @@ class FileWriter:
             'totalHeight',
             'totalMass',
             'gmIdentifier',
+            'keepExistingMembers',
             'toRun',
         ]
         
@@ -181,6 +182,7 @@ class FileWriter:
             psData.totalHeight,
             psData.totalMass,
             psData.gmIdentifier,
+            psData.keepExistingMembers,
             psData.toRun,
         ]
 

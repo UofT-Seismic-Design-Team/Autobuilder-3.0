@@ -127,7 +127,7 @@ class SAPSignals(QObject):
 
     log = pyqtSignal(str)
     resetProgress = pyqtSignal(int)
-    plotData = pyqtSignal(int, int)
+    plotData = pyqtSignal(int, float)
     updateProgress = pyqtSignal(int, int)
     startTime = pyqtSignal()
     endTime = pyqtSignal()
@@ -238,6 +238,7 @@ class SAPRunnable(QRunnable):
                 self.signals.plotData.emit(towerNum, avgBuildingCost + avgSeismicCost)
             else:
                 self.signals.plotData.emit(towerNum, towerPerformance.period)
+                print('tower period:', towerPerformance.period)
 
             self.signals.updateProgress.emit(i, numTowers)
 
@@ -324,7 +325,7 @@ class SAPRunnable(QRunnable):
 
     def clearPanel(self, SapModel, panel):
         # Deletes all members that are in the panel
-        if panel.IDs == ["UNKNOWN"]:
+        if panel.IDs == ["UNKNOWN"] and not self.psData.keepExistingMembers:
             self.clearExistingMembersinPanel(SapModel, panel)
         else:
             # Delete members that are contained in the panel

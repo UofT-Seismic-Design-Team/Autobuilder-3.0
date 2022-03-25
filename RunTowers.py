@@ -73,6 +73,7 @@ class RunTowers(QDialog):
         self.totalHeight_input.setPlainText(str(self.psData.totalHeight))
         self.totalMass_input.setPlainText(str(self.psData.totalMass))
         self.gmIdentifier_input.setPlainText(str(self.psData.gmIdentifier))
+        self.keepExistingMembers_checkBox.setChecked(self.psData.keepExistingMembers)
 
     def update(self):
         # SAP2000 Path
@@ -93,6 +94,9 @@ class RunTowers(QDialog):
 
         # Ground Motion Identifier
         self.psData.gmIdentifier = self.gmIdentifier_input.toPlainText()
+
+        # Keep Existing Members
+        self.psData.keepExistingMembers = self.keepExistingMembers_checkBox.isChecked()
     
     def save(self):
         self.update()

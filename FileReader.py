@@ -114,8 +114,20 @@ class FileReader:
             elif var == 'nodesList':
                 self.psData.nodesList = val.split()
 
-            elif var == 'renderZ':
-                self.psData.renderZ = float(val)
+            elif var == 'footprint':
+                self.psData.footprint = float(val)
+            
+            elif var == 'totalHeight':
+                self.psData.totalHeight = float(val)
+
+            elif var == 'totalMass':
+                self.psData.totalMass = float(val)
+
+            elif var == 'gmIdentifier':
+                self.psData.gmIdentifier = val
+
+            elif var == 'keepExistingMembers':
+                self.psData.keepExistingMembers = (val == 'True')
 
     def readDisplaySettings(self, data):
         print('read display setting')

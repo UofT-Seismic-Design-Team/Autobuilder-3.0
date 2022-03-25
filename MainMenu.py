@@ -55,6 +55,9 @@ class MainWindow(QMainWindow):
         self.fileLoc = ''
         self.fileName = ''
 
+        # Status
+        self.isSaved = False
+
         # TESTING ----------------------------------------------
 
         # self.tower.defineFloors()
@@ -336,6 +339,16 @@ class MainWindow(QMainWindow):
 
         self.views_toolbar.addAction(self.down_button)
 
+    def closeEvent(self, event):
+        if not self.isSaved:
+            warning = WarningMessage()
+            title = 'Your file has not been saved. Do you want to save it?'
+
+            if self.fileLoc:
+                warning.popUpConfirmation(title, self.saveFile)
+            else:
+                warning.popUpConfirmation(title, self.saveAsFile)
+
     def setMenu(self):
         # Project Settings
         self.action_ProjectSettings.triggered.connect(self.openProjectSettings)
@@ -376,6 +389,9 @@ class MainWindow(QMainWindow):
         else:
             self.saveAsFile()
 
+        # Update status
+        self.isSaved = True
+
     def saveAsFile(self, signal=None):
         fileInfo = QFileDialog.getSaveFileName(self, "Save As", "untitled.ab", "Autobuilder files (*.ab)")
 
@@ -390,8 +406,21 @@ class MainWindow(QMainWindow):
                 warning = WarningMessage()
                 warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
 
+        # Update status
+        self.isSaved = True
+    
     # Open file ------------------------------------------------------------------------------
     def openFile(self, signal=None):
+        # Prompt to save
+        if not self.isSaved:
+            warning = WarningMessage()
+            title = 'Your file has not been saved. Do you want to save it?'
+
+            if self.fileLoc:
+                warning.popUpConfirmation(title, self.saveFile)
+            else:
+                warning.popUpConfirmation(title, self.saveAsFile)
+
         fileInfo = QFileDialog.getOpenFileName(self, "Open File", "autobuilder.ab", "Autobuilder files (*.ab)")
 
         if fileInfo[0]: # No action if no file was selected
@@ -411,6 +440,9 @@ class MainWindow(QMainWindow):
                 warning.popUpErrorBox('Fail to open file. Please check if the selected file is corrupted.')
 
             self.tower.build()
+
+        # Reset Status
+        self.isSaved = False
 
     # For Project Settings --------------------------------------------
     def openProjectSettings(self, signal):
