@@ -164,34 +164,14 @@ class PerformanceAnalyzer:
 
         # Set units to millimetres
         SapModel.SetPresentUnits(SAP2000Constants.Units['N_mm_C'])
-
-        maxTs = {
+        dictTemplate = {
             'Stress': [],
             'Type': [], # 'F': Frame; 'W': Wall
             'LC': [],
             'Name': [],
         }
 
-        maxCs = {
-            'Stress': [],
-            'Type': [], # 'F': Frame; 'W': Wall
-            'LC': [],
-            'Name': [],
-        }
-
-        maxMs = {
-            'Stress': [],
-            'Type': [], # 'F': Frame; 'W': Wall
-            'LC': [],
-            'Name': [],
-        }
-
-        maxVs = {
-            'Stress': [],
-            'Type': [], # 'F': Frame; 'W': Wall
-            'LC': [],
-            'Name': [],
-        }
+        maxTs, maxCs, maxMs, maxVs = [dictTemplate.copy() for i in range(4)]
 
         maxTwBs = []
         maxCwBs = []
@@ -219,7 +199,6 @@ class PerformanceAnalyzer:
                 # Get forces in members (i.e. tension, compression and bendings)
                 OBJECT_ELEM = 0
                 [NumberResults, Obj, ObjSta, Elm, ElmSta, LoadCase, StepType, StepNum, P, V2, V3, T, M2, M3, ret] = SapModel.Results.FrameForce(member, OBJECT_ELEM)
-
                 print('Load Case:', LoadCase)
 
                 # in case no forces found

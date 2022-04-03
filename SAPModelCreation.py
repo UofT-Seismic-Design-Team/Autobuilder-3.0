@@ -552,7 +552,6 @@ class SAPRunnable(QRunnable):
     def runAnalysis(self, SapModel, towerPerformance):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
-        # TODO: fuck i gotta god damn fix it
         if self.runGMs:
             SapModel.Analyze.SetRunCaseFlag('', True, True)
         else:   # Modal analysis: To obtain period and tower weight
@@ -589,6 +588,7 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
 
+        # Get COMBOs in model --------------------------------
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         except:
@@ -596,13 +596,24 @@ class SAPRunnable(QRunnable):
             AllCombos = []
         
         # Get MEMBER STRESS ---------------------------------
-        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier='GM2', allCombos=AllCombos)
-        TENSILE_STRESS = 7
-        COMPRESSIVE_STRESS = 5
-        SHEAR_STRESS = 1.5
-        maxT_DCR = max(maxTwBs) / TENSILE_STRESS
-        maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
-        maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
+        if self.runGMs:
+            maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier='GM2', allCombos=AllCombos)
+            TENSILE_STRESS = 7
+            COMPRESSIVE_STRESS = 5
+            SHEAR_STRESS = 1.5
+            maxT_DCR = max(maxTwBs) / TENSILE_STRESS
+            maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
+            maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
+
+        else:
+            maxT_DCR = 'max tension not calculated'
+            maxC_DCR = 'max compression not calculated'
+            maxV_DCR = 'max shear not calculated'
+
+            maxTs_df = pd.DataFrame()
+            maxCs_df = pd.DataFrame()
+            maxMs_df = pd.DataFrame()
+            maxVs_df = pd.DataFrame()
 
         print('maxT_DCR:', maxT_DCR)
         print('maxC_DCR:', maxC_DCR)
