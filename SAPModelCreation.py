@@ -229,8 +229,7 @@ class SAPRunnable(QRunnable):
             # self.signals.log.emit('ERROR running analysis')
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
-
-            # TODO: fix below
+            
             if self.runGMs:
                 avgBuildingCost = towerPerformance.avgBuildingCost()
                 avgSeismicCost = towerPerformance.avgSeismicCost()
@@ -238,7 +237,9 @@ class SAPRunnable(QRunnable):
                 self.signals.plotData.emit(towerNum, avgBuildingCost + avgSeismicCost)
             else:
                 self.signals.plotData.emit(towerNum, towerPerformance.period)
-                print('tower period:', towerPerformance.period)
+
+            # Save the file
+            SapModel.File.Save(SAPFileLoc)
 
             self.signals.updateProgress.emit(i, numTowers)
 
@@ -325,7 +326,7 @@ class SAPRunnable(QRunnable):
 
     def clearPanel(self, SapModel, panel):
         # Deletes all members that are in the panel
-        if panel.IDs == ["UNKNOWN"] and not self.psData.keepExistingMembers:
+        if panel.IDs == ["UNKNOWN"] and (not self.psData.keepExistingMembers):
             self.clearExistingMembersinPanel(SapModel, panel)
         else:
             # Delete members that are contained in the panel
@@ -551,12 +552,11 @@ class SAPRunnable(QRunnable):
     def runAnalysis(self, SapModel, towerPerformance):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
+        # TODO: fuck i gotta god damn fix it
         if self.runGMs:
             SapModel.Analyze.SetRunCaseFlag('', True, True)
-        else:
+        else:   # Modal analysis: To obtain period and tower weight
             SapModel.Analyze.SetRunCaseFlag('', False, True)
-            SapModel.Analyze.SetRunCaseFlag('GM1', False, False)
-            SapModel.Analyze.SetRunCaseFlag('GM2', False, False)
             SapModel.Analyze.SetRunCaseFlag('DEAD', True, False)
             SapModel.Analyze.SetRunCaseFlag('MODAL', True, False)
 
@@ -589,10 +589,16 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
 
+        try:
+            [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
+        except:
+            self.signals.log.emit('ERROR no load combinations found')
+            AllCombos = []
+        
         # Get MEMBER STRESS ---------------------------------
-        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress()
+        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier='GM2', allCombos=AllCombos)
         TENSILE_STRESS = 7
-        COMPRESSIVE_STRESS = 4.5
+        COMPRESSIVE_STRESS = 5
         SHEAR_STRESS = 1.5
         maxT_DCR = max(maxTwBs) / TENSILE_STRESS
         maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
@@ -601,12 +607,6 @@ class SAPRunnable(QRunnable):
         print('maxT_DCR:', maxT_DCR)
         print('maxC_DCR:', maxC_DCR)
         print('maxV_DCR:', maxV_DCR)
-        
-        try:
-            [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
-        except:
-            self.signals.log.emit('ERROR no load combinations found')
-            AllCombos = []
 
         for combo in AllCombos:
             self.signals.log.emit(str(self.runGMs))
@@ -647,7 +647,7 @@ class SAPRunnable(QRunnable):
 
         towerPerformance.totalWeight = totalWeight
         towerPerformance.period = period
-        towerPerformance.tensionPCR = maxT_DCR
+        towerPerformance.tensionDCR = maxT_DCR
         towerPerformance.compDCR = maxC_DCR
         towerPerformance.shearDCR = maxV_DCR
         

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Icons">
+    <file alias="table.png">resources/Icons/table.png</file>
     <file alias="autobuilder.ico">resources/Icons/autobuilder.ico</file>
     <file alias="application-sidebar.png">resources/Icons/application-sidebar.png</file>
     <file alias="arrow-090.png">resources/Icons/arrow-090.png</file>
@@ -24,6 +25,7 @@
     <file alias="Run Tower - 24x24.png">resources/Icons/Run Tower - 24x24.png</file>
   </qresource>
   <qresource prefix="UI">
+    <file alias="autobuilder_facedesign_v1.ui">resources/UI/autobuilder_facedesign_v1.ui</file>
     <file alias="autobuilder_runtowers_v2.ui">resources/UI/autobuilder_runtowers_v2.ui</file>
     <file alias="autobuilder_buildtower.ui">resources/UI/autobuilder_buildtower.ui</file>
     <file alias="autobuilder_floordesign_v2.ui">resources/UI/autobuilder_floordesign_v2.ui</file>
