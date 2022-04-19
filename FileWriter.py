@@ -549,6 +549,10 @@ class FileWriter:
             'CR',
         ]
 
+        towerDCRs = [
+            'tensionDCR', 'compDCR', 'shearDCR',
+        ]
+
         for towerNum in towerPerformances:
             outputTable['towerNum'].append(towerNum)
             towerPerformance = towerPerformances[towerNum]
@@ -603,6 +607,16 @@ class FileWriter:
                         outputTable[crYName].append(crY)
                     else:
                         outputTable[crYName] = [crY]
+
+            for attr in towerDCRs:
+                result = getattr(towerPerformance, attr)
+
+                if attr in outputTable:
+                    # column name for this result
+                    outputTable[attr].append(result)
+                else:
+                    outputTable[attr] = [result]
+
                 
 
         df = pd.DataFrame(outputTable)
