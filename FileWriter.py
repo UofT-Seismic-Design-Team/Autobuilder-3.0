@@ -151,6 +151,7 @@ class FileWriter:
 
         # Other settings
         psKeys = [
+            # Project Settings
             'gm',
             'analysis',
             'modelLoc',
@@ -158,14 +159,23 @@ class FileWriter:
             'renderX',
             'renderY',
             'renderZ',
+            'tensileStrength',
+            'compressiveStrength',
+            'shearStrength',
+
+            # Run Towers
             'SAPPath',
             'nodesList',
             'footprint',
             'totalHeight',
             'totalMass',
+            'forceReductionFactor',
             'gmIdentifier',
+            'memberUtilizationId',
             'keepExistingMembers',
+            'divideAllMembersAtIntersections',
             'toRun',
+            'centreOfRigidity',
         ]
         
         values = [
@@ -176,14 +186,22 @@ class FileWriter:
             psData.renderX,
             psData.renderY,
             psData.renderZ,
+            psData.tensileStrength,
+            psData.compressiveStrength,
+            psData.shearStrength,
+
             psData.SAPPath,
             ' '.join(psData.nodesList),
             psData.footprint,
             psData.totalHeight,
             psData.totalMass,
+            psData.forceReductionFactor,
             psData.gmIdentifier,
+            psData.memberUtilizationId,
             psData.keepExistingMembers,
+            psData.divideAllMembersAtIntersections,
             psData.toRun,
+            EnumToString.CRTYPE[psData.centreOfRigidity],
         ]
 
         for i, psKey in enumerate(psKeys):
@@ -389,7 +407,6 @@ class FileWriter:
 
         for bName in bracings:
             bracing = bracings[bName]
-
             for member in bracing.members:
                 x1 = member.start_node.x
                 y1 = member.start_node.y

@@ -77,7 +77,6 @@ class ProjectSettings(QDialog):
         self.sapModelLoc_label.setText(modelName)
 
     def Populate(self):
-        
         data = self.data
 
         # Elevations
@@ -104,6 +103,11 @@ class ProjectSettings(QDialog):
         self.analysisType_comboBox.setCurrentIndex(data.analysisType)
         self.SAPModelLoc = data.SAPModelLoc
         self.sapModelLoc_label.setText(data.modelName)
+
+        # Material Properties
+        self.tensileStrength_input.setText(str(data.tensileStrength))
+        self.compressiveStrength_input.setText(str(data.compressiveStrength))
+        self.shearStrength_input.setText(str(data.shearStrength))
 
         # Render settings
         self.x_input.setText(str(data.renderX))
@@ -195,6 +199,15 @@ class ProjectSettings(QDialog):
             warning.popUpErrorBox('Invalid input for render settings')
             return # terminate the saving process
 
+        # Material Properties
+        try:
+            self.data.tensileStrength = float(self.tensileStrength_input.text())
+            self.data.compressiveStrength = float(self.compressiveStrength_input.text())
+            self.data.shearStrength = float(self.shearStrength_input.text())
+        except:
+            warning.popUpErrorBox('Invalid input for material properties')
+            return # terminate the saving process
+
         # Analysis options
         self.data.groundMotion = self.gm_checkBox.isChecked()
         self.data.analysisType = self.analysisType_comboBox.currentIndex()
@@ -210,6 +223,11 @@ class ProjectSettings(QDialog):
 class ATYPE:
     TIME_HISTORY = 0
     RSA = 1
+
+class CRTYPE:
+    DO_NOT_RUN = 0
+    SINGLE_FLOOR = 1
+    ALL_FLOOR = 2
 
 # struct to store data for project settings
 class ProjectSettingsData:
@@ -233,6 +251,11 @@ class ProjectSettingsData:
         self.renderY = 12
         self.renderZ = 60
 
+        # Material Properties (in MPa)
+        self.tensileStrength = 7
+        self.compressiveStrength = 5
+        self.shearStrength = 1.5
+
         # Run Towers variables
         self.SAPPath = 'C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'
         if not os.path.exists('C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe'):
@@ -242,8 +265,12 @@ class ProjectSettingsData:
         self.footprint = 144
         self.totalHeight = 60
         self.totalMass = 7.83
-        self.gmIdentifier = 'GM1'
+        self.forceReductionFactor = 0.85
+        self.gmIdentifier = 'GM1' # TODO: naming inconsistency - to fix
+        self.memberUtilizationId = 'GM2'
         self.keepExistingMembers = False
+        self.divideAllMembersAtIntersections = False
+        self.centreOfRigidity = CRTYPE.DO_NOT_RUN
         self.toRun = False
 
     def reset(self):
