@@ -71,7 +71,8 @@ class FileReader:
 
             var = line[0]
             val = line[1]
-            
+
+            # Project Settings
             if var == 'tower_elevs':
                 elevs = val.split()
                 for elev in elevs:
@@ -108,6 +109,16 @@ class FileReader:
             elif var == 'renderZ':
                 self.psData.renderZ = float(val)
 
+            elif var == 'tensileStrength':
+                self.psData.tensileStrength = float(val)
+
+            elif var == 'compressiveStrength':
+                self.psData.compressiveStrength = float(val)
+
+            elif var == 'shearStrength':
+                self.psData.shearStrength = float(val)
+
+            # Run Towers
             elif var == 'SAPPath':
                 self.psData.SAPPath = val
 
@@ -126,8 +137,17 @@ class FileReader:
             elif var == 'gmIdentifier':
                 self.psData.gmIdentifier = val
 
+            elif var == 'memberUtilizationId':
+                self.psData.memberUtilizationId = val
+
             elif var == 'keepExistingMembers':
                 self.psData.keepExistingMembers = (val == 'True')
+
+            elif var == 'divideAllMembersAtIntersections':
+                self.psData.divideAllMembersAtIntersections = (val == 'True')
+
+            elif var == 'centreOfRigidity':
+                self.psData.centreOfRigidity = StringToEnum.CRTYPE[val]
 
     def readDisplaySettings(self, data):
         print('read display setting')

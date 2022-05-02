@@ -145,10 +145,12 @@ class DesignVariable(QDialog):
 
     def addGroup(self):
         ''' Add Bracing Group and clear iteration table '''
-
         # If currently on Bracing tab:
         if self.tabWidget.currentIndex() == 0:
+            # Intialize new bracing group with a random bracing
             newBracingGroup = BracingGroup()
+            newBracingGroup.bracings = [list(self.tower.bracings.keys())[0]]
+
             id = 1
             newBracingGroup.name = "New Bracing Group " + str(id)
             while newBracingGroup.name in self.tower.bracingGroups:
@@ -158,7 +160,10 @@ class DesignVariable(QDialog):
 
         # If currently on Section tab:
         elif self.tabWidget.currentIndex() == 1:
+            # Intialize new section group with a random section
             newSectionGroup = SectionGroup()
+            newSectionGroup.sections = [list(self.projectSettingsData.sections.keys())[0]]
+
             id = 1
             newSectionGroup.name = "New Section Group " + str(id)
             while newSectionGroup.name in self.tower.sectionGroups:
@@ -168,11 +173,15 @@ class DesignVariable(QDialog):
         
         self.Populate()
 
-        # empty coord. table
-        self.IterationTable.setRowCount(0)
+        # Select new group --------------------
+        if self.tabWidget.currentIndex() == 0:
+            self.bracingGroupTable.selectRow(self.bracingGroupTable.rowCount()-1)
 
-        # clear bracing name
-        self.GroupNameEdit.clear()
+        elif self.tabWidget.currentIndex() == 1:
+            self.sectionGroupTable.selectRow(self.sectionGroupTable.rowCount()-1)
+
+        # Update ----------------------
+        self.updateScreen()
 
     def deleteGroup(self):
         '''delete group and associated iterations'''
@@ -326,104 +335,78 @@ class DesignVariable(QDialog):
                 self.sectionGroupTable.setItem(row, column, sgItem)
 
     def nameChange(self):
-        ''' change group name after it is defined in main table '''
+        ''' change group name after it was defined in main table '''
         warning = WarningMessage()
 
         if self.tabWidget.currentIndex() == 0:
             row = self.bracingGroupTable.currentRow() #returns -1 when repopulating empty table
             print('bracing group namechange')
             if row != -1 and self.currentBracingGroupName != None:
-                bgName = self.bracingGroupTable.item(row,0).text()
+                newName = self.bracingGroupTable.item(row,0).text()
 
-                if bgName == '':
+                # Error handling
+                if newName == '':
                     warning.popUpErrorBox('Bracing group name is missing.')
                     self.bracingGroupTable.item(row,0).setText(self.currentBracingGroupName)
                     return
 
-                if bgName in self.tower.bracingGroups:
+                if newName in self.tower.bracingGroups:
                     warning.popUpErrorBox('Bracing group name already exists.')
                     self.bracingGroupTable.item(row,0).setText(self.currentBracingGroupName)
                     return
 
-                bg = self.tower.bracingGroups[self.currentBracingGroupName]
-                # update group name to match changed cell
-                bg.name = bgName
-                # assign original iterations to group name
-                self.tower.bracingGroups[bgName] = self.tower.bracingGroups.pop(self.currentBracingGroupName)
+                # Change name while preserving the order
+                bgKeys = list(self.tower.bracingGroups.keys())
+                bgValues = list(self.tower.bracingGroups.values())
+
+                self.tower.bracingGroups.clear()
+                for i in range(len(bgKeys)):
+                    # bracing group to be changed
+                    if bgKeys[i] == self.currentBracingGroupName:
+                        # update the name of group
+                        bgValues[i].name = newName
+                        # assign original iterations to new name
+                        self.tower.bracingGroups[newName] = bgValues[i]
+                    else:
+                        self.tower.bracingGroups[bgKeys[i]] = bgValues[i]
                 
                 # match group name to item name in main table
-                self.GroupNameEdit.setText(bgName)
+                self.GroupNameEdit.setText(newName)
                 
                 self.updateScreen()
 
         elif self.tabWidget.currentIndex() == 1:
             row = self.sectionGroupTable.currentRow() #returns -1 when repopulating empty table
             if row != -1 and self.currentSectionGroupName != None:
-                sgName = self.sectionGroupTable.item(row,0).text()
+                newName = self.sectionGroupTable.item(row,0).text()
 
-                if sgName == '':
+                if newName == '':
                     warning.popUpErrorBox('Section group name is missing.')
                     self.sectionGroupTable.item(row,0).setText(self.currentSectionGroupName)
                     return
 
-                if sgName in self.tower.sectionGroups:
+                if newName in self.tower.sectionGroups:
                     warning.popUpErrorBox('Section group name already exists.')
                     self.sectionGroupTable.item(row,0).setText(self.currentSectionGroupName)
                     return
+                
+                # Change name while preserving the order
+                sgKeys = list(self.tower.sectionGroups.keys())
+                sgValues = list(self.tower.sectionGroups.values())
 
-                sg = self.tower.sectionGroups[self.currentSectionGroupName]
-                # update group name to match changed cell
-                sg.name = sgName
-                # assign original iterations to group name
-                self.tower.sectionGroups[sgName] = self.tower.sectionGroups.pop(self.currentSectionGroupName)
+                self.tower.sectionGroups.clear()
+                for i in range(len(sgKeys)):
+                    # section group to be changed
+                    if sgKeys[i] == self.currentSectionGroupName:
+                        # update the name of group
+                        sgValues[i].name = newName
+                        # assign original iterations to new name
+                        self.tower.sectionGroups[newName] = sgValues[i]
+                    else:
+                        self.tower.sectionGroups[sgKeys[i]] = sgValues[i]
                 
                 # match group name to item name in main table
-                self.GroupNameEdit.setText(sgName)
+                self.GroupNameEdit.setText(newName)
 
                 self.updateScreen()
     
-'''
-    def refreshBGTable(self):
-        # Display bracing iteration table for existing bracing group
-
-        # if switching to an existing bracing group
-        if self.bracingGroupTable.currentItem() is not None:
-
-            self.BGIterationTable.setRowCount(0)
-
-            # Set currently selected cell as current bracing object
-            currBG = self.bracingGroupTable.currentItem().text()
-            BG = self.tower.bracingGroups[currBG]
-
-            # Fill itereation table
-            for row, bracing in enumerate(BG.bracings):
-                self.BGIterationTable.insertRow(self.BGIterationTable.rowCount())
-                self.BGIterationTable.setItem(row, 0, QTableWidgetItem(str(bracing)))
-
-            # Display name of currently selected bracing
-            self.BGNameEdit.setText(currBG)
-
-    
-    def updateBGIteration(self):
-
-        #Update bracing group with new iteration info
-
-        BGs = self.tower.bracingGroups
-        BGName = self.BGNameEdit.text()
-
-        if not (BGName in BGs):
-            newBG = BracingGroup(BGName)
-            self.tower.addBracingGroup(newBG)
-
-        BG = BGs[BGName]
-
-        for row in range(self.BGIterationTable.rowCount()):
-            bracing = self.BGIterationTable.item(row,0).text()
-            if bracing not in BG.bracings:
-                BG.addBracing(bracing)
-
-        # Change BG name in main table
-        newRow = self.bracingGroupTable.rowCount()
-        BGItem = QTableWidgetItem(BGName)
-        self.bracingGroupTable.setItem(int(newRow)-1,0,BGItem)
-'''

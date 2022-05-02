@@ -64,6 +64,7 @@ class RunTower(QDialog):
 
         # Elasped Time
         self.timeElapsed = 0 # in seconds
+        self.estTimeRemaining = 0 # in seconds
         self.timer = QTimer(self)
         self.timer.setInterval(1000) # period in miliseconds
         self.timer.timeout.connect(self.updateElapsedTime)
@@ -100,8 +101,7 @@ class RunTower(QDialog):
         self.numTowersLabel.setText('{} out of {}'.format(str(current + 1), str(numTowers)))
 
         avgTime = self.timeElapsed/(current + 1)
-        estTimeRemaining = round(avgTime * (numTowers - (current+1)))
-        self.estTimeLabel.setText(str(datetime.timedelta(seconds=estTimeRemaining)))
+        self.estTimeRemaining = round(avgTime * (numTowers - (current+1)))
 
     def resetProgress(self, max):
         self.progressBar.setValue(0)
@@ -112,6 +112,10 @@ class RunTower(QDialog):
     def updateElapsedTime(self):
         self.timeElapsed += 1
         self.timeElapsedLabel.setText(str(datetime.timedelta(seconds=self.timeElapsed)))
+
+        if self.estTimeRemaining > 1:
+            self.estTimeRemaining -= 1
+        self.estTimeLabel.setText(str(datetime.timedelta(seconds=self.estTimeRemaining)))
 
     def updatePlot(self, x, y):
         self.plotter.addxData(x)
@@ -597,13 +601,18 @@ class SAPRunnable(QRunnable):
         
         # Get MEMBER STRESS ---------------------------------
         if self.runGMs:
-            maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier='GM2', allCombos=AllCombos)
-            TENSILE_STRESS = 7
-            COMPRESSIVE_STRESS = 5
-            SHEAR_STRESS = 1.5
-            maxT_DCR = max(maxTwBs) / TENSILE_STRESS
-            maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
-            maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
+            memberUtilizationId = self.psData.memberUtilizationId
+            maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier=memberUtilizationId, allCombos=AllCombos)
+
+            forceReductionFactor = self.psData.forceReductionFactor
+            maxT_DCR = max(maxTwBs)*forceReductionFactor / (self.psData.tensileStrength + Algebra.EPSILON)
+            maxC_DCR = max(maxCwBs)*forceReductionFactor / (self.psData.compressiveStrength + Algebra.EPSILON)
+            maxV_DCR = maxVs_df['Stress'].max()*forceReductionFactor / (self.psData.shearStrength + Algebra.EPSILON)
+
+            # Temporary output
+            self.signals.log.emit('maxT_DCR: {}'.format(maxT_DCR))
+            self.signals.log.emit('maxC_DCR: {}'.format(maxC_DCR))
+            self.signals.log.emit('maxV_DCR: {}'.format(maxV_DCR))
 
         else:
             maxT_DCR = 'max tension not calculated'
@@ -615,16 +624,12 @@ class SAPRunnable(QRunnable):
             maxMs_df = pd.DataFrame()
             maxVs_df = pd.DataFrame()
 
-        print('maxT_DCR:', maxT_DCR)
-        print('maxC_DCR:', maxC_DCR)
-        print('maxV_DCR:', maxV_DCR)
-
         for combo in AllCombos:
             self.signals.log.emit(str(self.runGMs))
             if self.runGMs:
                 # Only run combo with ground motions
-                self.signals.log.emit('GM id '+ self.psData.gmIdentifier)
-                self.signals.log.emit('combo '+combo)
+                # self.signals.log.emit('GM id '+ self.psData.gmIdentifier)
+                # self.signals.log.emit('combo '+combo)
                 if not(self.psData.gmIdentifier in combo):
                     continue
 
@@ -663,7 +668,15 @@ class SAPRunnable(QRunnable):
         towerPerformance.shearDCR = maxV_DCR
         
         # Get Centre of Rigidity ---------------------------------
-        towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        if self.psData.centreOfRigidity == CRTYPE.SINGLE_FLOOR:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+            print(towerPerformance.CR)
+        elif self.psData.centreOfRigidity == CRTYPE.ALL_FLOOR:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        elif self.psData.centreOfRigidity == CRTYPE.DO_NOT_RUN:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        else:
+            pass
 
         # Get Eccentricity ---------------------------------
         towerPerformance.maxEcc, towerPerformance.avgEcc = analyzer.getEccentricity(towerPerformance.CR, self.tower)

@@ -368,14 +368,15 @@ class MainWindow(QMainWindow):
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             try:
                 filewriter.writeFiles()
+                # Update status
+                self.isSaved = True
+
             except:
                 warning = WarningMessage()
                 warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
         else:
             self.saveAsFile()
 
-        # Update status
-        self.isSaved = True
 
     def saveAsFile(self, signal=None):
         fileInfo = QFileDialog.getSaveFileName(self, "Save As", "untitled.ab", "Autobuilder files (*.ab)")
@@ -387,12 +388,12 @@ class MainWindow(QMainWindow):
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             try:
                 filewriter.writeFiles()
+                # Update status
+                self.isSaved = True
+                
             except:
                 warning = WarningMessage()
                 warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
-
-        # Update status
-        self.isSaved = True
     
     # Open file ------------------------------------------------------------------------------
     def openFile(self, signal=None):
