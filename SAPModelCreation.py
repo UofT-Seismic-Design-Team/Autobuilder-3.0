@@ -224,7 +224,7 @@ class SAPRunnable(QRunnable):
             self.signals.log.emit('-------------------------')
 
             # try:
-            self.runAnalysis(SapModel, towerPerformance)
+            self.runAnalysis(SapModel, towerPerformance, towerNum)
             # except:
             # self.signals.log.emit('ERROR running analysis')
                 
@@ -548,7 +548,7 @@ class SAPRunnable(QRunnable):
         if ret != 0 :
             self.signals.log.emit('ERROR changing section of member ' + str(memberID))
 
-    def runAnalysis(self, SapModel, towerPerformance):
+    def runAnalysis(self, SapModel, towerPerformance, towerNum):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         if self.runGMs:
@@ -601,6 +601,10 @@ class SAPRunnable(QRunnable):
         print('maxT_DCR:', maxT_DCR)
         print('maxC_DCR:', maxC_DCR)
         print('maxV_DCR:', maxV_DCR)
+
+        # Create output table
+        filewriter = FileWriter(self.mainFileLoc)
+        filewriter.writeStressOut(towerNum, maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs)
         
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
@@ -656,3 +660,5 @@ class SAPRunnable(QRunnable):
 
         # Get Eccentricity ---------------------------------
         towerPerformance.maxEcc, towerPerformance.avgEcc = analyzer.getEccentricity(towerPerformance.CR, self.tower)
+
+

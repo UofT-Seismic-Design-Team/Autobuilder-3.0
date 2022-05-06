@@ -5,6 +5,7 @@ from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
 from Performance import * # tower performance data
 from Message import *    # pop up window for illegal entries
+from csv import writer
 
 import os   # create new directory
 
@@ -631,3 +632,42 @@ class FileWriter:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
                 warning.popUpErrorBox('Unable to save output table')
+
+    def writeStressOut(self, towerNum, maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs, logSignal = None):
+        stressTableLoc = self.folderLoc + FileExtension.stressTable
+
+        stressDf = [maxTs_df, maxCs_df, maxMs_df, maxVs_df]
+        stressList = [towerNum, max(maxTwBs), max(maxCwBs)]
+
+        for i in stressDf:
+                id = i["Stress"].idxmax()
+                max_row = list(i.iloc[id])
+                stressList = stressList + max_row
+
+        if towerNum == 1:
+            df = pd.DataFrame([stressList])
+            df.columns = ["Tower Number", "Max_CombT_Stress (MPa)", "Max_CombC_Stress (MPa)",
+                          "Max_T_Stress (MPa)", "Max_T_Stress_Type", "Max_T_Stress_LC", "Max_T_Stress_ID",
+                          "Max_C_Stress (MPa)", "Max_C_Stress_Type", "Max_C_Stress_LC", "Max_C_Stress_ID",
+                          "Max_M_Stress (MPa)", "Max_M_Stress_Type", "Max_M_Stress_LC", "Max_M_Stress_ID",
+                          "Max_V_Stress (MPa)", "Max_V_Stress_Type", "Max_V_Stress_LC", "Max_V_Stress_ID",
+                          ]
+            try:
+                df.to_csv(stressTableLoc, index=False)
+            except:
+                if logSignal:
+                    logSignal.emit('Fail to generate stress result table')
+                else:
+                    # NOTE: no warning message for SAPModelCreation due to thread safety issues
+                    warning = WarningMessage()
+                    warning.popUpErrorBox('Unable to save stress result table')
+
+        else:
+            try:
+                with open(stressTableLoc, 'a', newline='') as f:
+                    csv_writer = writer(f)
+                    csv_writer.writerow(stressList)
+            except:
+                # NOTE: no warning message for SAPModelCreation due to thread safety issues
+                warning = WarningMessage()
+                warning.popUpErrorBox('Unable to save new stress results')

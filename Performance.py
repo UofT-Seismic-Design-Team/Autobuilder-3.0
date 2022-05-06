@@ -211,7 +211,7 @@ class PerformanceAnalyzer:
             OBJECT_ELEM = 0
             [NumberResults, Obj, ObjSta, Elm, ElmSta, LoadCase, StepType, StepNum, P, V2, V3, T, M2, M3, ret] = SapModel.Results.FrameForce(member, OBJECT_ELEM)
 
-            print('Load Case:', LoadCase)
+            # print('Load Case:', LoadCase)
 
             # Max Tensile Stress
             maxT = max(P)
