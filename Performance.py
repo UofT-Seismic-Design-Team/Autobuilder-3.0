@@ -546,6 +546,14 @@ class TowerPerformance:
         self.maxEcc = 0
         self.avgEcc = 0
 
+        # Member Stresses
+        self.max_T = pd.DataFrame()
+        self.max_C = pd.DataFrame()
+        self.max_M = pd.DataFrame()
+        self.max_V = pd.DataFrame()
+        self.max_CombT = 0
+        self.max_CombC = 0
+
     def addVariable(self, variableName, assignedValue):
         self.variables[variableName] = assignedValue
 
@@ -567,3 +575,6 @@ class TowerPerformance:
             avgSeismicCost /= min(len(self.seismicCost),1)
 
         return avgSeismicCost
+
+    def memberStress(self):
+        ''' -> dataframe'''

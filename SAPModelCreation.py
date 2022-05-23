@@ -215,6 +215,9 @@ class SAPRunnable(QRunnable):
             self.roundingModelCoordinates(SapModel)
             #self.divideMembersAtIntersection(SapModel)
 
+            # Set to multi-thread solver
+            SapModel.Analyze.SetSolverOption_2(SolverType=2, SolverProcessType=0, NumberParallelRuns=0)
+
             # Save the file
             SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
             SapModel.File.Save(SAPFileLoc)
@@ -247,6 +250,9 @@ class SAPRunnable(QRunnable):
         # Create output table
         filewriter = FileWriter(self.mainFileLoc)
         filewriter.writeOutputTable(self.towerPerformances, self.signals.log)
+
+        # Create member stresses table
+        filewriter.writeStressOut(self.towerPerformances, self.signals.log)
 
         # Save tower performances
         self.tower.towerPerformances.clear()
@@ -602,10 +608,13 @@ class SAPRunnable(QRunnable):
         print('maxC_DCR:', maxC_DCR)
         print('maxV_DCR:', maxV_DCR)
 
-        # Create output table
-        filewriter = FileWriter(self.mainFileLoc)
-        filewriter.writeStressOut(towerNum, maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs)
-        
+        towerPerformance.max_T = maxTs_df
+        towerPerformance.max_C = maxCs_df
+        towerPerformance.max_M = maxMs_df
+        towerPerformance.max_V = maxVs_df
+        towerPerformance.max_CombT = max(maxTwBs)
+        towerPerformance.max_CombC = max(maxCwBs)
+
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         except:

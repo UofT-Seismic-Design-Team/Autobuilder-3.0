@@ -633,41 +633,62 @@ class FileWriter:
                 warning = WarningMessage()
                 warning.popUpErrorBox('Unable to save output table')
 
-    def writeStressOut(self, towerNum, maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs, logSignal = None):
+    def writeStressOut(self, towerPerformances, logSignal = None):
+        '''Write member stresses to a file'''
+
         stressTableLoc = self.folderLoc + FileExtension.stressTable
 
-        stressDf = [maxTs_df, maxCs_df, maxMs_df, maxVs_df]
-        stressList = [towerNum, max(maxTwBs), max(maxCwBs)]
+        stressTable = {
+            "towerNum": [],
+        }
 
-        for i in stressDf:
-                id = i["Stress"].idxmax()
-                max_row = list(i.iloc[id])
-                stressList = stressList + max_row
+        stressDf = [
+            'max_T', 'max_C', 'max_M', 'max_V'
+        ]
 
-        if towerNum == 1:
-            df = pd.DataFrame([stressList])
-            df.columns = ["Tower Number", "Max_CombT_Stress (MPa)", "Max_CombC_Stress (MPa)",
-                          "Max_T_Stress (MPa)", "Max_T_Stress_Type", "Max_T_Stress_LC", "Max_T_Stress_ID",
-                          "Max_C_Stress (MPa)", "Max_C_Stress_Type", "Max_C_Stress_LC", "Max_C_Stress_ID",
-                          "Max_M_Stress (MPa)", "Max_M_Stress_Type", "Max_M_Stress_LC", "Max_M_Stress_ID",
-                          "Max_V_Stress (MPa)", "Max_V_Stress_Type", "Max_V_Stress_LC", "Max_V_Stress_ID",
-                          ]
-            try:
-                df.to_csv(stressTableLoc, index=False)
-            except:
-                if logSignal:
-                    logSignal.emit('Fail to generate stress result table')
+        maxStressList = [
+            'max_CombT', 'max_CombC'
+        ]
+
+        nameComb = ["_Stress (MPa)", "_Stress_Type", "_Stress_LC", "_Stress_ID"]
+
+        for towerNum in towerPerformances:
+            stressTable['towerNum'].append(towerNum)
+            towerPerformance = towerPerformances[towerNum]
+
+            for attr in maxStressList:
+                result = getattr(towerPerformance, attr)
+                resultName = attr + nameComb[0]
+                if resultName in stressTable:
+                    # column name for this result
+                    stressTable[resultName].append(result)
                 else:
-                    # NOTE: no warning message for SAPModelCreation due to thread safety issues
-                    warning = WarningMessage()
-                    warning.popUpErrorBox('Unable to save stress result table')
+                    stressTable[resultName] = [result]
 
-        else:
-            try:
-                with open(stressTableLoc, 'a', newline='') as f:
-                    csv_writer = writer(f)
-                    csv_writer.writerow(stressList)
-            except:
+            for attr in stressDf:
+                result = getattr(towerPerformance, attr)
+                id = result["Stress"].idxmax()
+                max_row = list(result.iloc[id])
+
+                for i in range(len(nameComb)):
+                    resultName = attr + nameComb[i]
+                    if resultName in stressTable:
+                        # column name for this result
+                        stressTable[resultName].append(max_row[i])
+                    else:
+                        stressTable[resultName] = [max_row[i]]
+
+        df = pd.DataFrame(stressTable)
+
+        try:
+            df.to_csv(stressTableLoc, index=False)
+
+        except:
+            if logSignal:
+                logSignal.emit('Fail to generate member stress result table')
+            else:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
-                warning.popUpErrorBox('Unable to save new stress results')
+                warning.popUpErrorBox('Unable to save member stress result table')
+
+
