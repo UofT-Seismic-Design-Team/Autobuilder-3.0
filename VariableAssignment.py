@@ -29,6 +29,10 @@ class VariableAssignment(QDialog):
         self.setIconsForButtons()
         self.setOkandCancelButtons()
 
+        # Data
+        self.tables = [self.BracingAssignmentTable, self.SectionAssignmentTable, self.AreaSectionAssignmentTable]
+        self.groupDicts = [self.tower.bracingGroups,self.tower.sectionGroups,self.tower.areaSectionGroups]
+
         # Add or delete list of assignments
         self.addAssignmentButton.clicked.connect(self.addAssignment)
         self.deleteAssignmentButton.clicked.connect(self.deleteAssignment)
@@ -39,42 +43,69 @@ class VariableAssignment(QDialog):
         self.displayAssignmentData()
 
     def addAssignment(self):
-        # If currently on Bracing tab:
-        if self.tabWidget.currentIndex() == 0:
-            row = self.BracingAssignmentTable.rowCount()
-            self.BracingAssignmentTable.insertRow(row)
-            # Add drop down menu
-            bCombo = QComboBox()
-            for t in self.tower.bracingGroups.keys():
-                bCombo.addItem(t)
-            self.BracingAssignmentTable.setCellWidget(row,1,bCombo)
-            bCombo.setCurrentText(list(self.tower.bracingGroups.keys())[0])
+        for tabIndex in range(len(self.tables)):
+            # If currently on tab:
+            if self.tabWidget.currentIndex() == tabIndex:
+                table = self.tables[tabIndex]
+                groupDict = self.groupDicts[tabIndex]
 
-            # Default panel name is row number
-            self.BracingAssignmentTable.setItem(row,0, QTableWidgetItem(str(row+1)))
+                row = table.rowCount()
+                table.insertRow(row)
+                # Add drop down menu
+                combo = QComboBox()
+                for t in groupDict.keys():
+                    combo.addItem(t)
 
-        elif self.tabWidget.currentIndex() == 1:
-            row = self.SectionAssignmentTable.rowCount()
-            self.SectionAssignmentTable.insertRow(row)
-            # Add drop down menu
-            sCombo = QComboBox()
-            for t in self.tower.sectionGroups.keys():
-                sCombo.addItem(t)
-            self.SectionAssignmentTable.setCellWidget(row,1,sCombo)
-            sCombo.setCurrentText(list(self.tower.sectionGroups.keys())[0])
+                table.setCellWidget(row,1,combo)
+                combo.setCurrentText(list(groupDict.keys())[0])
+
+                # Default name is row number
+                table.setItem(row,0, QTableWidgetItem(str(row+1)))
+
+        # if self.tabWidget.currentIndex() == 0:
+        #     row = self.BracingAssignmentTable.rowCount()
+        #     self.BracingAssignmentTable.insertRow(row)
+        #     # Add drop down menu
+        #     bCombo = QComboBox()
+        #     for t in self.tower.bracingGroups.keys():
+        #         bCombo.addItem(t)
+        #     self.BracingAssignmentTable.setCellWidget(row,1,bCombo)
+        #     bCombo.setCurrentText(list(self.tower.bracingGroups.keys())[0])
+
+        #     # Default panel name is row number
+        #     self.BracingAssignmentTable.setItem(row,0, QTableWidgetItem(str(row+1)))
+
+        # elif self.tabWidget.currentIndex() == 1:
+        #     row = self.SectionAssignmentTable.rowCount()
+        #     self.SectionAssignmentTable.insertRow(row)
+        #     # Add drop down menu
+        #     sCombo = QComboBox()
+        #     for t in self.tower.sectionGroups.keys():
+        #         sCombo.addItem(t)
+        #     self.SectionAssignmentTable.setCellWidget(row,1,sCombo)
+        #     sCombo.setCurrentText(list(self.tower.sectionGroups.keys())[0])
 
     def deleteAssignment(self):
-        if self.tabWidget.currentIndex() == 0:
-            indices = self.BracingAssignmentTable.selectionModel().selectedRows()
-            for i, index in enumerate(sorted(indices)):
-                updatedRow = index.row()-i
-                self.BracingAssignmentTable.removeRow(updatedRow)
+        for tabIndex in range(len(self.tables)):
+            if self.tabWidget.currentIndex() == tabIndex:
+                table = self.tables[tabIndex]
 
-        elif self.tabWidget.currentIndex() == 1:
-            indices = self.SectionAssignmentTable.selectionModel().selectedRows()
-            for i, index in enumerate(sorted(indices)):
-                updatedRow = index.row()-i
-                self.SectionAssignmentTable.removeRow(updatedRow)
+                indices = table.selectionModel().selectedRows()
+                for i, index in enumerate(sorted(indices)):
+                    updatedRow = index.row()-i
+                    table.removeRow(updatedRow)
+
+        # if self.tabWidget.currentIndex() == 0:
+        #     indices = self.BracingAssignmentTable.selectionModel().selectedRows()
+        #     for i, index in enumerate(sorted(indices)):
+        #         updatedRow = index.row()-i
+        #         self.BracingAssignmentTable.removeRow(updatedRow)
+
+        # elif self.tabWidget.currentIndex() == 1:
+        #     indices = self.SectionAssignmentTable.selectionModel().selectedRows()
+        #     for i, index in enumerate(sorted(indices)):
+        #         updatedRow = index.row()-i
+        #         self.SectionAssignmentTable.removeRow(updatedRow)
     
     def setIconsForButtons(self):
         self.addAssignmentButton.setIcon(QIcon(':/Icons/plus.png'))
@@ -94,16 +125,18 @@ class VariableAssignment(QDialog):
 
         rowNumB = self.BracingAssignmentTable.rowCount()
         rowNumS = self.SectionAssignmentTable.rowCount()
+        rowNumAS = self.AreaSectionAssignmentTable.rowCount()
         tempB = []
         tempS = []
+        tempAS = []
 
+        # Bracing
         for i in range(rowNumB):
             panelInput = self.BracingAssignmentTable.item(i,0)
 
+            panel = ''
             if panelInput:
                 panel = panelInput.text()
-            else:
-                panel = ''
 
             if panel not in tempB and panel in self.tower.panels.keys():
                 tempB.append(panel)
@@ -111,7 +144,7 @@ class VariableAssignment(QDialog):
                 warning.popUpErrorBox('Duplicate or non-existent panels!')
                 return
 
-        # NOTE: changed panel to member id
+        # Member section
         for i in range(rowNumS):
             member_idInput = self.SectionAssignmentTable.item(i,0)
 
@@ -126,9 +159,24 @@ class VariableAssignment(QDialog):
                 warning.popUpErrorBox('Duplicate or non-existent members!')
                 return
 
+        # Area section
+        for i in range(rowNumAS):
+            panelInput = self.AreaSectionAssignmentTable.item(i,0)
+
+            panel = ''
+            if panelInput:
+                panel = panelInput.text()
+
+            if panel not in tempAS and panel in self.tower.panels.keys():
+                tempAS.append(panel)
+            else:
+                warning.popUpErrorBox('Duplicate or non-existent panels!')
+                return
+
         # clear all existing assignments ---------------------------
         for panel in self.tower.panels:
             self.tower.panels[panel].bracingGroup = ''
+            self.tower.panels[panel].areaSectionGroup = ''
 
         self.tower.member_ids.clear()
 
@@ -155,7 +203,18 @@ class VariableAssignment(QDialog):
             '''TEST'''
             self.tower.member_ids[member_id] = sg
 
-        print('member_ids:', self.tower.member_ids)
+        for i in range(rowNumAS):
+            panelItem = self.AreaSectionAssignmentTable.item(i,0)
+            asg = self.AreaSectionAssignmentTable.cellWidget(i,1).currentText()
+
+            # Check if the row is filled
+            if panelItem == None or asg == None:
+                break
+
+            panel = panelItem.text()
+            self.tower.panels[panel].addAreaSectionAssignment(asg)
+
+        print('panel', panel,  self.tower.panels[panel].areaSectionGroup)
 
         self.close()    # close only if the saving process is completed successfully
 
@@ -163,10 +222,10 @@ class VariableAssignment(QDialog):
     def displayAssignmentData(self):
 
         #Add warning for non existent bracing or member group
-        i = 0
-        j = 0
+        i = j = k =0
         assignment_rowNumB = self.BracingAssignmentTable.rowCount()
         assignment_rowNumS = self.SectionAssignmentTable.rowCount()
+        assignment_rowNumAS = self.AreaSectionAssignmentTable.rowCount()
 
         panels = self.tower.panels
         member_ids = self.tower.member_ids
@@ -188,6 +247,23 @@ class VariableAssignment(QDialog):
                     self.BracingAssignmentTable.setCellWidget(i,1,bCombo)
                     bCombo.setCurrentText(bgItem)
                 i += 1
+
+            # Display area section group table
+            if panels[panel].areaSectionGroup != '':
+                # Populate cells
+                panelItem = QTableWidgetItem(str(panel))
+                asgItem = str(panels[panel].areaSectionGroup)
+                if k >= assignment_rowNumAS:
+                    self.AreaSectionAssignmentTable.insertRow(k)
+                    self.AreaSectionAssignmentTable.setItem(k,0,panelItem)
+
+                    # Set dropdown menu with existing groups
+                    asCombo = QComboBox()
+                    for t in self.tower.areaSectionGroups.keys():
+                        asCombo.addItem(t)
+                    self.AreaSectionAssignmentTable.setCellWidget(k,1,asCombo)
+                    asCombo.setCurrentText(asgItem)
+                k += 1
         
         for member_id in member_ids:
             # Display section group table
@@ -214,12 +290,11 @@ class VariableAssignment(QDialog):
         if fileLoc == '': # No action if no file was selected
             return
 
-        if self.tabWidget.currentIndex() == 0:
-            table = self.BracingAssignmentTable
-            variables = list(self.tower.bracingGroups.keys())
-        elif self.tabWidget.currentIndex() == 1:
-            table = self.SectionAssignmentTable
-            variables = list(self.tower.sectionGroups.keys())
+        for tabIndex in range(len(self.tables)):
+            if self.tabWidget.currentIndex() == tabIndex:
+                table = self.tables[tabIndex]
+                variables = list(self.groupDicts[tabIndex].keys())
+                break
 
         # reset in table
         table.setRowCount(0)

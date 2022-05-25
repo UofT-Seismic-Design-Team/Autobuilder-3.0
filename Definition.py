@@ -1,3 +1,7 @@
+# TODO: for future
+from asyncio.windows_events import NULL
+from enum import Enum
+
 # Module to store constants
 
 class Algebra:
@@ -36,8 +40,10 @@ class FileExtension:
     bracings = '/bracings.csv'
     bracingGroups = '/bracingGroups.csv'
     sectionGroups = '/sectionGroups.csv'
+    areaSectionGroups = '/areaSectionGroups.csv'
     bracingAssignments = '/bracingAssignments.csv'
     sectionAssignments = '/sectionAssignments.csv'
+    areaSectionAssignments = '/areaSectionAssignments.csv'
     inputTable = '/inputTable.csv'
     outputTable = '/outputTable.csv'
     errorLog = '/errorLog.csv'
@@ -54,8 +60,10 @@ class MFHeader:
     bracings = '#Bracings'
     bracingGroups = '#Bracing_Groups'
     sectionGroups = '#Section_Groups'
+    areaSectionGroups = '#Area_Section_Groups'
     bracingAssignments = '#Bracing_Assignments'
     sectionAssignments = '#Section_Assignments'
+    areaSectionAssignments = '#Area_Section_Assignments'
 
 class EnumToString:
     ATYPE = {
@@ -126,7 +134,7 @@ class UnitConversion:
 
     # relative to kg 
     # from xxx to kg
-    # e.g. 1 lb = 0.453592 kg
+    # e.g. 1 lb = 0.453592 kbr
     Mass = {
         'lb': 0.453592
     }
@@ -138,3 +146,12 @@ class View2DConstants:
     MEMBER_SIZE = 5.0
     NODE_SIZE = 15.0
     TEXT_SIZE = 7.0
+
+class InputFileKeyword:
+    # Tower elements
+    bracing = 'Bracing'
+    shearWall = 'ShearWall'
+    member = 'Member'
+
+    # Tower variable
+    variable = 'Variable'

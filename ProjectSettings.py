@@ -47,6 +47,10 @@ class ProjectSettings(QDialog):
         self.sectionProp_add.clicked.connect(lambda x: self.sectionProp_table.insertRow(self.sectionProp_table.rowCount()))
         self.sectionProp_del.clicked.connect(lambda x: self.sectionProp_table.removeRow(self.sectionProp_table.rowCount()-1))
 
+        # Area section properties table row control
+        self.areaSectionProp_add.clicked.connect(lambda x: self.areaSectionProp_table.insertRow(self.areaSectionProp_table.rowCount()))
+        self.areaSectionProp_del.clicked.connect(lambda x: self.areaSectionProp_table.removeRow(self.areaSectionProp_table.rowCount()-1))
+
         # SAP2000 model location
         self.SAPModelLoc = ''
         self.sapModel_button.clicked.connect(self.saveSAPModelLoc)
@@ -54,8 +58,11 @@ class ProjectSettings(QDialog):
     def setIconsForButtons(self):
         self.floorElev_add.setIcon(QIcon(':/Icons/plus.png'))
         self.sectionProp_add.setIcon(QIcon(':/Icons/plus.png'))
+        self.areaSectionProp_add.setIcon(QIcon(':/Icons/plus.png'))
+        
         self.floorElev_del.setIcon(QIcon(':/Icons/minus.png'))
         self.sectionProp_del.setIcon(QIcon(':/Icons/minus.png'))
+        self.areaSectionProp_del.setIcon(QIcon(':/Icons/minus.png'))
 
     def setOkandCancelButtons(self):
         self.OkButton = self.projectSettings_buttonBox.button(QDialogButtonBox.Ok)
@@ -87,7 +94,7 @@ class ProjectSettings(QDialog):
                 self.floorElev_table.insertRow(i)
             self.floorElev_table.setItem(i,0,item)
 
-        # Section properties
+        # Frame Section properties
         sectionProp_rowNum = self.sectionProp_table.rowCount()
         for i, key in enumerate(data.sections):
             sect = data.sections[key]
@@ -97,6 +104,17 @@ class ProjectSettings(QDialog):
                 self.sectionProp_table.insertRow(i)
             self.sectionProp_table.setItem(i,1,sectName)
             self.sectionProp_table.setItem(i,0,rank)
+
+        # Area Section properties
+        areaSectionProp_rowNum = self.areaSectionProp_table.rowCount()
+        for i, key in enumerate(data.areaSections):
+            sect = data.areaSections[key]
+            sectName = QTableWidgetItem(str(sect.name))
+            rank = QTableWidgetItem(str(sect.rank))
+            if i >= areaSectionProp_rowNum:
+                self.sectionProp_table.insertRow(i)
+            self.areaSectionProp_table.setItem(i,1,sectName)
+            self.areaSectionProp_table.setItem(i,0,rank)
 
         # Analysis options
         self.gm_checkBox.setChecked(data.groundMotion)
@@ -149,6 +167,7 @@ class ProjectSettings(QDialog):
                 # clear data stored in project settings and tower (except for floor plans)
                 self.data.floorElevs.clear()
                 self.data.sections.clear()
+                self.data.areaSections.clear()
                 self.tower.elevations.clear()
                 self.tower.floors.clear()
                 self.tower.columns.clear()
@@ -168,8 +187,8 @@ class ProjectSettings(QDialog):
         self.mainmenu.elevation_index = 0
         self.mainmenu.elevation = self.tower.elevations[self.mainmenu.elevation_index]
 
-        # Section properties
-        self.data.sections.clear() # reset section properties
+        # Section properties ----------------
+        self.data.sections.clear() # reset
 
         rowNum = self.sectionProp_table.rowCount()
         for i in range(rowNum):
@@ -190,7 +209,35 @@ class ProjectSettings(QDialog):
                 warning.popUpErrorBox('Invalid input for section properties')
                 return # terminate the saving process
 
-        # Render settings
+        # Area Section properties ----------------
+        self.data.areaSections.clear() # reset
+
+        rowNum = self.areaSectionProp_table.rowCount()
+        for i in range(rowNum):
+            nameItem = self.areaSectionProp_table.item(i,1)
+            rankItem = self.areaSectionProp_table.item(i,0)
+            # Check if the row is filled
+            if nameItem == None:
+                break
+            name = nameItem.text()
+            rank = rankItem.text()
+            try:
+                # Check if the item is filled
+                if name == '':
+                    break
+                sect = Section(name, int(rank))
+                self.data.areaSections[name] = sect
+            except:
+                warning.popUpErrorBox('Invalid input for area section properties')
+                return # terminate the saving process
+
+        # add empty shear wall properties
+        emptyShearWall = str(None)
+        if not (emptyShearWall in self.data.areaSections):
+            sect = Section(emptyShearWall, rowNum+1)
+            self.data.areaSections[emptyShearWall] = sect
+
+        # Render settings -----------------
         try:
             self.data.renderX = float(self.x_input.text())
             self.data.renderY = float(self.y_input.text())
@@ -239,6 +286,10 @@ class ProjectSettingsData:
             'BALSA_0.1875x0.1875': Section('BALSA_0.1875x0.1875', 2)
             }
 
+        self.areaSections = {
+            'ShearWall_3/32': Section('ShearWall_3/32',1),
+            }
+
         # Analysis options
         self.groundMotion = False
         self.analysisType = ATYPE.TIME_HISTORY
@@ -276,4 +327,5 @@ class ProjectSettingsData:
     def reset(self):
         self.floorElevs.clear()
         self.sections.clear()
+        self.areaSections.clear()
         self.nodesList.clear()

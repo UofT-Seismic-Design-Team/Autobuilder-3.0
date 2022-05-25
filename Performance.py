@@ -287,7 +287,7 @@ class PerformanceAnalyzer:
         # Subtract weights. Weight is initially in lb, convert to kg
         print('Calculating costs...')
 
-        weight = (weight * UnitConversion.Mass['lb'] - totalMass) / UnitConversion.Mass['lb']
+        weight = max((weight * UnitConversion.Mass['lb'] - totalMass) / UnitConversion.Mass['lb'], 0)   # weight must be greater than 0
         design_life = 100 # years
         construction_cost = 2000000*(weight**2)+6*(10**6)
         land_cost = 35000 * footprint

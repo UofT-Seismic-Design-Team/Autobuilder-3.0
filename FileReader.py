@@ -23,8 +23,10 @@ class FileReader:
                 'bracings':[MFHeader.bracings+'\n',-1],
                 'bracingGroups':[MFHeader.bracingGroups+'\n',-1],
                 'sectionGroups':[MFHeader.sectionGroups+'\n',-1],
+                'areaSectionGroups':[MFHeader.areaSectionGroups+'\n',-1],
                 'b_assignments':[MFHeader.bracingAssignments+'\n',-1],
                 's_assignments':[MFHeader.sectionAssignments+'\n',-1],
+                'as_assignments':[MFHeader.areaSectionAssignments+'\n',-1],
             }
 
             sortedHeaderLoc = []
@@ -58,8 +60,10 @@ class FileReader:
             self.readBracings(comps['bracings'][2])
             self.readBracingGroups(comps['bracingGroups'][2])
             self.readSectionGroups(comps['sectionGroups'][2])
+            self.readAreaSectionGroups(comps['areaSectionGroups'][2])
             self.readBracingAssignments(comps['b_assignments'][2])
             self.readSectionAssignments(comps['s_assignments'][2])
+            self.readAreaSectionAssignments(comps['as_assignments'][2])
             
     def readProjectSettings(self, data):
         print('read project setting')
@@ -87,6 +91,15 @@ class FileReader:
                 sect = Section(name, rank)
 
                 self.psData.sections[name] = sect
+
+            elif var == 'area_sect_props':
+                temp = val.split()
+
+                name = temp[0]
+                rank = int(temp[1])
+                sect = Section(name, rank)
+
+                self.psData.areaSections[name] = sect
 
             elif var == 'gm':
                 self.psData.groundMotion = (val == 'True') # return True if the value is 'True'
@@ -319,7 +332,7 @@ class FileReader:
                 self.tower.addBracingGroup(newGroup)
 
             bracingGroup = bracingGroups[groupName]
-            bracingGroup.addBracing(bracing)
+            bracingGroup.addVariable(bracing)
             self.tower.addBracingGroup(bracingGroup)
 
     def readSectionGroups(self, data):
@@ -338,8 +351,27 @@ class FileReader:
                 self.tower.addSectionGroup(newGroup)
 
             sectionGroup = sectionGroups[groupName]
-            sectionGroup.addSection(section)
+            sectionGroup.addVariable(section)
             self.tower.addSectionGroup(sectionGroup)
+
+    def readAreaSectionGroups(self, data):
+        if not data:
+            return None
+
+        areaSectionGroups = self.tower.areaSectionGroups
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline 
+
+            groupName = str(line[0])
+            section = str(line[1])
+
+            if not (groupName in areaSectionGroups):
+                newGroup = AreaSectionGroup(groupName)
+                self.tower.addAreaSectionGroup(newGroup)
+
+            areaSectionGroup = areaSectionGroups[groupName]
+            areaSectionGroup.addVariable(section)
+            self.tower.addAreaSectionGroup(areaSectionGroup)
 
     def readBracingAssignments(self, data):
         if not data:
@@ -368,6 +400,21 @@ class FileReader:
             sGroup = str(line[1])
 
             member_ids[member_id] = sGroup
+
+    def readAreaSectionAssignments(self, data):
+        if not data:
+            return None
+
+        panels = self.tower.panels
+        for line in data[1:]: # skip header
+            line = line.rstrip('\n').split(',') # remove trailing newline
+
+            panelName = str(line[0])
+            asGroup = str(line[1])
+
+            for panel in panels:
+                if panelName == panel:
+                    panels[panel].addAreaSectionAssignment(asGroup)
 
     def readInputTable(self, fileLoc):
         df = pd.read_csv (fileLoc)
