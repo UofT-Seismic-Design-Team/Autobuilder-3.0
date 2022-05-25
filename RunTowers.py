@@ -3,9 +3,10 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *  # extends QtCore with GUI functionality
 from PyQt5.QtOpenGL import *  # provides QGLWidget, a special OpenGL QWidget
 from PyQt5 import uic
-from Message import *
 
+from Message import *
 from FileReader import *
+from ProjectSettings import *
 
 import sys  # We need sys so that we can pass argv to QApplication
 import os
@@ -60,20 +61,45 @@ class RunTowers(QDialog):
 
     def setRunNowButton(self):
         self.runNow_Button.clicked.connect(self.runNow)
+        self.runNow_Button.clicked.connect(self.save)
         self.runNow_Button.clicked.connect(self.close)
 
     def setImportInputTableButton(self):
         self.importInputTable_Button.clicked.connect(self.importInputTable)
 
     def Populate(self):
-        # Set Text
-        self.SAP2000Path_input.setPlainText(self.psData.SAPPath)
+        # Building Cost and Seismic Cost Calculation ----------------------------------------------------
         self.nodesToAnalyze_input.setPlainText(','.join(self.psData.nodesList))
         self.footprint_input.setPlainText(str(self.psData.footprint))
         self.totalHeight_input.setPlainText(str(self.psData.totalHeight))
         self.totalMass_input.setPlainText(str(self.psData.totalMass))
-        self.gmIdentifier_input.setPlainText(str(self.psData.gmIdentifier))
+        self.forceReductionFactor_input.setPlainText(str(self.psData.forceReductionFactor))
+
+        # Load Combination Keywords ----------------------------------------------------------------
+        self.seismicPerformanceId_input.setPlainText(str(self.psData.gmIdentifier)) # naming inconsistency
+        self.memberUtilizationId_input.setPlainText(str(self.psData.memberUtilizationId))
+
+        # Analysis Setup ----------------------------------------------------------------
+        self.SAP2000Path_input.setPlainText(self.psData.SAPPath)
+
+        # Centre of Rigidity ----------------------------------------------------------------
+        # Reset
+        self.doNotRun_radioButton.setChecked(False)
+        self.singleFloor_radioButton.setChecked(False)
+        self.allFloor_radioButton.setChecked(False)
+
+        if self.psData.centreOfRigidity == CRTYPE.DO_NOT_RUN:
+            self.doNotRun_radioButton.setChecked(True)
+        elif self.psData.centreOfRigidity == CRTYPE.SINGLE_FLOOR:
+            self.singleFloor_radioButton.setChecked(True)
+        elif self.psData.centreOfRigidity == CRTYPE.ALL_FLOOR:
+            self.allFloor_radioButton.setChecked(True)
+        else:
+            self.doNotRun_radioButton.setChecked(True)
+
+        # Others ----------------------------------------------------------------
         self.keepExistingMembers_checkBox.setChecked(self.psData.keepExistingMembers)
+        self.divideAllMembersAtIntersections_checkBox.setChecked(self.psData.divideAllMembersAtIntersections)
 
     def update(self):
         # SAP2000 Path
@@ -92,11 +118,26 @@ class RunTowers(QDialog):
         # Total Mass
         self.psData.totalMass = float(self.totalMass_input.toPlainText())
 
-        # Ground Motion Identifier
-        self.psData.gmIdentifier = self.gmIdentifier_input.toPlainText()
+        # Force Reduction Factor
+        self.psData.forceReductionFactor = float(self.forceReductionFactor_input.toPlainText())
+
+        # Load Combination Keywords
+        self.psData.gmIdentifier = self.seismicPerformanceId_input.toPlainText()
+        self.psData.memberUtilizationId = self.memberUtilizationId_input.toPlainText()
+
+        # Centre of Rigidity ------------------------------
+        if self.doNotRun_radioButton.isChecked():
+            self.psData.centreOfRigidity = CRTYPE.DO_NOT_RUN
+        elif self.singleFloor_radioButton.isChecked():
+            self.psData.centreOfRigidity = CRTYPE.SINGLE_FLOOR
+        elif self.allFloor_radioButton.isChecked():
+            self.psData.centreOfRigidity = CRTYPE.ALL_FLOOR
+        else:
+            self.psData.centreOfRigidity = CRTYPE.DO_NOT_RUN
 
         # Keep Existing Members
         self.psData.keepExistingMembers = self.keepExistingMembers_checkBox.isChecked()
+        self.psData.divideAllMembersAtIntersections = self.divideAllMembersAtIntersections_checkBox.isChecked()
     
     def save(self):
         self.update()

@@ -103,20 +103,33 @@ class BracingScheme(QDialog):
     
     def addBracingScheme(self):
         '''add bracing and clear coord properties '''
+        # Reset -----------------------------------
+        # empty coord. table
+        self.bracingCoordTable.setRowCount(0)
+        # clear bracing name
+        self.bracingNameEdit.clear()
+
+        # Initialize new bracing scheme with at least one node pairs --------------------
         newBracing = Bracing()
+
+        newBracing.members, newBracing.nodePairs, newBracing.materials = [], [], []
+
+        newBracing.nodePairs.append([Node(0,0), Node(0,0)])
+        newBracing.materials.append(self.sections[0])
+        # Generate members
+        newBracing.generateMembersfromNodes()
+
         id = 1
         newBracing.name = "New Bracing " + str(id)
         while newBracing.name in self.tower.bracings:
             id += 1
-            newBracing.name = "new Bracing " + str(id)
+            newBracing.name = "New Bracing " + str(id)
         self.tower.addBracing(newBracing)
-        self.Populate()
-        
-        # empty coord. table
-        self.bracingCoordTable.setRowCount(0)
 
-        # clear bracing name
-        self.bracingNameEdit.clear()
+        # Refresh
+        self.Populate()
+        self.bracingSchemeTable.selectRow(self.bracingSchemeTable.rowCount()-1)
+        self.updateScreen()
 
     def deleteBracingScheme(self):
         '''delete bracing and associated coord properties'''
@@ -361,64 +374,3 @@ class BracingScheme(QDialog):
 
         self.bracingSchemeViewer.dimension_x = size.width()
         self.bracingSchemeViewer.dimension_y = size.height()
-
-        '''
-    def updateCoord(self):
-        #Save new bracing and associated coord properties
-
-        #warning = WarningMessage()
-        bracings = self.tower.bracings
-        bcName = self.bracingNameEdit.text()
-
-        #delete existing bracing definition
-        if bcName in bracings:
-            bracings.pop('bcName', None)
-
-        newBracing = Bracing(bcName)
-        self.tower.addBracing(newBracing)
-
-        for row in range(self.bracingCoordTable.rowCount()):
-            # changed from 1,2,3,4
-            x1 = float(self.bracingCoordTable.item(row, 0).text())
-            y1 = float(self.bracingCoordTable.item(row, 1).text())
-            x2 = float(self.bracingCoordTable.item(row, 2).text())
-            y2 = float(self.bracingCoordTable.item(row, 3).text())
-            material = str(self.bracingCoordTable.item(row, 4).text())
-
-            node1 = Node(x1, y1)
-            node2 = Node(x2, y2)
-            
-            newBracing.addNodes(node1,node2)
-            newBracing.addMat(material)
-
-        # generate members
-        newBracing.generateMembersfromNodes()
-
-        # change bracing name in main table
-        newRow = self.bracingSchemeTable.rowCount()
-        bcItem = QTableWidgetItem(bcName)
-        #How to disable clicking?
-        #bcItem.setFlags(
-Qt.ItemIsEditable)
-        self.bracingSchemeTable.setItem(int(newRow)-1,0,bcItem)
-
-        # set displayed bracing to new bracing
-        self.bracingSchemeViewer.displayed_bracing = bcName
-
-        try:
-            if elev == '':
-                break
-            tempElevs.append(float(elev))
-        except:
-            warning.popUpErrorBox('Invalid input for elevations')
-            return # terminate the saving process
-        '''
-
-    
-
-'''
-class BracingSchemeData:
-
-    def __init__(self):
-        self.bracingSchemes = {}
-'''

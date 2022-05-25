@@ -64,6 +64,7 @@ class RunTower(QDialog):
 
         # Elasped Time
         self.timeElapsed = 0 # in seconds
+        self.estTimeRemaining = 0 # in seconds
         self.timer = QTimer(self)
         self.timer.setInterval(1000) # period in miliseconds
         self.timer.timeout.connect(self.updateElapsedTime)
@@ -100,8 +101,7 @@ class RunTower(QDialog):
         self.numTowersLabel.setText('{} out of {}'.format(str(current + 1), str(numTowers)))
 
         avgTime = self.timeElapsed/(current + 1)
-        estTimeRemaining = round(avgTime * (numTowers - (current+1)))
-        self.estTimeLabel.setText(str(datetime.timedelta(seconds=estTimeRemaining)))
+        self.estTimeRemaining = round(avgTime * (numTowers - (current+1)))
 
     def resetProgress(self, max):
         self.progressBar.setValue(0)
@@ -112,6 +112,10 @@ class RunTower(QDialog):
     def updateElapsedTime(self):
         self.timeElapsed += 1
         self.timeElapsedLabel.setText(str(datetime.timedelta(seconds=self.timeElapsed)))
+
+        if self.estTimeRemaining > 1:
+            self.estTimeRemaining -= 1
+        self.estTimeLabel.setText(str(datetime.timedelta(seconds=self.estTimeRemaining)))
 
     def updatePlot(self, x, y):
         self.plotter.addxData(x)
@@ -232,8 +236,7 @@ class SAPRunnable(QRunnable):
             # self.signals.log.emit('ERROR running analysis')
                 
             self.towerPerformances[str(towerNum)] = towerPerformance
-
-            # TODO: fix below
+            
             if self.runGMs:
                 avgBuildingCost = towerPerformance.avgBuildingCost()
                 avgSeismicCost = towerPerformance.avgSeismicCost()
@@ -241,7 +244,9 @@ class SAPRunnable(QRunnable):
                 self.signals.plotData.emit(towerNum, avgBuildingCost + avgSeismicCost)
             else:
                 self.signals.plotData.emit(towerNum, towerPerformance.period)
-                print('tower period:', towerPerformance.period)
+
+            # Save the file
+            SapModel.File.Save(SAPFileLoc)
 
             self.signals.updateProgress.emit(i, numTowers)
 
@@ -331,7 +336,7 @@ class SAPRunnable(QRunnable):
 
     def clearPanel(self, SapModel, panel):
         # Deletes all members that are in the panel
-        if panel.IDs == ["UNKNOWN"] and not self.psData.keepExistingMembers:
+        if panel.IDs == ["UNKNOWN"] and (not self.psData.keepExistingMembers):
             self.clearExistingMembersinPanel(SapModel, panel)
         else:
             # Delete members that are contained in the panel
@@ -559,10 +564,8 @@ class SAPRunnable(QRunnable):
 
         if self.runGMs:
             SapModel.Analyze.SetRunCaseFlag('', True, True)
-        else:
+        else:   # Modal analysis: To obtain period and tower weight
             SapModel.Analyze.SetRunCaseFlag('', False, True)
-            SapModel.Analyze.SetRunCaseFlag('GM1', False, False)
-            SapModel.Analyze.SetRunCaseFlag('GM2', False, False)
             SapModel.Analyze.SetRunCaseFlag('DEAD', True, False)
             SapModel.Analyze.SetRunCaseFlag('MODAL', True, False)
 
@@ -620,13 +623,38 @@ class SAPRunnable(QRunnable):
         except:
             self.signals.log.emit('ERROR no load combinations found')
             AllCombos = []
+        
+        # Get MEMBER STRESS ---------------------------------
+        if self.runGMs:
+            memberUtilizationId = self.psData.memberUtilizationId
+            maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress(maxStressIdentifier=memberUtilizationId, allCombos=AllCombos)
+
+            forceReductionFactor = self.psData.forceReductionFactor
+            maxT_DCR = max(maxTwBs)*forceReductionFactor / (self.psData.tensileStrength + Algebra.EPSILON)
+            maxC_DCR = max(maxCwBs)*forceReductionFactor / (self.psData.compressiveStrength + Algebra.EPSILON)
+            maxV_DCR = maxVs_df['Stress'].max()*forceReductionFactor / (self.psData.shearStrength + Algebra.EPSILON)
+
+            # Temporary output
+            self.signals.log.emit('maxT_DCR: {}'.format(maxT_DCR))
+            self.signals.log.emit('maxC_DCR: {}'.format(maxC_DCR))
+            self.signals.log.emit('maxV_DCR: {}'.format(maxV_DCR))
+
+        else:
+            maxT_DCR = 'max tension not calculated'
+            maxC_DCR = 'max compression not calculated'
+            maxV_DCR = 'max shear not calculated'
+
+            maxTs_df = pd.DataFrame()
+            maxCs_df = pd.DataFrame()
+            maxMs_df = pd.DataFrame()
+            maxVs_df = pd.DataFrame()
 
         for combo in AllCombos:
             self.signals.log.emit(str(self.runGMs))
             if self.runGMs:
                 # Only run combo with ground motions
-                self.signals.log.emit('GM id '+ self.psData.gmIdentifier)
-                self.signals.log.emit('combo '+combo)
+                # self.signals.log.emit('GM id '+ self.psData.gmIdentifier)
+                # self.signals.log.emit('combo '+combo)
                 if not(self.psData.gmIdentifier in combo):
                     continue
 
@@ -660,12 +688,20 @@ class SAPRunnable(QRunnable):
 
         towerPerformance.totalWeight = totalWeight
         towerPerformance.period = period
-        towerPerformance.tensionPCR = maxT_DCR
+        towerPerformance.tensionDCR = maxT_DCR
         towerPerformance.compDCR = maxC_DCR
         towerPerformance.shearDCR = maxV_DCR
         
         # Get Centre of Rigidity ---------------------------------
-        towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        if self.psData.centreOfRigidity == CRTYPE.SINGLE_FLOOR:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+            print(towerPerformance.CR)
+        elif self.psData.centreOfRigidity == CRTYPE.ALL_FLOOR:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        elif self.psData.centreOfRigidity == CRTYPE.DO_NOT_RUN:
+            towerPerformance.CR = analyzer.getCR(self.tower.elevations)
+        else:
+            pass
 
         # Get Eccentricity ---------------------------------
         towerPerformance.maxEcc, towerPerformance.avgEcc = analyzer.getEccentricity(towerPerformance.CR, self.tower)

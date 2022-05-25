@@ -17,6 +17,7 @@ from DesignVariable import * # open bracing and section group UI
 from TowerVariation import *    # generate tower variations
 from SAPModelCreation import * # create and run towers in SAP2000
 from Panels import *
+from Face import *  # open face ui
 from RunTowers import * # open run towers dialog
 
 from View2DEngine import *  # import View2DEngine
@@ -57,43 +58,7 @@ class MainWindow(QMainWindow):
 
         # Status
         self.isSaved = False
-
-        # TESTING ----------------------------------------------
-
-        # self.tower.defineFloors()
-
-        # floorPlan = FloorPlan()
-        # floorPlan.nodes = [Node(2,0), Node(4,0), Node(12,6), Node(12,9), Node(0,9)]
-        # floorPlan.generateMembersfromNodes()
-
-        # floorPlan2 = FloorPlan()
-        # floorPlan2.nodes = [Node(3,0),Node(4,0),Node(4,6),Node(12,6),Node(12,9),Node(0,9)]
-        # floorPlan2.generateMembersfromNodes()
-
-        # default = Bracing('default')
-        # default.nodePairs = [[Node(0,0), Node(0,1)], [Node(0,1), Node(1,1)], [Node(1,1), Node(1,0)], [Node(1,0), Node(0,0)]]
-        # default.materials = ['BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875', 'BALSA_0.1875X0.1875']
-        # default.generateMembersfromNodes()
-        # self.tower.addBracing(default)
-
-        # for elev in elevs[5:]:
-        #     floorPlan.addElevation(elev)
-
-        # for elev in elevs[:5+1]:
-        #     floorPlan2.addElevation(elev)
-
-        # self.tower.addFloorPlan(floorPlan)
-        # self.tower.addFloorPlan(floorPlan2)
-
-        # self.tower.addFloorPlansToFloors()
-
-        # self.tower.generateFacesByFloorPlan(floorPlan)
-        # self.tower.generateFacesByFloorPlan(floorPlan2)
-
-        # self.tower.generatePanelsByFace()
-        # self.tower.addPanelsToFloors()
-
-        # self.tower.generateColumnsByFace()
+        self.isClosed = False
 
         # Default for 2021 competition tower
 
@@ -278,6 +243,13 @@ class MainWindow(QMainWindow):
         self.functions_toolbar.addAction(self.floorPlan_button)
 
         # Add button for Editing Panel
+        self.face_button = QAction(QIcon(':/Icons/table.png'), "Edit Face", self)
+        self.face_button.setStatusTip("Edit Face")
+        self.face_button.triggered.connect(self.openFace)
+
+        self.functions_toolbar.addAction(self.face_button)
+
+        # Add button for Editing Panel
         self.panel_button = QAction(QIcon(':/Icons/Panel - 24x24.png'), "Edit Panel", self)
         self.panel_button.setStatusTip("Edit Panel")
         self.panel_button.triggered.connect(self.openPanel)
@@ -340,14 +312,27 @@ class MainWindow(QMainWindow):
         self.views_toolbar.addAction(self.down_button)
 
     def closeEvent(self, event):
+        warning = WarningMessage()
+        
+        # Prompt to save
         if not self.isSaved:
-            warning = WarningMessage()
             title = 'Your file has not been saved. Do you want to save it?'
 
             if self.fileLoc:
                 warning.popUpConfirmation(title, self.saveFile)
             else:
                 warning.popUpConfirmation(title, self.saveAsFile)
+
+        # Prompt to close Autobuilder
+        title = 'Do you want to close Autobuilder?'
+        warning.popUpConfirmation(title, self.setIsClosed)
+        if self.isClosed:
+            event.accept()
+        else:
+            event.ignore()
+
+    def setIsClosed(self):
+        self.isClosed = True
 
     def setMenu(self):
         # Project Settings
@@ -383,14 +368,15 @@ class MainWindow(QMainWindow):
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             try:
                 filewriter.writeFiles()
+                # Update status
+                self.isSaved = True
+
             except:
                 warning = WarningMessage()
                 warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
         else:
             self.saveAsFile()
 
-        # Update status
-        self.isSaved = True
 
     def saveAsFile(self, signal=None):
         fileInfo = QFileDialog.getSaveFileName(self, "Save As", "untitled.ab", "Autobuilder files (*.ab)")
@@ -402,12 +388,12 @@ class MainWindow(QMainWindow):
             filewriter = FileWriter(self.fileLoc, self.tower, self.projectSettingsData)
             try:
                 filewriter.writeFiles()
+                # Update status
+                self.isSaved = True
+                
             except:
                 warning = WarningMessage()
                 warning.popUpErrorBox('Fail to save files. Please check if you have permission to access the files or the directory.')
-
-        # Update status
-        self.isSaved = True
     
     # Open file ------------------------------------------------------------------------------
     def openFile(self, signal=None):
@@ -617,10 +603,15 @@ class MainWindow(QMainWindow):
     def change_panel_orientation(self, signal):
         self.panel_direction *= -1
 
-    # For FloorDesign----------------------cd----------------------
+    # For FloorDesign--------------------------------------------
     def openFloorDesign(self, signal):
         floorPlan = FloorPlanUI(self)
         floorPlan.exec_()
+
+    # For Face--------------------------------------------
+    def openFace(self, signal):
+        face= FaceUI(self)
+        face.exec_()
 
     # For Panel--------------------------------------------
     def openPanel(self, signal):

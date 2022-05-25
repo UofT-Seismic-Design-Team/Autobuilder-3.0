@@ -64,10 +64,22 @@ class EnumToString:
         1: 'RSA',
     }
 
+    CRTYPE = {
+        0: 'Do not run',
+        1: 'Single Floor',
+        2: 'All Floor',
+    }
+
 class StringToEnum:
     ATYPE = {
         'Time_History': 0,
         'RSA': 1,
+    }
+
+    CRTYPE = {
+        'Do not run': 0,
+        'Single Floor': 1,
+        'All Floor': 2,
     }
 
 class Color:

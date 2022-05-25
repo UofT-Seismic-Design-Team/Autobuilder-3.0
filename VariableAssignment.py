@@ -176,12 +176,10 @@ class VariableAssignment(QDialog):
             if panels[panel].bracingGroup != '':
                 # Populate cells
                 panelItem = QTableWidgetItem(str(panel))
-                #bgItem = QTableWidgetItem(str(panels[panel].bracingGroup))
                 bgItem = str(panels[panel].bracingGroup)
                 if i >= assignment_rowNumB:
                     self.BracingAssignmentTable.insertRow(i)
                     self.BracingAssignmentTable.setItem(i,0,panelItem)
-                    #self.BracingAssignmentTable.setItem(i,1,bgItem)
 
                     # Set dropdown menu with existing groups
                     bCombo = QComboBox()
@@ -195,12 +193,10 @@ class VariableAssignment(QDialog):
             # Display section group table
             if member_id != '':
                 member_idItem = QTableWidgetItem(str(member_id))
-                #sgItem = QTableWidgetItem(str(panels[panel].sectionGroup))
                 sgItem = str(member_ids[member_id])
                 if j >= assignment_rowNumS:
                     self.SectionAssignmentTable.insertRow(j)
                     self.SectionAssignmentTable.setItem(j,0,member_idItem)
-                    #self.SectionAssignmentTable.setItem(j,1,sgItem)
 
                     # Set dropdown menu with existing groups
                     sCombo = QComboBox()
