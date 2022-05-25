@@ -9,6 +9,7 @@ from TowerVariation import * # dict of combinations
 from Performance import * # results
 from FileWriter import *
 from Plot import * # For graphs and plots
+from Definition import InputFileKeyword
 
 from Definition import *    # file extensions, EnumToString conversion
 
@@ -196,20 +197,27 @@ class SAPRunnable(QRunnable):
             towerPerformance = TowerPerformance(str(towerNum))
 
             for key in inputTable:
-                if "Panel" in key:
+                if InputFileKeyword.bracing in key:
                     bracing = self.tower.bracings[inputTable[key][i]]
-                    panel = self.tower.panels[key.strip('Panel ')]
-                    self.clearPanel(SapModel, panel)
+                    panel = self.tower.panels[key.strip('Panel ').rstrip('-Bracing')]
+                    self.clearMembersinPanel(SapModel, panel)
                     self.buildBracing(SapModel, panel, bracing)
 
+                if InputFileKeyword.shearWall in key:
+                    areaSectionName = inputTable[key][i]
+                    panel = self.tower.panels[key.lstrip('Panel ').rstrip('-ShearWall')]
+                    self.removeShearWallinPanel(SapModel, panel)
+                    if areaSectionName != str(None):
+                        self.buildShearWall(SapModel, panel, areaSectionName)
+
                 # TODO: update member later
-                if "Member" in key:
+                if InputFileKeyword.member in key:
                     memberID = key.strip('Member ')
                     sectionName = inputTable[key][i]
                     # build members
                     self.changeMemberSection(SapModel, memberID, sectionName)
 
-                if "Variable-" in key:
+                if InputFileKeyword.variable in key:
                     variableName = key.strip('Variable-')
                     assignedValue = inputTable[key][i]
   
@@ -265,7 +273,8 @@ class SAPRunnable(QRunnable):
 
         # reset
         for panel in self.tower.panels.values():
-            panel.IDs = ["UNKNOWN"]
+            panel.memberIDs = ["UNKNOWN"]
+            panel.areaID = "UNKNOWN"
 
     def startSap2000(self):
         #set the following flag to True to attach to an existing instance of the program
@@ -334,17 +343,30 @@ class SAPRunnable(QRunnable):
             if ret != 0:
                 self.signals.log.emit('ERROR rounding coordinates of point ' + PointName)
 
-    def clearPanel(self, SapModel, panel):
+    def clearMembersinPanel(self, SapModel, panel):
         # Deletes all members that are in the panel
-        if panel.IDs == ["UNKNOWN"] and (not self.psData.keepExistingMembers):
+        if panel.memberIDs == ["UNKNOWN"] and (not self.psData.keepExistingMembers):
             self.clearExistingMembersinPanel(SapModel, panel)
         else:
             # Delete members that are contained in the panel
-            for memberID in panel.IDs:
+            for memberID in panel.memberIDs:
                 ret = SapModel.FrameObj.Delete(memberID)
                 if ret != 0:
                     self.signals.log.emit('ERROR deleting member ' + memberID)
-        panel.IDs.clear()
+        panel.memberIDs.clear()
+
+    def removeShearWallinPanel(self, SapModel, panel):
+        # if panel.areaIDs == ["UNKNOWN"] and (not self.psData.keepExistingMembers):
+        #     self.clearExistingMembersinPanel(SapModel, panel)
+        # else:
+        # Delete area objects that exist in the panel
+        if panel.areaID == "UNKNOWN":
+            pass
+        else: 
+            ret = SapModel.AreaObj.Delete(panel.areaID)
+            if ret != 0:
+                self.signals.log.emit('ERROR deleting area ' + panel.areaID)
+        panel.areaID = ''
 
     def clearExistingMembersinPanel(self, SapModel, panel):
         vec1_x = panel.lowerLeft.x - panel.upperLeft.x
@@ -528,7 +550,35 @@ class SAPRunnable(QRunnable):
 
             if member_name is not None:
                 print('member name:', member_name)
-                panel.IDs.append(member_name)
+                panel.memberIDs.append(member_name)
+
+    def buildShearWall(self, SapModel, panel, areaSectionName):
+
+        numPoints = 4
+        points = {
+            'x': [panel.lowerLeft.x, panel.upperLeft.x, panel.upperRight.x, panel.lowerRight.x],
+            'y': [panel.lowerLeft.y, panel.upperLeft.y, panel.upperRight.y, panel.lowerRight.y],
+            'z': [panel.lowerLeft.z, panel.upperLeft.z, panel.upperRight.z, panel.lowerRight.z],
+        }
+        
+        [x_coords, y_coords, z_coord, areaName, ret] = SapModel.AreaObj.AddByCoord(numPoints, points['x'], points['y'], points['z'], PropName=areaSectionName)
+
+        if ret != 0:
+            self.signals.log.emit('ERROR building area object in panel '+ panel.name)
+
+        # Get points of area
+        [num, points, ret] = SapModel.AreaObj.GetPoints(areaName)
+        
+        # Set point to fixed support if at ground level
+        for point in points:
+            [x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(point)
+            if z <= 0:
+                values = [True for i in range(6)] # Set restraint in all 6 degree of freedom
+                ret = SapModel.PointObj.setRestraint(point, values)
+
+        if areaName is not None:
+            print('areaName:', areaName)
+            panel.areaID = areaName
 
     def divideMembersAtIntersection(self, SapModel):
         '''  May not be necessary '''

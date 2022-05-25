@@ -26,10 +26,12 @@ class Tower:
 
         # Section properties
         self.sections = {}
+        self.areaSections = {}
 
         # Groups and assignments
         self.bracingGroups = {}
         self.sectionGroups = {}
+        self.areaSectionGroups = {}
         self.assignments = {}
         
         # Input table
@@ -45,6 +47,9 @@ class Tower:
     def setSections(self, sects):
         self.sections = sects
 
+    def setAreaSections(self, areaSects):
+        self.areaSections = areaSects
+
     def reset(self):
         ''' clear all data '''
         self.elevations.clear()
@@ -53,9 +58,11 @@ class Tower:
         self.floorPlans.clear()
         self.panels.clear()
         self.sections.clear()
+        self.areaSections.clear()
         self.bracings.clear()
         self.bracingGroups.clear()
         self.sectionGroups.clear()
+        self.areaSectionGroups.clear()
         self.assignments.clear()
         self.faces.clear()
         self.member_ids.clear()
@@ -104,6 +111,10 @@ class Tower:
     def addSectionGroup(self, group):
         ''' Add section group object to section groups '''
         self.sectionGroups[group.name] = group
+
+    def addAreaSectionGroup(self, group):
+        ''' Add area section group object to area section groups '''
+        self.areaSectionGroups[group.name] = group
 
     def addAssignment(self, assignment):
         ''' Add bracing assignment objects to bracing assignments '''
@@ -449,10 +460,16 @@ class Panel:
         self.lowerRight = Node()
 
         # Member IDs contained in Panel
-        self.IDs = ['UNKNOWN']
+        self.memberIDs = ['UNKNOWN']
+
+        # Area Object IDs contained in Panel
+        self.areaID= 'UNKNOWN'
 
         # Bracing that is assigned to a panel object
         self.bracingGroup = ''
+
+        # Area section that is assigned to a panel object
+        self.areaSectionGroup = ''
 
     def definePanelWithNodes(self, lowerLeft, upperLeft, upperRight, lowerRight):
         ''' Define panel with nodes '''
@@ -470,6 +487,9 @@ class Panel:
 
     def addBracingAssignment(self, bGroup):
         self.bracingGroup = bGroup
+
+    def addAreaSectionAssignment(self, asGroup):
+        self.areaSectionGroup = asGroup
 
     def averageSideLength(self):
         ''' Calculate the average side length of panel'''
@@ -603,47 +623,52 @@ class Bracing:
     def __str__(self):
         return "Bracing {}".format(self.name)
 
-# --------------------------------------------------------------------------     
+# --------------------------------------------------------------------------
+class Group:
+    variables: List[str]
+    assignments: List[str]
 
-class BracingGroup:
     # static variable for id
     id = 1
 
     def __init__(self, name=None):
         self.name = name    # name is in string form
         if not name:
-            self.name = str(BracingGroup.id)
-            BracingGroup.id += 1
+            self.name = str(Group.id)
+            Group.id += 1
 
-        self.bracings = []
-        self.panelAssignments = []
+        self.variables = []
+        self.assignments = []
     
-    def addBracing(self, bracing):
-        self.bracings.append(bracing)
+    def addVariable(self, var):
+        self.variables.append(var)
 
-    def addPanel(self, panel):
-        self.panelAssignments.append(panel)
+    def addAssignment(self, assignment):
+        self.assignments.append(assignment)
 
-class SectionGroup:
-    # static variable for id
-    id = 1
+class BracingGroup(Group):
+    variables: List[str] # str -> key to bracing objects
+    assignments: List[str] # str -> key to panel objects
 
     def __init__(self, name=None):
-        self.name = name    # name is in string form
-        if not name:
-            self.name = str(SectionGroup.id)
-            SectionGroup.id += 1
+        super().__init__(name)
 
-        self.sections = []
-        self.memberIdAssignments = []
-    
-    def addSection(self, section):
-        self.sections.append(section)
+class SectionGroup(Group):
+    variables: List[str] # str -> key to section objects
+    assignments: List[str] # str -> member ids
 
-    def addMemberId(self, member_id):
-        self.memberIdAssignments.append(member_id)
+    def __init__(self, name=None):
+        super().__init__(name)
+
+class AreaSectionGroup(Group):
+    variables: List[str] # str -> key to area section objects
+    assignments: List[str] # str -> key to panel objects
+
+    def __init__(self, name=None):
+        super().__init__(name)
 
 # --------------------------------------------------------------------------
+# TODO: remove this class?
 class Assignment:
 
      # static variable for id
@@ -663,8 +688,7 @@ class Assignment:
     def __str__(self):
         return "Assignment {}".format(self.name)
 
-
-'''ADD function to go back to bottom floor once top is reached'''
+# ---------------------------------
 class Section:
 
     def __init__(self, name, rank):

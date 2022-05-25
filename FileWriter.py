@@ -34,8 +34,10 @@ class FileWriter:
         self.writeBracings()
         self.writeBracingGroups()
         self.writeSectionGroups()
+        self.writeAreaSectionGroups()
         self.writeBracingAssignments()
         self.writeSectionAssignments()
+        self.writeAreaSectionAssignments()
 
         self.writeMainFile()
 
@@ -80,6 +82,11 @@ class FileWriter:
         with open(sGroupsLoc, 'r') as f:
             sGroups = f.read()
 
+        asGroups = ''
+        asGroupsLoc = self.folderLoc + FileExtension.areaSectionGroups
+        with open(asGroupsLoc, 'r') as f:
+            asGroups = f.read()
+
         bAssignments = ''
         bAssignmentsLoc = self.folderLoc + FileExtension.bracingAssignments
         with open(bAssignmentsLoc, 'r') as f:
@@ -90,6 +97,11 @@ class FileWriter:
         with open(sAssignmentsLoc, 'r') as f:
             sAssignments = f.read()
 
+        asAssignments = ''
+        asAssignmentsLoc = self.folderLoc + FileExtension.areaSectionAssignments
+        with open(asAssignmentsLoc, 'r') as f:
+            asAssignments = f.read()
+
         headers = [
             MFHeader.projectSettings,
             MFHeader.displaySettings,
@@ -99,8 +111,10 @@ class FileWriter:
             MFHeader.bracings,
             MFHeader.bracingGroups,
             MFHeader.sectionGroups,
+            MFHeader.areaSectionGroups,
             MFHeader.bracingAssignments,
             MFHeader.sectionAssignments,
+            MFHeader.areaSectionAssignments,
         ]
 
         datasets = [
@@ -112,8 +126,10 @@ class FileWriter:
             bracings,
             bGroups,
             sGroups,
+            asGroups,
             bAssignments,
             sAssignments,
+            asAssignments,
         ]
 
         with open(self.mainFileLoc, 'w') as mainFile:
@@ -127,8 +143,10 @@ class FileWriter:
 
                  mainFile.write('\n')
 
+    # TODO: move all strings to Definition module
     def writeProjectSettings(self):
         ''' Write project settings data to file '''
+
         projectSettingsLoc = self.folderLoc + FileExtension.projectSettings
         psData = self.psData
 
@@ -147,6 +165,13 @@ class FileWriter:
         for key in psData.sections:
             sect = psData.sections[key]
             psData_dict['setting'].append('sect_props')
+            val = str(sect.name) + ' ' + str(sect.rank)
+            psData_dict['value'].append(val)
+
+        # area sections
+        for key in psData.areaSections:
+            sect = psData.areaSections[key]
+            psData_dict['setting'].append('area_sect_props')
             val = str(sect.name) + ' ' + str(sect.rank)
             psData_dict['value'].append(val)
 
@@ -447,7 +472,7 @@ class FileWriter:
         for bGroupName in bGroups:
             bGroup = bGroups[bGroupName]
 
-            for bName in bGroup.bracings:
+            for bName in bGroup.variables:
                 bGroupsData['bracingGroup'].append(bGroupName)
                 bGroupsData['bracing'].append(bName)
 
@@ -474,7 +499,7 @@ class FileWriter:
         for sGroupName in sGroups:
             sGroup = sGroups[sGroupName]
 
-            for sName in sGroup.sections:
+            for sName in sGroup.variables:
                 sGroupsData['sectionGroup'].append(sGroupName)
                 sGroupsData['section'].append(sName)
 
@@ -486,6 +511,33 @@ class FileWriter:
         except:
             warning = WarningMessage()
             warning.popUpErrorBox('Unable to save section groups')
+
+    def writeAreaSectionGroups(self):
+        ''' Write Section Groups to file '''
+        asGroupsLoc = self.folderLoc + FileExtension.areaSectionGroups
+        tower = self.tower
+        asGroups = tower.areaSectionGroups
+
+        asGroupsData = {
+            'areaSectionGroup':[],
+            'areaSection':[],
+        }
+
+        for asGroupName in asGroups:
+            asGroup = asGroups[asGroupName]
+
+            for asName in asGroup.variables:
+                asGroupsData['areaSectionGroup'].append(asGroupName)
+                asGroupsData['areaSection'].append(asName)
+
+        df = pd.DataFrame(asGroupsData)
+
+        try:
+            df.to_csv(asGroupsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to save area section groups')
 
     def writeBracingAssignments(self):
         ''' Write Bracing Assignments to file '''
@@ -540,6 +592,34 @@ class FileWriter:
         except:
             warning = WarningMessage()
             warning.popUpErrorBox('Unable to save section assignments')
+
+    def writeAreaSectionAssignments(self):
+        ''' Write Area Section Assignments to file '''
+        asAssignmentsLoc = self.folderLoc + FileExtension.areaSectionAssignments
+        tower = self.tower
+        panels = tower.panels
+
+        asAssignmentsData = {
+            'panelName':[],
+            'areaSectionGroup':[],
+        }
+
+        for pName in panels:
+            panel = panels[pName]
+            asGroup = panel.areaSectionGroup
+
+            if asGroup:
+                asAssignmentsData['panelName'].append(pName)
+                asAssignmentsData['areaSectionGroup'].append(asGroup)
+
+        df = pd.DataFrame(asAssignmentsData)
+
+        try:
+            df.to_csv(asAssignmentsLoc, index=False)
+
+        except:
+            warning = WarningMessage()
+            warning.popUpErrorBox('Unable to save area section assignments')
 
     def writeInputTable(self, inputTable):
         ''' Write Input Table to file '''

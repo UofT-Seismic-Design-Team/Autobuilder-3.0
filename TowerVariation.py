@@ -5,6 +5,7 @@ from PyQt5 import uic
 
 from Model import * # Tower, Bracings, Bracing Groups, Section Groups etc.
 from FileWriter import *    # save inputTable file
+from Definition import InputFileKeyword
 
 import resources    # For icons and UIs
 
@@ -35,6 +36,17 @@ class GenerateTower(QDialog):
         self.counter = 0
         self.run = False
 
+        # # TODO: maybe create an enum class in Definition module
+        # self.variblesEnum = {
+        #     'BRACING': 0,
+        #     'SECTION': 1,
+        #     'AREA_SECTION': 2,
+        # }
+
+        # # Iterables
+        # self.componments = [self.tower.panels, self.tower.member_ids, self.tower.panels]
+        # self.varGroups = [self.tower.bracingGroups, self.tower.sectionGroups, self.tower.areaSectionGroups]
+
         self.OkButton.clicked.connect(lambda x: self.close())
 
         # Update views -----------------------------
@@ -50,14 +62,14 @@ class GenerateTower(QDialog):
 
         # clear existing panel assignments
         for bg in bracingGroups.values():
-            bg.panelAssignments.clear()
+            bg.assignments.clear()
 
         for pName in panels:
             panel = panels[pName]
             bgName = panel.bracingGroup
 
             if bgName != '':
-                bracingGroups[bgName].addPanel(panel)
+                bracingGroups[bgName].addAssignment(panel)
 
     def addMemberIdsToSectionGroups(self):
         member_ids = self.tower.member_ids
@@ -65,37 +77,57 @@ class GenerateTower(QDialog):
 
         # clear existing member id assignments
         for sg in sectionGroups.values():
-            sg.memberIdAssignments.clear()
+            sg.assignments.clear()
 
         for member_id in member_ids:
             sgName = member_ids[member_id]
-            sectionGroups[sgName].addMemberId(member_id)
+            sectionGroups[sgName].addAssignment(member_id)
 
+    def addPanelsToAreaSectionGroups(self):
+        panels = self.tower.panels
+        areaSectionGroups = self.tower.areaSectionGroups
+
+        # clear existing panel assignments
+        for asg in areaSectionGroups.values():
+            asg.assignments.clear()
+
+        for pName in panels:
+            panel = panels[pName]
+            asgName = panel.areaSectionGroup
+
+            if asgName != '':
+                areaSectionGroups[asgName].addAssignment(panel)
+
+        # --- TEST ---
+        for asgName in areaSectionGroups:
+            print(asgName)
+            asg = areaSectionGroups[asgName]
+            print([str(name) for name in asg.assignments])
+    
     def GenerateInputTable(self):
         if not self.run:
             return
 
         self.addPanelsToBracingGroups()
         self.addMemberIdsToSectionGroups()
+        self.addPanelsToAreaSectionGroups()
 
         bracingGroups = self.tower.bracingGroups
         sectionGroups = self.tower.sectionGroups
+        areaSectionGroups = self.tower.areaSectionGroups
+
+        variableGroups = [bracingGroups, sectionGroups, areaSectionGroups]
 
         dict_of_combos = {}
 
-        for bgName in bracingGroups:
-            bg = bracingGroups[bgName]
-            if bg.panelAssignments: # only generate combo it's assigned to panel
-                dict_of_combos[bgName] = []
-                for bracing in bg.bracings:
-                    dict_of_combos[bgName].append(str(bracing))
+        for variableGroup in variableGroups:
+            for groupName in variableGroup:
+                group = variableGroup[groupName]
 
-        for sgName in sectionGroups:
-            sg = sectionGroups[sgName]
-            if sg.memberIdAssignments: # only generate combo it's assigned to member
-                dict_of_combos[sgName] = []
-                for section in sg.sections:
-                    dict_of_combos[sgName].append(str(section))
+                if group.assignments: # only generate combo it's assigned to tower components
+                    dict_of_combos[groupName] = []
+                    for var in group.variables:
+                        dict_of_combos[groupName].append(str(var))
 
         # list_of_combos contains the variables and the values in each values
         list_of_combos = [dict(zip(dict_of_combos.keys(),v)) for v in product(*dict_of_combos.values())]
@@ -111,30 +143,37 @@ class GenerateTower(QDialog):
 
         inputTable = {}
 
-        for varName in dict_of_combos:
-            values = dict_of_combos[varName]
+        for groupName in dict_of_combos:
+            value = dict_of_combos[groupName]
 
-            inputTable['Variable-' + varName] = values
+            inputTable['{}-{}'.format(InputFileKeyword.variable, groupName)] = value
 
-            if varName in bracingGroups:
-                bg = bracingGroups[varName]
-                for panel in bg.panelAssignments:
+            if groupName in bracingGroups:
+                bg = bracingGroups[groupName]
+                print(groupName)
+                for panel in bg.assignments:
                     pName = str(panel)
-                    inputTable[pName] = values
+                    print(pName)
+                    inputTable['{}-{}'.format(pName, InputFileKeyword.bracing)] = value
 
-            if varName in sectionGroups:
-                sg = sectionGroups[varName]
-                for memberId in sg.memberIdAssignments:
-                    inputTable['Member '+ memberId] = values
+            elif groupName in sectionGroups:
+                sg = sectionGroups[groupName]
+                for memberId in sg.assignments:
+                    inputTable['{}-{}'.format(InputFileKeyword.member, memberId)] = value
+
+            elif groupName in areaSectionGroups:
+                asg = areaSectionGroups[groupName]
+                print(groupName)
+                for panel in asg.assignments:
+                    pName = str(panel)
+                    print(pName)
+                    inputTable['{}-{}'.format(pName, InputFileKeyword.shearWall)] = value
 
         # Convert list of dicts
         tower_enum = [i for i in range(1,len(list_of_combos)+1)]
         self.tower.inputTable['towerNumber'] = tower_enum
 
-        # for var in dict_of_combos:
-        self.tower.inputTable.update(inputTable)
-
-        # testing: print(inputTable)
+        self.tower.inputTable = inputTable
 
         # Save inputTable
         filewriter = FileWriter(self.fileLoc, self.tower)

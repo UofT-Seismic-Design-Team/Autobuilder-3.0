@@ -26,12 +26,11 @@
             <widget class="QLabel" name="editAssignmentLabel">
              <property name="font">
               <font>
-               <weight>75</weight>
                <bold>true</bold>
               </font>
              </property>
              <property name="text">
-              <string>Assign Bracing Design to Panel</string>
+              <string>Assign Variables</string>
              </property>
             </widget>
            </item>
@@ -54,7 +53,7 @@
          <item>
           <widget class="QTabWidget" name="tabWidget">
            <property name="currentIndex">
-            <number>0</number>
+            <number>2</number>
            </property>
            <widget class="QWidget" name="BracingTab">
             <attribute name="title">
@@ -110,6 +109,33 @@
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="ShearWallTab">
+            <attribute name="title">
+             <string>Shear Wall Assignment</string>
+            </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QTableWidget" name="AreaSectionAssignmentTable">
+               <property name="sizeAdjustPolicy">
+                <enum>QAbstractScrollArea::AdjustIgnored</enum>
+               </property>
+               <attribute name="horizontalHeaderStretchLastSection">
+                <bool>true</bool>
+               </attribute>
+               <column>
+                <property name="text">
+                 <string>Panel</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Section Design</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -141,7 +167,6 @@
         </property>
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
