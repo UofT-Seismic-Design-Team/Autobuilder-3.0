@@ -5,6 +5,7 @@ from Definition import *    # file extensions, EnumToString conversion
 import pandas as pd  # use data frame to write files
 from Performance import * # tower performance data
 from Message import *    # pop up window for illegal entries
+from csv import writer
 
 import os   # create new directory
 
@@ -728,3 +729,63 @@ class FileWriter:
                 # NOTE: no warning message for SAPModelCreation due to thread safety issues
                 warning = WarningMessage()
                 warning.popUpErrorBox('Unable to save output table')
+
+    def writeStressOut(self, towerPerformances, logSignal = None):
+        '''Write member stresses to a file'''
+
+        stressTableLoc = self.folderLoc + FileExtension.stressTable
+
+        stressTable = {
+            "towerNum": [],
+        }
+
+        stressDf = [
+            'max_T', 'max_C', 'max_M', 'max_V'
+        ]
+
+        maxStressList = [
+            'max_CombT', 'max_CombC'
+        ]
+
+        nameComb = ["_Stress (MPa)", "_Stress_Type", "_Stress_LC", "_Stress_ID"]
+
+        for towerNum in towerPerformances:
+            stressTable['towerNum'].append(towerNum)
+            towerPerformance = towerPerformances[towerNum]
+
+            for attr in maxStressList:
+                result = getattr(towerPerformance, attr)
+                resultName = attr + nameComb[0]
+                if resultName in stressTable:
+                    # column name for this result
+                    stressTable[resultName].append(result)
+                else:
+                    stressTable[resultName] = [result]
+
+            for attr in stressDf:
+                result = getattr(towerPerformance, attr)
+                id = result["Stress"].idxmax()
+                max_row = list(result.iloc[id])
+
+                for i in range(len(nameComb)):
+                    resultName = attr + nameComb[i]
+                    if resultName in stressTable:
+                        # column name for this result
+                        stressTable[resultName].append(max_row[i])
+                    else:
+                        stressTable[resultName] = [max_row[i]]
+
+        df = pd.DataFrame(stressTable)
+
+        try:
+            df.to_csv(stressTableLoc, index=False)
+
+        except:
+            if logSignal:
+                logSignal.emit('Fail to generate member stress result table')
+            else:
+                # NOTE: no warning message for SAPModelCreation due to thread safety issues
+                warning = WarningMessage()
+                warning.popUpErrorBox('Unable to save member stress result table')
+
+

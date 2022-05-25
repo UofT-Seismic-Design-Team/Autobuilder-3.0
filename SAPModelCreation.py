@@ -227,6 +227,9 @@ class SAPRunnable(QRunnable):
             self.roundingModelCoordinates(SapModel)
             #self.divideMembersAtIntersection(SapModel)
 
+            # Set to multi-thread solver
+            SapModel.Analyze.SetSolverOption_2(SolverType=2, SolverProcessType=0, NumberParallelRuns=0)
+
             # Save the file
             SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
             SapModel.File.Save(SAPFileLoc)
@@ -236,7 +239,7 @@ class SAPRunnable(QRunnable):
             self.signals.log.emit('-------------------------')
 
             # try:
-            self.runAnalysis(SapModel, towerPerformance)
+            self.runAnalysis(SapModel, towerPerformance, towerNum)
             # except:
             # self.signals.log.emit('ERROR running analysis')
                 
@@ -260,6 +263,9 @@ class SAPRunnable(QRunnable):
         # Create output table
         filewriter = FileWriter(self.mainFileLoc)
         filewriter.writeOutputTable(self.towerPerformances, self.signals.log)
+
+        # Create member stresses table
+        filewriter.writeStressOut(self.towerPerformances, self.signals.log)
 
         # Save tower performances
         self.tower.towerPerformances.clear()
@@ -603,7 +609,7 @@ class SAPRunnable(QRunnable):
         if ret != 0 :
             self.signals.log.emit('ERROR changing section of member ' + str(memberID))
 
-    def runAnalysis(self, SapModel, towerPerformance):
+    def runAnalysis(self, SapModel, towerPerformance, towerNum):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
         if self.runGMs:
@@ -642,7 +648,26 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
 
-        # Get COMBOs in model --------------------------------
+        # Get MEMBER STRESS ---------------------------------
+        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress()
+        TENSILE_STRESS = 7
+        COMPRESSIVE_STRESS = 4.5
+        SHEAR_STRESS = 1.5
+        maxT_DCR = max(maxTwBs) / TENSILE_STRESS
+        maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
+        maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
+
+        print('maxT_DCR:', maxT_DCR)
+        print('maxC_DCR:', maxC_DCR)
+        print('maxV_DCR:', maxV_DCR)
+
+        towerPerformance.max_T = maxTs_df
+        towerPerformance.max_C = maxCs_df
+        towerPerformance.max_M = maxMs_df
+        towerPerformance.max_V = maxVs_df
+        towerPerformance.max_CombT = max(maxTwBs)
+        towerPerformance.max_CombC = max(maxCwBs)
+
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         except:
@@ -730,3 +755,5 @@ class SAPRunnable(QRunnable):
 
         # Get Eccentricity ---------------------------------
         towerPerformance.maxEcc, towerPerformance.avgEcc = analyzer.getEccentricity(towerPerformance.CR, self.tower)
+
+

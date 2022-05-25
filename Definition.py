@@ -46,6 +46,7 @@ class FileExtension:
     areaSectionAssignments = '/areaSectionAssignments.csv'
     inputTable = '/inputTable.csv'
     outputTable = '/outputTable.csv'
+    stressTable = '/stressResultTable.csv'
     errorLog = '/errorLog.csv'
 
     SAPModels = '/SAP Models'
