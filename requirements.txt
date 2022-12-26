@@ -8,5 +8,4 @@ PyQt5==5.15.7
 scikit_image==0.19.2
 scipy==1.9.1
 Shapely==2.0.0
-skimage==0.0
 xlrd==2.0.1
