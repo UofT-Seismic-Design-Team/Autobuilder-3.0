@@ -1,7 +1,7 @@
 Developer
 =====
 
-.. autosummary::
-   :toctree: generated
+Stack
+------------
 
-   Developer Guide
+
