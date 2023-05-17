@@ -1,5 +1,5 @@
-Developer Guide
-===
+Tutorial
+=====
 
 .. autosummary::
    :toctree: generated
