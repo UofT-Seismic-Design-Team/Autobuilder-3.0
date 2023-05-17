@@ -9,7 +9,6 @@ try:
 except ImportError:
     pass
 
-# TESTING only 
 def main():
     app = QApplication(sys.argv)
 

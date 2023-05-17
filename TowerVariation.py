@@ -171,7 +171,7 @@ class GenerateTower(QDialog):
 
         # Convert list of dicts
         tower_enum = [i for i in range(1,len(list_of_combos)+1)]
-        self.tower.inputTable['towerNumber'] = tower_enum
+        inputTable['towerNumber'] = tower_enum
 
         self.tower.inputTable = inputTable
 

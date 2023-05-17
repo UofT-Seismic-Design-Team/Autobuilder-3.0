@@ -648,26 +648,6 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
 
-        # Get MEMBER STRESS ---------------------------------
-        maxTs_df, maxCs_df, maxMs_df, maxVs_df, maxTwBs, maxCwBs = analyzer.getMemberStress()
-        TENSILE_STRESS = 7
-        COMPRESSIVE_STRESS = 4.5
-        SHEAR_STRESS = 1.5
-        maxT_DCR = max(maxTwBs) / TENSILE_STRESS
-        maxC_DCR = max(maxCwBs) / COMPRESSIVE_STRESS
-        maxV_DCR = maxVs_df['Stress'].max() / SHEAR_STRESS
-
-        print('maxT_DCR:', maxT_DCR)
-        print('maxC_DCR:', maxC_DCR)
-        print('maxV_DCR:', maxV_DCR)
-
-        towerPerformance.max_T = maxTs_df
-        towerPerformance.max_C = maxCs_df
-        towerPerformance.max_M = maxMs_df
-        towerPerformance.max_V = maxVs_df
-        towerPerformance.max_CombT = max(maxTwBs)
-        towerPerformance.max_CombC = max(maxCwBs)
-
         try:
             [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
         except:
@@ -694,10 +674,26 @@ class SAPRunnable(QRunnable):
             maxC_DCR = 'max compression not calculated'
             maxV_DCR = 'max shear not calculated'
 
-            maxTs_df = pd.DataFrame()
-            maxCs_df = pd.DataFrame()
-            maxMs_df = pd.DataFrame()
-            maxVs_df = pd.DataFrame()
+            dictTemplate = {
+                'Stress': [0],
+                'Type': [0], # 'F': Frame; 'W': Wall
+                'LC': [0],
+                'Name': [0],
+            }
+
+            maxTs_df = pd.DataFrame(data=dictTemplate)
+            maxCs_df = pd.DataFrame(data=dictTemplate)
+            maxMs_df = pd.DataFrame(data=dictTemplate)
+            maxVs_df = pd.DataFrame(data=dictTemplate)
+            maxTwBs = [0]
+            maxCwBs = [0]
+
+        towerPerformance.max_T = maxTs_df
+        towerPerformance.max_C = maxCs_df
+        towerPerformance.max_M = maxMs_df
+        towerPerformance.max_V = maxVs_df
+        towerPerformance.max_CombT = max(maxTwBs)
+        towerPerformance.max_CombC = max(maxCwBs)
 
         for combo in AllCombos:
             self.signals.log.emit(str(self.runGMs))
