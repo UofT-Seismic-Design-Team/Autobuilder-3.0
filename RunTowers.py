@@ -78,6 +78,7 @@ class RunTowers(QDialog):
         # Load Combination Keywords ----------------------------------------------------------------
         self.seismicPerformanceId_input.setPlainText(str(self.psData.gmIdentifier)) # naming inconsistency
         self.memberUtilizationId_input.setPlainText(str(self.psData.memberUtilizationId))
+        self.membersToAnalyze_input.setPlainText(','.join(self.psData.membersList))
 
         # Analysis Setup ----------------------------------------------------------------
         self.SAP2000Path_input.setPlainText(self.psData.SAPPath)
@@ -124,6 +125,10 @@ class RunTowers(QDialog):
         # Load Combination Keywords
         self.psData.gmIdentifier = self.seismicPerformanceId_input.toPlainText()
         self.psData.memberUtilizationId = self.memberUtilizationId_input.toPlainText()
+
+        # Members to Analyze (assuming input is string of integers seperated by commas)
+        membersToAnalyze = self.membersToAnalyze_input.toPlainText()
+        self.psData.membersList = membersToAnalyze.split(',')
 
         # Centre of Rigidity ------------------------------
         if self.doNotRun_radioButton.isChecked():

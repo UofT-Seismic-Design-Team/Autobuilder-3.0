@@ -153,6 +153,9 @@ class FileReader:
             elif var == 'memberUtilizationId':
                 self.psData.memberUtilizationId = val
 
+            elif var == 'nodesList':
+                self.psData.membersList = val.split()
+
             elif var == 'keepExistingMembers':
                 self.psData.keepExistingMembers = (val == 'True')
 

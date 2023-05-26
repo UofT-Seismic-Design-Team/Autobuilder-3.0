@@ -21,6 +21,7 @@ totalMass,7.83
 forceReductionFactor,0.85
 gmIdentifier,GM1
 memberUtilizationId,GM2
+membersList,1 2 4 5
 keepExistingMembers,False
 divideAllMembersAtIntersections,False
 toRun,False

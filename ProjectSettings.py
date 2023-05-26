@@ -317,6 +317,7 @@ class ProjectSettingsData:
         self.totalHeight = 60
         self.totalMass = 7.83
         self.forceReductionFactor = 0.85
+        self.membersList = ['0']
         self.gmIdentifier = 'GM1' # TODO: naming inconsistency - to fix
         self.memberUtilizationId = 'GM2'
         self.responseSpectrumId = 'RESP'
