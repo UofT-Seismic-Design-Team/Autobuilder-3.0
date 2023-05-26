@@ -1,4 +1,4 @@
-File C:/Users/Kaison/Documents/GitHub/Autobuilder-3.0/Test Files/Example_beta/SAP Model/2022.$2k was saved on m/d/yy at h:mm:ss
+File C:\Users\kaiso\OneDrive\Documents\GitHub\Autobuilder-3.0\Test Files\Example_beta\SAP Model\2022.$2k was saved on m/d/yy at h:mm:ss
  
 TABLE:  "ACTIVE DEGREES OF FREEDOM"
    UX=Yes   UY=Yes   UZ=Yes   RX=Yes   RY=Yes   RZ=Yes
@@ -936,11 +936,6 @@ TABLE:  "CONNECTIVITY - FRAME"
    Frame=918   JointI=386   JointJ=97   IsCurved=No   GUID=4db6e8cd-249b-4c27-b782-bbbc5a53d014
    Frame=919   JointI=386   JointJ=93   IsCurved=No   GUID=fc9cbd3d-f1f6-4218-a170-86bf0c94edda
    Frame=920   JointI=386   JointJ=385   IsCurved=No   GUID=7c6a0a42-a008-4068-866f-66466d1393ed
-   Frame=921   JointI=93   JointJ=387   IsCurved=No   GUID=fa79eccf-ada9-4ae0-8d50-9eebbbeac6d6
-   Frame=922   JointI=387   JointJ=376   IsCurved=No   GUID=cd92bfc6-84e9-44f5-8f20-731f6793becb
-   Frame=923   JointI=387   JointJ=388   IsCurved=No   GUID=0c8d831d-203f-4102-91df-e040aea578b6
-   Frame=924   JointI=387   JointJ=97   IsCurved=No   GUID=1cef0314-9996-4467-a836-e0881a2c38ef
-   Frame=925   JointI=376   JointJ=389   IsCurved=No   GUID=dab9653d-96d5-4e46-ac6e-5ccb708c16ee
  
 TABLE:  "COORDINATE SYSTEMS"
    Name=GLOBAL   Type=Cartesian   X=0   Y=0   Z=0   AboutZ=0   AboutY=0   AboutX=0
@@ -1871,14 +1866,6 @@ TABLE:  "FRAME AUTO MESH ASSIGNMENTS"
    Frame=918   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=919   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
    Frame=920   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=921   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=922   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=923   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=924   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=925   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=926   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=927   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
-   Frame=928   AutoMesh=Yes   AtJoints=Yes   AtFrames=No   NumSegments=0   MaxLength=0   MaxDegrees=0
  
 TABLE:  "FRAME DESIGN PROCEDURES"
    Frame=1   DesignProc="From Material"
@@ -2801,14 +2788,6 @@ TABLE:  "FRAME DESIGN PROCEDURES"
    Frame=918   DesignProc="From Material"
    Frame=919   DesignProc="From Material"
    Frame=920   DesignProc="From Material"
-   Frame=921   DesignProc="From Material"
-   Frame=922   DesignProc="From Material"
-   Frame=923   DesignProc="From Material"
-   Frame=924   DesignProc="From Material"
-   Frame=925   DesignProc="From Material"
-   Frame=926   DesignProc="From Material"
-   Frame=927   DesignProc="From Material"
-   Frame=928   DesignProc="From Material"
  
 TABLE:  "FRAME LOAD TRANSFER OPTIONS"
    Frame=1   Transfer=Yes
@@ -3731,14 +3710,6 @@ TABLE:  "FRAME LOAD TRANSFER OPTIONS"
    Frame=918   Transfer=Yes
    Frame=919   Transfer=Yes
    Frame=920   Transfer=Yes
-   Frame=921   Transfer=Yes
-   Frame=922   Transfer=Yes
-   Frame=923   Transfer=Yes
-   Frame=924   Transfer=Yes
-   Frame=925   Transfer=Yes
-   Frame=926   Transfer=Yes
-   Frame=927   Transfer=Yes
-   Frame=928   Transfer=Yes
  
 TABLE:  "FRAME OUTPUT STATION ASSIGNMENTS"
    Frame=1   StationType=MaxStaSpcg   MaxStaSpcg=24   AddAtElmInt=Yes   AddAtPtLoad=Yes
@@ -4661,14 +4632,6 @@ TABLE:  "FRAME OUTPUT STATION ASSIGNMENTS"
    Frame=918   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=919   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
    Frame=920   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=921   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=922   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=923   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=924   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=925   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=926   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=927   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
-   Frame=928   StationType=MinNumSta   MinNumSta=3   AddAtElmInt=Yes   AddAtPtLoad=Yes
  
 TABLE:  "FRAME SECTION ASSIGNMENTS"
    Frame=1   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
@@ -5591,14 +5554,6 @@ TABLE:  "FRAME SECTION ASSIGNMENTS"
    Frame=918   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
    Frame=919   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
    Frame=920   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=921   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=922   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=923   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=924   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=925   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=926   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=927   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
-   Frame=928   AutoSelect=N.A.   AnalSect=FSEC1   MatProp=Default
  
 TABLE:  "FRAME SECTION PROPERTIES 01 - GENERAL"
    SectionName=FSEC1   Material=A992Fy50   Shape="I/Wide Flange"   t3=12   t2=5   tf=0.38   tw=0.25   t2b=5   tfb=0.38   Area=6.61   TorsConst=0.231870449633333   I33=157.902961333333   I22=7.93130208333333   I23=0   AS2=3 _
@@ -5618,6 +5573,35 @@ TABLE:  "FUNCTION - POWER SPECTRAL DENSITY - USER"
 TABLE:  "FUNCTION - RESPONSE SPECTRUM - USER"
    Name=UNIFRS   Period=0   Accel=1   FuncDamp=0.05
    Name=UNIFRS   Period=1   Accel=1
+   Name=2023_GM2   Period=0.01   Accel=1.3478   FuncDamp=0.05
+   Name=2023_GM2   Period=0.02   Accel=1.7346
+   Name=2023_GM2   Period=0.03   Accel=2.2902
+   Name=2023_GM2   Period=0.04   Accel=3.1407
+   Name=2023_GM2   Period=0.05   Accel=2.8133
+   Name=2023_GM2   Period=0.06   Accel=2.933
+   Name=2023_GM2   Period=0.07   Accel=2.3768
+   Name=2023_GM2   Period=0.08   Accel=3.1871
+   Name=2023_GM2   Period=0.09   Accel=3.1148
+   Name=2023_GM2   Period=0.1   Accel=3.7074
+   Name=2023_GM2   Period=0.11   Accel=3.5343
+   Name=2023_GM2   Period=0.12   Accel=3.9915
+   Name=2023_GM2   Period=0.13   Accel=4.5741
+   Name=2023_GM2   Period=0.14   Accel=3.7816
+   Name=2023_GM2   Period=0.15   Accel=2.7383
+   Name=2023_GM2   Period=0.16   Accel=2.1408
+   Name=2023_GM2   Period=0.17   Accel=2.2983
+   Name=2023_GM2   Period=0.18   Accel=2.3619
+   Name=2023_GM2   Period=0.19   Accel=2.4364
+   Name=2023_GM2   Period=0.2   Accel=2.9643
+   Name=2023_GM2   Period=0.21   Accel=3.3303
+   Name=2023_GM2   Period=0.22   Accel=2.942
+   Name=2023_GM2   Period=0.23   Accel=2.7247
+   Name=2023_GM2   Period=0.24   Accel=3.084
+   Name=2023_GM2   Period=0.25   Accel=3.4828
+   Name=2023_GM2   Period=0.26   Accel=3.3754
+   Name=2023_GM2   Period=0.27   Accel=2.7707
+   Name=2023_GM2   Period=0.28   Accel=2.6316
+   Name=2023_GM2   Period=0.29   Accel=2.775
  
 TABLE:  "FUNCTION - STEADY STATE - USER"
    Name=UNIFSS   Frequency=0   Value=1
@@ -6141,9 +6125,6 @@ TABLE:  "JOINT COORDINATES"
    Joint=384   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=3   Z=52.5   SpecialJt=No   GUID=e919e3eb-4bb5-4532-b9f9-5d766bb3efd7
    Joint=385   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=6   Z=54   SpecialJt=No   GUID=28f8fd67-ac2c-4ce4-8a0b-df16627ae81e
    Joint=386   CoordSys=GLOBAL   CoordType=Cartesian   XorR=12   Y=9   Z=52.5   SpecialJt=No   GUID=1446b7e2-bdc1-47ef-8578-c9dd0815300d
-   Joint=387   CoordSys=GLOBAL   CoordType=Cartesian   XorR=9   Y=12   Z=52.5   SpecialJt=No   GUID=2ff96499-cb9c-46aa-b5e9-94915183fbb5
-   Joint=388   CoordSys=GLOBAL   CoordType=Cartesian   XorR=6   Y=12   Z=54   SpecialJt=No   GUID=806ce35a-5901-40c7-98e5-2efe62d4210e
-   Joint=389   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=12   Z=52.5   SpecialJt=No   GUID=2bb51785-dfaa-41e3-90ba-9f5c874ad0cb
  
 TABLE:  "JOINT PATTERN DEFINITIONS"
    Pattern=Default

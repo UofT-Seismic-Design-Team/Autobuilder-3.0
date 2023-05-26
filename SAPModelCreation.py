@@ -4,7 +4,7 @@ from PyQt5.QtGui import *  # extends QtCore with GUI functionality
 from PyQt5 import uic
 
 from Model import * # tower and other design components
-from ProjectSettings import *   # project settings data
+from ProjectSettings import *   # project settings data, data enumeration
 from TowerVariation import * # dict of combinations
 from Performance import * # results
 from FileWriter import *
@@ -30,12 +30,13 @@ import matplotlib.pyplot as plt
 import shapely.geometry
 from skimage.transform import ProjectiveTransform
 
+
 class RunTower(QDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.mainFileLoc = args[0].fileLoc
-        self.folderLoc = self.mainFileLoc.replace('.ab', '')
+        self.folderLoc= self.mainFileLoc.replace('.ab', '')
         self.SAPFolderLoc = self.folderLoc + FileExtension.SAPModels
 
         # Create new directory for data
@@ -53,6 +54,7 @@ class RunTower(QDialog):
         # Project Settings Data
         self.psData = args[0].projectSettingsData
         self.runGMs = self.psData.groundMotion
+        self.analysisType = self.psData.analysisType
 
         # Reference to existing tower
         self.tower = args[0].tower
@@ -150,6 +152,7 @@ class SAPRunnable(QRunnable):
         # Project Settings Data
         self.psData = runTower.psData
         self.runGMs = self.psData.groundMotion
+        self.analysisType = self.psData.analysisType
 
         # Reference to existing tower
         self.tower = runTower.tower
@@ -231,7 +234,7 @@ class SAPRunnable(QRunnable):
             SapModel.Analyze.SetSolverOption_2(SolverType=2, SolverProcessType=0, NumberParallelRuns=0)
 
             # Save the file
-            SAPFileLoc = self.SAPFolderLoc + os.sep + 'Tower ' + str(towerNum) + '.sdb'
+            SAPFileLoc = r'{}\Tower{}.sdb'.format(self.SAPFolderLoc, str(towerNum))
             SapModel.File.Save(SAPFileLoc)
 
             # Analyse tower and print results to spreadsheet
@@ -612,12 +615,50 @@ class SAPRunnable(QRunnable):
     def runAnalysis(self, SapModel, towerPerformance, towerNum):
         SapModel.SetPresentUnits(SAP2000Constants.Units['kip_in_F'])
 
-        if self.runGMs:
-            SapModel.Analyze.SetRunCaseFlag('', True, True)
-        else:   # Modal analysis: To obtain period and tower weight
-            SapModel.Analyze.SetRunCaseFlag('', False, True)
-            SapModel.Analyze.SetRunCaseFlag('DEAD', True, False)
-            SapModel.Analyze.SetRunCaseFlag('MODAL', True, False)
+        # TODO: get load cases for respective load case types
+        NumberCases = 0
+        DeadCaseNames, ModalCaseNames, THCaseNames, RSCaseNames = [], [], [], []
+
+        [NumberCases, DeadCaseNames, ret] = SapModel.LoadCases.GetNameList(NumberCases, DeadCaseNames,SAP2000Constants.CaseTypes['LinearStatic'])
+        [NumberCases, ModalCaseNames, ret] = SapModel.LoadCases.GetNameList(NumberCases, ModalCaseNames,SAP2000Constants.CaseTypes['Modal'])
+        [NumberCases, THCaseNames, ret] = SapModel.LoadCases.GetNameList(NumberCases, THCaseNames,SAP2000Constants.CaseTypes['LinearHistory'])
+        [NumberCases, RSCaseNames, ret] = SapModel.LoadCases.GetNameList(NumberCases, RSCaseNames,SAP2000Constants.CaseTypes['ResponseSpectrum'])
+
+        SapModel.Analyze.SetRunCaseFlag('', False, True)    # reset load cases flags
+
+        # TEST: print all load cases run flags
+        print('BEFORE')
+        [NumberItems, CaseName, Run, ret] = SapModel.Analyze.GetRunCaseFlag()
+        for name, run in zip(CaseName, Run):
+            if run:
+                print(name)
+
+        # 1. run dead load and modal cases (required by default)
+        for caseName in DeadCaseNames:
+            SapModel.Analyze.SetRunCaseFlag(caseName, True, False)
+        for caseName in ModalCaseNames:
+            SapModel.Analyze.SetRunCaseFlag(caseName, True, False)
+
+        # 2. run time history or response spectrum analysis to obtain seismic performance
+        if self.runGMs: 
+            if self.analysisType == ATYPE.TIME_HISTORY:
+                for caseName in THCaseNames:
+                    SapModel.Analyze.SetRunCaseFlag(caseName, True, False)
+            elif self.analysisType == ATYPE.RSA:
+                for caseName in RSCaseNames:
+                    SapModel.Analyze.SetRunCaseFlag(caseName, True, False)
+
+        # TEST: print all load cases run flags
+        print('AFTER')
+        [NumberItems, CaseName, Run, ret] = SapModel.Analyze.GetRunCaseFlag()
+        runningCases = [name for name, run in zip(CaseName, Run) if run]
+        print('runningCases', runningCases)
+
+        print('runGMs', self.runGMs)
+        print('analysisType', self.analysisType)
+        print('THCaseNames', THCaseNames)
+        print('DeadCaseNames', DeadCaseNames)
+        print('RSCaseNames', RSCaseNames)
 
         #Run Analysis
         self.signals.log.emit('Running model in SAP2000...')
@@ -648,8 +689,22 @@ class SAPRunnable(QRunnable):
         # Get PERIOD ---------------------------------
         period = analyzer.getPeriod()
 
+        # try:
+        [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
+        print('old all combos', AllCombos)
+
+        # Check case list of each combo in AllCombos to see if the entire case list is in runningCases
+        # If not, remove from AllCombos
         try:
-            [NumberCombo, AllCombos, ret] = SapModel.RespCombo.GetNameList()
+            tempAllCombos = list(copy.deepcopy(AllCombos))
+            for combo in AllCombos:
+                [NumberItems, comboTypeList, comboCaseList, scaleFactorList, ret] = SapModel.RespCombo.GetCaseList(combo)
+                if not set(comboCaseList).issubset(set(runningCases)):
+                    self.signals.log.emit('NOTE {} not run in SAP2000'.format(combo))
+                    tempAllCombos.remove(combo)
+            AllCombos = tempAllCombos
+            print('new all combos', AllCombos)
+
         except:
             self.signals.log.emit('ERROR no load combinations found')
             AllCombos = []
@@ -665,9 +720,9 @@ class SAPRunnable(QRunnable):
             maxV_DCR = maxVs_df['Stress'].max()*forceReductionFactor / (self.psData.shearStrength + Algebra.EPSILON)
 
             # Temporary output
-            self.signals.log.emit('maxT_DCR: {}'.format(maxT_DCR))
-            self.signals.log.emit('maxC_DCR: {}'.format(maxC_DCR))
-            self.signals.log.emit('maxV_DCR: {}'.format(maxV_DCR))
+            self.signals.log.emit('maxT_DCR: {}'.format(round(maxT_DCR,2)))
+            self.signals.log.emit('maxC_DCR: {}'.format(round(maxC_DCR,2)))
+            self.signals.log.emit('maxV_DCR: {}'.format(round(maxV_DCR,2)))
 
         else:
             maxT_DCR = 'max tension not calculated'

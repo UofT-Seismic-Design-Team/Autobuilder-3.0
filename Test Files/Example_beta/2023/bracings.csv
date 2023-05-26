@@ -1,0 +1,16 @@
+bracingName,x1,y1,x2,y2,material
+default,0.0,0.0,0.0,1.0,BALSA_0.1875x0.1875
+default,0.0,1.0,1.0,1.0,BALSA_0.1875x0.1875
+default,1.0,1.0,1.0,0.0,BALSA_0.1875x0.1875
+default,1.0,0.0,0.0,0.0,BALSA_0.1875x0.1875
+one_floor_x,0.0,0.0,1.0,0.5,BALSA_0.1875x0.1875
+one_floor_x,0.0,0.5,1.0,0.0,BALSA_0.1875x0.1875
+one_floor_x,0.0,0.5,1.0,0.5,BALSA_0.1875x0.1875
+one_floor_x,0.0,0.5,1.0,1.0,BALSA_0.1875x0.1875
+one_floor_x,0.0,1.0,1.0,0.5,BALSA_0.1875x0.1875
+two_floor_x,0.0,0.0,0.5,0.5,BALSA_0.1875x0.1875
+two_floor_x,0.5,0.5,1.0,0.0,BALSA_0.1875x0.1875
+two_floor_x,0.5,0.5,0.0,1.0,BALSA_0.1875x0.1875
+two_floor_x,0.5,0.5,1.0,1.0,BALSA_0.1875x0.1875
+two_floor_x,0.0,0.5,0.5,0.5,BALSA_0.1875x0.1875
+two_floor_x,0.5,0.5,1.0,0.5,BALSA_0.1875x0.1875

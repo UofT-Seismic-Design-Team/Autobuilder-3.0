@@ -127,15 +127,34 @@ class SAP2000Constants:
 
     MaxDecimalPlaces = 6
 
+    CaseTypes = {
+        'LinearStatic': 1,
+        'NonlinearStatic': 2,
+        'Modal': 3,
+        'ResponseSpectrum': 4,
+        'LinearHistory': 5,
+        'NonlinearHistory': 6,
+        'LinearDynamic': 7,
+        'NonlinearDynamic': 8,
+        'MovingLoad': 9,
+        'Buckling': 10,
+        'SteadyState': 11,
+        'PowerSpectralDensity': 12,
+        'LinearStaticMultistep': 13,
+        'Hyperstatic': 14,
+        'ExternalResults': 15,
+    }
+
 class Constants:
     g = 9.81 # in m/s^2
     filler = '_' # filler character for files
 
 class UnitConversion:
-
-    # relative to kg 
-    # from xxx to kg
-    # e.g. 1 lb = 0.453592 kbr
+    ''' 
+    relative to kg 
+        i.e. from xxx to kg
+        e.g. 1 lb = 0.453592 kbr
+    '''
     Mass = {
         'lb': 0.453592
     }

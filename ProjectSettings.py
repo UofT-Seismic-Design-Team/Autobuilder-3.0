@@ -319,6 +319,7 @@ class ProjectSettingsData:
         self.forceReductionFactor = 0.85
         self.gmIdentifier = 'GM1' # TODO: naming inconsistency - to fix
         self.memberUtilizationId = 'GM2'
+        self.responseSpectrumId = 'RESP'
         self.keepExistingMembers = False
         self.divideAllMembersAtIntersections = False
         self.centreOfRigidity = CRTYPE.DO_NOT_RUN

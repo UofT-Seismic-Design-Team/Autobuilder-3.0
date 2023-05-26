@@ -1,0 +1,38 @@
+
+
+ SAP2000 v22.0.0 Ultimate 64-bit (Analysis Build 9780/64)                       
+ File: C:\Users\kaiso\OneDrive...0\Test Files\Example_beta\SAP Model\2023_NS.OUT
+                                                                     
+                                                                       
+
+ D I S P L A C E M E N T   D E G R E E S   O F   F R E E D O M
+
+         (A) = Active DOF, equilibrium equation
+         (-) = Restrained DOF, reaction computed
+         (+) = Constrained DOF
+         (>) = External substructure DOF
+         ( ) = Null DOF
+
+  JOINTS              UX  UY  UZ  RX  RY  RZ
+       1               -   -   -   -   -   -
+       2 TO      11    A   A   A   A   A   A
+      12 TO      13    -   -   -   -   -   -
+      14 TO      15    A   A   A   A   A   A
+      16               -   -   -   -   -   -
+      17 TO      88    A   A   A   A   A   A
+      89               -   -   -   -   -   -
+      90 TO      91    A   A   A   A   A   A
+      92 TO      93    -   -   -   -   -   -
+      94 TO      95    A   A   A   A   A   A
+      96               -   -   -   -   -   -
+      97 TO     171    A   A   A   A   A   A
+     172               -   -   -   -   -   -
+     173               A   A   A   A   A   A
+     174               -   -   -   -   -   -
+     175 TO     176    A   A   A   A   A   A
+     177 TO     178    -   -   -   -   -   -
+     179 TO     180    A   A   A   A   A   A
+     181 TO     182    -   -   -   -   -   -
+     183 TO     184    A   A   A   A   A   A
+     185 TO     186    -   -   -   -   -   -
+     187 TO     967    A   A   A   A   A   A

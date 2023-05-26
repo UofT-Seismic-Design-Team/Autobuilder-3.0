@@ -165,22 +165,22 @@ class PerformanceAnalyzer:
         # Set units to millimetres
         SapModel.SetPresentUnits(SAP2000Constants.Units['N_mm_C'])
         dictTemplate = {
-            'Stress': [],
-            'Type': [], # 'F': Frame; 'W': Wall
-            'LC': [],
-            'Name': [],
+            'Stress': [0],
+            'Type': [None], # 'F': Frame; 'W': Wall
+            'LC': [None],
+            'Name': [None],
         }
 
         maxTs, maxCs, maxMs, maxVs = [dictTemplate.copy() for i in range(4)]
 
-        maxTwBs = []
-        maxCwBs = []
+        maxTwBs = [0]
+        maxCwBs = [0]
 
         # Frame members ------------------------
         if selectedFrameMembers == []:
             [numberNames, allNames, ret] = SapModel.FrameObj.GetNameList()
             selectedFrameMembers = allNames
-
+            
         for combo in allCombos:
             if not(maxStressIdentifier in combo):
                 continue

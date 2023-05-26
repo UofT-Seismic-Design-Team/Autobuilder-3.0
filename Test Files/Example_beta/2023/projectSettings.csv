@@ -1,0 +1,26 @@
+setting,value
+tower_elevs,0.0 6.0 12.0 18.0 24.0 36.0 42.0 48.0 54.0 60.0
+sect_props,BALSA_0.1875x0.1875 1
+area_sect_props,None 5
+gm,True
+analysis,Time_History
+modelLoc,C:/Users/kaiso/OneDrive/Documents/GitHub/Autobuilder-3.0/Test Files/Example_beta/SAP Model/2023_NS.sdb
+modelName,2023_NS.sdb
+renderX,14.0
+renderY,14.0
+renderZ,60.0
+tensileStrength,7.0
+compressiveStrength,5.0
+shearStrength,1.5
+SAPPath,C:\Program Files\Computers and Structures\SAP2000 22\SAP2000.exe
+nodesList,179 180 183 184
+footprint,144.0
+totalHeight,60.0
+totalMass,7.83
+forceReductionFactor,0.85
+gmIdentifier,GM1
+memberUtilizationId,GM2
+keepExistingMembers,False
+divideAllMembersAtIntersections,False
+toRun,False
+centreOfRigidity,Do not run

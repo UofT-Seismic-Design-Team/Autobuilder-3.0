@@ -2,9 +2,11 @@ import matplotlib.pyplot as plt
 import numpy
 
 class Plotter:
-    def __init__(self, xlabel='X', ylabel='Y'):
+    def __init__(self, xlabel='X', ylabel='Y', title='Tower Performances', lineType='ro'):
         self.xlabel = xlabel
         self.ylabel = ylabel
+        self.title = title
+        self.lineType = lineType
 
         self.fig = plt.figure()
         self.ax = plt.subplot(1,1,1)
@@ -18,11 +20,14 @@ class Plotter:
         self.ax.set_xlabel(self.xlabel)
         self.ax.set_ylabel(self.ylabel)
         
-        plt.title('Tower Performances')
+        plt.title(self.title)
 
-        self.ax.plot(self.xdata, self.ydata, 'ro', markersize=6)
+        self.ax.plot(self.xdata, self.ydata, self.lineType, markersize=6)
         plt.grid(True)
         plt.show(block=False)
+
+    def save(self, loc):
+        plt.savefig(loc)
 
     def updatePlot(self):
         self.ax.lines[0].set_data(self.xdata,self.ydata)
