@@ -36,7 +36,7 @@ Autobuilder 3.0 provides a user-friendly interface with a set of features that a
 </div>
 
 <!-- TechStack -->
-### :space_invader: Framework
+### Framework
 
 <details>
   <ul>
@@ -46,7 +46,7 @@ Autobuilder 3.0 provides a user-friendly interface with a set of features that a
 </details>
 
 <!-- Features -->
-### :dart: Features
+### Features
 
 - Structural Components Parameterization
 - Seismic Analysis
@@ -57,7 +57,7 @@ Autobuilder 3.0 provides a user-friendly interface with a set of features that a
 ## 	:toolbox: Getting Started
 
 <!-- Run Locally -->
-### :running: Run Locally
+### Run Locally
 
 Clone the project
 
@@ -84,7 +84,7 @@ Run the program
 ```
 
 <!-- Build -->
-### :triangular_flag_on_post: Build
+### Build
 
 To build this project run
 
@@ -94,18 +94,18 @@ To build this project run
 
 <!-- Documentation -->
 
-## :book: Documentation
+## Documentation
 Currenly, Autobuilder is only for internal use. Please reach out to the UofT Seismic Design Team: ut.seismic@gmail.com if you are seeking for more information and future collaboration opportunities.
 
 <!-- Contact -->
-## :handshake: Contact
+## Contact
 
 Website: [https://seismic.skule.ca](https://seismic.skule.ca)
 
 Email: [ut.seismic@gmail.com](mailto:ut.seismic@gmail.com)
 
 <!-- Acknowledgments -->
-## :gem: Acknowledgements
+## Acknowledgements
 
  - [Learn PyQt](https://www.learnpyqt.com/)
  - [Readme Template](https://github.com/othneildrew/Best-README-Template)
