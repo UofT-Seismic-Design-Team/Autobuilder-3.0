@@ -6,6 +6,7 @@
   <p>
     Seismic Design, Automation, and Optimization!
   </p>
+</div>
 
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
