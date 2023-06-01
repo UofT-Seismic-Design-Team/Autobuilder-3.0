@@ -15,19 +15,11 @@
   * [Screenshots](#camera-screenshots)
   * [Framework](#space_invader-tech-stack)
   * [Features](#dart-features)
-  * [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
-  * [Prerequisites](#bangbang-prerequisites)
-  * [Installation](#gear-installation)
   * [Running Tests](#test_tube-running-tests)
   * [Run Locally](#running-run-locally)
-  * [Deployment](#triangular_flag_on_post-deployment)
-- [Usage](#eyes-usage)
-- [Roadmap](#compass-roadmap)
-- [Contributing](#wave-contributing)
-  * [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
-- [License](#warning-license)
+  * [Build](#triangular_flag_on_post-build)
+- [Documentation](#book-Documentation)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
@@ -60,6 +52,9 @@ Autobuilder 3.0 provides a user-friendly interface with a set of features that a
 - Seismic Analysis
 - Member Utilization Calculations
 - Center of Rigidity Estimation
+
+<!-- Getting Started -->
+## 	:toolbox: Getting Started
 
 <!-- Run Locally -->
 ### :running: Run Locally
@@ -99,11 +94,18 @@ To build this project run
 
 <!-- Documentation -->
 
-## Documentation
+## :book: Documentation
 Currenly, Autobuilder is only for internal use. Please reach out to the UofT Seismic Design Team: ut.seismic@gmail.com if you are seeking for more information and future collaboration opportunities.
 
 <!-- Contact -->
 ## :handshake: Contact
 
 Website: [https://seismic.skule.ca](https://seismic.skule.ca)
+
 Email: [ut.seismic@gmail.com](mailto:ut.seismic@gmail.com)
+
+<!-- Acknowledgments -->
+## :gem: Acknowledgements
+
+ - [Learn PyQt](https://www.learnpyqt.com/)
+ - [Readme Template](https://github.com/othneildrew/Best-README-Template)
