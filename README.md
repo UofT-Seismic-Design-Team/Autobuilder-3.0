@@ -1,15 +1,108 @@
-# Autobuilder-3.0
+<div align="center">
 
-Autobuilder 3.0 provides a user-friendly interface with a set of features that allows structrual designers to parametrize and optimize high-rise structures subjected to dynamic loads.
+  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
+  <h1>UofT Seismic Design Team Autobuilder 3.0</h1>
+  
+  <p>
+    Seismic Design, Automation, and Optimization!
+  </p>
 
-## How to run
-### Run Locally
+<!-- Table of Contents -->
+# :notebook_with_decorative_cover: Table of Contents
 
-    python Execution.py
-    
-### Create a Build
+- [About the Project](#star2-about-the-project)
+  * [Screenshots](#camera-screenshots)
+  * [Framework](#space_invader-tech-stack)
+  * [Features](#dart-features)
+  * [Environment Variables](#key-environment-variables)
+- [Getting Started](#toolbox-getting-started)
+  * [Prerequisites](#bangbang-prerequisites)
+  * [Installation](#gear-installation)
+  * [Running Tests](#test_tube-running-tests)
+  * [Run Locally](#running-run-locally)
+  * [Deployment](#triangular_flag_on_post-deployment)
+- [Usage](#eyes-usage)
+- [Roadmap](#compass-roadmap)
+- [Contributing](#wave-contributing)
+  * [Code of Conduct](#scroll-code-of-conduct)
+- [FAQ](#grey_question-faq)
+- [License](#warning-license)
+- [Contact](#handshake-contact)
+- [Acknowledgements](#gem-acknowledgements)
 
-    pyinstaller Execution.spec
-    
+<!-- About the Project -->
+## :star2: About the Project
+
+Autobuilder 3.0 provides a user-friendly interface with a set of features that allows structrual designers to parameterize and optimize high-rise structures subjected to dynamic loads.
+
+<!-- User Interface -->
+### :camera: Screenshots
+
+<div align="center"> 
+  <img src="assets/Autobuilder-MainWindow.png" alt="screenshot" />
+</div>
+
+<!-- TechStack -->
+### :space_invader: Framework
+
+<details>
+  <ul>
+    <li><a href="https://www.qt.io/qt-for-python">PyQt5</a></li>
+    <li><a href="https://wiki.csiamerica.com/display/kb/OAPI">SAP2000 OAPI</a></li>
+  </ul>
+</details>
+
+<!-- Features -->
+### :dart: Features
+
+- Structural Components Parameterization
+- Seismic Analysis
+- Member Utilization Calculations
+- Center of Rigidity Estimation
+
+<!-- Run Locally -->
+### :running: Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/UofT-Seismic-Design-Team/Autobuilder-3.0.git
+```
+
+Go to the project directory
+
+```bash
+  cd Autobuilder-3.0
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+Run the program
+
+```bash
+  python Execution.py
+```
+
+<!-- Build -->
+### :triangular_flag_on_post: Build
+
+To build this project run
+
+```bash
+  pyinstaller Execution.spec
+```
+
+<!-- Documentation -->
+
 ## Documentation
 Currenly, Autobuilder is only for internal use. Please reach out to the UofT Seismic Design Team: ut.seismic@gmail.com if you are seeking for more information and future collaboration opportunities.
+
+<!-- Contact -->
+## :handshake: Contact
+
+Website: [https://seismic.skule.ca](https://seismic.skule.ca)
+Email: [ut.seismic@gmail.com](mailto:ut.seismic@gmail.com)

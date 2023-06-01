@@ -38,13 +38,21 @@ class View3DGLWidget(QGLWidget):
 
         #For panel nodes to be highlighted
         self.nodes =[]
+
+        # Color
+        self.color = {
+            'Column': (0,0,0),  # black
+            'Beam': (1,0,1),     # green
+            'Panel': (0,0,1),   # blue
+        }
+
         # ----------------------------------------------------------------------
 
         # Save the previous location of the cursor
         self.last_x, self.last_y = None, None
 
     def initializeGL(self):
-        self.qglClearColor(QColor('black'))     # initialize the screen to black
+        self.qglClearColor(QColor('White'))     # initialize the screen to black
         
         glEnable(GL_DEPTH_TEST)           # enable depth testing
 
@@ -102,7 +110,7 @@ class View3DGLWidget(QGLWidget):
                     start_node = member.start_node
                     end_node = member.end_node
 
-                    glColor3fv((1,1,1))
+                    glColor3fv(self.color['Beam'])
                     
                     vertex1 = (start_node.x-centerX, start_node.y-centerY, elev-centerZ+self.translation_z)
                     glVertex3fv(vertex1)
@@ -116,7 +124,7 @@ class View3DGLWidget(QGLWidget):
             start_node = column.start_node
             end_node = column.end_node
 
-            glColor3fv((1,0,0))
+            glColor3fv(self.color['Column'])
             
             vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex1)
@@ -132,7 +140,7 @@ class View3DGLWidget(QGLWidget):
             start_node = node[0]
             end_node = node[1]
 
-            glColor3fv((0,0,1))
+            glColor3fv(self.color['Panel'])
 
             vertex1 = (start_node.x-centerX, start_node.y-centerY, start_node.z-centerZ+self.translation_z)
             glVertex3fv(vertex1)
