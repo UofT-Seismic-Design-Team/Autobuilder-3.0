@@ -37,6 +37,21 @@ Constraint
 
 WIP
 
+Analysis
+--------------
+
+Centre of Rigidity
+~~~~~~~~~~~~~~
+
+Permutation
+~~~~~~~~~~~
+
+Time History
+~~~~~~~~~~~~
+
+Response Spectrum Analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 Create a build
 --------------
