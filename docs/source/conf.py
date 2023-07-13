@@ -3,8 +3,8 @@
 # -- Project information
 
 project = 'Autobuilder'
-copyright = '2023, Siu Kai'
-author = 'Siu Kai'
+copyright = '2023, Kaison'
+author = 'Kaison'
 
 release = '0.1'
 version = '0.1.0'
