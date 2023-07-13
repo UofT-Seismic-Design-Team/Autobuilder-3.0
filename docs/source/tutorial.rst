@@ -1,18 +1,22 @@
 Tutorial
 =====
 
-.. _installation:
+.. _setup:
 
-Installation
+How to set up
 ------------
 
-To use Autobuilder, first install:
+1. Install dependencies
+
+>>> pip install -r requirements.txt
+
+2. Run the program
+
+>>> python Execution.py
 
 
-Build an Autobuilder model
-----------------
+User Guide
+----------
 
-For example:
-
->>> pyinstaller Execution.spec
+<Link to Simple Tutorial PDF>
 
