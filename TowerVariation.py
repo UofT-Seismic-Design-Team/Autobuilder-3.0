@@ -186,7 +186,7 @@ class GenerateTower(QDialog):
 
         self.run = False
 
-    def addProgress(self):
+    def addProgress(self): 
         if self.counter <= 100: # counter's max = 101
             self.counter += 1
 
