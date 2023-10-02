@@ -13,9 +13,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,7 +47,24 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#outline">Outline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-analyzer">Performance Analyzer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getweight">getWeight*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getmaxacceleration">getMaxAcceleration*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getperiod">getPeriod</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getmaxdisplacement">getMaxDisplacement*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getbaseshear">getBaseShear</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getroofnodenames">getRoofNodeNames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getmemberstress">getMemberStress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getcosts">getCosts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getcr">getCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geteccentricity">getEccentricity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tower-performance">Tower Performance</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -75,7 +92,707 @@
            <div itemprop="articleBody">
              
   <section id="performance">
-<h1>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h1>
+<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading"></a></h1>
+<hr class="docutils" />
+<section id="outline">
+<span id="id1"></span><h2>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h2>
+<p>Performance</p>
+<hr class="docutils" />
+</section>
+<section id="performance-analyzer">
+<span id="performanceanalyzer"></span><h2>Performance Analyzer<a class="headerlink" href="#performance-analyzer" title="Permalink to this heading"></a></h2>
+<section id="getweight">
+<h3>getWeight*<a class="headerlink" href="#getweight" title="Permalink to this heading"></a></h3>
+<p>This method calculates the total weight of the structure:</p>
+<ol class="arabic simple">
+<li><p>Set units to meters</p></li>
+<li><p>Select dead loads only and retrieve base reaction forces</p></li>
+<li><p>Divide the base reactions in the global Z direction by the gravitational constant g to get the weight</p></li>
+<li><p>Convert the weight into lbs</p></li>
+</ol>
+<p>The method <em>BaseReact()</em> returns zero if the reactions are successfully recovered, otherwise it returns a nonzero value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getWeight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the total weight of a structure.</span>
+
+<span class="sd">    This method sets the units to meters, retrieves the base reactions for the &#39;DEAD&#39; case,</span>
+<span class="sd">    and calculates the total weight in pounds.</span>
+
+<span class="sd">    :return: The total weight in pounds.</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="c1"># Set units to meters</span>
+    <span class="n">SapModel</span><span class="o">.</span><span class="n">SetPresentUnits</span><span class="p">(</span><span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">Units</span><span class="p">[</span><span class="s1">&#39;N_m_C&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Get base reactions</span>
+    <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Setup</span><span class="o">.</span><span class="n">DeselectAllCasesAndCombosForOutput</span><span class="p">()</span>
+    <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Setup</span><span class="o">.</span><span class="n">SetCaseSelectedForOutput</span><span class="p">(</span><span class="s1">&#39;DEAD&#39;</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">BaseReact</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ret</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting weight&#39;</span><span class="p">)</span>
+
+    <span class="n">base_react</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">total_weight</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">base_react</span> <span class="o">/</span> <span class="n">Constants</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="c1"># Convert to lb</span>
+    <span class="n">total_weight</span> <span class="o">=</span> <span class="n">total_weight</span> <span class="o">/</span> <span class="n">UnitConversion</span><span class="o">.</span><span class="n">Mass</span><span class="p">[</span><span class="s1">&#39;lb&#39;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">total_weight</span>
+</pre></div>
+</div>
+</section>
+<section id="getmaxacceleration">
+<h3>getMaxAcceleration*<a class="headerlink" href="#getmaxacceleration" title="Permalink to this heading"></a></h3>
+<p>This method finds the maximum acceleration out of all roof nodes in units of g:</p>
+<ol class="arabic simple">
+<li><p>Set units to meters</p></li>
+<li><p>Find the absolute acceleration for each roof node</p></li>
+<li><p>Compare the acceleration of each node to find the maximum acceleration</p></li>
+</ol>
+<p>The method <em>JointAccAbs()</em> returns zero if the accelerations are successfully recovered, otherwise it returns a nonzero value.</p>
+</section>
+<section id="getperiod">
+<h3>getPeriod<a class="headerlink" href="#getperiod" title="Permalink to this heading"></a></h3>
+<p>This method finds the modal period of the structure using the method <em>ModalPeriod()</em>.</p>
+<p>The method <em>ModalPeriod()</em> returns zero if the data is successfully recovered, otherwise it returns a nonzero value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getPeriod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the modal period of the structure.</span>
+
+<span class="sd">    :return: The period of the structure.</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">ModalPeriod</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ret</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting modal period&#39;</span><span class="p">)</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">period</span>
+</pre></div>
+</div>
+</section>
+<section id="getmaxdisplacement">
+<h3>getMaxDisplacement*<a class="headerlink" href="#getmaxdisplacement" title="Permalink to this heading"></a></h3>
+<p>This method finds the maximum displacement out of all roof nodes in millimeters:</p>
+<ol class="arabic simple">
+<li><p>Set units to millimeters</p></li>
+<li><p>Find the absolute displacement for each roof node</p></li>
+<li><p>Compare the displacement of each node to find the maximum displacement</p></li>
+</ol>
+<p>The method <em>JointAccAbs()</em> returns zero if the accelerations are successfully recovered, otherwise it returns a nonzero value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getMaxDisplacement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roofNodeNames</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the maximum displacement of the roof nodes in millimeters.</span>
+
+<span class="sd">    :param roofNodeNames: A list of roof node names.</span>
+<span class="sd">    :type roofNodeNames: list</span>
+<span class="sd">    :return: The maximum displacement in millimeters.</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="c1"># Set units to millimetres</span>
+    <span class="n">SapModel</span><span class="o">.</span><span class="n">SetPresentUnits</span><span class="p">(</span><span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">Units</span><span class="p">[</span><span class="s1">&#39;N_mm_C&#39;</span><span class="p">])</span>
+
+    <span class="n">maxDisp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">roofNodeName</span> <span class="ow">in</span> <span class="n">roofNodeNames</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">JointDispl</span><span class="p">(</span><span class="n">roofNodeName</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ret</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting displacement at Node </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roofNodeName</span><span class="p">))</span>
+
+        <span class="n">max_and_min_disp</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+
+        <span class="n">max_pos_disp</span> <span class="o">=</span> <span class="n">max_and_min_disp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">min_neg_disp</span> <span class="o">=</span> <span class="n">max_pos_disp</span>
+
+        <span class="c1"># Error handling: in case displacements are not available</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">max_and_min_disp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">min_neg_disp</span> <span class="o">=</span> <span class="n">max_and_min_disp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">currentMaxDisp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">max_pos_disp</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">min_neg_disp</span><span class="p">))</span>
+        <span class="n">maxDisp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxDisp</span><span class="p">,</span> <span class="n">currentMaxDisp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">maxDisp</span>
+</pre></div>
+</div>
+</section>
+<section id="getbaseshear">
+<h3>getBaseShear<a class="headerlink" href="#getbaseshear" title="Permalink to this heading"></a></h3>
+<p>This method finds the base shear forces of the structure using the method <em>BaseReact(</em>).
+The base shear force is the base reaction in the global X direction.</p>
+<p>The method <em>BaseReact()</em> returns zero if the reactions are successfully recovered, otherwise it returns a nonzero value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getBaseShear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"> Get the base shear forces of the structure.</span>
+
+<span class="sd">:return: The base shear force</span>
+<span class="sd">:rtype: float</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">BaseReact</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ret</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ERROR getting base reaction&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">basesh</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">basesh</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">basesh</span>
+</pre></div>
+</div>
+</section>
+<section id="getroofnodenames">
+<h3>getRoofNodeNames<a class="headerlink" href="#getroofnodenames" title="Permalink to this heading"></a></h3>
+<p>This method finds the names of the roof nodes out of all the nodes of the structure:</p>
+<ol class="arabic simple">
+<li><p>Retrieve the names of all the nodes of the structure</p></li>
+<li><p>Find the X, Y, Z coordinates for each node</p></li>
+<li><p>Compare the coordinates of each node to find the maximum X, Y, Z coordinates and minimum X, Y coordinates. These coordinates indicates the coordinates of the roof corners.</p></li>
+<li><p>Find the names of the roof corners</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getRoofNodeNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the names of nodes on the roof of the structure.</span>
+
+<span class="sd">    This method identifies the nodes on the roof based on their coordinates and selects nodes</span>
+<span class="sd">    at the quarter points on the top floor.</span>
+
+<span class="sd">    :return: A list of node names on the roof.</span>
+<span class="sd">    :rtype: list of str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="n">roofNodeNames</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Retrieve names of all nodes and store in allNodeNames (list)</span>
+    <span class="p">[</span><span class="n">number_nodes</span><span class="p">,</span> <span class="n">allNodeNames</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">PointObj</span><span class="o">.</span><span class="n">GetNameList</span><span class="p">()</span>
+
+    <span class="c1"># Initialize variables to track the maximum and minimum X, Y, Z coordinates of the nodes</span>
+    <span class="n">z_max</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y_max</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_min</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y_min</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Obtain the maximum X, Y, Z coordinates and minimum X, Y coordinates relative to the origin</span>
+    <span class="k">for</span> <span class="n">nodeName</span> <span class="ow">in</span> <span class="n">allNodeNames</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">PointObj</span><span class="o">.</span><span class="n">GetCoordCartesian</span><span class="p">(</span><span class="n">nodeName</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">MaxDecimalPlaces</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">MaxDecimalPlaces</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">MaxDecimalPlaces</span><span class="p">)</span>
+
+        <span class="n">x_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_max</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">y_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_max</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">z_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">z_max</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+        <span class="n">x_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">y_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">x_width</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_max</span> <span class="o">-</span> <span class="n">x_min</span><span class="p">)</span>
+    <span class="n">y_width</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y_max</span> <span class="o">-</span> <span class="n">y_min</span><span class="p">)</span>
+
+    <span class="c1"># Make sure we get results from a node that is at the quarter points on the top floor</span>
+    <span class="k">for</span> <span class="n">nodeName</span> <span class="ow">in</span> <span class="n">allNodeNames</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">PointObj</span><span class="o">.</span><span class="n">GetCoordCartesian</span><span class="p">(</span><span class="n">nodeName</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="n">z_max</span><span class="p">:</span>
+            <span class="n">roofNodeNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodeName</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">roofNodeNames</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">roofNodeNames</span>
+</pre></div>
+</div>
+</section>
+<section id="getmemberstress">
+<h3>getMemberStress<a class="headerlink" href="#getmemberstress" title="Permalink to this heading"></a></h3>
+<p>This method calculates the maximum stress of the selected members in a structure:</p>
+<ol class="arabic simple">
+<li><p>Set units to millimeters</p></li>
+<li><p>Find the names of the selected members</p></li>
+<li><p>For all but the maximum stress load combinations:</p></li>
+</ol>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Select “combo” for load combinations</p></li>
+<li><p>Set “Envelope” as the output option for modal history results</p></li>
+<li><p>Get the name of the member section and then the properties of the member</p></li>
+<li><p>For each member, find the maximum Tensile Stress, Compressive Stress, and Bending and Shear about both major and minor axes</p></li>
+</ol>
+</div></blockquote>
+<p>Modal History describes the structure responds to dynamic loading over time.
+The envelope type of modal history helps determine the maximum displacements, accelerations,
+or other response quantities that the structure may experience due to dynamic loadings.</p>
+<p>The method <em>GetSection(member)</em> finds the name of the member section
+The method <em>GetSectProps(sectNames)</em> displays the mechanical properties of the member section, including the cross-sectional area, shear areas, torsional constant, and the moment of inertia, section modulus of bending, plastic modulus of bending of the local 2 and 3 axes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getMemberStress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selectedFrameMembers</span><span class="o">=</span><span class="p">[],</span> <span class="n">selectedWallMembers</span><span class="o">=</span><span class="p">[],</span>  <span class="n">maxStressIdentifier</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">allCombos</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate and return stress dataframes for frame members.</span>
+
+<span class="sd">    This method calculates and returns four dataframes (Tensile, Compressive, Bending, Shear) that contain stress</span>
+<span class="sd">    information for selected frame members. The stress data includes maximum tensile stress, maximum compressive stress,</span>
+<span class="sd">    maximum bending stress, and maximum shear stress.</span>
+
+<span class="sd">    :param selectedFrameMembers: List of selected frame members (optional, default is empty list).</span>
+<span class="sd">    :type selectedFrameMembers: list of str</span>
+<span class="sd">    :param selectedWallMembers: List of selected wall members (optional, default is empty list).</span>
+<span class="sd">    :type selectedWallMembers: list of str</span>
+<span class="sd">    :param maxStressIdentifier: Identifier for the maximum stress calculation (optional).</span>
+<span class="sd">    :type maxStressIdentifier: str</span>
+<span class="sd">    :param allCombos: List of load combinations (optional, default is empty list).</span>
+<span class="sd">    :type allCombos: list of str</span>
+<span class="sd">    :return: Four dataframes containing stress information (Tensile, Compressive, Bending, Shear) and two lists of maximum Tensile+Bending stress and maximum Compressive+Bending stress.</span>
+<span class="sd">    :rtype: tuple</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Steps</span>
+    <span class="c1"># 1. Get all or selected frame/wall members</span>
+    <span class="c1"># 2. Get section props of individual memebers</span>
+    <span class="c1"># 3. Get forces in members (i.e. tension, compression and bendings)</span>
+    <span class="c1"># 4. convert forces to stress, including bending stress</span>
+    <span class="c1"># 5. Output &quot;max stress, member type, member name&quot;</span>
+
+    <span class="n">SapModel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SapModel</span>
+
+    <span class="c1"># Set units to millimetres</span>
+    <span class="n">SapModel</span><span class="o">.</span><span class="n">SetPresentUnits</span><span class="p">(</span><span class="n">SAP2000Constants</span><span class="o">.</span><span class="n">Units</span><span class="p">[</span><span class="s1">&#39;N_mm_C&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Initialize dictTemplate to keep track of Stress, Member Type, Load Case and Member Name</span>
+    <span class="n">dictTemplate</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Stress&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span> <span class="c1"># &#39;F&#39;: Frame; &#39;W&#39;: Wall</span>
+        <span class="s1">&#39;LC&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span>
+        <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="c1"># Initialize variables to keep track of maximum Tension, Compression, Bending and Shear</span>
+    <span class="n">maxTs</span><span class="p">,</span> <span class="n">maxCs</span><span class="p">,</span> <span class="n">maxMs</span><span class="p">,</span> <span class="n">maxVs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictTemplate</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+
+    <span class="n">maxTwBs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">maxCwBs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Frame members ------------------------</span>
+    <span class="k">if</span> <span class="n">selectedFrameMembers</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="p">[</span><span class="n">numberNames</span><span class="p">,</span> <span class="n">allNames</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">FrameObj</span><span class="o">.</span><span class="n">GetNameList</span><span class="p">()</span>
+        <span class="n">selectedFrameMembers</span> <span class="o">=</span> <span class="n">allNames</span>
+
+    <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">allCombos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">maxStressIdentifier</span> <span class="ow">in</span> <span class="n">combo</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Setup</span><span class="o">.</span><span class="n">DeselectAllCasesAndCombosForOutput</span><span class="p">()</span>
+        <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Setup</span><span class="o">.</span><span class="n">SetComboSelectedForOutput</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+        <span class="c1"># set type to envelope</span>
+        <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">Setup</span><span class="o">.</span><span class="n">SetOptionModalHist</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">selectedFrameMembers</span><span class="p">:</span>
+            <span class="c1"># Get section props of memebers</span>
+            <span class="p">[</span><span class="n">sectName</span><span class="p">,</span> <span class="n">sAuto</span> <span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">FrameObj</span><span class="o">.</span><span class="n">GetSection</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+            <span class="p">[</span><span class="n">Area</span><span class="p">,</span> <span class="n">As2</span><span class="p">,</span> <span class="n">As3</span><span class="p">,</span> <span class="n">Torsion</span><span class="p">,</span> <span class="n">I22</span><span class="p">,</span> <span class="n">I33</span><span class="p">,</span> <span class="n">S22</span><span class="p">,</span> <span class="n">S33</span><span class="p">,</span> <span class="n">Z22</span><span class="p">,</span> <span class="n">Z33</span><span class="p">,</span> <span class="n">R22</span><span class="p">,</span> <span class="n">R33</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">PropFrame</span><span class="o">.</span><span class="n">GetSectProps</span><span class="p">(</span><span class="n">sectName</span><span class="p">)</span>
+            <span class="c1"># Note: As2 and As3 refer to the reduced effective shear areas. This to reflect the parabolic distribution of shear stress in the section. Assume SAP2000 is correct</span>
+
+            <span class="c1"># Get forces in members (i.e. tension, compression and bendings)</span>
+            <span class="n">OBJECT_ELEM</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="p">[</span><span class="n">NumberResults</span><span class="p">,</span> <span class="n">Obj</span><span class="p">,</span> <span class="n">ObjSta</span><span class="p">,</span> <span class="n">Elm</span><span class="p">,</span> <span class="n">ElmSta</span><span class="p">,</span> <span class="n">LoadCase</span><span class="p">,</span> <span class="n">StepType</span><span class="p">,</span> <span class="n">StepNum</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">V2</span><span class="p">,</span> <span class="n">V3</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">M3</span><span class="p">,</span> <span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="n">SapModel</span><span class="o">.</span><span class="n">Results</span><span class="o">.</span><span class="n">FrameForce</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">OBJECT_ELEM</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Load Case:&#39;</span><span class="p">,</span> <span class="n">LoadCase</span><span class="p">)</span>
+
+            <span class="c1"># in case no forces found</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">LoadCase</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Max Tensile Stress</span>
+            <span class="n">maxT</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+            <span class="n">maxTStress</span> <span class="o">=</span> <span class="n">maxT</span> <span class="o">/</span> <span class="n">Area</span>
+
+            <span class="n">maxTs</span><span class="p">[</span><span class="s1">&#39;Stress&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxTStress</span><span class="p">)</span>
+            <span class="n">maxTs</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+            <span class="n">maxTs</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+            <span class="n">maxTs</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+            <span class="c1"># Max Compressive Stress</span>
+            <span class="n">maxC</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+            <span class="n">maxCStress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxC</span><span class="p">)</span> <span class="o">/</span> <span class="n">Area</span>
+
+            <span class="n">maxCs</span><span class="p">[</span><span class="s1">&#39;Stress&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxCStress</span><span class="p">)</span>
+            <span class="n">maxCs</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+            <span class="n">maxCs</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+            <span class="n">maxCs</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+            <span class="c1"># Max Bending Stress - major and minor bending axes</span>
+            <span class="n">maxM2pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
+            <span class="n">maxM2neg</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM2pos</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM2neg</span><span class="p">):</span>
+                <span class="n">maxM2Stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM2pos</span><span class="p">)</span> <span class="o">/</span> <span class="n">S22</span> <span class="c1"># Bending Stress = Bending / Section Modulus of Bending</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxM2Stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM2neg</span><span class="p">)</span> <span class="o">/</span> <span class="n">S22</span>
+
+            <span class="n">maxM3pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span>
+            <span class="n">maxM3neg</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">M3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM3pos</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM3neg</span><span class="p">):</span>
+                <span class="n">maxM3Stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM3pos</span><span class="p">)</span> <span class="o">/</span> <span class="n">S33</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxM3Stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxM3neg</span><span class="p">)</span> <span class="o">/</span> <span class="n">S33</span>
+
+            <span class="c1"># Find maximum bending stress between the bending stresses about the 2 local axes</span>
+            <span class="k">if</span> <span class="n">maxM2Stress</span> <span class="o">&gt;=</span> <span class="n">maxM3Stress</span><span class="p">:</span>
+                <span class="n">maxMStress</span> <span class="o">=</span> <span class="n">maxM2Stress</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxMStress</span> <span class="o">=</span> <span class="n">maxM3Stress</span>
+
+            <span class="n">maxMs</span><span class="p">[</span><span class="s1">&#39;Stress&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxMStress</span><span class="p">)</span>
+            <span class="n">maxMs</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+            <span class="n">maxMs</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+            <span class="n">maxMs</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+            <span class="c1"># Max shear stress - major and minor local axes</span>
+            <span class="n">maxV2pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">V2</span><span class="p">)</span>
+            <span class="n">maxV2neg</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">V2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV2pos</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV2neg</span><span class="p">):</span>
+                <span class="n">maxV2stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV2pos</span><span class="p">)</span> <span class="o">/</span> <span class="n">As2</span> <span class="c1"># Shear Stress = Shear Force / Shear Area</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxV2stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV2neg</span><span class="p">)</span> <span class="o">/</span> <span class="n">As2</span>
+
+            <span class="n">maxV3pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">V3</span><span class="p">)</span>
+            <span class="n">maxV3neg</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">V3</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV3pos</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV3neg</span><span class="p">):</span>
+                <span class="n">maxV3stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV3pos</span><span class="p">)</span> <span class="o">/</span> <span class="n">As3</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxV3stress</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">maxV3neg</span><span class="p">)</span> <span class="o">/</span> <span class="n">As3</span>
+
+            <span class="c1"># Find the maximum shear stress between the shear stresses along the 2 local axes (Optional)</span>
+            <span class="k">if</span> <span class="n">maxV2stress</span> <span class="o">&gt;=</span> <span class="n">maxV3stress</span><span class="p">:</span>
+                <span class="n">maxVStress</span> <span class="o">=</span> <span class="n">maxV2stress</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxVStress</span> <span class="o">=</span> <span class="n">maxV3stress</span>
+
+            <span class="n">maxVs</span><span class="p">[</span><span class="s1">&#39;Stress&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxVStress</span><span class="p">)</span>
+            <span class="n">maxVs</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+            <span class="n">maxVs</span><span class="p">[</span><span class="s1">&#39;LC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+            <span class="n">maxVs</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+            <span class="n">maxTwBs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxTStress</span> <span class="o">+</span> <span class="n">maxMStress</span><span class="p">)</span>
+            <span class="n">maxCwBs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxCStress</span> <span class="o">+</span> <span class="n">maxMStress</span><span class="p">)</span>
+
+    <span class="c1"># Return 4 dataframes</span>
+    <span class="n">maxTs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">maxTs</span><span class="p">)</span>
+    <span class="n">maxCs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">maxCs</span><span class="p">)</span>
+    <span class="n">maxMs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">maxMs</span><span class="p">)</span>
+    <span class="n">maxVs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">maxVs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">maxTs_df</span><span class="p">,</span> <span class="n">maxCs_df</span><span class="p">,</span> <span class="n">maxMs_df</span><span class="p">,</span> <span class="n">maxVs_df</span><span class="p">,</span> <span class="n">maxTwBs</span><span class="p">,</span> <span class="n">maxCwBs</span>
+</pre></div>
+</div>
+</section>
+<section id="getcosts">
+<h3>getCosts<a class="headerlink" href="#getcosts" title="Permalink to this heading"></a></h3>
+<p>This method is used to estimate the annual building cost and the annual maintenance cost.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getCosts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxAcc</span><span class="p">,</span> <span class="n">maxDisp</span><span class="p">,</span> <span class="n">footprint</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">totalMass</span><span class="p">,</span> <span class="n">totalHeight</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the annual building and seismic costs.</span>
+
+<span class="sd">    This method calculates the annual building cost and annual seismic cost based on various parameters,</span>
+<span class="sd">    including maximum acceleration, maximum displacement, footprint, weight, total mass, and total height.</span>
+
+<span class="sd">    :param maxAcc: The maximum acceleration in g units.</span>
+<span class="sd">    :type maxAcc: float</span>
+<span class="sd">    :param maxDisp: The maximum displacement in millimeters.</span>
+<span class="sd">    :type maxDisp: float</span>
+<span class="sd">    :param footprint: The footprint of the structure.</span>
+<span class="sd">    :type footprint: float</span>
+<span class="sd">    :param weight: The weight of the structure in pounds.</span>
+<span class="sd">    :type weight: float</span>
+<span class="sd">    :param totalMass: The total mass of the structure.</span>
+<span class="sd">    :type totalMass: float</span>
+<span class="sd">    :param totalHeight: The total height of the structure in millimeters.</span>
+<span class="sd">    :type totalHeight: float</span>
+<span class="sd">    :return: A tuple containing the annual building cost and annual seismic cost (float, float).</span>
+<span class="sd">    :rtype: tuple</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Subtract weights. Weight is initially in lb, convert to kg</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calculating costs...&#39;</span><span class="p">)</span>
+
+    <span class="n">weight</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">weight</span> <span class="o">*</span> <span class="n">UnitConversion</span><span class="o">.</span><span class="n">Mass</span><span class="p">[</span><span class="s1">&#39;lb&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">totalMass</span><span class="p">)</span> <span class="o">/</span> <span class="n">UnitConversion</span><span class="o">.</span><span class="n">Mass</span><span class="p">[</span><span class="s1">&#39;lb&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1"># weight must be greater than 0</span>
+    <span class="n">design_life</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># years</span>
+    <span class="n">construction_cost</span> <span class="o">=</span> <span class="mi">2000000</span><span class="o">*</span><span class="p">(</span><span class="n">weight</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">6</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">land_cost</span> <span class="o">=</span> <span class="mi">35000</span> <span class="o">*</span> <span class="n">footprint</span>
+    <span class="n">annual_building_cost</span> <span class="o">=</span> <span class="p">(</span><span class="n">land_cost</span> <span class="o">+</span> <span class="n">construction_cost</span><span class="p">)</span> <span class="o">/</span> <span class="n">design_life</span>
+
+    <span class="n">equipment_cost</span> <span class="o">=</span> <span class="mi">15000000</span>
+    <span class="n">return_period_1</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">return_period_2</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">apeak_1</span> <span class="o">=</span> <span class="n">maxAcc</span> <span class="c1"># in units of g</span>
+    <span class="n">xpeak_1</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="n">maxDisp</span><span class="o">/</span><span class="p">(</span><span class="n">totalHeight</span> <span class="o">*</span> <span class="mf">25.4</span><span class="p">)</span> <span class="c1"># % roof drift</span>
+    <span class="n">structural_damage_1</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xpeak_1</span><span class="p">)</span> <span class="c1"># CDF of a standard normal distribution with Mean = 1.5 and S.D. = 0.5</span>
+    <span class="n">equipment_damage_1</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mf">1.75</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">apeak_1</span><span class="p">)</span>
+    <span class="n">economic_loss_1</span> <span class="o">=</span> <span class="n">structural_damage_1</span><span class="o">*</span><span class="n">construction_cost</span> <span class="o">+</span> <span class="n">equipment_damage_1</span><span class="o">*</span><span class="n">equipment_cost</span>
+    <span class="n">annual_economic_loss_1</span> <span class="o">=</span> <span class="n">economic_loss_1</span><span class="o">/</span><span class="n">return_period_1</span>
+    <span class="n">structural_damage_2</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">equipment_damage_2</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">economic_loss_2</span> <span class="o">=</span> <span class="n">structural_damage_2</span><span class="o">*</span><span class="n">construction_cost</span> <span class="o">+</span> <span class="n">equipment_damage_2</span><span class="o">*</span><span class="n">equipment_cost</span>
+    <span class="n">annual_economic_loss_2</span> <span class="o">=</span> <span class="n">economic_loss_2</span><span class="o">/</span><span class="n">return_period_2</span>
+    <span class="n">annual_seismic_cost</span> <span class="o">=</span> <span class="n">annual_economic_loss_1</span> <span class="o">+</span> <span class="n">annual_economic_loss_2</span>
+
+    <span class="k">return</span> <span class="n">annual_building_cost</span><span class="p">,</span> <span class="n">annual_seismic_cost</span>
+</pre></div>
+</div>
+</section>
+<section id="getcr">
+<h3>getCR<a class="headerlink" href="#getcr" title="Permalink to this heading"></a></h3>
+<p>This method finds the centre of rotation for each floor of the structure.
+#. Unlock the model
+#. Set units to inches
+#. Get the names of the nodes of each floor
+#. Remove any constraints assigned to the nodes
+#. Define and assign diaphram constraints to the nodes of each floor
+#. Retrieve the names of all load patterns and add in the unit load cases
+#. Set only unit load cases to run, add unit loads to each floor and run analysis
+#. Select each of the unit load cases
+#. Find the rotation about the local 3 axis for all nodes at each floor but the ground
+#.</p>
+<p>The method <em>DeleteConstraint(node, 0)</em> removes any constraint assignments to the node.
+The method <em>SetDiaphragm(diaphragmType, 3)</em> defines a diaphram constraint orthogonal to the Z axis.
+The method <em>SetConstraint(node, diaphragmType, 0, True)</em> sets the diaphram constraint for each node. Any previous constraints will be replaced.
+The method *
+All the methods each return zero if each of them are successful, otherwise they return a nonzero value.
+.. code-block:: python</p>
+<blockquote>
+<div><dl>
+<dt>def getCR(self, towerElevs):</dt><dd><p>“””
+Calculate and return the Centre of Rotation for each floor in a tower.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param towerElevs<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of elevation levels for tower floors.</p>
+</dd>
+<dt class="field-even">type towerElevs<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of float</p>
+</dd>
+<dt class="field-odd">return<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary containing CR for each floor at the specified elevations.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+<p>“””
+# TODO: implement all floor CR
+SapModel = self.SapModel
+SapModel.SetModelIsLocked(False)
+SapModel.SetPresentUnits(SAP2000Constants.Units[‘kip_in_F’])
+towerCRs = {}</p>
+<p># Get names of nodes on each floor
+[number_nodes, all_node_names, ret] = SapModel.PointObj.GetNameList()
+floor_nodes = {}
+for node_name in all_node_names:</p>
+<blockquote>
+<div><p>[x, y, z, ret] = SapModel.PointObj.GetCoordCartesian(node_name, 0, 0, 0)
+if z in towerElevs:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if z not in floor_nodes:</dt><dd><p>floor_nodes[z] = []</p>
+</dd>
+</dl>
+<p>floor_nodes[z].append(node_name)</p>
+</div></blockquote>
+</div></blockquote>
+<p># remove existing diaphragm constraints
+for elev in floor_nodes:</p>
+<blockquote>
+<div><p>nodes = floor_nodes[elev]
+for node in nodes:</p>
+<blockquote>
+<div><p>ret = SapModel.PointObj.DeleteConstraint(node, 0)
+if ret != 0:</p>
+<blockquote>
+<div><p>print(‘ERROR deleting diaphragm constraint from floor at elevation ‘ + str(elev))</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p># Define and set diaphragm constraint if not defined already
+print(‘Defining and Setting diaphragm constraint…’)
+for elev in towerElevs:</p>
+<blockquote>
+<div><p>diaphragmType = ‘Diaphragm’ + str(elev)
+[axis, csys, ret] = SapModel.ConstraintDef.GetDiaphragm(diaphragmType)
+if ret != 0:</p>
+<blockquote>
+<div><p>SapModel.ConstraintDef.SetDiaphragm(diaphragmType, 3)</p>
+</div></blockquote>
+<p>nodes = floor_nodes[elev]
+for node in nodes:</p>
+<blockquote>
+<div><p>ret = SapModel.PointObj.SetConstraint(node, diaphragmType, 0, True)
+if ret != 0:</p>
+<blockquote>
+<div><p>print(‘ERROR setting diaphragm constraint from floor at elevation ‘ + str(elev))</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p># Create unit X, unit Y, and unit Z load cases if they haven’t already been set
+print(‘Defining unit load cases…’)
+# Retrieve the names of all load patterns
+[number_patterns, all_load_patterns, ret] = SapModel.LoadPatterns.GetNameList()
+LTYPE_DEAD = 1
+unitLoadPatterns = {</p>
+<blockquote>
+<div><p>‘Unit X’: [1, 0, 0, 0, 0, 0],
+‘Unit Y’: [0, 1, 0, 0, 0, 0],
+‘Unit Moment’: [0, 0, 0, 0, 0, 1]}</p>
+</div></blockquote>
+<dl>
+<dt>for unitLoadPattern in unitLoadPatterns:</dt><dd><dl>
+<dt>for elev in towerElevs:</dt><dd><p>loadCaseName = unitLoadPattern + ‘ - ‘ + str(elev)
+if loadCaseName not in all_load_patterns:</p>
+<blockquote>
+<div><p>ret = SapModel.LoadPatterns.Add(loadCaseName, LTYPE_DEAD)
+if ret != 0:</p>
+<blockquote>
+<div><p>print(‘ERROR adding ‘ + loadCaseName + ‘ load case’)</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+</dl>
+<p># Set all unit load cases to run
+SapModel.Analyze.SetRunCaseFlag(‘’, False, True)
+# Set only unit load cases to run
+for unitLoadPattern in unitLoadPatterns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>for elev in towerElevs:</dt><dd><p>SapModel.Analyze.SetRunCaseFlag(unitLoadPattern + ‘ - ‘ + str(elev), True, False)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Add loads to all floors
+nodeNum = 0
+for elev in towerElevs:</p>
+<blockquote>
+<div><p>node = floor_nodes[elev][nodeNum]
+for unitLoadPattern in unitLoadPatterns:</p>
+<blockquote>
+<div><p>loadCaseName = unitLoadPattern + ‘ - ‘ + str(elev)
+SapModel.PointObj.SetLoadForce(node, loadCaseName, unitLoadPatterns[unitLoadPattern], True, ‘GLOBAL’, 0)</p>
+</div></blockquote>
+</div></blockquote>
+<p># Run analysis ———————————————————————————————–
+print()
+print(‘Running model in SAP2000…’)
+SapModel.Analyze.RunAnalysis()
+print(‘Finished running.’)
+print()</p>
+<p># For each floor, assign unit loads, run case, find rotations, find Crx and Cry
+for elev in towerElevs:</p>
+<blockquote>
+<div><p># skip elevation 0
+if elev &lt;= 0:</p>
+<blockquote>
+<div><p>continue</p>
+</div></blockquote>
+<p>print(‘Calculating Cr…’)</p>
+<p>node = floor_nodes[elev][nodeNum]</p>
+<p># Get rotations at joint
+rotations = []
+for patternName in unitLoadPatterns:</p>
+<blockquote>
+<div><p>SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()
+SapModel.Results.Setup.SetCaseSelectedForOutput(patternName + ‘ - ‘ + str(elev), True)</p>
+<p>OBJECT_ELEM = 0
+number_results = 0
+object_names = []
+element_names = []
+load_cases = []
+step_types = []
+step_nums = []
+u1 = []
+u2 = []
+u3 = []
+r1 = []
+r2 = []
+r3 = []
+ret = 0</p>
+<p>[number_results, object_names, element_names, load_cases, step_types, step_nums, u1, u2, u3, r1, r2, r3, ret] = SapModel.Results.JointDisplAbs(node, OBJECT_ELEM, number_results, object_names, element_names, load_cases, step_types, step_nums, u1, u2, u3, r1, r2, r3)</p>
+<dl class="simple">
+<dt>if ret != 0:</dt><dd><p>print(‘ERROR getting rotations from ‘ + patternName + ‘ - ‘ + str(elev) + ‘ case’)</p>
+</dd>
+</dl>
+<p>rotations.append(r3[0])</p>
+</div></blockquote>
+<p>Rzx, Rzy, Rzz = rotations</p>
+<p>[load_x, load_y, load_z, ret] = SapModel.PointObj.GetCoordCartesian(node, 0, 0, 0)
+Crx = load_x - Rzy/ (Rzz + Algebra.EPSILON)
+Cry = load_y + Rzx/ (Rzz + Algebra.EPSILON)
+floorCR = [Crx, Cry]
+# Append results
+towerCRs[elev] = floorCR</p>
+</div></blockquote>
+<p># Unlock model
+SapModel.SetModelIsLocked(False)</p>
+<dl>
+<dt>for elev in towerElevs:</dt><dd><p>print(‘Deleting unit loads and constraints…’)
+node = floor_nodes[elev][nodeNum]
+for patternName in unitLoadPatterns:</p>
+<blockquote>
+<div><p># Delete unit loads
+ret = SapModel.PointObj.DeleteLoadForce(node, patternName + ‘ - ‘ + str(elev), 0)
+if ret != 0:</p>
+<blockquote>
+<div><p>print(‘ERROR deleting’ + patternName + ‘ on floor at elevation ‘ + str(elev))</p>
+</div></blockquote>
+</div></blockquote>
+<p>nodes = floor_nodes[elev]
+for node in nodes:</p>
+<blockquote>
+<div><p># Delete diaphragm constraint from floor
+ret = SapModel.PointObj.DeleteConstraint(node, 0)
+if ret != 0:</p>
+<blockquote>
+<div><p>print(‘ERROR deleting diaphragm constraint from floor at elevation ‘ + str(elev))</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+<p># Set all load cases to run again, except for the unit load cases
+SapModel.Analyze.SetRunCaseFlag(‘’, True, True)
+for patternName in unitLoadPatterns:</p>
+<blockquote>
+<div><p>SapModel.Analyze.SetRunCaseFlag(patternName, False, False)</p>
+</div></blockquote>
+<p>return towerCRs</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="geteccentricity">
+<h3>getEccentricity<a class="headerlink" href="#geteccentricity" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getEccentricity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">towerCRs</span><span class="p">,</span> <span class="n">tower</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Maximum and Average eccentricity &#39;&#39;&#39;</span>
+    <span class="n">eccs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">elev</span> <span class="ow">in</span> <span class="n">towerCRs</span><span class="p">:</span>
+        <span class="n">crX</span><span class="p">,</span> <span class="n">crY</span> <span class="o">=</span> <span class="n">towerCRs</span><span class="p">[</span><span class="n">elev</span><span class="p">]</span>
+        <span class="n">comX</span> <span class="o">=</span> <span class="n">tower</span><span class="o">.</span><span class="n">floors</span><span class="p">[</span><span class="n">elev</span><span class="p">]</span><span class="o">.</span><span class="n">comX</span>
+        <span class="n">comY</span> <span class="o">=</span> <span class="n">tower</span><span class="o">.</span><span class="n">floors</span><span class="p">[</span><span class="n">elev</span><span class="p">]</span><span class="o">.</span><span class="n">comY</span>
+
+        <span class="n">xEcc</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">crX</span> <span class="o">-</span> <span class="n">comX</span><span class="p">)</span>
+        <span class="n">yEcc</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">crY</span> <span class="o">-</span> <span class="n">comY</span><span class="p">)</span>
+
+        <span class="n">eccs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xEcc</span><span class="p">)</span>
+        <span class="n">eccs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yEcc</span><span class="p">)</span>
+
+    <span class="n">maxEcc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">eccs</span><span class="p">)</span>
+    <span class="n">avgEcc</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">eccs</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eccs</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">maxEcc</span><span class="p">,</span> <span class="n">avgEcc</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tower-performance">
+<span id="towerperformance"></span><h2>Tower Performance<a class="headerlink" href="#tower-performance" title="Permalink to this heading"></a></h2>
+</section>
 </section>
 
 
