@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tower Variation &mdash; Autobuilder 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Autobuilder
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Autobuilder</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tower Variation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Towervariation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tower-variation">
+<h1>Tower Variation<a class="headerlink" href="#tower-variation" title="Permalink to this heading"></a></h1>
+<p>The <strong>Tower Variation</strong> code is used to generate a dictionary of tower variations. It accomplishes this by creating all possible combinations of variables associated with bracing groups, section groups, and area section groups. These combinations are then applied to panels and members, resulting in different tower variations. In the following pages, you will find detailed explanations of the code’s different functions and their parameters.</p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h2>
+<section id="addpanelstobracinggroups">
+<h3>addPanelsToBracingGroups<a class="headerlink" href="#addpanelstobracinggroups" title="Permalink to this heading"></a></h3>
+<p>This function is designed to associate panels with their corresponding bracing groups within a tower configuration. It iterates through the panels in the tower and assigns each panel to its designated bracing group if such an assignment exists. It begins by accessing two dictionaries: <strong>panels</strong>, which contains panel objects, and <strong>bracingGroups</strong>, which holds bracing group objects, both residing within the <strong>self.tower</strong> object. To ensure a clean slate, the function first clears any existing panel assignments within each bracing group by iterating through all the bracing groups in the <strong>bracingGroups</strong> dictionary and clearing the assignments attribute for each group. Subsequently, it iterates through the <strong>panels</strong> and, for each panel, retrieves its <strong>bracingGroup</strong> attribute, indicating the name of the designated bracing group. If the <strong>bracingGroup</strong> name is not an empty string, signifying a designated group, the function associates the panel with the corresponding bracing group by calling the <strong>addAssignment</strong> method and passing the panel as an argument. This process ensures that panels are correctly assigned to their respective bracing groups.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addPanelsToBracingGroups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="n">panels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">panels</span>
+     <span class="n">bracingGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">bracingGroups</span>
+
+     <span class="c1"># clear existing panel assignments</span>
+     <span class="k">for</span> <span class="n">bg</span> <span class="ow">in</span> <span class="n">bracingGroups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+         <span class="n">bg</span><span class="o">.</span><span class="n">assignments</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+     <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">panels</span><span class="p">:</span>
+         <span class="n">panel</span> <span class="o">=</span> <span class="n">panels</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
+         <span class="n">bgName</span> <span class="o">=</span> <span class="n">panel</span><span class="o">.</span><span class="n">bracingGroup</span>
+
+         <span class="k">if</span> <span class="n">bgName</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+             <span class="n">bracingGroups</span><span class="p">[</span><span class="n">bgName</span><span class="p">]</span><span class="o">.</span><span class="n">addAssignment</span><span class="p">(</span><span class="n">panel</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="addmemberidstosectiongroups">
+<h3>addMemberIdsToSectionGroups<a class="headerlink" href="#addmemberidstosectiongroups" title="Permalink to this heading"></a></h3>
+<p>This function, is similar to the <strong>addPanelsToBracingGroups</strong> fuction but focuses on the association of member IDs with their respective section groups within a tower object. Initially, it accesses two dictionaries, <strong>member_ids</strong> and <strong>sectionGroups</strong>, representing member IDs and section groups, respectively, retrieved from the <strong>self.tower</strong> object. To prepare for new assignments, the function systematically clears any pre-existing member ID assignments within each section group by iterating through the section groups and emptying their assignments attribute. Subsequently, the function iterates through the member IDs, fetching the corresponding section group name, and then utilizes this name to access the corresponding section group object within the <strong>sectionGroups</strong> dictionary. Finally, the <strong>addAssignment</strong> method is used on the section group, associating the member ID with its designated section group, ensuring precise member ID assignments within the tower’s section groups.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addMemberIdsToSectionGroups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">member_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">member_ids</span>
+    <span class="n">sectionGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">sectionGroups</span>
+
+    <span class="c1"># clear existing member id assignments</span>
+    <span class="k">for</span> <span class="n">sg</span> <span class="ow">in</span> <span class="n">sectionGroups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">sg</span><span class="o">.</span><span class="n">assignments</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">member_id</span> <span class="ow">in</span> <span class="n">member_ids</span><span class="p">:</span>
+        <span class="n">sgName</span> <span class="o">=</span> <span class="n">member_ids</span><span class="p">[</span><span class="n">member_id</span><span class="p">]</span>
+        <span class="n">sectionGroups</span><span class="p">[</span><span class="n">sgName</span><span class="p">]</span><span class="o">.</span><span class="n">addAssignment</span><span class="p">(</span><span class="n">member_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="addpanelstoareasectiongroups">
+<h3>addPanelsToAreaSectionGroups<a class="headerlink" href="#addpanelstoareasectiongroups" title="Permalink to this heading"></a></h3>
+<p>The <strong>addPanelsToAreaSectionGroups</strong> function, is responsible for associating panels with their respective area section groups within a tower object. It begins by accessing two dictionaries: <strong>panels</strong>, which contains panel objects, and <strong>areaSectionGroups</strong>, which holds area section group objects. Both dictionaries are retrieved from self.tower, representing tower components. To ensure a clean slate, the function clears any pre-existing panel assignments within each area section group by iterating through all the groups and clearing their assignments attribute. Subsequently, it iterates through the panels, retrieving the associated area section group name for each panel from the <strong>areaSectionGroup</strong> attribute. If a panel has a designated area section group, the function assigns the panel to the corresponding area section group by calling the <strong>addAssignment</strong> method of that group and passing the panel as an argument. The function concludes by testing and printing the names of area section groups and their assigned components. In essence, it ensures that panels are correctly assigned to their respective area section groups.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addPanelsToAreaSectionGroups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">panels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">panels</span>
+    <span class="n">areaSectionGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">areaSectionGroups</span>
+
+    <span class="c1"># clear existing panel assignments</span>
+    <span class="k">for</span> <span class="n">asg</span> <span class="ow">in</span> <span class="n">areaSectionGroups</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">asg</span><span class="o">.</span><span class="n">assignments</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">panels</span><span class="p">:</span>
+        <span class="n">panel</span> <span class="o">=</span> <span class="n">panels</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
+        <span class="n">asgName</span> <span class="o">=</span> <span class="n">panel</span><span class="o">.</span><span class="n">areaSectionGroup</span>
+
+        <span class="k">if</span> <span class="n">asgName</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">areaSectionGroups</span><span class="p">[</span><span class="n">asgName</span><span class="p">]</span><span class="o">.</span><span class="n">addAssignment</span><span class="p">(</span><span class="n">panel</span><span class="p">)</span>
+
+    <span class="c1"># --- TEST ---</span>
+    <span class="k">for</span> <span class="n">asgName</span> <span class="ow">in</span> <span class="n">areaSectionGroups</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">asgName</span><span class="p">)</span>
+        <span class="n">asg</span> <span class="o">=</span> <span class="n">areaSectionGroups</span><span class="p">[</span><span class="n">asgName</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">asg</span><span class="o">.</span><span class="n">assignments</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="generateinputtable">
+<h3>GenerateInputTable<a class="headerlink" href="#generateinputtable" title="Permalink to this heading"></a></h3>
+<p>The <strong>GenerateInputTable</strong> function within the provided code is responsible for generating an input table that captures various combinations of variables and their associated values for a tower-building application. It begins by preparing the necessary data, including associations between tower components and their respective groups (bracing groups, section groups, and area section groups). The function then constructs all possible combinations of these variables and their values. Subsequently, it organizes these combinations into a dictionary called <strong>inputTable</strong>. For each group of variables, it creates entries in <strong>inputTable</strong>, appending the values associated with those variables. Depending on the group type (e.g., bracing, section, or area section), it applies specific naming conventions to the entries. Finally, the function saves the generated <strong>inputTable</strong> as part of the tower object. In case of an error during the input table saving process, the code displays a error message with the text “Unable to create input table.”</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GenerateInputTable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">addPanelsToBracingGroups</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addMemberIdsToSectionGroups</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addPanelsToAreaSectionGroups</span><span class="p">()</span>
+
+    <span class="n">bracingGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">bracingGroups</span>
+    <span class="n">sectionGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">sectionGroups</span>
+    <span class="n">areaSectionGroups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">areaSectionGroups</span>
+
+    <span class="n">variableGroups</span> <span class="o">=</span> <span class="p">[</span><span class="n">bracingGroups</span><span class="p">,</span> <span class="n">sectionGroups</span><span class="p">,</span> <span class="n">areaSectionGroups</span><span class="p">]</span>
+
+    <span class="n">dict_of_combos</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">variableGroup</span> <span class="ow">in</span> <span class="n">variableGroups</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">groupName</span> <span class="ow">in</span> <span class="n">variableGroup</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">variableGroup</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">assignments</span><span class="p">:</span> <span class="c1"># only generate combo it&#39;s assigned to tower components</span>
+                <span class="n">dict_of_combos</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+                    <span class="n">dict_of_combos</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+
+    <span class="c1"># list_of_combos contains the variables and the values in each values</span>
+    <span class="n">list_of_combos</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">dict_of_combos</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">dict_of_combos</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+
+    <span class="c1"># reset dict</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dict_of_combos</span><span class="p">:</span>
+        <span class="n">dict_of_combos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># add to dict</span>
+    <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">list_of_combos</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">combo</span><span class="p">:</span>
+            <span class="n">dict_of_combos</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="n">inputTable</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">groupName</span> <span class="ow">in</span> <span class="n">dict_of_combos</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">dict_of_combos</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span>
+
+        <span class="n">inputTable</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">InputFileKeyword</span><span class="o">.</span><span class="n">variable</span><span class="p">,</span> <span class="n">groupName</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">if</span> <span class="n">groupName</span> <span class="ow">in</span> <span class="n">bracingGroups</span><span class="p">:</span>
+            <span class="n">bg</span> <span class="o">=</span> <span class="n">bracingGroups</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">groupName</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">panel</span> <span class="ow">in</span> <span class="n">bg</span><span class="o">.</span><span class="n">assignments</span><span class="p">:</span>
+                <span class="n">pName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">panel</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">pName</span><span class="p">)</span>
+                <span class="n">inputTable</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pName</span><span class="p">,</span> <span class="n">InputFileKeyword</span><span class="o">.</span><span class="n">bracing</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">elif</span> <span class="n">groupName</span> <span class="ow">in</span> <span class="n">sectionGroups</span><span class="p">:</span>
+            <span class="n">sg</span> <span class="o">=</span> <span class="n">sectionGroups</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">memberId</span> <span class="ow">in</span> <span class="n">sg</span><span class="o">.</span><span class="n">assignments</span><span class="p">:</span>
+                <span class="n">inputTable</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">InputFileKeyword</span><span class="o">.</span><span class="n">member</span><span class="p">,</span> <span class="n">memberId</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">elif</span> <span class="n">groupName</span> <span class="ow">in</span> <span class="n">areaSectionGroups</span><span class="p">:</span>
+            <span class="n">asg</span> <span class="o">=</span> <span class="n">areaSectionGroups</span><span class="p">[</span><span class="n">groupName</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">groupName</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">panel</span> <span class="ow">in</span> <span class="n">asg</span><span class="o">.</span><span class="n">assignments</span><span class="p">:</span>
+                <span class="n">pName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">panel</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">pName</span><span class="p">)</span>
+                <span class="n">inputTable</span><span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">-</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pName</span><span class="p">,</span> <span class="n">InputFileKeyword</span><span class="o">.</span><span class="n">shearWall</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="c1"># Convert list of dicts</span>
+    <span class="n">tower_enum</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_combos</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">inputTable</span><span class="p">[</span><span class="s1">&#39;towerNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tower_enum</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">inputTable</span> <span class="o">=</span> <span class="n">inputTable</span>
+
+    <span class="c1"># Save inputTable</span>
+    <span class="n">filewriter</span> <span class="o">=</span> <span class="n">FileWriter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fileLoc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">filewriter</span><span class="o">.</span><span class="n">writeInputTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tower</span><span class="o">.</span><span class="n">inputTable</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">warning</span> <span class="o">=</span> <span class="n">WarningMessage</span><span class="p">()</span>
+        <span class="n">warning</span><span class="o">.</span><span class="n">popUpErrorBox</span><span class="p">(</span><span class="s1">&#39;Unable to create input table&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="addprogress">
+<h3>addProgress<a class="headerlink" href="#addprogress" title="Permalink to this heading"></a></h3>
+<p>The <strong>addProgress</strong> function updates a progress bar within the application window by incrementing a counter variable, which ranges from 0 to 100, to represent the progress of a certain task. When the counter reaches 100, it sets a flag to indicate that the task is complete.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">addProgress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span> <span class="c1"># counter&#39;s max = 101</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="bp">self</span><span class="o">.</span><span class="n">progressBar</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Kaison.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
