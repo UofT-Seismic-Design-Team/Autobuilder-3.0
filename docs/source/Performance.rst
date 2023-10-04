@@ -11,7 +11,7 @@ Performance Analyzer
 PerformanceAnalyzer provides methods for analyzing the performance and estimating the cost of a structure.
 
 
-getWeight*
+getWeight
 ~~~~~~~~~
 This method calculates the total weight of the structure:
 
@@ -56,7 +56,7 @@ The method *BaseReact()* returns zero if the reactions are successfully recovere
 
 
 
-getMaxAcceleration*
+getMaxAcceleration
 ~~~~~~~~~
 This method finds the maximum acceleration out of all roof nodes in units of g:
 
@@ -130,7 +130,7 @@ The method *ModalPeriod()* returns zero if the data is successfully recovered, o
 
 
 
-getMaxDisplacement*
+getMaxDisplacement
 ~~~~~~~~~
 This method finds the maximum displacement out of all roof nodes in millimeters:
 
