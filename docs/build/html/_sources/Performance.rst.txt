@@ -3,21 +3,12 @@ Performance
 
 -----------
 
-.. _outline:
-
-Outline
-------------
-
-Performance
-
-------
-
-
 
 .. _performanceanalyzer:
 
 Performance Analyzer
 --------------
+PerformanceAnalyzer provides methods for analyzing the performance and estimating the cost of a structure.
 
 
 getWeight*
@@ -520,7 +511,7 @@ This method is used to estimate the annual building cost and the annual maintena
 
 getCR
 ~~~~~~~~~
-This method finds the centre of rotation for each floor of the structure. 
+This method finds the centre of rigidity for each floor of the structure. 
 #. Unlock the model
 #. Set units to inches
 #. Get the names of the nodes of each floor
@@ -530,18 +521,21 @@ This method finds the centre of rotation for each floor of the structure.
 #. Set only unit load cases to run, add unit loads to each floor and run analysis
 #. Select each of the unit load cases
 #. Find the rotation about the local 3 axis for all nodes at each floor but the ground
-#. 
+#. Calculate the X and Y coordinates of the Centre of Rigidity
+#. Unlock the model
+#. Remove unit loads and remove diaphram constraint from the nodes of each floor
+#. Set all cases but the unit load cases to run
 
 The method *DeleteConstraint(node, 0)* removes any constraint assignments to the node. 
 The method *SetDiaphragm(diaphragmType, 3)* defines a diaphram constraint orthogonal to the Z axis. 
 The method *SetConstraint(node, diaphragmType, 0, True)* sets the diaphram constraint for each node. Any previous constraints will be replaced. 
-The method *
+The method 
 All the methods each return zero if each of them are successful, otherwise they return a nonzero value.
 .. code-block:: python
 
     def getCR(self, towerElevs):
         """
-        Calculate and return the Centre of Rotation for each floor in a tower.
+        Calculate and return the Centre of Rigidity for each floor in a tower.
 
         :param towerElevs: List of elevation levels for tower floors.
         :type towerElevs: list of float
@@ -703,11 +697,26 @@ All the methods each return zero if each of them are successful, otherwise they 
 
 getEccentricity
 ~~~~~~~~~
+This method calculates the maximum and average eccentricity of the tower.
+#. Calculate for each floor, the difference between the X or Y coordinates of centre of regidity and the centre of mass to find the eccentricity of the structure.
+#. Find the maximum and average value for eccentricty.
 
 .. code-block:: python
 
     def getEccentricity(self, towerCRs, tower):
-        ''' Maximum and Average eccentricity '''
+        """
+        Calculate the maximum and average eccentricity for a structure.
+
+        This method calculates and returns the maximum and average eccentricity for a tower based on CR (Center of Rotation)
+        values and the center of mass of each floor.
+
+        :param towerCRs: Dictionary containing CR (Center of Rotation) for each floor at specified elevations.
+        :type towerCRs: dict
+        :param tower: Tower object containing floor information.
+        :type tower: Tower
+        :return: Maximum and average eccentricity (X and Y) values.
+        :rtype: tuple
+        """
         eccs = []
 
         for elev in towerCRs:
@@ -727,11 +736,87 @@ getEccentricity
         return maxEcc, avgEcc
 
 
-
 .. _towerperformance:
 
 
 Tower Performance
 --------------
+The class tower performance finds the average building and seismic costs
 
+.. code-block:: python 
 
+    class TowerPerformance:
+        # static variable for id
+        id = 1
+
+        def __init__(self, name):
+            self.name = name
+            if not name:
+                self.name = str(TowerPerformance.id)
+                TowerPerformance.id += 1
+
+            # Variables & assigned values
+            self.variables = {}
+
+            # results from SAP2000
+            # key: load combo; values
+            self.maxAcc = {}
+            self.maxDisp = {}
+            self.basesh = {} # base shear
+            self.totalWeight = 0
+            self.period = 0
+
+            # Member Stress
+            self.tensileStress = pd.DataFrame()
+            self.compressiveStress = pd.DataFrame()
+            self.bendingStress = pd.DataFrame()
+            self.shearStress = pd.DataFrame()
+
+            # Demand-capacity ratios
+            self.tensionDCR = 0
+            self.compDCR = 0
+            self.shearDCR = 0
+
+            # SDC metrics
+            # key: load combo; values
+            self.buildingCost = {}
+            self.seismicCost = {}
+
+            # For asymmetrical tower
+            # key: floor; values: CRx, CRy
+            self.CR = {}
+            self.maxEcc = 0
+            self.avgEcc = 0
+
+            # Member Stresses
+            self.max_T = pd.DataFrame()
+            self.max_C = pd.DataFrame()
+            self.max_M = pd.DataFrame()
+            self.max_V = pd.DataFrame()
+            self.max_CombT = 0
+            self.max_CombC = 0
+
+        def addVariable(self, variableName, assignedValue): # Add a variable with an assigned value to the tower.
+            self.variables[variableName] = assignedValue
+
+        def avgBuildingCost(self):
+            ''' -> float'''
+            avgBuildingCost = 0
+            for bdCost in self.buildingCost.values():
+                avgBuildingCost += bdCost
+            if len(self.buildingCost) > 0:
+                avgBuildingCost /= min(len(self.buildingCost),1)
+
+            return avgBuildingCost
+
+        def avgSeismicCost(self):
+            ''' -> float'''
+            avgSeismicCost = 0
+          for sCost in self.seismicCost.values():
+                avgSeismicCost += sCost
+                avgSeismicCost /= min(len(self.seismicCost),1)
+
+            return avgSeismicCost
+
+        def memberStress(self):
+            ''' -> dataframe'''

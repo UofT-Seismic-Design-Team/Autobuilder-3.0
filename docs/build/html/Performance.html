@@ -48,7 +48,6 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#outline">Outline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#performance-analyzer">Performance Analyzer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#getweight">getWeight*</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#getmaxacceleration">getMaxAcceleration*</a></li>
@@ -94,13 +93,9 @@
   <section id="performance">
 <h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading"></a></h1>
 <hr class="docutils" />
-<section id="outline">
-<span id="id1"></span><h2>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h2>
-<p>Performance</p>
-<hr class="docutils" />
-</section>
 <section id="performance-analyzer">
 <span id="performanceanalyzer"></span><h2>Performance Analyzer<a class="headerlink" href="#performance-analyzer" title="Permalink to this heading"></a></h2>
+<p>PerformanceAnalyzer provides methods for analyzing the performance and estimating the cost of a structure.</p>
 <section id="getweight">
 <h3>getWeight*<a class="headerlink" href="#getweight" title="Permalink to this heading"></a></h3>
 <p>This method calculates the total weight of the structure:</p>
@@ -541,7 +536,7 @@ The method <em>GetSectProps(sectNames)</em> displays the mechanical properties o
 </section>
 <section id="getcr">
 <h3>getCR<a class="headerlink" href="#getcr" title="Permalink to this heading"></a></h3>
-<p>This method finds the centre of rotation for each floor of the structure.
+<p>This method finds the centre of rigidity for each floor of the structure.
 #. Unlock the model
 #. Set units to inches
 #. Get the names of the nodes of each floor
@@ -551,17 +546,20 @@ The method <em>GetSectProps(sectNames)</em> displays the mechanical properties o
 #. Set only unit load cases to run, add unit loads to each floor and run analysis
 #. Select each of the unit load cases
 #. Find the rotation about the local 3 axis for all nodes at each floor but the ground
-#.</p>
+#. Calculate the X and Y coordinates of the Centre of Rigidity
+#. Unlock the model
+#. Remove unit loads and remove diaphram constraint from the nodes of each floor
+#. Set all cases but the unit load cases to run</p>
 <p>The method <em>DeleteConstraint(node, 0)</em> removes any constraint assignments to the node.
 The method <em>SetDiaphragm(diaphragmType, 3)</em> defines a diaphram constraint orthogonal to the Z axis.
 The method <em>SetConstraint(node, diaphragmType, 0, True)</em> sets the diaphram constraint for each node. Any previous constraints will be replaced.
-The method *
+The method
 All the methods each return zero if each of them are successful, otherwise they return a nonzero value.
 .. code-block:: python</p>
 <blockquote>
 <div><dl>
 <dt>def getCR(self, towerElevs):</dt><dd><p>“””
-Calculate and return the Centre of Rotation for each floor in a tower.</p>
+Calculate and return the Centre of Rigidity for each floor in a tower.</p>
 <dl class="field-list simple">
 <dt class="field-odd">param towerElevs<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of elevation levels for tower floors.</p>
@@ -767,8 +765,23 @@ for patternName in unitLoadPatterns:</p>
 </section>
 <section id="geteccentricity">
 <h3>getEccentricity<a class="headerlink" href="#geteccentricity" title="Permalink to this heading"></a></h3>
+<p>This method calculates the maximum and average eccentricity of the tower.
+#. Calculate for each floor, the difference between the X or Y coordinates of centre of regidity and the centre of mass to find the eccentricity of the structure.
+#. Find the maximum and average value for eccentricty.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getEccentricity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">towerCRs</span><span class="p">,</span> <span class="n">tower</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39; Maximum and Average eccentricity &#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the maximum and average eccentricity for a structure.</span>
+
+<span class="sd">    This method calculates and returns the maximum and average eccentricity for a tower based on CR (Center of Rotation)</span>
+<span class="sd">    values and the center of mass of each floor.</span>
+
+<span class="sd">    :param towerCRs: Dictionary containing CR (Center of Rotation) for each floor at specified elevations.</span>
+<span class="sd">    :type towerCRs: dict</span>
+<span class="sd">    :param tower: Tower object containing floor information.</span>
+<span class="sd">    :type tower: Tower</span>
+<span class="sd">    :return: Maximum and average eccentricity (X and Y) values.</span>
+<span class="sd">    :rtype: tuple</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">eccs</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">elev</span> <span class="ow">in</span> <span class="n">towerCRs</span><span class="p">:</span>
@@ -792,6 +805,84 @@ for patternName in unitLoadPatterns:</p>
 </section>
 <section id="tower-performance">
 <span id="towerperformance"></span><h2>Tower Performance<a class="headerlink" href="#tower-performance" title="Permalink to this heading"></a></h2>
+<p>The class tower performance finds the average building and seismic costs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TowerPerformance</span><span class="p">:</span>
+    <span class="c1"># static variable for id</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">TowerPerformance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">TowerPerformance</span><span class="o">.</span><span class="n">id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Variables &amp; assigned values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># results from SAP2000</span>
+        <span class="c1"># key: load combo; values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxAcc</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxDisp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basesh</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># base shear</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">totalWeight</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Member Stress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tensileStress</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compressiveStress</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bendingStress</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shearStress</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+        <span class="c1"># Demand-capacity ratios</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tensionDCR</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compDCR</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shearDCR</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># SDC metrics</span>
+        <span class="c1"># key: load combo; values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buildingCost</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seismicCost</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># For asymmetrical tower</span>
+        <span class="c1"># key: floor; values: CRx, CRy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CR</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxEcc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avgEcc</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Member Stresses</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_T</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_C</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_M</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_V</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_CombT</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_CombC</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">addVariable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variableName</span><span class="p">,</span> <span class="n">assignedValue</span><span class="p">):</span> <span class="c1"># Add a variable with an assigned value to the tower.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">variableName</span><span class="p">]</span> <span class="o">=</span> <span class="n">assignedValue</span>
+
+    <span class="k">def</span> <span class="nf">avgBuildingCost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; -&gt; float&#39;&#39;&#39;</span>
+        <span class="n">avgBuildingCost</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bdCost</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildingCost</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">avgBuildingCost</span> <span class="o">+=</span> <span class="n">bdCost</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buildingCost</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">avgBuildingCost</span> <span class="o">/=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">buildingCost</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">avgBuildingCost</span>
+
+    <span class="k">def</span> <span class="nf">avgSeismicCost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; -&gt; float&#39;&#39;&#39;</span>
+        <span class="n">avgSeismicCost</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="k">for</span> <span class="n">sCost</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">seismicCost</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">avgSeismicCost</span> <span class="o">+=</span> <span class="n">sCost</span>
+            <span class="n">avgSeismicCost</span> <span class="o">/=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seismicCost</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">avgSeismicCost</span>
+
+    <span class="k">def</span> <span class="nf">memberStress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; -&gt; dataframe&#39;&#39;&#39;</span>
+</pre></div>
+</div>
 </section>
 </section>
 
