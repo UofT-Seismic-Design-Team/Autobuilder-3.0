@@ -1,5 +1,5 @@
 Welcome to Autobuilder's documentation!
-==========================================
+===================================
 
 **Autobuilder** is a desktop application for structural designers
 to automate and optimize the design and analysis process of structures under seismic loads.
@@ -18,4 +18,4 @@ Contents
 
    tutorial
    developer
-   Towervariation
+   Performance
