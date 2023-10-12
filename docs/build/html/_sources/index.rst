@@ -15,8 +15,7 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
-   
+
    tutorial
    developer
    Towervariation

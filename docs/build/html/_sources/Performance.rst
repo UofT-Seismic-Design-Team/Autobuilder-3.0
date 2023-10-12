@@ -1,6 +1,9 @@
 Performance
 ==================
 
+-----------
+
+
 .. _performanceanalyzer:
 
 Performance Analyzer
@@ -54,7 +57,7 @@ The method *BaseReact()* returns zero if the reactions are successfully recovere
 
 
 getMaxAcceleration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method finds the maximum acceleration out of all roof nodes in units of g:
 
 #. Set units to meters
@@ -128,7 +131,7 @@ The method *ModalPeriod()* returns zero if the data is successfully recovered, o
 
 
 getMaxDisplacement
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method finds the maximum displacement out of all roof nodes in millimeters:
 
 #. Set units to millimeters
@@ -177,7 +180,7 @@ The method *JointAccAbs()* returns zero if the accelerations are successfully re
 
 
 getBaseShear
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method finds the base shear forces of the structure using the method *BaseReact(*). 
 The base shear force is the base reaction in the global X direction.
 
@@ -208,7 +211,7 @@ The method *BaseReact()* returns zero if the reactions are successfully recovere
 
 
 getRoofNodeNames
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method finds the names of the roof nodes out of all the nodes of the structure:
 
 #. Retrieve the names of all the nodes of the structure
@@ -272,17 +275,16 @@ This method finds the names of the roof nodes out of all the nodes of the struct
 
 
 getMemberStress
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method calculates the maximum stress of the selected members in a structure:
 
 #. Set units to millimeters
 #. Find the names of the selected members
 #. For all but the maximum stress load combinations: 
-
-   a. Select "combo" for load combinations
-   b. Set "Envelope" as the output option for modal history results
-   c. Get the name of the member section and then the properties of the member
-   d. For each member, find the maximum Tensile Stress, Compressive Stress, and Bending and Shear about both major and minor axes
+  a. Select "combo" for load combinations
+  b. Set "Envelope" as the output option for modal history results
+  c. Get the name of the member section and then the properties of the member
+  d. For each member, find the maximum Tensile Stress, Compressive Stress, and Bending and Shear about both major and minor axes
 
 
 Modal History describes the structure responds to dynamic loading over time.
@@ -529,9 +531,8 @@ The method *SetDiaphragm(diaphragmType, 3)* defines a diaphram constraint orthog
 The method *SetConstraint(node, diaphragmType, 0, True)* sets the diaphram constraint for each node. Any previous constraints will be replaced. 
 The method 
 All the methods each return zero if each of them are successful, otherwise they return a nonzero value.
-
 .. code-block:: python
-    
+
     def getCR(self, towerElevs):
         """
         Calculate and return the Centre of Rigidity for each floor in a tower.
@@ -695,7 +696,7 @@ All the methods each return zero if each of them are successful, otherwise they 
 
 
 getEccentricity
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
 This method calculates the maximum and average eccentricity of the tower.
 #. Calculate for each floor, the difference between the X or Y coordinates of centre of regidity and the centre of mass to find the eccentricity of the structure.
 #. Find the maximum and average value for eccentricty.
@@ -739,7 +740,7 @@ This method calculates the maximum and average eccentricity of the tower.
 
 
 Tower Performance
-----------------------
+--------------
 The class tower performance finds the average building and seismic costs
 
 .. code-block:: python 

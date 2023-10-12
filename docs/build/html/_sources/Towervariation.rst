@@ -26,8 +26,7 @@ This function is designed to associate panels with their corresponding bracing g
             if bgName != '':
                 bracingGroups[bgName].addAssignment(panel)
 
-
-
+|
 addMemberIdsToSectionGroups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This function, is similar to the **addPanelsToBracingGroups** fuction but focuses on the association of member IDs with their respective section groups within a tower object. Initially, it accesses two dictionaries, **member_ids** and **sectionGroups**, representing member IDs and section groups, respectively, retrieved from the **self.tower** object. To prepare for new assignments, the function systematically clears any pre-existing member ID assignments within each section group by iterating through the section groups and emptying their assignments attribute. Subsequently, the function iterates through the member IDs, fetching the corresponding section group name, and then utilizes this name to access the corresponding section group object within the **sectionGroups** dictionary. Finally, the **addAssignment** method is used on the section group, associating the member ID with its designated section group, ensuring precise member ID assignments within the tower's section groups.
@@ -46,8 +45,7 @@ This function, is similar to the **addPanelsToBracingGroups** fuction but focuse
             sgName = member_ids[member_id]
             sectionGroups[sgName].addAssignment(member_id)
 
-
-
+|
 addPanelsToAreaSectionGroups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -76,8 +74,7 @@ The **addPanelsToAreaSectionGroups** function, is responsible for associating pa
             asg = areaSectionGroups[asgName]
             print([str(name) for name in asg.assignments])
 
-
-
+|
 GenerateInputTable
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -165,10 +162,9 @@ The **GenerateInputTable** function within the provided code is responsible for 
             warning.popUpErrorBox('Unable to create input table')
             self.close()
 
-
         self.run = False
 
-
+|
 addProgress
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The **addProgress** function updates a progress bar within the application window by incrementing a counter variable, which ranges from 0 to 100, to represent the progress of a certain task. When the counter reaches 100, it sets a flag to indicate that the task is complete.
