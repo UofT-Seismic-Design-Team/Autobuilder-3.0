@@ -5,36 +5,34 @@ Contents
 =========
 
 .. toctree::
-    :maxdepth: 2
-    :numbered:
-
-    Initializing a New Model
-        Initialize the Model 
-    Main Window
-        Save File
-        Open File
-        Section View
-        3-D View
-    Bracing Schemes
-        Create Bracing Schemes
-    Floor Plans
-        Create/Edit Floor Plans
-        Assign Floor Plans to Elevation
-        Define Locations of the Centre of Mass (COM)
-    Panels
-        Generate Panels from Floor Plans
-        Edit Panels
-    Design Variables
-        Define Bracing Group
-        Define Section Group
-    Variable Assignment 
-        Assign Bracing Design to Panels
-        Assign Member Section to Members
-    Generate Tower
-        Generate Towers
-        Additional Information 
-    Run Tower
-        Run Towers
+  
+  Initializing a New Model
+    Initialize the Model 
+  Main Window
+    Save File
+    Open File
+    Section View
+    3-D View
+  Bracing Schemes
+    Create Bracing Schemes
+  Floor Plans
+    Create/Edit Floor Plans
+    Assign Floor Plans to Elevation
+    Define Locations of the Centre of Mass (COM)
+  Panels
+    Generate Panels from Floor Plans
+    Edit Panels
+  Design Variables
+    Define Bracing Group
+    Define Section Group
+  Variable Assignment 
+    Assign Bracing Design to Panels
+    Assign Member Section to Members
+  Generate Tower
+    Generate Towers
+    Additional Information 
+  Run Tower
+      Run Towers
 
 
 Through this tutorial, you will learn how to optimize your tower design in SAP2000 using Autobuilder. This tutorial will also help to familiarize you with the program's basic functions and features.
@@ -46,9 +44,10 @@ The required materials and finished product of this tutorial can be found in <C:
     1. The SAP2000 model used in this tutorial is incomplete and only for demonstration purposes. See “Modelling in SAP2000” for an introductory SAP2000 modelling tutorial. 
     2. Save the Autobuilder file frequently throughout the tutorial if possible. 
 
-1. Initializing a New Model
-=============================
 This section describes the process of setting up a new Autobuilder model.
+
+1. Initializing a New Model
+==============================
 
 1.1 Initialize the Model
 --------------------------
