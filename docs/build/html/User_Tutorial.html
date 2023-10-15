@@ -11,11 +11,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,49 +47,53 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer.html">Developer</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#contents">Contents</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#initialize-the-model">1.1 Initialize the Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#contents">Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initializing-a-new-model">1. Initializing a New Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialize-the-model">1.1 Initialize the Model</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#main-window">2. Main Window</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#save-file">2.1 Save File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#open-file">2.2 Open File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#section-view">2.3 Section View</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#d-view">2.4 3-D View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main-window">2. Main Window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#save-file">2.1 Save File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-file">2.2 Open File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#section-view">2.3 Section View</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-view">2.4 3-D View</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#bracing-schemes">3. Bracing Schemes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#create-bracing-schemes">3.1 Create Bracing Schemes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bracing-schemes">3. Bracing Schemes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-bracing-schemes">3.1 Create Bracing Schemes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#floor-plans">4. Floor Plans</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#create-edit-floor-plans">4.1 Create/Edit Floor Plans</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#assign-floor-plans-to-elevation">4.2 Assign Floor Plans to Elevation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#define-location-of-the-centre-of-mass-com">4.3 Define Location of the Centre of Mass (COM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#floor-plans">4. Floor Plans</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-edit-floor-plans">4.1 Create/Edit Floor Plans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assign-floor-plans-to-elevation">4.2 Assign Floor Plans to Elevation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-location-of-the-centre-of-mass-com">4.3 Define Location of the Centre of Mass (COM)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#panels">5. Panels</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#generate-panels-from-floor-plans">5.1 Generate Panels from Floor Plans</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#edit-panels">5.2 Edit Panels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#panels">5. Panels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-panels-from-floor-plans">5.1 Generate Panels from Floor Plans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit-panels">5.2 Edit Panels</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#design-variables">6. Design Variables</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#define-bracing-group">6.1 Define Bracing Group</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#define-section-group">6.2 Define Section Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design-variables">6. Design Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#define-bracing-group">6.1 Define Bracing Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-section-group">6.2 Define Section Group</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#variable-assignment">7. Variable Assignment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#assign-bracing-design-to-panel">7.1 Assign Bracing Design to Panel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#assign-member-section-to-members">7.2 Assign Member Section to Members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-assignment">7. Variable Assignment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assign-bracing-design-to-panel">7.1 Assign Bracing Design to Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assign-member-section-to-members">7.2 Assign Member Section to Members</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#generate-tower">8. Generate Tower</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#additional-information">8.2 Additional Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-tower">8. Generate Tower</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-towers">8.1 Generate Towers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">8.2 Additional Information</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#run-tower">9. Run Tower</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#run-towers">9.1 Run Towers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-tower">9. Run Tower</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-towers">9.1 Run Towers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -119,12 +123,9 @@
            <div itemprop="articleBody">
              
   <section id="user-tutorial">
-<h1>User Tutorial<a class="headerlink" href="#user-tutorial" title="Link to this heading"></a></h1>
-</section>
+<h1>User Tutorial<a class="headerlink" href="#user-tutorial" title="Permalink to this heading"></a></h1>
 <section id="contents">
-<h1>Contents<a class="headerlink" href="#contents" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-</div>
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading"></a></h2>
 <p>Through this tutorial, you will learn how to optimize your tower design in SAP2000 using Autobuilder. This tutorial will also help to familiarize you with the program’s basic functions and features.</p>
 <p>The required materials and finished product of this tutorial can be found in &lt;C:Program Files (x86)University of Toronto Seismic Design TeamAutobuilderExample_beta&gt;</p>
 <div class="admonition note">
@@ -135,11 +136,16 @@
 </ol>
 </div>
 <p>This section describes the process of setting up a new Autobuilder model.</p>
+<blockquote>
+<div></div></blockquote>
+</section>
+<section id="initializing-a-new-model">
+<h2>1. Initializing a New Model<a class="headerlink" href="#initializing-a-new-model" title="Permalink to this heading"></a></h2>
 <section id="initialize-the-model">
-<h2>1.1 Initialize the Model<a class="headerlink" href="#initialize-the-model" title="Link to this heading"></a></h2>
+<h3>1.1 Initialize the Model<a class="headerlink" href="#initialize-the-model" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>To start, go to <em>Settings -&gt; Project Settings /</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/gear.png</span></code></p></li>
+<li><p>To start, go to <em>Settings -&gt; Project Settings /</em> click <img alt="gear" src="_images/gear.png" /></p></li>
 <li><p>The <em>Project Settings</em> dialog shown below will appear.</p></li>
 </ul>
 <img alt="_images/Project-Settings.png" src="_images/Project-Settings.png" />
@@ -202,16 +208,16 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 </section>
 </section>
 <section id="main-window">
-<h1>2. Main Window<a class="headerlink" href="#main-window" title="Link to this heading"></a></h1>
+<h2>2. Main Window<a class="headerlink" href="#main-window" title="Permalink to this heading"></a></h2>
 <p>This section describes the basic controls in the main window.</p>
 <section id="save-file">
-<h2>2.1 Save File<a class="headerlink" href="#save-file" title="Link to this heading"></a></h2>
+<h3>2.1 Save File<a class="headerlink" href="#save-file" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>To start, go to <em>File -&gt; Save File…/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/disk.png</span></code></p></li>
+<li><p>To start, go to <em>File -&gt; Save File…/</em> click <img alt="disk" src="_images/disk.png" /></p></li>
 <li><p>The <em>Save File</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/sources/images/save-file.png" src="docs/sources/images/save-file.png" />
+<img alt="_images/save-file.png" src="_images/save-file.png" />
 <ul class="simple">
 <li><dl class="simple">
 <dt>Save your current model</dt><dd><ul>
@@ -225,36 +231,36 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 </div></blockquote>
 </section>
 <section id="open-file">
-<h2>2.2 Open File<a class="headerlink" href="#open-file" title="Link to this heading"></a></h2>
+<h3>2.2 Open File<a class="headerlink" href="#open-file" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>To start, go to <em>File -&gt; Open File…/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/folder-horizontal-open.png</span></code>.</p></li>
+<li><p>To start, go to <em>File -&gt; Open File…/</em> click  <img alt="folder-horizontal-open" src="_images/folder-horizontal-open.png" /></p></li>
 <li><p>The <em>Open File</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/Open-file.png" src="docs/source/images/Open-file.png" />
+<img alt="_images/Open-file.png" src="_images/Open-file.png" />
 <ul class="simple">
 <li><p>Open your previously saved model</p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="section-view">
-<h2>2.3 Section View<a class="headerlink" href="#section-view" title="Link to this heading"></a></h2>
+<h3>2.3 Section View<a class="headerlink" href="#section-view" title="Permalink to this heading"></a></h3>
 <p>The left portion of the main window consists of the section view of the tower as seen below.
-.. image:: docs/source/images/section-view.png</p>
+.. image:: images/section-view.png</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/arrow-090.png</span></code> or <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/arrow-270.png</span></code> to move up or down a floor. “Z= X.X” represents the current floor elevation and will change accordingly.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/flip.png</span></code> changes the orientation of the panels</p></li>
+<li><p>Click <img alt="arrow-090" src="_images/arrow-090.png" /> or <img alt="arrow-270" src="_images/arrow-270.png" /> to move up or down a floor. “Z= X.X” represents the current floor elevation and will change accordingly.</p></li>
+<li><p><img alt="flip" src="_images/flip.png" /> changes the orientation of the panels</p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="d-view">
-<h2>2.4 3-D View<a class="headerlink" href="#d-view" title="Link to this heading"></a></h2>
+<h3>2.4 3-D View<a class="headerlink" href="#d-view" title="Permalink to this heading"></a></h3>
 <p>The right portion of the main window consists of the 3-D view of the tower as seen below.
-.. image:: docs/source/images/3-D-view.png</p>
+.. image:: images/3-D-view.png</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/arrow-090.png</span></code> or <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/arrow-270.png</span></code> to shift up or down.</p></li>
+<li><p>Click <img alt="arrow-090" src="_images/arrow-090.png" />  or <img alt="arrow-270" src="_images/arrow-270.png" /> to shift up or down.</p></li>
 <li><p>Scroll up or down to zoom in or out.</p></li>
 <li><p>Doublc click to resume to the original zoom level.</p></li>
 </ul>
@@ -262,24 +268,25 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 </section>
 </section>
 <section id="bracing-schemes">
-<h1>3. Bracing Schemes<a class="headerlink" href="#bracing-schemes" title="Link to this heading"></a></h1>
+<h2>3. Bracing Schemes<a class="headerlink" href="#bracing-schemes" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to define bracing schemes. By default, there will be one pre-defined bracing scheme.</p>
 <section id="create-bracing-schemes">
-<h2>3.1 Create Bracing Schemes<a class="headerlink" href="#create-bracing-schemes" title="Link to this heading"></a></h2>
+<h3>3.1 Create Bracing Schemes<a class="headerlink" href="#create-bracing-schemes" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>To start, go to <em>Edit -&gt; Bracing Scheme/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/Bracing</span> <span class="pre">-</span> <span class="pre">24x24.png</span></code></p></li>
+<li><p>To start, go to <em>Edit -&gt; Bracing Scheme/</em> click <img alt="Bracing-24x24" src="_images/Bracing-24x24.png" /></p></li>
 <li><p>The <em>Bracing Scheme</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/bracing-scheme.png*Click``..image::resources/Icons/plus.png``attheleftsideofthedialogtocreateanewbracingscheme." src="docs/source/images/bracing-scheme.png*Click``..image::resources/Icons/plus.png``attheleftsideofthedialogtocreateanewbracingscheme." />
+<img alt="_images/bracing-scheme.png" src="_images/bracing-scheme.png" />
 <ul class="simple">
+<li><p>Click <img alt="plus" src="_images/plus.png" /> at the left side of the dialog to create a new bracing scheme.</p></li>
 <li><p>Rename “New Bracing 1” to “double_x”.</p></li>
 <li><p>Enter the following coordinates and the material of each member in the table shown below.</p></li>
 </ul>
-<img alt="docs/source/images/define-bracing.png" src="docs/source/images/define-bracing.png" />
+<img alt="_images/define-bracing.png" src="_images/define-bracing.png" />
 <ul class="simple">
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/plus.png</span></code> to add a new row.</p></li>
-<li><p>Select one or multiple rows and click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/minus.png</span></code> to delete.</p></li>
+<li><p>Click <img alt="plus" src="_images/plus.png" /> to add a new row.</p></li>
+<li><p>Select one or multiple rows and click <img alt="minus" src="_images/minus.png" /> to delete.</p></li>
 <li><p>(Note: The following mathematical operations are allowed: +, -, <a href="#id1"><span class="problematic" id="id2">*</span></a>, /.)</p></li>
 </ul>
 </div></blockquote>
@@ -290,18 +297,18 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 </section>
 </section>
 <section id="floor-plans">
-<h1>4. Floor Plans<a class="headerlink" href="#floor-plans" title="Link to this heading"></a></h1>
+<h2>4. Floor Plans<a class="headerlink" href="#floor-plans" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to define floor plans. By default, there will be ten pre-defined floor plans.</p>
 <section id="create-edit-floor-plans">
-<h2>4.1 Create/Edit Floor Plans<a class="headerlink" href="#create-edit-floor-plans" title="Link to this heading"></a></h2>
+<h3>4.1 Create/Edit Floor Plans<a class="headerlink" href="#create-edit-floor-plans" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>To start, go to <em>Edit -&gt; Floor Plan/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/Floor</span> <span class="pre">Plan</span> <span class="pre">-</span> <span class="pre">24x24.png</span></code>.</p></li>
+<li><p>To start, go to <em>Edit -&gt; Floor Plan/</em> click <img alt="Floorplane-24x24" src="_images/Floor_Plan-24x24.png" />.</p></li>
 <li><p>The <em>Floor</em> Plan dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/floor-plan.png" src="docs/source/images/floor-plan.png" />
+<img alt="_images/floor-plan.png" src="_images/floor-plan.png" />
 <ul class="simple">
-<li><p>Select all the existing floor plans click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/minus.png</span></code> to delete.</p></li>
-<li><p>Create a new floor plan by clicking <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/plus.png</span></code> next to “Edit Floor Plan” and rename it to “Floor_1_7”.</p></li>
+<li><p>Select all the existing floor plans click <img alt="minus" src="_images/minus.png" /> to delete.</p></li>
+<li><p>Create a new floor plan by clicking <img alt="plus" src="_images/plus.png" /> next to “Edit Floor Plan” and rename it to “Floor_1_7”.</p></li>
 <li><dl class="simple">
 <dt>Enter the following information in the new floor plan:</dt><dd><ul>
 <li><p>X Y Coordinates</p></li>
@@ -317,116 +324,101 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 <li><dl>
 <dt>Repeat the steps above for the rest of floor plans:</dt><dd><ul>
 <li><dl>
-<dt>Floor plan name: Floor_8_10_16_19</dt><dd><ul class="simple">
-<li><p>X Y Coordinates</p></li>
-</ul>
-<ul class="simple">
-<li><ul>
-<li><p><strong>X</strong></p></li>
-<li><p><strong>Y</strong></p></li>
-<li><p><strong>Bottom</strong></p></li>
-<li><p><strong>Top</strong></p></li>
-</ul>
+<dt>Floor plan name: Floor_8_10_16_19</dt><dd><ul>
+<li><p>X Y Coordinates</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>Bottom</p></th>
+<th class="head"><p>Top</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>12</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>12</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+</tr>
+</tbody>
+</table>
 </li>
-<li><ul>
-<li><p>0</p></li>
-<li><p>0</p></li>
-<li><p>1</p></li>
-<li><p>1</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>12</p></li>
-<li><p>0</p></li>
-<li><p>2</p></li>
-<li><p>2</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>12</p></li>
-<li><p>12</p></li>
-<li><p>3</p></li>
-<li><p>3</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>0</p></li>
-<li><p>12</p></li>
-<li><p>4</p></li>
-<li><p>4</p></li>
-</ul>
-</li>
-<li><p>Members</p></li>
-</ul>
-<ul class="simple">
-<li><ul>
-<li><p><strong>Start</strong></p></li>
-<li><p><strong>End</strong></p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>1</p></li>
-<li><p>2</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>2</p></li>
-<li><p>3</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>3</p></li>
-<li><p>4</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>4</p></li>
-<li><p>1</p></li>
-</ul>
+<li><p>Members</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Start</p></th>
+<th class="head"><p>End</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt>Floor plan name: Floor_11_15</dt><dd><ul class="simple">
-<li><p>X Y Coordinates</p></li>
-</ul>
-<ul class="simple">
-<li><ul>
-<li><p><strong>X</strong></p></li>
-<li><p><strong>Y</strong></p></li>
-<li><p><strong>Bottom</strong></p></li>
-<li><p><strong>Top</strong></p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>3.25</p></li>
-<li><p>3.25</p></li>
-<li><p>1</p></li>
-<li><p>1</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>8.75</p></li>
-<li><p>3.25</p></li>
-<li><p>2</p></li>
-<li><p>2</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>8.75</p></li>
-<li><p>8.75</p></li>
-<li><p>3</p></li>
-<li><p>3</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p>3.25</p></li>
-<li><p>8.75</p></li>
-<li><p>4</p></li>
-<li><p>4</p></li>
-</ul>
+<dt>Floor plan name: Floor_11_15</dt><dd><ul>
+<li><p>X Y Coordinates</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>Bottom</p></th>
+<th class="head"><p>Top</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3.25</p></td>
+<td><p>3.25</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>8.75</p></td>
+<td><p>3.25</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>8.75</p></td>
+<td><p>8.75</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.25</p></td>
+<td><p>8.75</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ul>
 </dd>
@@ -439,53 +431,242 @@ ensure the ground motion is correctly defined in the SAP2000 model.</p>
 </ul>
 </section>
 <section id="assign-floor-plans-to-elevation">
-<h2>4.2 Assign Floor Plans to Elevation<a class="headerlink" href="#assign-floor-plans-to-elevation" title="Link to this heading"></a></h2>
+<h3>4.2 Assign Floor Plans to Elevation<a class="headerlink" href="#assign-floor-plans-to-elevation" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>To start, go to <em>Assign Elevation.</em></p></li>
 <li><p>The table shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/floor-plan-2.png" src="docs/source/images/floor-plan-2.png" />
-<ul class="simple">
-<li><p>Enter the name of th floor plans to their corresponding elevations</p></li>
+<img alt="_images/floor-plan-2.png" src="_images/floor-plan-2.png" />
+<ul>
+<li><p>Enter the name of th floor plans to their corresponding elevations</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elevation</p></th>
+<th class="head"><p>1st Layer</p></th>
+<th class="head"><p>2nd Layer</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>18.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>21.0</p></td>
+<td><p>Floor_1_7</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+</tr>
+<tr class="row-odd"><td><p>24.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>27.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>30.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>33.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>36.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>39.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>42.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>45.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>48.0</p></td>
+<td><p>Floor_11_15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>51.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>54.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>57.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>60.0</p></td>
+<td><p>Floor_8_10_16_19</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><ul class="simple">
+<li><p>1st Layer: Primary floor plan</p></li>
+<li><p>2nd Layer: Secondary floor plan which is directly on top of the 1st Layer</p></li>
+<li><p>Note: The nearest floor plans will be connected. For instance, Floor_8_10_16_19 at</p></li>
+</ul>
+<p>elevation 21.0 will be connected to Floor_8_10_16_19 at elevation 24.0, while Floor_1_7 at elevation 21.0 will be connected to Floor_1_7 at elevation 18.0.</p>
+</div></blockquote>
+</li>
 </ul>
 </section>
 <section id="define-location-of-the-centre-of-mass-com">
-<h2>4.3 Define Location of the Centre of Mass (COM)<a class="headerlink" href="#define-location-of-the-centre-of-mass-com" title="Link to this heading"></a></h2>
+<h3>4.3 Define Location of the Centre of Mass (COM)<a class="headerlink" href="#define-location-of-the-centre-of-mass-com" title="Permalink to this heading"></a></h3>
 <p>The locations of the COMs are important for the center of rigidity calculation, which is used to evaluate the performances of towers with asymmetrical floor plans.</p>
 <ul class="simple">
 <li><p>To start, go to <em>Centre of Mass.</em></p></li>
 <li><p>The table shown below will appear.</p></li>
 </ul>
-<ul class="simple">
-<li><p>Enter the followings:</p></li>
-</ul>
-<ul class="simple">
+<img alt="_images/floor-plan-3.png" src="_images/floor-plan-3.png" />
+<ul>
+<li><p>Enter the followings:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Elevation</p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>6.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>9.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>12.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>15.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>18.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>21.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>24.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>27.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>30.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>33.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>36.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>39.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>42.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>45.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>48.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>51.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>54.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-even"><td><p>57.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>60.0</p></td>
+<td><p>6.0</p></td>
+<td><p>6.0</p></td>
+</tr>
+</tbody>
+</table>
+</li>
 <li><p>Press OK to return to the main window</p></li>
 </ul>
 </section>
 </section>
 <section id="panels">
-<h1>5. Panels<a class="headerlink" href="#panels" title="Link to this heading"></a></h1>
+<h2>5. Panels<a class="headerlink" href="#panels" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to create and edit panels. Panels are boxes/quadrilaterals that define the design locations of the braces.</p>
 <section id="generate-panels-from-floor-plans">
-<h2>5.1 Generate Panels from Floor Plans<a class="headerlink" href="#generate-panels-from-floor-plans" title="Link to this heading"></a></h2>
+<h3>5.1 Generate Panels from Floor Plans<a class="headerlink" href="#generate-panels-from-floor-plans" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Go to <em>Edit -&gt; Generate Panel -&gt; with Floor Plan</em></p></li>
 <li><p>The generated panels will be shown in the section view.</p></li>
 </ul>
-<img alt="docs/source/images/section-view-2.png" src="docs/source/images/section-view-2.png" />
+<img alt="_images/section-view-2.png" src="_images/section-view-2.png" />
 </section>
 <section id="edit-panels">
-<h2>5.2 Edit Panels<a class="headerlink" href="#edit-panels" title="Link to this heading"></a></h2>
+<h3>5.2 Edit Panels<a class="headerlink" href="#edit-panels" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>To start, go to <em>Edit -&gt; Panel/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/Panel</span> <span class="pre">-</span> <span class="pre">24x24.png</span></code>.</p></li>
+<li><p>To start, go to <em>Edit -&gt; Panel/</em> click <img alt="panel-24x24" src="_images/Panel-24x24.png" />.</p></li>
 <li><p>The <em>Panel</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/panel.png" src="docs/source/images/panel.png" />
+<img alt="_images/panel.png" src="_images/panel.png" />
 <ul class="simple">
 <li><p>Click and select a panel in the table on the left. The selected panel will be shown in the 3D viewer.</p></li>
 </ul>
-<img alt="docs/source/images/panel-2.png" src="docs/source/images/panel-2.png" />
+<img alt="_images/panel-2.png" src="_images/panel-2.png" />
 <ul>
 <li><dl>
 <dt>Other tips:</dt><dd><ul class="simple">
@@ -502,23 +683,23 @@ designed to span multiple floors.</p>
 </section>
 </section>
 <section id="design-variables">
-<h1>6. Design Variables<a class="headerlink" href="#design-variables" title="Link to this heading"></a></h1>
+<h2>6. Design Variables<a class="headerlink" href="#design-variables" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to create and edit design variable groups, including bracings and member sections.</p>
 <section id="define-bracing-group">
-<h2>6.1 Define Bracing Group<a class="headerlink" href="#define-bracing-group" title="Link to this heading"></a></h2>
+<h3>6.1 Define Bracing Group<a class="headerlink" href="#define-bracing-group" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Go to <em>Edit -&gt; Design Variable/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/pencil.png</span></code></p></li>
+<li><p>Go to <em>Edit -&gt; Design Variable/</em> click <img alt="pencil" src="_images/pencil.png" />.</p></li>
 <li><p>The Design Variables dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/design-variable.png" src="docs/source/images/design-variable.png" />
+<img alt="_images/design-variable.png" src="_images/design-variable.png" />
 <ul class="simple">
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/plus.png</span></code> above the left column to create a new bracing group and rename it to “x_double_x”.</p></li>
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/plus.png</span></code> above the right column to create a new variable. Select “double_x” from the drop- down.</p></li>
+<li><p>Click <img alt="plus" src="_images/plus.png" /> above the left column to create a new bracing group and rename it to “x_double_x”.</p></li>
+<li><p>Click <img alt="plus" src="_images/plus.png" /> above the right column to create a new variable. Select “double_x” from the drop- down.</p></li>
 <li><p>Create another variable and select “x”.</p></li>
 </ul>
 </section>
 <section id="define-section-group">
-<h2>6.2 Define Section Group<a class="headerlink" href="#define-section-group" title="Link to this heading"></a></h2>
+<h3>6.2 Define Section Group<a class="headerlink" href="#define-section-group" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><p>Click the “Section Group” tab.</p></li>
 <li><dl class="simple">
@@ -541,17 +722,17 @@ designed to span multiple floors.</p>
 </section>
 </section>
 <section id="variable-assignment">
-<h1>7. Variable Assignment<a class="headerlink" href="#variable-assignment" title="Link to this heading"></a></h1>
+<h2>7. Variable Assignment<a class="headerlink" href="#variable-assignment" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to assign the bracing and member section design variable groups.</p>
 <section id="assign-bracing-design-to-panel">
-<h2>7.1 Assign Bracing Design to Panel<a class="headerlink" href="#assign-bracing-design-to-panel" title="Link to this heading"></a></h2>
+<h3>7.1 Assign Bracing Design to Panel<a class="headerlink" href="#assign-bracing-design-to-panel" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Go to <em>Edit -&gt; Variable Assignment/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/pencil_plus.png</span></code>.</p></li>
+<li><p>Go to <em>Edit -&gt; Variable Assignment/</em> click <img alt="pencil_plus" src="_images/pencil_plus.png" />.</p></li>
 <li><p>The <em>Variable Assignment</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/variable-assignment.png" src="docs/source/images/variable-assignment.png" />
+<img alt="_images/variable-assignment.png" src="_images/variable-assignment.png" />
 <ul>
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/plus.png</span></code></p></li>
+<li><p>Click <img alt="plus" src="_images/plus.png" />.</p></li>
 <li><p>Select “x_double_x” in the drop-down for Panel “1”.</p></li>
 <li><p>Alternatively, click “Import .csv”.</p></li>
 <li><dl>
@@ -568,7 +749,7 @@ designed to span multiple floors.</p>
 <li><p>1st column: Panel Name</p></li>
 <li><p>2nd column: Bracing Group Name</p></li>
 </ul>
-<img alt="docs/source/images/format-bracing-assignment.png" src="docs/source/images/format-bracing-assignment.png" />
+<img alt="_images/format-bracing-assignment.png" src="_images/format-bracing-assignment.png" />
 <ul class="simple">
 <li><p>Note: No header required</p></li>
 </ul>
@@ -577,10 +758,10 @@ designed to span multiple floors.</p>
 </li>
 <li><p>The <em>Bracing Assignment</em> table will be filled as seen below.</p></li>
 </ul>
-<img alt="docs/source/images/bracing-assignment-table.png" src="docs/source/images/bracing-assignment-table.png" />
+<img alt="_images/bracing-assignment-table.png" src="_images/bracing-assignment-table.png" />
 </section>
 <section id="assign-member-section-to-members">
-<h2>7.2 Assign Member Section to Members<a class="headerlink" href="#assign-member-section-to-members" title="Link to this heading"></a></h2>
+<h3>7.2 Assign Member Section to Members<a class="headerlink" href="#assign-member-section-to-members" title="Permalink to this heading"></a></h3>
 <ul>
 <li><p>Go to <em>Section Assignment</em></p></li>
 <li><dl class="simple">
@@ -602,31 +783,33 @@ designed to span multiple floors.</p>
 </li>
 <li><p>2nd column: Section Group Name</p></li>
 </ul>
-<img alt="docs/source/images/format-section-assignment.png" src="docs/source/images/format-section-assignment.png" />
+<img alt="_images/format-section-assignment.png" src="_images/format-section-assignment.png" />
 </dd>
 </dl>
 </li>
-<li><p>In this tutorial, section assignment is not required. Thus, select all section assignments and click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/minus.png</span></code> to delete.</p></li>
+<li><p>In this tutorial, section assignment is not required. Thus, select all section assignments and click <img alt="minus" src="_images/minus.png" /> to delete.</p></li>
 <li><p>Press OK to return to the main window.</p></li>
 </ul>
 </section>
 </section>
 <section id="generate-tower">
-<h1>8. Generate Tower<a class="headerlink" href="#generate-tower" title="Link to this heading"></a></h1>
+<h2>8. Generate Tower<a class="headerlink" href="#generate-tower" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to generate tower designs.</p>
-<dl>
-<dt>8.1 Generate Towers</dt><dd><ul class="simple">
-<li><p>Go to <em>Analysis -&gt; Generate Towers/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/Generate</span> <span class="pre">Tower</span> <span class="pre">-</span> <span class="pre">24x24.png</span></code>.</p></li>
+<section id="generate-towers">
+<h3>8.1 Generate Towers<a class="headerlink" href="#generate-towers" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Go to <em>Analysis -&gt; Generate Towers/</em> click <img alt="generatetower-24x24" src="_images/GenerateTower-24x24.png" />.</p></li>
 <li><p>The <em>Generate Tower</em> dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/generate-tower.png" src="docs/source/images/generate-tower.png" />
+<img alt="_images/generate-tower.png" src="_images/generate-tower.png" />
 <ul class="simple">
 <li><p>Press OK to return to the main window.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
+</section>
 <section id="additional-information">
-<h2>8.2 Additional Information<a class="headerlink" href="#additional-information" title="Link to this heading"></a></h2>
+<h3>8.2 Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this heading"></a></h3>
 <ul>
 <li><p>All possible tower designs will be generated based on the permutations of selected bracing designs/member sections and the associated panels/member IDs.</p></li>
 <li><p>In our case, there is one bracing group that contains two bracing designs, including “double_x” and “x”. This bracing group is assigned to all panels. Therefore, a total of two tower designs will be generated.</p></li>
@@ -641,7 +824,7 @@ designed to span multiple floors.</p>
 </li>
 <li><p>The following table should appear in Excel.</p></li>
 </ul>
-<img alt="docs/source/images/format-input-table.png" src="docs/source/images/format-input-table.png" />
+<img alt="_images/format-input-table.png" src="_images/format-input-table.png" />
 <ul>
 <li><dl>
 <dt>Format of input table:</dt><dd><ul class="simple">
@@ -657,29 +840,79 @@ designed to span multiple floors.</p>
 </section>
 </section>
 <section id="run-tower">
-<h1>9. Run Tower<a class="headerlink" href="#run-tower" title="Link to this heading"></a></h1>
+<h2>9. Run Tower<a class="headerlink" href="#run-tower" title="Permalink to this heading"></a></h2>
 <p>This section details the steps to model and run analysis on all the tower designs in SAP2000.</p>
 <section id="run-towers">
-<h2>9.1 Run Towers<a class="headerlink" href="#run-towers" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Go to <em>Analysis -&gt; Run Towers/</em> click <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">resources/Icons/Run</span> <span class="pre">Tower</span> <span class="pre">-</span> <span class="pre">24x24.png</span></code>.</p></li>
-<li><p>The <em>Run Towers</em> dialog shown below will appear.</p></li>
+<h3>9.1 Run Towers<a class="headerlink" href="#run-towers" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p>Go to <em>Analysis -&gt; Run Towers/</em> click <img alt="runtower-24x24" src="_images/RunTower-24x24.png" />.</p></li>
+<li><p>The <em>Run Towers</em> dialog shown below will appear.
+.. image:: images/run-towers.png
+* SAP2000 Path</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Must match the SAP2000.exe installed on your computer.</p></li>
 </ul>
-<img alt="docs/source/images/run-towers.png*SAP2000Path*MustmatchtheSAP2000.exeinstalledonyourcomputer.*NodestoAnalyze*Format:&lt;ID1&gt;,&lt;ID2&gt;,&lt;ID2&gt;...*EntertheIDsofnodesofinterest,typicallytheroofnodes.*Maximumaccelerationsanddisplacementswillbemeasuredfromthesenodes.*NodeIDsneedtobeobtainedfromthepreviouslyselectedSAP2000model.*Note:Maybeignoredif“GroundMotion”isuncheckedinProjectSettings.*Footprint(sqin)*Totalfootprintofthetower.*TotalHeight(in)*Totalheightofthetower.*TotalMass(kg)*Totalmass/weightsonthetower.*GroundMotionIdentifier*Maximumacceleration,displacementandbaseshearareobtainedwhenthetowerissubjectedtoloadcombinationscontainingtheidentifier/keyword(e.g.D+GM1-NS)*Note:Maybeignoredif“GroundMotion”isuncheckedinProjectSettings." src="docs/source/images/run-towers.png*SAP2000Path*MustmatchtheSAP2000.exeinstalledonyourcomputer.*NodestoAnalyze*Format:&lt;ID1&gt;,&lt;ID2&gt;,&lt;ID2&gt;...*EntertheIDsofnodesofinterest,typicallytheroofnodes.*Maximumaccelerationsanddisplacementswillbemeasuredfromthesenodes.*NodeIDsneedtobeobtainedfromthepreviouslyselectedSAP2000model.*Note:Maybeignoredif“GroundMotion”isuncheckedinProjectSettings.*Footprint(sqin)*Totalfootprintofthetower.*TotalHeight(in)*Totalheightofthetower.*TotalMass(kg)*Totalmass/weightsonthetower.*GroundMotionIdentifier*Maximumacceleration,displacementandbaseshearareobtainedwhenthetowerissubjectedtoloadcombinationscontainingtheidentifier/keyword(e.g.D+GM1-NS)*Note:Maybeignoredif“GroundMotion”isuncheckedinProjectSettings." />
-<ul class="simple">
+</div></blockquote>
+<ul>
+<li><dl class="simple">
+<dt>Nodes to Analyze</dt><dd><ul class="simple">
+<li><p>Format: &lt;ID1&gt;,&lt;ID2&gt;,&lt;ID2&gt;…</p></li>
+<li><p>Enter the IDs of nodes of interest, typically the roof nodes.</p></li>
+<li><p>Maximum accelerations and displacements will be measured from these nodes.</p></li>
+<li><p>Node IDs need to be obtained from the previously selected SAP2000 model.</p></li>
+<li><p>Note: May be ignored if “Ground Motion” is unchecked in Project Settings.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Footprint (sq in)</dt><dd><ul class="simple">
+<li><p>Total footprint of the tower.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Total Height (in)</dt><dd><ul class="simple">
+<li><p>Total height of the tower.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Total Mass (kg)</dt><dd><ul class="simple">
+<li><p>Total mass/weights on the tower.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Ground Motion Identifier</dt><dd><ul class="simple">
+<li><p>Maximum acceleration, displacement and base shear are obtained when the</p></li>
+</ul>
+<p>tower is subjected to load combinations containing the identifier/keyword (e.g.
+D+GM1-NS)
+* Note: May be ignored if “Ground Motion” is unchecked in Project Settings.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
 <li><p>Verify if the SAP2000 Path is correct. Do not change other inputs.</p></li>
 <li><p>Click “Run Now”.</p></li>
 <li><p>The Build Towers dialog shown below will appear.</p></li>
 </ul>
-<img alt="docs/source/images/build-towers.png" src="docs/source/images/build-towers.png" />
+<img alt="_images/build-towers.png" src="_images/build-towers.png" />
 <ul class="simple">
 <li><p>After completing the analysis:</p></li>
 </ul>
-<img alt="docs/source/images/build-towers-2.png" src="docs/source/images/build-towers-2.png" />
+<img alt="_images/build-towers-2.png" src="_images/build-towers-2.png" />
 <ul class="simple">
 <li><p>Close the <em>Build Towers</em> dialog and open the plot of tower performances.</p></li>
 </ul>
-<img alt="docs/source/images/tower-performances.png" src="docs/source/images/tower-performances.png" />
+<img alt="_images/tower-performances.png" src="_images/tower-performances.png" />
+</section>
 </section>
 </section>
 
