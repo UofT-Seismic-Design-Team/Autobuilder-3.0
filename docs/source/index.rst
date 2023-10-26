@@ -15,7 +15,10 @@ Contents
 --------
 
 .. toctree::
-
+   :maxdepth: 2
+   
    tutorial
+   User_Tutorial
    developer
-   Performance
+   Code/index
+
